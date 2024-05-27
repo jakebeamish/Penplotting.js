@@ -1,7 +1,9 @@
+import { addLineToSVG } from "./addLineToSVG.js";
 import { createSVG } from "./createSVG.js";
 
-const svg = createSVG();
+let svg = createSVG(200, 200);
 
-console.log(svg)
+addLineToSVG(svg, 0, 0, 200, 200)
+
 
 document.body.appendChild(svg)
