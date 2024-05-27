@@ -2,7 +2,7 @@
   "name": "penplot-svg-tool",
   "version": "0.0.0",
   "description": "A framework for making SVG files for penplotters",
-  "main": "index.js",
+  "main": "source/index.js",
   "scripts": {
     "test": "jest --coverage"
   },
