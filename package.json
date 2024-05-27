@@ -4,7 +4,7 @@
   "description": "A framework for making SVG files for penplotters",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "Jake Beamish",
