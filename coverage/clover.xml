@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1716820215959" clover="3.2.0">
-  <project timestamp="1716820215960" name="All files">
-    <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2" elements="16" coveredelements="16" complexity="0" loc="12" ncloc="12" packages="1" files="2" classes="2"/>
+<coverage generated="1716820894821" clover="3.2.0">
+  <project timestamp="1716820894821" name="All files">
+    <metrics statements="12" coveredstatements="12" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2" elements="17" coveredelements="17" complexity="0" loc="12" ncloc="12" packages="1" files="2" classes="2"/>
     <file name="addLineToSVG.js" path="/home/jake/Projects/penplot-svg-tool/source/addLineToSVG.js">
-      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="7" coveredstatements="7" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <line num="2" count="2" type="stmt"/>
       <line num="3" count="2" type="stmt"/>
       <line num="4" count="2" type="stmt"/>
       <line num="5" count="2" type="stmt"/>
       <line num="6" count="2" type="stmt"/>
-      <line num="8" count="2" type="stmt"/>
+      <line num="7" count="2" type="stmt"/>
       <line num="9" count="2" type="stmt"/>
     </file>
     <file name="createSVG.js" path="/home/jake/Projects/penplot-svg-tool/source/createSVG.js">

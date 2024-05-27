@@ -9,12 +9,13 @@ DA:3,2
 DA:4,2
 DA:5,2
 DA:6,2
-DA:8,2
+DA:7,2
 DA:9,2
 LF:7
 LH:7
-BRF:0
-BRH:0
+BRDA:1,0,0,2
+BRF:1
+BRH:1
 end_of_record
 TN:
 SF:source/createSVG.js
