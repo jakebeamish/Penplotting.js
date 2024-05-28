@@ -17,4 +17,5 @@ export function addLineToSVG(svg, x1, y1, x2, y2, stroke = 'black') {
     line.setAttribute('stroke', stroke)
 
     svg.appendChild(line);
+    return svg;
 }
