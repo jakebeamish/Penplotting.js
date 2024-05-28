@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1716919755148" clover="3.2.0">
-  <project timestamp="1716919755148" name="All files">
-    <metrics statements="20" coveredstatements="20" conditionals="11" coveredconditionals="11" methods="2" coveredmethods="2" elements="33" coveredelements="33" complexity="0" loc="20" ncloc="20" packages="1" files="2" classes="2"/>
+<coverage generated="1716925834928" clover="3.2.0">
+  <project timestamp="1716925834928" name="All files">
+    <metrics statements="33" coveredstatements="28" conditionals="11" coveredconditionals="11" methods="9" coveredmethods="4" elements="53" coveredelements="43" complexity="0" loc="33" ncloc="33" packages="1" files="4" classes="4"/>
+    <file name="Line.js" path="/home/jake/Projects/penplot-svg-tool/source/Line.js">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+    </file>
+    <file name="Vector.js" path="/home/jake/Projects/penplot-svg-tool/source/Vector.js">
+      <metrics statements="7" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="1"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="21" count="0" type="stmt"/>
+      <line num="30" count="0" type="stmt"/>
+      <line num="42" count="0" type="stmt"/>
+      <line num="53" count="0" type="stmt"/>
+      <line num="62" count="0" type="stmt"/>
+    </file>
     <file name="addLineToSVG.js" path="/home/jake/Projects/penplot-svg-tool/source/addLineToSVG.js">
       <metrics statements="12" coveredstatements="12" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
-      <line num="13" count="3" type="cond" truecount="2" falsecount="0"/>
-      <line num="14" count="3" type="cond" truecount="2" falsecount="0"/>
-      <line num="15" count="3" type="cond" truecount="2" falsecount="0"/>
-      <line num="17" count="3" type="stmt"/>
-      <line num="18" count="3" type="stmt"/>
-      <line num="19" count="3" type="stmt"/>
+      <line num="16" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="17" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="18" count="3" type="cond" truecount="2" falsecount="0"/>
       <line num="20" count="3" type="stmt"/>
       <line num="21" count="3" type="stmt"/>
       <line num="22" count="3" type="stmt"/>
       <line num="23" count="3" type="stmt"/>
+      <line num="24" count="3" type="stmt"/>
       <line num="25" count="3" type="stmt"/>
       <line num="26" count="3" type="stmt"/>
+      <line num="28" count="3" type="stmt"/>
+      <line num="29" count="3" type="stmt"/>
     </file>
     <file name="createSVG.js" path="/home/jake/Projects/penplot-svg-tool/source/createSVG.js">
       <metrics statements="8" coveredstatements="8" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
-      <line num="8" count="6" type="cond" truecount="2" falsecount="0"/>
-      <line num="9" count="6" type="stmt"/>
-      <line num="10" count="6" type="stmt"/>
-      <line num="11" count="6" type="stmt"/>
-      <line num="12" count="6" type="stmt"/>
+      <line num="12" count="6" type="cond" truecount="2" falsecount="0"/>
       <line num="13" count="6" type="stmt"/>
       <line num="14" count="6" type="stmt"/>
       <line num="15" count="6" type="stmt"/>
+      <line num="16" count="6" type="stmt"/>
+      <line num="17" count="6" type="stmt"/>
+      <line num="18" count="6" type="stmt"/>
+      <line num="19" count="6" type="stmt"/>
     </file>
   </project>
 </coverage>
