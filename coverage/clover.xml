@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1716925834928" clover="3.2.0">
-  <project timestamp="1716925834928" name="All files">
+<coverage generated="1716925989644" clover="3.2.0">
+  <project timestamp="1716925989644" name="All files">
     <metrics statements="33" coveredstatements="28" conditionals="11" coveredconditionals="11" methods="9" coveredmethods="4" elements="53" coveredelements="43" complexity="0" loc="33" ncloc="33" packages="1" files="4" classes="4"/>
     <file name="Line.js" path="/home/jake/Projects/penplot-svg-tool/source/Line.js">
       <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
