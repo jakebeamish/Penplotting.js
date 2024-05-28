@@ -8,6 +8,13 @@ export class Vector {
         return new Vector(array[0], array[1]);
     }
 
+    add(vector) {
+        return new Vector(
+            this.x + vector.x,
+            this.y + vector.y
+        )
+    }
+
     subtract(vector) {
         return new Vector(
             this.x - vector.x,
