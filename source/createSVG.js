@@ -1,7 +1,11 @@
 /**
  * Create an SVG element with specified width and height
  * @param {number} width 
- * @param {number} height 
+ * @param {number} height
+ * @param {Object} [options]
+ * @param {string} [options.units = '']
+ * @param {string} [options.backgroundColor = 'transparent']
+ * 
  * @returns {SVGElement}
  */
 export function createSVG(width = 100, height = 100, options = {} ) {
