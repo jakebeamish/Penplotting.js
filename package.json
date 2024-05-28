@@ -4,7 +4,8 @@
   "description": "A framework for making SVG files for penplotters",
   "main": "source/index.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "generate-docs": "jsdoc -c jsdoc.json --verbose"
   },
   "keywords": [],
   "author": "Jake Beamish",
@@ -16,5 +17,8 @@
     "jest": "^29.7.0",
     "jest-cucumber": "^4.4.0",
     "jest-environment-jsdom": "^29.7.0"
+  },
+  "dependencies": {
+    "jsdoc": "^4.0.3"
   }
 }
