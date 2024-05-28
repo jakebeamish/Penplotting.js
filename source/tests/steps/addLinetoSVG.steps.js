@@ -42,4 +42,22 @@ defineFeature(feature, test => {
 
         });
     });
+
+
+    test('Add a line with a specified stroke colour', ({ given, when, then }) => {
+        let svg;
+        given('I have an empty SVG element', () => {
+            svg = createSVG();
+        });
+
+        when('I add a line with a specified stroke colour', () => {
+            addLineToSVG(svg, 0, 0, 1, 1, {
+                stroke: 'blue'
+            })
+        });
+
+        then('the SVG element should contain a line with the specified stroke colour', () => {
+            expect(svg.querySelector('line').getAttribute('stroke')).toBe('blue')
+        });
+    });
 })

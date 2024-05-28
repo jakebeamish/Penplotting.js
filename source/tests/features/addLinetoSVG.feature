@@ -9,3 +9,8 @@ Feature: Add line to SVG
     Given I have an empty SVG element
     When I add a line with startpoint of 0,0 and endpoint 1,1
     Then the SVG element should contain a line with startpoint 0,0 and endpoint 1,1
+
+  Scenario: Add a line with a specified stroke colour
+    Given I have an empty SVG element
+    When I add a line with a specified stroke colour
+    Then the SVG element should contain a line with the specified stroke colour
