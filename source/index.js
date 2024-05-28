@@ -8,9 +8,9 @@ let height = svg.getAttribute("height");
 
 
 let centre = new Vector(width / 2, height / 2);
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 10; i++) {
     let other = Vector.fromArray([Math.random() * width, Math.random() * height])
-
+    console.log(centre.magnitude(), other.magnitude())
     addLineToSVG(svg, centre.x, centre.y, other.x, other.y);
 
 }

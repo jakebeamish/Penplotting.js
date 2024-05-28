@@ -7,4 +7,8 @@ export class Vector {
     static fromArray(array) {
         return new Vector(array[0], array[1]);
     }
+
+    magnitude() {
+        return Math.sqrt(this.x ** 2 + this.y ** 2);
+    }
 }
