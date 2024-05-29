@@ -3,6 +3,12 @@ import { Sketch } from "../../Sketch";
 
 const feature = loadFeature('./source/tests/features/Sketch.feature');
 
+// Cleanup function to reset the DOM after each test
+afterEach(() => {
+    document.body.innerHTML = '';
+});
+
+
 defineFeature(feature, test => {
     test('Create a sketch', ({ given, when, then }) => {
         let sketch;
@@ -35,7 +41,7 @@ defineFeature(feature, test => {
         });
     });
 
-    test('Create Lines and add them to the Sketch', ({ given, when, then }) => {
+    test('Read Lines from the lines array and add them to the SVG', ({ given, when, then }) => {
 
         let sketch;
         let line = {
@@ -63,6 +69,41 @@ defineFeature(feature, test => {
             expect(sketch.svg.querySelector('line').getAttribute('y1')).toBe("0");
             expect(sketch.svg.querySelector('line').getAttribute('x2')).toBe("1");
             expect(sketch.svg.querySelector('line').getAttribute('y2')).toBe("1");
+        });
+    });
+
+    test('Add lines to the SVG and then add the SVG to the document body', ({ given, when, then }) => {
+        let sketch = new Sketch(100, 100);
+        sketch.lines.push({
+            a: {
+                x: 3,
+                y: 4
+            },
+            b: {
+                x: 5,
+                y: 6
+            }
+        })
+
+        let domSvg;
+
+        given('I want to generate and see the sketch simply', () => {
+
+        });
+
+        when('I call sketch.draw()', () => {
+            sketch.draw();
+        });
+
+        then('lines should be added and the SVG should be shown', () => {
+            expect(sketch.svg).toBeTruthy();
+            expect(sketch.svg).toBeInstanceOf(SVGElement);
+            expect(sketch.svg.hasChildNodes()).toBeTruthy();
+
+            // Comparing the SVG element in the document with sketch.svg
+            // may need to be done using WaitFor
+
+            expect(document.body.querySelector('svg')).toBeTruthy()
         });
     });
 })
