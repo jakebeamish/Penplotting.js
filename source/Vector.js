@@ -27,10 +27,10 @@ export class Vector {
      * @returns {Vector} 
      */
     add(vector) {
-        return new Vector(
-            this.x + vector.x,
-            this.y + vector.y
-        )
+        // return new Vector(
+            this.x += vector.x,
+            this.y += vector.y
+        // )
     }
 
     /**
@@ -39,10 +39,10 @@ export class Vector {
      * @returns {Vector}
      */
     subtract(vector) {
-        return new Vector(
-            this.x - vector.x,
-            this.y - vector.y
-        )
+        // return new Vector(
+            this.x -= vector.x,
+            this.y -= vector.y
+        // )
     }
     
     /**
