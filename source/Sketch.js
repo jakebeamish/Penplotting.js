@@ -1,7 +1,18 @@
 import { createSVG } from "./createSVG.js";
 import { addLineToSVG } from "./addLineToSVG.js";
 
+/**
+ * @class
+ */
 export class Sketch {
+    /**
+     * 
+     * @param {number} width 
+     * @param {number} height 
+     * @param {object} [options] 
+     * @param {string} [options.units = '']
+     * @param {string} [options.backgroundColor = 'transparent']
+     */
     constructor(width, height, options) {
         this.width = width;
         this.height = height;
@@ -14,6 +25,9 @@ export class Sketch {
         });
     }
 
+    /**
+     * Creates an SVG and appends it to the document body
+     */
     draw() {
         this.addLinesToSVG();
         this.appendSVG();

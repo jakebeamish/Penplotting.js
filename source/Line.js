@@ -1,4 +1,12 @@
+/**
+ * @class
+ */
 export class Line {
+    /**
+     * 
+     * @param {Vector} a 
+     * @param {Vector} b 
+     */
     constructor(a, b) {
         this.a = a;
         this.b = b;
