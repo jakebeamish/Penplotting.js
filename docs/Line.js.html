@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: Line.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,35 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: Line.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @class
+ */
+export class Line {
+    /**
+     * 
+     * @param {Vector} a 
+     * @param {Vector} b 
+     */
+    constructor(a, b) {
+        this.a = a;
+        this.b = b;
+        this.x1 = a.x;
+        this.y1 = a.y;
+        this.x2 = b.x;
+        this.y2 = b.y;
+    }
+}</code></pre>
+        </article>
+    </section>
 
 
 
