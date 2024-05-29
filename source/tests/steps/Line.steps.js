@@ -4,7 +4,7 @@ import { Line } from '../../Line.js'
 
 
 
-const feature = loadFeature('./source/tests/features/createLine.feature')
+const feature = loadFeature('./source/tests/features/Line.feature')
 
 defineFeature(feature, test => {
 

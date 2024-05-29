@@ -1,4 +1,4 @@
-Feature: Create Line
+Feature: Line
 
   Scenario: Create a Line
     Given coordinates of start and end points
