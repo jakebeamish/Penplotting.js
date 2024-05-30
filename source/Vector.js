@@ -44,13 +44,27 @@ export class Vector {
             this.y -= vector.y
         // )
     }
+
+    static add(v1, v2) {
+        return new Vector(
+            v1.x + v2.x,
+            v1.y + v2.y
+        )
+    }
+
+    static subtract(v1, v2) {
+        return new Vector(
+            v1.x - v2.x,
+            v1.y - v2.y
+        )
+    }
     
     /**
      * 
      * @returns {number} The magnitude (Euclidean distance) of this vector
      */
     magnitude() {
-        return Math.sqrt(this.x ** 2 + this.y ** 2);
+        return Math.sqrt(this.x * this.x + this.y * this.y);
     }
 
     /**
@@ -59,6 +73,7 @@ export class Vector {
      * @returns {number}
      */
     distance(vector) {
-        return this.subtract(vector).magnitude();
+        this.subtract(vector);
+        return this.magnitude();
     }
 }

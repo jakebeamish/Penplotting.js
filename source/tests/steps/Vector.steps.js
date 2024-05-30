@@ -83,4 +83,40 @@ defineFeature(feature, test => {
             expect(b.y).toBe(2);
         });
     });
+
+    test('Static addition of two vectors', ({ given, when, then }) => {
+        let v1, v2, sum;
+
+        given(/^two vectors \((\d+), (\d+)\) and \((\d+), (\d+)\)$/, (arg0, arg1, arg2, arg3) => {
+            v1 = new Vector(parseInt(arg0), parseInt(arg1));
+            v2 = new Vector(parseInt(arg2), parseInt(arg3));
+        });
+
+        when('I add them together using Vector.add()', () => {
+            sum = Vector.add(v1, v2);
+        });
+
+        then(/^a new vector \((\d+), (\d+)\) should be returned$/, (arg0, arg1) => {
+            expect(sum.x).toBe(parseInt(arg0));
+            expect(sum.y).toBe(parseInt(arg1))
+        });
+    });
+
+    test('Calculate the distance to another Vector from this Vector', ({ given, when, then }) => {
+        let v1, v2, distance, expectedDistance;
+        given(/^a vector \((\d+), (\d+)\) and another \((\d+), (\d+)\)$/, (arg0, arg1, arg2, arg3) => {
+            v1 = new Vector(parseInt(arg0), parseInt(arg1));
+            v2 = new Vector(parseInt(arg2), parseInt(arg3));
+        });
+
+        when('I calculate the distance between them', () => {
+            distance = v1.distance(v2);
+            
+        });
+
+        then(/^I should recieve a result of (\d+)$/, (arg0) => {
+            expectedDistance = parseInt(arg0)
+            expect(distance).toBe(expectedDistance);
+        });
+    });
 });
