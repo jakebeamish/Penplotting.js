@@ -1,3 +1,5 @@
+import { Vector } from "./Vector.js";
+
 /**
  * @class
  */
@@ -14,5 +16,9 @@ export class Line {
         this.y1 = a.y;
         this.x2 = b.x;
         this.y2 = b.y;
+    }
+
+    length() {
+        return this.a.distance(this.b)
     }
 }

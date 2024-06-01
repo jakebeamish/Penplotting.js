@@ -58,6 +58,13 @@ export class Vector {
             v1.y - v2.y
         )
     }
+
+    static lerp(v1, v2, amount) {
+        return new Vector(
+            v1.x + amount * (v2.x - v1.x),
+            v1.y + amount * (v2.y - v1.y)
+        )
+    }
     
     /**
      * 
@@ -73,7 +80,7 @@ export class Vector {
      * @returns {number}
      */
     distance(vector) {
-        this.subtract(vector);
-        return this.magnitude();
+        let length = Vector.subtract(this, vector);
+        return length.magnitude();
     }
 }
