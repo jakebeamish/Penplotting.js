@@ -1,5 +1,6 @@
 import { createSVG } from "./createSVG.js";
 import { addLineToSVG } from "./addLineToSVG.js";
+import { deduplicateObjectArray } from "./deduplicateObjectArray.js";
 
 /**
  * @class
@@ -31,6 +32,13 @@ export class Sketch {
     draw() {
         this.addLinesToSVG();
         this.appendSVG();
+    }
+
+    /**
+     * 
+     */
+    deduplicateLines() {
+        this.lines = deduplicateObjectArray(this.lines);
     }
 
     addLinesToSVG() {
