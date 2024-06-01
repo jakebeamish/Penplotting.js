@@ -1,12 +1,16 @@
 /**
  * Create an SVG element with specified width and height
- * @param {number} width 
- * @param {number} height
+ * @example
+ * // returns <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" style="background-color:transparent">
+ * createSVG();
+ * 
+ * @param {number} [width=100]
+ * @param {number} [height=100]
  * @param {Object} [options]
  * @param {string} [options.units = '']
  * @param {string} [options.backgroundColor = 'transparent']
  * 
- * @returns {SVGElement}
+ * @returns {SVGElement} An SVG element with specified width and height
  */
 export function createSVG(width = 100, height = 100, options = {} ) {
     let { units = '', backgroundColor = 'transparent' } = options
