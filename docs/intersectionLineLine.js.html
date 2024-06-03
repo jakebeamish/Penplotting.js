@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: addLineToSVG.js</title>
+    <title>JSDoc: Source: intersectionLineLine.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: addLineToSVG.js</h1>
+    <h1 class="page-title">Source: intersectionLineLine.js</h1>
 
     
 
@@ -27,35 +27,42 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Add a line to an SVG element
- * @param {SVGElement} svg 
- * @param {number} x1 
- * @param {number} y1 
- * @param {number} x2 
- * @param {number} y2 
- * @param {Object} [options]
- * @param {string} [options.units = ""]
- * @param {string} [options.stroke = "black"]
- * @param {number} [options.strokeWidth = 0.1]
- * @returns {SVGElement}
+ * 
+ * @param {Line} line1 
+ * @param {Line} line2 
+ * @returns {(boolean|Array)} - False if lines don't intersect, otherwise returns the intersection point [x,y]
  */
-export function addLineToSVG(svg, x1, y1, x2, y2, options) {
+export function intersectionLineLine(line1, line2) {
+    const x1 = line1.a.x;
+    const y1 = line1.a.y;
+    const x2 = line1.b.x;
+    const y2 = line1.b.y;
 
-    let units = options?.units || "";
-    let stroke = options?.stroke || "black";
-    let strokeWidth = options?.strokeWidth || 0.1;
+    const x3 = line2.a.x;
+    const y3 = line2.a.y;
+    const x4 = line2.b.x;
+    const y4 = line2.b.y;
 
-    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    line.setAttribute('x1', `${x1}${units}`);
-    line.setAttribute('y1', `${y1}${units}`);
-    line.setAttribute('x2', `${x2}${units}`);
-    line.setAttribute('y2', `${y2}${units}`);
-    line.setAttribute('stroke', stroke);
-    line.setAttribute('stroke-width', `${strokeWidth}${units}`);
+    const denominator = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
 
-    svg.appendChild(line);
-    return svg;
-}</code></pre>
+    // Check if lines are parallel
+    if (denominator === 0) {
+        return false;
+    }
+
+    const ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denominator;
+    const ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denominator;
+
+    // Check if intersection point lies within the line segments
+    if (ua >= 0 &amp;&amp; ua &lt;= 1 &amp;&amp; ub >= 0 &amp;&amp; ub &lt;= 1) {
+        const x = x1 + ua * (x2 - x1);
+        const y = y1 + ua * (y2 - y1);
+        return [x, y];
+    } else {
+        return false;
+    }
+}
+</code></pre>
         </article>
     </section>
 

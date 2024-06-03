@@ -45,6 +45,12 @@ export class Vector {
         // )
     }
 
+    /**
+     * 
+     * @param {*} v1 
+     * @param {*} v2 
+     * @returns 
+     */
     static add(v1, v2) {
         return new Vector(
             v1.x + v2.x,
@@ -52,6 +58,12 @@ export class Vector {
         )
     }
 
+    /**
+     * 
+     * @param {*} v1 
+     * @param {*} v2 
+     * @returns 
+     */
     static subtract(v1, v2) {
         return new Vector(
             v1.x - v2.x,
@@ -63,6 +75,13 @@ export class Vector {
         return new Vector(
             v1.x + amount * (v2.x - v1.x),
             v1.y + amount * (v2.y - v1.y)
+        )
+    }
+
+    static multiply(v, scalar) {
+        return new Vector(
+            v.x * scalar,
+            v.y * scalar
         )
     }
     

@@ -5,60 +5,53 @@ import { randomInteger } from "./random.js";
 import { wrap } from "./wrap.js";
 import { intersectionLineLine } from "./intersectionLineLine.js";
 
-let sketch = new Sketch(210, 297, {
+const sketch = new Sketch(210, 297, {
     units: 'mm',
-    backgroundColor: 'gainsboro'
+    backgroundColor: 'gainsboro',
 });
 
-let { width, height } = sketch;
+const { width, height } = sketch;
 const margin = 0.1 * width;
-let centre = new Vector(width / 2, height / 2);
+const centre = new Vector(width / 2, height / 2);
 
-for (let i = 0; i < 3; i++) {
-    let y = (i + 0.5) / 3 * height;
-    let line = new Line(
-        { x: margin, y: y },
-        { x: width - margin, y: y }
-    )
-    sketch.lines.push(line)
+for (let j = 0; j < 1; j++) {
+
+let turtle = {
+    position: new Vector(margin, height/2),
+    move: function(v) {
+        this.position.add(v)
+    }
 }
 
-let newLines = [];
+let movements = [
+    new Vector(1, 0),
+    new Vector(1, 0),
+    new Vector(0, 1),
+    new Vector(0, -1),
+    new Vector(1, 1),
+    new Vector(1, -1),
+    new Vector(1, 1),
+    new Vector(1, -1),
+    new Vector(-1, -1),
+    new Vector(-1, 1),
+]
 
-for (let i = 0; i < 100; i++) {
-    for (let line of sketch.lines) {
-        if (!line.hasChild) {
-            let midpoint = Vector.lerp(line.a, line.b, Math.random());
-            let newpoint;
-            if (line.a.x == line.b.x) {
-                newpoint = Vector.add(midpoint, new Vector(randomInteger(-50, 50), 0))
-            } else if (line.a.y == line.b.y) {
-                newpoint = Vector.add(midpoint, new Vector(0, randomInteger(-50, 50)))
-            } else {
-                console.log("Not straight")
-            }
+let previous = null;
 
-            let newLine = new Line(midpoint, newpoint);
-            newLine.hasChild = false;
-            let valid = true;
-            for (let other of sketch.lines) {
-                if (line !== other && intersectionLineLine(newLine, other)
-                    || newLine.length() < 10) {
-                    valid = false;
-                }
-            }
-            if (valid) {
-                newLines.push(newLine)
-                line.hasChild = true;
-            }
-        }
-    }
+for (let i = 0; i < 50; i++) {
+    let a = new Vector(turtle.position.x, turtle.position.y);
 
-    for (let line of newLines) {
-        sketch.lines.push(line)
-    }
+    let index = Math.floor((Math.random() * movements.length))
+
+    let movement = movements[index];
+    movement = Vector.multiply(movements[index], 5)
+    turtle.move(movement);
+    let b = new Vector(turtle.position.x, turtle.position.y);
+    sketch.lines.push(new Line(a, b))
+}
+
 }
 
 sketch.deduplicateLines();
-console.table(sketch.lines)
+console.log(sketch.lines)
 sketch.draw();
