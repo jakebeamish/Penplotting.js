@@ -29,3 +29,8 @@ Feature: Vector
   Given two vectors (1, 3) and (5, 4)
   When I add them together using Vector.add()
   Then a new vector (6, 7) should be returned
+
+  Scenario: Static subtraction of two vectors
+  Given two vectors (10, 10) and (5, 4)
+  When I subtract them using Vector.subtract()
+  Then a new vector (5, 6) should be returned

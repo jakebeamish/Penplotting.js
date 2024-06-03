@@ -119,4 +119,21 @@ defineFeature(feature, test => {
             expect(distance).toBe(expectedDistance);
         });
     });
+
+    test('Static subtraction of two vectors', ({ given, when, then }) => {
+        let v1, v2, result;
+        given(/^two vectors \((\d+), (\d+)\) and \((\d+), (\d+)\)$/, (arg0, arg1, arg2, arg3) => {
+            v1 = new Vector(parseInt(arg0), parseInt(arg1));
+            v2 = new Vector(parseInt(arg2), parseInt(arg3));
+        });
+
+        when('I subtract them using Vector.subtract()', () => {
+            result = Vector.subtract(v1, v2);
+        });
+
+        then(/^a new vector \((\d+), (\d+)\) should be returned$/, (arg0, arg1) => {
+            expect(result.x).toBe(parseInt(arg0));
+            expect(result.y).toBe(parseInt(arg1));
+        });
+    });
 });

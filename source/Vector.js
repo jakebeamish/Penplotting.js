@@ -27,10 +27,9 @@ export class Vector {
      * @returns {Vector} 
      */
     add(vector) {
-        // return new Vector(
-            this.x += vector.x,
-            this.y += vector.y
-        // )
+        this.x += vector.x;
+        this.y += vector.y;
+        return this;
     }
 
     /**
@@ -39,10 +38,9 @@ export class Vector {
      * @returns {Vector}
      */
     subtract(vector) {
-        // return new Vector(
-            this.x -= vector.x,
-            this.y -= vector.y
-        // )
+        this.x -= vector.x;
+        this.y -= vector.y;
+        return this;
     }
 
     static add(v1, v2) {
@@ -58,7 +56,7 @@ export class Vector {
             v1.y - v2.y
         )
     }
-    
+
     /**
      * 
      * @returns {number} The magnitude (Euclidean distance) of this vector
