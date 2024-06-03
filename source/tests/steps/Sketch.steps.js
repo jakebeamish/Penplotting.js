@@ -106,4 +106,41 @@ defineFeature(feature, test => {
             expect(document.body.querySelector('svg')).toBeTruthy()
         });
     });
+
+    test('Simplify the Sketch by removing duplicate Lines', ({ given, when, then }) => {
+        let sketch = new Sketch();
+
+        sketch.lines.push({
+            a: {
+                x: 3,
+                y: 4
+            },
+            b: {
+                x: 5,
+                y: 6
+            }
+        }),
+
+        sketch.lines.push({
+            a: {
+                x: 3,
+                y: 4
+            },
+            b: {
+                x: 5,
+                y: 6
+            }
+        })
+        
+        given('I don\'t want to draw duplicated lines', () => {
+        });
+
+        when('I call Sketch.deduplicateLines()', () => {
+            sketch.deduplicateLines();
+        });
+
+        then('the Sketch lines array should not contain duplicated lines', () => {
+            expect(sketch.lines.length).toBe(1)
+        });
+    });
 })
