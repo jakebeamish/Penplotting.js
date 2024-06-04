@@ -11,5 +11,5 @@ let sketch = new Sketch(210, 297, {
 
 let { width, height } = sketch;
 
-sketch.deduplicateLines();
+
 sketch.draw();

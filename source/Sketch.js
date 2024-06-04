@@ -30,6 +30,7 @@ export class Sketch {
      * Creates an SVG and appends it to the document body
      */
     draw() {
+        this.deduplicateLines();
         this.addLinesToSVG();
         this.appendSVG();
     }
