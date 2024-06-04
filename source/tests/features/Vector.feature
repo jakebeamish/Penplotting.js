@@ -40,7 +40,7 @@ Feature: Vector
   When I multiply the vector by the scalar
   Then the vector should now equal (5, 15)
 
-Scenario: Rotate this vector by 90 degrees
+  Scenario: Rotate this vector by 90 degrees
   Given a vector (1, 0) and an angle 1.5708 radians
   When I rotate the vector by the angle
   Then the vector should now equal approximately (0, 1)
