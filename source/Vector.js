@@ -43,6 +43,11 @@ export class Vector {
         return this;
     }
 
+    multiply(scalar) {
+        this.x *= scalar;
+        this.y *= scalar;
+    }
+
     static add(v1, v2) {
         return new Vector(
             v1.x + v2.x,
@@ -73,5 +78,20 @@ export class Vector {
     distance(vector) {
         this.subtract(vector);
         return this.magnitude();
+    }
+
+    /**
+    * Rotate this vector by a specified angle.
+    * @param {number} angle - The angle to rotate the vector by, in radians.
+    * @returns {Vector} This vector after rotation.
+    */
+    rotate(angle) {
+        const cosAngle = Math.cos(angle);
+        const sinAngle = Math.sin(angle);
+        const x = this.x * cosAngle - this.y * sinAngle;
+        const y = this.x * sinAngle + this.y * cosAngle;
+        this.x = x;
+        this.y = y;
+        return this;
     }
 }
