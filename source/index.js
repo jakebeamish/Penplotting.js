@@ -4,9 +4,9 @@ import { Sketch } from "./Sketch.js";
 import { randomInteger } from "./random.js";
 import { wrap } from "./wrap.js";
 
-let sketch = new Sketch(210, 297, {
+let sketch = new Sketch(70, 70, {
     units: 'mm',
-    backgroundColor: 'gainsboro'
+    backgroundColor: 'black'
 });
 
 let { width, height } = sketch;
