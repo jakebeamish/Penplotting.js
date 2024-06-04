@@ -6,10 +6,15 @@ import { wrap } from "./wrap.js";
 
 let sketch = new Sketch(70, 70, {
     units: 'mm',
-    backgroundColor: 'black'
+    backgroundColor: 'grey'
 });
 
-let { width, height } = sketch;
+const { width, height } = sketch;
+const a = new Vector(0, height/2);
+const b = new Vector(width, height/2)
 
+sketch.lines.push(
+    new Line(a, b)
+)
 
 sketch.draw();

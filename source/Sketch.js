@@ -14,11 +14,12 @@ export class Sketch {
      * @param {string} [options.units = '']
      * @param {string} [options.backgroundColor = 'transparent']
      */
-    constructor(width, height, options) {
+    constructor(width, height, {
+       units = '',
+       backgroundColor = 'transparent' 
+    }={}) {
         this.width = width;
         this.height = height;
-        this.units = options?.units || '';
-        this.backgroundColor = options?.backgroundColor || 'transparent';
         this.lines = [];
         this.svg = createSVG(this.width, this.height, {
             units: this.units,
@@ -27,7 +28,7 @@ export class Sketch {
     }
 
     /**
-     * Creates an SVG and appends it to the document body
+     * Creates an SVG element and appends it to the document body
      */
     draw() {
         this.deduplicateLines();
@@ -36,19 +37,26 @@ export class Sketch {
     }
 
     /**
-     * 
+     * Removes duplicated Lines in this Sketch's lines array.
+     * @todo Compare startpoints with endpoints too
      */
     deduplicateLines() {
         this.lines = deduplicateObjectArray(this.lines);
     }
 
+    /**
+     * Adds the Lines in this Sketch's lines array to it's svg element.
+     */
     addLinesToSVG() {
         for (let line of this.lines) {
             addLineToSVG(this.svg, line.a.x, line.a.y, line.b.x, line.b.y, { stroke: 'black', strokeWidth: 0.1 });
         }
     }
 
+    /**
+     * Appends this sketch's svg element to the document body.
+     */
     appendSVG() {
         document.body.appendChild(this.svg);
-    }
+        }
 }
