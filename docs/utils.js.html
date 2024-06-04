@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Line.js</title>
+    <title>JSDoc: Source: utils.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Line.js</h1>
+    <h1 class="page-title">Source: utils.js</h1>
 
     
 
@@ -27,22 +27,33 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @class
+ * @class Linear Congruential Generator
  */
-export class Line {
+export class LCG {
     /**
-     * 
-     * @param {Vector} a 
-     * @param {Vector} b 
+     * @param {number} [seed=0] 
      */
-    constructor(a, b) {
-        this.a = a;
-        this.b = b;
-        this.x1 = a.x;
-        this.y1 = a.y;
-        this.x2 = b.x;
-        this.y2 = b.y;
+    constructor(seed = 0) {
+        this.seed = seed;
     }
+
+    next() {
+        this.seed = (this.seed * 1664525 + 1013904223) % 4294967296;
+        return this.seed / 4294967296;
+    }
+}
+
+export function randomInteger(min, max, randomfn = Math.random()) {
+    let range = max - min;
+    return min + Math.floor(randomfn * range);
+}
+
+export function sinFract(x, y, a, b, m) {
+    return fract(Math.sin(x * a + y * b) * m)
+}
+
+export function fract(x) {
+    return x - Math.floor(x);
 }</code></pre>
         </article>
     </section>
