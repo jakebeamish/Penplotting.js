@@ -65,13 +65,32 @@ export class Vector {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     }
 
+    nearestNeighbour(array, n) {
+        let neighbours = [];
+        for (let i = 0; i < n; i++) {
+            let record = Infinity;
+            let nearest = null;
+            for (let other of array) {
+                if (other != this && !neighbours.includes(other)) {
+                    let dist = this.distance(other)
+                    if (dist < record) {
+                        nearest = other;
+                        record = dist;
+                    }
+                }
+            }
+            neighbours.push(nearest)
+        }
+        return neighbours;
+    }
+
     /**
      * Calculate the distance to another vector from this vector
      * @param {Vector} vector 
      * @returns {number}
      */
     distance(vector) {
-        this.subtract(vector);
-        return this.magnitude();
+        let d = Vector.subtract(this, vector);
+        return d.magnitude();
     }
 }
