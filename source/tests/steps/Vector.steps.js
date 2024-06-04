@@ -136,4 +136,47 @@ defineFeature(feature, test => {
             expect(result.y).toBe(parseInt(arg1));
         });
     });
+
+
+    test('Multiply this vector by a scalar', ({ given, when, then }) => {
+
+        let vector;
+        let scalar;
+
+        given(/^a vector \((\d+), (\d+)\) and a scalar (\d+)$/, (arg0, arg1, arg2) => {
+            vector = new Vector(parseInt(arg0), parseInt(arg1));
+            scalar = parseInt(arg2)
+        });
+
+        when('I multiply the vector by the scalar', () => {
+            vector.multiply(scalar);
+        });
+
+        then(/^the vector should now equal \((\d+), (\d+)\)$/, (arg0, arg1) => {
+            expect(vector.x).toBe(parseInt(arg0));
+            expect(vector.y).toBe(parseInt(arg1));
+        });
+    });
+
+
+    test('Rotate this vector by 90 degrees', ({ given, when, then }) => {
+
+        let vector;
+        let angle;
+    
+        given('a vector (1, 0) and an angle 1.5708 radians', () => {
+            vector = new Vector(1, 0);
+            angle = 1.5708; // π/2 radians
+        });
+    
+        when('I rotate the vector by the angle', () => {
+            vector.rotate(angle);
+        });
+    
+        then('the vector should now equal approximately (0, 1)', () => {
+            expect(vector.x).toBeCloseTo(0, 5);
+            expect(vector.y).toBeCloseTo(1, 5);
+        });
+    });
+    
 });
