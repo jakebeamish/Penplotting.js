@@ -15,12 +15,14 @@ export class Sketch {
      * @param {string} [options.backgroundColor = 'transparent']
      */
     constructor(width, height, {
-       units = '',
+       units = 'mm',
        backgroundColor = 'transparent' 
     }={}) {
         this.width = width;
         this.height = height;
         this.lines = [];
+        this.units = units;
+        this.backgroundColor = backgroundColor
         this.svg = createSVG(this.width, this.height, {
             units: this.units,
             backgroundColor: this.backgroundColor

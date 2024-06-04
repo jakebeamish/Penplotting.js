@@ -4,14 +4,10 @@ import { Sketch } from "./Sketch.js";
 import { randomInteger } from "./random.js";
 import { wrap } from "./wrap.js";
 
-let sketch = new Sketch(70, 70, {
-    units: 'mm',
-    backgroundColor: 'grey'
-});
-
+const sketch = new Sketch(70, 70);
 const { width, height } = sketch;
-const a = new Vector(0, height/2);
-const b = new Vector(width, height/2)
+const a = new Vector(0, height / 2);
+const b = new Vector(width, height / 2);
 
 sketch.lines.push(
     new Line(a, b)
