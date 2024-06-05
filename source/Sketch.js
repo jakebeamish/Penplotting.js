@@ -11,13 +11,16 @@ export class Sketch {
      * @param {number} width 
      * @param {number} height 
      * @param {object} [options] 
+     * @param {string} [options.title = "Untitled"]
      * @param {string} [options.units = '']
      * @param {string} [options.backgroundColor = 'transparent']
      */
     constructor(width, height, {
        units = 'mm',
-       backgroundColor = 'transparent' 
+       backgroundColor = 'transparent',
+       title = "Untitled"
     }={}) {
+        this.title = title;
         this.width = width;
         this.height = height;
         this.lines = [];
@@ -35,7 +38,22 @@ export class Sketch {
     draw() {
         this.deduplicateLines();
         this.addLinesToSVG();
+
+        document.title = this.title;
         this.appendSVG();
+
+    }
+
+    downloadSVG() {
+        const svgData = new XMLSerializer().serializeToString(this.svg);
+        const svgBlob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+        const svgUrl = URL.createObjectURL(svgBlob);
+        const downloadLink = document.createElement("a");
+        downloadLink.href = svgUrl;
+        downloadLink.download = `${this.title}.svg`;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
     }
 
     /**

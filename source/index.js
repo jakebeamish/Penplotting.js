@@ -34,3 +34,4 @@ for (let i = 0; i < columns; i++) {
 }
 
 sketch.draw();
+sketch.downloadSVG();
