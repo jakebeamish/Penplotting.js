@@ -15,4 +15,11 @@ export class Line {
         this.x2 = b.x;
         this.y2 = b.y;
     }
+
+    /**
+     * @returns {number} The distance between the startpoint and endpoint of the line
+     */
+    length() {
+        return this.a.distance(this.b);
+    }
 }
