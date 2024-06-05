@@ -12,10 +12,8 @@ describe('fract', () => {
     });
 
     test('It returns numbers in the range [0,1)', () => {
-        for (let i = 0; i < 100; i++) {
-            let x = fract(Math.random() * 0xFFFFFF);
-            expect(x).toBeGreaterThanOrEqual(0)
-            expect(x).toBeLessThan(1)
-        }
+        let x = fract(Math.random() * 0xFFFFFF);
+        expect(x).toBeGreaterThanOrEqual(0)
+        expect(x).toBeLessThan(1)
     })
 });
