@@ -1,8 +1,7 @@
 import { Vector } from "./Vector.js";
 import { Line } from "./Line.js";
 import { Sketch } from "./Sketch.js";
-import { LCG, randomInteger, sinFract } from "./utils.js";
-import { wrap } from "./wrap.js";
+import { LCG, randomInteger, sinFract, wrap } from "./utils.js";
 
 const sketch = new Sketch(141, 200);
 const { width, height } = sketch;

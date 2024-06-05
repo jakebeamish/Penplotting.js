@@ -24,6 +24,22 @@ export function sinFract(x, y, a, b, m) {
     return fract(Math.sin(x * a + y * b) * m)
 }
 
+/**
+ * 
+ * @param {number} x
+ * @returns {number} The fractional part of x
+ * @example
+ * // returns 0.42
+ * fract(1.42)
+ * @example
+ * // returns 0.77
+ * fract(-42.23)
+ */
 export function fract(x) {
     return x - Math.floor(x);
+}
+
+export function wrap(input, min, max) {
+    let range = max - min;
+    return min + ((input - min) + range) % range
 }
