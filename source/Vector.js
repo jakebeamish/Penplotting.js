@@ -81,6 +81,26 @@ export class Vector {
     }
 
     /**
+     * Calculate the dot product of two vectors
+     * @param {Vector} v1
+     * @param {Vector} v2
+     * @returns {number}
+     */
+    static dot(v1, v2) {
+        return v1.x * v2.x + v1.y * v2.y;
+    }
+
+    /**
+     * Calculate the cross product of two 2D vectors
+     * @param {Vector} v1
+     * @param {Vector} v2
+     * @returns {number}
+     */
+    static cross(v1, v2) {
+        return v1.x * v2.y - v1.y * v2.x;
+    }
+
+    /**
      * 
      * @returns {number} The magnitude (Euclidean distance) of this vector
      */
