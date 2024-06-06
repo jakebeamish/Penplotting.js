@@ -1,5 +1,5 @@
 import { Vector } from "../../Vector"
-
+describe('Vector', () => {
 describe('Vector class', () => {
     test('It exists', () => {
         let v = new Vector(0, 0);
@@ -71,4 +71,6 @@ describe("Vector.clone()", () => {
         expect(b).toEqual(a);
         expect(b).not.toBe(a);
     })
+})
+
 })
