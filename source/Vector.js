@@ -54,6 +54,12 @@ export class Vector {
         return this;
     }
 
+    /**
+     * Add two vectors
+     * @param {Vector} v1 
+     * @param {Vector} v2 
+     * @returns {Vector}
+     */
     static add(v1, v2) {
         return new Vector(
             v1.x + v2.x,
@@ -61,6 +67,12 @@ export class Vector {
         )
     }
 
+    /**
+     * Subtract two vectors
+     * @param {Vector} v1 
+     * @param {Vector} v2 
+     * @returns {Vector}
+     */
     static subtract(v1, v2) {
         return new Vector(
             v1.x - v2.x,
