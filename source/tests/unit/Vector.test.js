@@ -17,9 +17,7 @@ describe('Vector.lerp()', () => {
         const a = new Vector(0, 0);
         const b = new Vector(1, 1);
         const amount = 0.5;
-
         const output = Vector.lerp(a, b, amount);
-
         expect(output instanceof Vector).toBeTruthy();
     });
 
@@ -47,5 +45,30 @@ describe("Cross product", () => {
             new Vector(2, 2),
             new Vector(1, 4)
         )).toBe(6)
+    })
+})
+
+describe("Vector.normalize()", () => {
+    test("Normalized vector should have magnitude of 1", () => {
+        const v = new Vector(10, 53);
+        v.normalize();
+        expect(v.magnitude()).toBe(1)
+    });
+
+    test("Error should be thrown if a Vector of magnitude zero is normalized", () => {
+        const v = new Vector(0, 0);
+        expect(() => {
+            v.normalize();
+        }).toThrowError("Cannot normalize a zero vector");
+    })
+})
+
+describe("Vector.copy()", () => {
+    test("It returns a new Vector with the same values", () => {
+        const a = new Vector(3, 5);
+        const b = a.copy();
+
+        expect(a).toMatchObject(b);
+        expect(a).not.toEqual(b);
     })
 })
