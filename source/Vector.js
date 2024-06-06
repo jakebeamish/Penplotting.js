@@ -1,3 +1,5 @@
+import { lerp } from "./utils.js";
+
 /**
  * @class
  */
@@ -159,5 +161,19 @@ export class Vector {
      */
     getAngle() {
         return Math.atan2(this.y, this.x);
+    }
+
+    /**
+     * Linear interpolation between vectors
+     * @param {Vector} v1 
+     * @param {Vector} v2 
+     * @param {number} amount 
+     * @returns {Vector}
+     */
+    static lerp(v1, v2, amount) {
+        return new Vector(
+            lerp(v1.x, v2.x, amount),
+            lerp(v1.y, v2.y, amount)
+        )
     }
 }
