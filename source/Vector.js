@@ -43,9 +43,15 @@ export class Vector {
         return this;
     }
 
+    /**
+     * Multiply this vector by a scalar
+     * @param {*} scalar 
+     * @retruns {Vector}
+     */
     multiply(scalar) {
         this.x *= scalar;
         this.y *= scalar;
+        return this;
     }
 
     static add(v1, v2) {
