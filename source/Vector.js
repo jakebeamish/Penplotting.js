@@ -152,4 +152,12 @@ export class Vector {
     copy() {
         return new Vector(this.x, this.y);
     }
+
+    /**
+     * Get the angle of this vector with respect to the positive x-axis
+     * @returns {number} Angle in radians
+     */
+    getAngle() {
+        return Math.atan2(this.y, this.x);
+    }
 }
