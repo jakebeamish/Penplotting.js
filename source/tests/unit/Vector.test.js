@@ -26,7 +26,7 @@ describe('Vector.lerp()', () => {
         const b = new Vector(1, 1);
         const amount = 0.5;
 
-        expect(Vector.lerp(a, b, amount)).toMatchObject(new Vector(0.5, 0.5))
+        expect(Vector.lerp(a, b, amount)).toEqual(new Vector(0.5, 0.5))
     })
 })
 
@@ -63,12 +63,12 @@ describe("Vector.normalize()", () => {
     })
 })
 
-describe("Vector.copy()", () => {
+describe("Vector.clone()", () => {
     test("It returns a new Vector with the same values", () => {
         const a = new Vector(3, 5);
-        const b = a.copy();
+        const b = a.clone();
 
-        expect(a).toMatchObject(b);
-        expect(a).not.toEqual(b);
+        expect(b).toEqual(a);
+        expect(b).not.toBe(a);
     })
 })
