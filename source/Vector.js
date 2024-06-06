@@ -151,7 +151,7 @@ export class Vector {
      * Get a copy of this vector
      * @returns {Vector}
      */
-    copy() {
+    clone() {
         return new Vector(this.x, this.y);
     }
 
