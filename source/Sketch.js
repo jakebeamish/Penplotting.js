@@ -44,17 +44,22 @@ export class Sketch {
 
     }
 
-    downloadSVG() {
-        const svgData = new XMLSerializer().serializeToString(this.svg);
-        const svgBlob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
-        const svgUrl = URL.createObjectURL(svgBlob);
-        const downloadLink = document.createElement("a");
-        downloadLink.href = svgUrl;
-        downloadLink.download = `${this.title}.svg`;
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    }
+    downloadSVG(filename) {
+        const serializer = new XMLSerializer();
+        const source = serializer.serializeToString(this.svg);
+    
+        const svgBlob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(svgBlob);
+    
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+    
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
 
     /**
      * Removes duplicated Lines in this Sketch's lines array.
