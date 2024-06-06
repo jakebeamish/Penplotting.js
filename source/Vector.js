@@ -130,4 +130,26 @@ export class Vector {
         this.y = y;
         return this;
     }
+
+    /**
+     * Normalise this vector
+     * @returns {Vector}
+     */
+    normalize() {
+        const mag = this.magnitude();
+        if (mag === 0) {
+            throw new Error("Cannot normalize a zero vector");
+        }
+        this.x /= mag;
+        this.y /= mag;
+        return this;
+    }
+
+    /**
+     * Get a copy of this vector
+     * @returns {Vector}
+     */
+    copy() {
+        return new Vector(this.x, this.y);
+    }
 }
