@@ -124,10 +124,8 @@ export class Vector {
     * @returns {Vector} This vector after rotation.
     */
     rotate(angle) {
-        const cosAngle = Math.cos(angle);
-        const sinAngle = Math.sin(angle);
-        const x = this.x * cosAngle - this.y * sinAngle;
-        const y = this.x * sinAngle + this.y * cosAngle;
+        const x = this.x * Math.cos(angle) - this.y * Math.sin(angle);
+        const y = this.x * Math.sin(angle) + this.y * Math.cos(angle);
         this.x = x;
         this.y = y;
         return this;
