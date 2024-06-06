@@ -40,6 +40,16 @@ export function fract(x) {
 }
 
 export function wrap(input, min, max) {
-    let range = max - min;
+    const range = max - min;
     return min + ((input - min) + range) % range
+}
+
+/**
+ * Linear interpolation between two values
+ * @param {number} a
+ * @param {number} b
+ * @param {number} amount
+ */
+export function lerp(a, b, amount) {
+    return a + ((b - a) * amount);
 }

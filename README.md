@@ -10,7 +10,7 @@ This is a dependency-less JavaScript framework for making SVG files for penplott
 ## Roadmap
 
 TODO:
-- Lerp, Vector.lerp
+- Vector.lerp
 - Map
 - More PRNG implementations
 - Units conversion
