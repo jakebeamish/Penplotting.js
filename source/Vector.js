@@ -114,8 +114,8 @@ export class Vector {
      * @returns {number}
      */
     distance(vector) {
-        this.subtract(vector);
-        return this.magnitude();
+        const delta = Vector.subtract(this, vector)
+        return delta.magnitude();
     }
 
     /**
