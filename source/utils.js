@@ -53,3 +53,26 @@ export function wrap(input, min, max) {
 export function lerp(a, b, amount) {
     return a + ((b - a) * amount);
 }
+
+/**
+ * Re-maps a number from one range to another.
+ * 
+ * @param {number} value - The number to be re-mapped.
+ * @param {number} min1 - The minimum value of the original range.
+ * @param {number} max1 - The maximum value of the original range.
+ * @param {number} min2 - The minimum value of the target range.
+ * @param {number} max2 - The maximum value of the target range.
+ * @param {boolean} [withinBounds=false] - Whether the remapped value should be constrained within the target range.
+ * @returns {number} The re-mapped value.
+ */
+function map(value, min1, max1, min2, max2, withinBounds = false) {
+  // Re-map the value from the original range to the target range
+  let mappedValue = min2 + ((value - min1) / (max1 - min1)) * (max2 - min2);
+  
+  // Optionally constrain the remapped value within the target range
+  if (withinBounds) {
+    mappedValue = Math.min(max2, Math.max(min2, mappedValue));
+  }
+  
+  return mappedValue;
+}
