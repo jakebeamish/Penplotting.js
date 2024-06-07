@@ -30,6 +30,7 @@ export class Sketch {
             units: this.units,
             backgroundColor: this.backgroundColor
         });
+        this.filename = `${this.title}_${this.width}x${this.height}${this.units}.svg`
     }
 
     /**
