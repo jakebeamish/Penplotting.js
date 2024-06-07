@@ -1,16 +1,16 @@
-This is a dependency-less JavaScript framework for making SVG files for penplotters.
+This is a dependency-free JavaScript framework for making SVG files for penplotters.
 
 ## Features
 
 - A Sketch class to contain everything needed to create and render the SVG
-- 2D Vector and Line classes with helpful methods
+- 2D Vector class for geometry
+- Line class for drawing lines
 - A seedable PRNG
-- Maths functions such as fract, wrap,
+- Maths functions such as fract, wrap, lerp, map
 
 ## Roadmap
 
 TODO:
-- Map
 - More PRNG implementations
 - Units conversion
 - Support for SVG paths
