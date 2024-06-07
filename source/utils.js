@@ -65,7 +65,7 @@ export function lerp(a, b, amount) {
  * @param {boolean} [withinBounds=false] - Whether the remapped value should be constrained within the target range.
  * @returns {number} The re-mapped value.
  */
-function map(value, min1, max1, min2, max2, withinBounds = false) {
+export function map(value, min1, max1, min2, max2, withinBounds = false) {
   // Re-map the value from the original range to the target range
   let mappedValue = min2 + ((value - min1) / (max1 - min1)) * (max2 - min2);
   
