@@ -1,3 +1,6 @@
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jakebeamish/penplot-svg-tool)
+
+
 This is a dependency-free JavaScript framework for making SVG files for penplotters.
 
 ## Features
