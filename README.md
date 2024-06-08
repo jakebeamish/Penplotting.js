@@ -1,6 +1,3 @@
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jakebeamish/penplot-svg-tool)
-
-
 This is a dependency-free JavaScript framework for making SVG files for penplotters.
 
 ## Features
@@ -10,6 +7,26 @@ This is a dependency-free JavaScript framework for making SVG files for penplott
 - Line class for drawing lines
 - A seedable PRNG
 - Maths functions such as fract, wrap, lerp, map
+
+## Usage
+
+The way I'm using this framework currently is something like this:
+
+```js
+let sketch = new Sketch();
+let line = new Line(
+	new Vector(100, 0),
+	new Vector(0, 100)
+);
+
+sketch.lines.push(line);
+sketch.draw();
+```
+
+1. Create a new Sketch (with optional parameters for dimensions, units and background colour)
+2. Create and manipulate Vectors and Lines
+3. Add Lines to the Sketch by pushing Lines to the Sketch's `lines` array
+4. Call the Sketch's instance method `draw()`
 
 ## Roadmap
 
