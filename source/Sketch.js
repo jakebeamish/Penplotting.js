@@ -1,6 +1,7 @@
 import { createSVG } from "./createSVG.js";
 import { addLineToSVG } from "./addLineToSVG.js";
 import { deduplicateObjectArray } from "./deduplicateObjectArray.js";
+import { randomHex } from "./utils.js";
 
 /**
  * @class
@@ -18,7 +19,8 @@ export class Sketch {
     constructor(width, height, {
        units = 'mm',
        backgroundColor = 'transparent',
-       title = "Untitled"
+       title = "Untitled",
+       seed = randomHex(6),
     }={}) {
         this.title = title;
         this.width = width;
@@ -30,7 +32,8 @@ export class Sketch {
             units: this.units,
             backgroundColor: this.backgroundColor
         });
-        this.filename = `${this.title}_${this.width}x${this.height}${this.units}.svg`
+        this.seed = seed;
+        this.filename = `${this.title}_${this.seed.hex}_${this.width}x${this.height}${this.units}.svg`
     }
 
     /**
