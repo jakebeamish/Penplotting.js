@@ -45,7 +45,7 @@ export class Sketch {
 
     }
 
-    downloadSVG(filename) {
+    downloadSVG() {
         const serializer = new XMLSerializer();
         const source = serializer.serializeToString(this.svg);
     
@@ -54,7 +54,7 @@ export class Sketch {
     
         const a = document.createElement("a");
         a.href = url;
-        a.download = filename;
+        a.download = this.filename;
         document.body.appendChild(a);
         a.click();
     
