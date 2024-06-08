@@ -29,7 +29,7 @@ test('Sketch downloadSVG method', () => {
     // Use URL.createObjectURL to generate the expected absolute URL
     const expectedHref = new URL('mock-url', document.location).href;
     expect(aElement.href).toBe(expectedHref);
-    expect(aElement.download).toBe('test.svg');
+    expect(aElement.download).toBe(sketch.filename);
   
     // Clean up mocks
     appendChildMock.mockRestore();
