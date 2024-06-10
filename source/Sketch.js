@@ -81,7 +81,7 @@ export class Sketch {
 	 * Adds the Lines in this Sketch's lines array to it's svg element.
 	 */
 	addLinesToSVG() {
-		for (let line of this.lines) {
+		for (const line of this.lines) {
 			addLineToSVG(this.svg, line.a.x, line.a.y, line.b.x, line.b.y, {
 				stroke: "black",
 				strokeWidth: 0.1,
