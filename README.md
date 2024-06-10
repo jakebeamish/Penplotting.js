@@ -43,5 +43,8 @@ TODO:
 
 ## Contributing
 
-This project is tested using `jest` and `jest-cucumber`.
-Documentation is made using JSDoc.
+Currently, I am using `jest` and `jest-cucumber` for testing. Some scenarios are described in feature files, but the majority of tests are not.
+
+I'm trying to make sure that everything in the library is well documented using `JSDoc`.
+
+I am also trying out Biome.js for formatting.
