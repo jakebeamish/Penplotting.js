@@ -15,6 +15,7 @@ export class Sketch {
      * @param {string} [options.title = "Untitled"]
      * @param {string} [options.units = '']
      * @param {string} [options.backgroundColor = 'transparent']
+     * @param {number} [seed = randomHex(6)]
      */
     constructor(width, height, {
        units = 'mm',
