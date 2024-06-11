@@ -48,7 +48,7 @@ export class Sketch {
 		this.deduplicateLines();
 		this.addLinesToSVG();
 
-		document.title = this.title;
+		document.title = `${this.title} ${this.seed.hex}`;
 		this.appendSVG();
 	}
 
