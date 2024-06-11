@@ -20,6 +20,11 @@ export function randomInteger(min, max, randomfn = Math.random()) {
 	return min + Math.floor(randomfn * range);
 }
 
+export function randomElement(array, randomfn = Math.random()) {
+	const index = Math.floor(randomfn * array.length);
+	return array[index];
+}
+
 export function sinFract(x, y, a, b, m) {
 	return fract(Math.sin(x * a + y * b) * m);
 }
