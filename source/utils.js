@@ -1,29 +1,29 @@
-/**
- * @class Linear Congruential Generator
- */
-export class LCG {
-	/**
-	 * @param {number} [seed=0]
-	 */
-	constructor(seed = 0) {
-		this.seed = seed;
-	}
+// /**
+//  * @class Linear Congruential Generator
+//  */
+// export class LCG {
+// 	/**
+// 	 * @param {number} [seed=0]
+// 	 */
+// 	constructor(seed = 0) {
+// 		this.seed = seed;
+// 	}
 
-	random() {
-		this.seed = (this.seed * 1664525 + 1013904223) % 4294967296;
-		return this.seed / 4294967296;
-	}
-}
+// 	random() {
+// 		this.seed = (this.seed * 1664525 + 1013904223) % 4294967296;
+// 		return this.seed / 4294967296;
+// 	}
+// }
 
-export function randomInteger(min, max, randomfn = Math.random()) {
-	const range = max - min;
-	return min + Math.floor(randomfn * range);
-}
+// export function randomInteger(min, max, randomfn = Math.random()) {
+// 	const range = max - min;
+// 	return min + Math.floor(randomfn * range);
+// }
 
-export function randomElement(array, randomfn = Math.random()) {
-	const index = Math.floor(randomfn * array.length);
-	return array[index];
-}
+// export function randomElement(array, randomfn = Math.random()) {
+// 	const index = Math.floor(randomfn * array.length);
+// 	return array[index];
+// }
 
 export function sinFract(x, y, a, b, m) {
 	return fract(Math.sin(x * a + y * b) * m);
@@ -82,7 +82,7 @@ export function map(value, min1, max1, min2, max2, withinBounds = false) {
 	return mappedValue;
 }
 
-export function randomHex(length) {
+export function cryptoRandomHex(length) {
 	if (length <= 0) return "";
 
 	// Calculate the number of bytes needed (each byte = 2 hex characters)

@@ -1,4 +1,5 @@
 export { Vector } from "./Vector.js";
 export { Line } from "./Line.js";
 export { Sketch } from "./Sketch.js";
-export { LCG, randomInteger, randomElement, randomHex, fract, lerp, map, sinFract, wrap } from "./utils.js";
+export { PRNG, LCG } from "./Random.js";
+export { fract, lerp, map, sinFract, wrap, cryptoRandomHex } from "./utils.js";

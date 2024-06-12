@@ -1,11 +1,11 @@
-import { LCG } from "../../utils";
+import { LCG } from "../../Random";
 
 describe("LCG", () => {
 	test("It always returns values between 0 and 1", () => {
 		let lcg = new LCG();
 
 		for (let i = 0; i < 100; i++) {
-			let value = lcg.random();
+			let value = lcg.randomFloat();
 			expect(value).toBeGreaterThanOrEqual(0);
 			expect(value).toBeLessThan(1);
 		}
@@ -17,7 +17,7 @@ describe("LCG", () => {
 		const lcg2 = new LCG(seed);
 
 		for (let i = 0; i < 5; i++) {
-			expect(lcg1.random()).toBeCloseTo(lcg2.random());
+			expect(lcg1.randomFloat()).toBeCloseTo(lcg2.randomFloat());
 		}
 	});
 
@@ -29,10 +29,25 @@ describe("LCG", () => {
 		const sequence2 = [];
 
 		for (let i = 0; i < 5; i++) {
-			sequence1.push(lcg1.random());
-			sequence2.push(lcg2.random());
+			sequence1.push(lcg1.randomFloat());
+			sequence2.push(lcg2.randomFloat());
 		}
 
 		expect(sequence1).not.toEqual(sequence2);
+	});
+
+
+	describe("The random integer function", () => {
+		const lcg = new LCG(12345);
+		let x = lcg.randomInteger(0, 10);
+		test("It returns integers", () => {
+			expect(typeof x).toBe("number");
+			expect(x).toBe(parseInt(x));
+		});
+
+		test("It returns integers between min and max", () => {
+			expect(x).toBeGreaterThanOrEqual(0);
+			expect(x).toBeLessThan(10);
+		});
 	});
 });

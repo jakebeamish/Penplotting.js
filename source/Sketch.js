@@ -1,7 +1,7 @@
 import { createSVG } from "./createSVG.js";
 import { addLineToSVG } from "./addLineToSVG.js";
 import { deduplicateObjectArray } from "./deduplicateObjectArray.js";
-import { randomHex } from "./utils.js";
+import { cryptoRandomHex } from "./utils.js";
 
 /**
  * @class
@@ -24,7 +24,7 @@ export class Sketch {
 			units = "mm",
 			backgroundColor = "transparent",
 			title = "Untitled",
-			seed = randomHex(6),
+			seed = cryptoRandomHex(6),
 		} = {},
 	) {
 		this.title = title;

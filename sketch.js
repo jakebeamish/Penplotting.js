@@ -1,33 +1,51 @@
-import { Sketch, Line, Vector, LCG, randomHex, randomInteger, sinFract } from "./source/index.js";
+import { Sketch, Line, Vector, LCG, cryptoRandomHex } from "./source/index.js";
 
-let sketch = new Sketch(100, 141,
+let sketch = new Sketch(200, 282,
     {
-        units: "mm",
-        backgroundColor: "ivory",
+        // units: "mm",
+        backgroundColor: "gray",
     }
 );
 
 const { width, height } = sketch;
-
 const lcg = new LCG(sketch.seed.decimal);
-
 const margin = 0.1 * (width + height) * 0.5;
 
-for (let i = 0; i < 100; i++) {
-    const x = margin + (i / 100) * (width - (margin * 2));
-    const a = new Vector(x, margin);
-    const b = new Vector(x, height - margin);
+const options = {
+    cols: [4, 5, 7],
+    rows: [3, 5, 8],
+    offset: [0],
+    lines: [20, 100, 1000]
+}
 
-    const r = lcg.random();
-    if (r < 0.5) {
-        const o = new Vector(randomInteger(-5, 5, sinFract(i * 0.0000000000000000001, 0.0001, 0.000000001, 0.00001, 1)) * 0.5, 0);
-        const c = Vector.add(b, o);
-        const d = Vector.add(a, o);
-        sketch.lines.push(new Line(a, c));
-        sketch.lines.push(new Line(d, b));
+const cols = lcg.randomElement(options.cols);
+const rows = lcg.randomElement(options.rows);
+
+
+
+let grid = [];
+
+for (let j = 0; j < rows; j++) {
+    grid[j] = [];
+    for (let i = 0; i < cols; i++) {
+        const x = margin + (((i + 0.5) / cols) * (width - (margin * 2)));
+        const y = margin + (((j + 0.5) / rows) * (height - (margin * 2)));
+        const v = new Vector(x, y);
+        const r = new Vector(
+            (lcg.randomFloat() * 2) - 1,
+            (lcg.randomFloat() * 2) - 1
+        )
+        v.add(r.multiply(lcg.randomElement(options.offset)));
+
+        grid[j].push(v);
     }
+}
 
-    sketch.lines.push(new Line(a, b));
+for (let c = 0; c < lcg.randomElement(options.lines); c++) {
+    const a = grid[lcg.randomInteger(0, rows)][lcg.randomInteger(0, cols)];
+    const b = grid[lcg.randomInteger(0, rows)][lcg.randomInteger(0, cols)];
+    const l = new Line(a, b);
+    sketch.lines.push(l)
 }
 
 sketch.draw();
