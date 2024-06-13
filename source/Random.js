@@ -20,7 +20,7 @@ class PRNG {
     }
 
     /**
-     * Generates a random float (in the range (0, 1]?)
+     * Generate a random float (in the range (0, 1]?)
      * @returns {number} A number between 0 and 1
      */
     randomFloat() {
@@ -28,10 +28,10 @@ class PRNG {
     }
 
     /**
-     * Generates a random integer from a specified range of values
-     * @param {number} min - The minimum integer value 
-     * @param {number} max - The maximum integer value
-     * @returns {number} - A random integer in the given range
+     * Generate a random integer from a specified range of values.
+     * @param {number} min - The minimum integer value.
+     * @param {number} max - The maximum integer value.
+     * @returns {number} - A random integer in the given range.
      */
     randomInteger(min, max) {
         const range = max - min;
@@ -39,9 +39,9 @@ class PRNG {
     }
 
     /**
-     * Selects a random element from an array
-     * @param {array} array - The array from which to select an element
-     * @returns {*} - A randomly selected element from the given array
+     * Select a random element from an array.
+     * @param {array} array - The array from which to select an element.
+     * @returns {*} - A randomly selected element from the given array.
      */
     randomElement(array) {
         const index = Math.floor(this.randomFloat() * array.length);
