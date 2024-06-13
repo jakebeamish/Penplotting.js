@@ -56,42 +56,6 @@ export function map(value, min1, max1, min2, max2, withinBounds = false) {
 	return mappedValue;
 }
 
-export function cryptoRandomHex(length) {
-	if (length <= 0) return "";
-
-	// Calculate the number of bytes needed (each byte = 2 hex characters)
-	const byteLength = Math.ceil(length / 2);
-	const randomBytes = new Uint8Array(byteLength);
-
-	// Fill the array with cryptographically secure random values
-	crypto.getRandomValues(randomBytes);
-
-	// Convert the random bytes to a hex string
-	const hexValue = Array.from(randomBytes)
-		.map((byte) => byte.toString(16).padStart(2, "0"))
-		.join("");
-
-	// Ensure the hex value matches the specified length
-	const truncatedHexValue = hexValue.slice(0, length);
-
-	// Convert the hex string to a decimal value
-	let decimalValue;
-	const bigIntValue = BigInt("0x" + truncatedHexValue);
-
-	// Check if the value is within the safe integer range
-	const maxSafeInteger = BigInt(Number.MAX_SAFE_INTEGER);
-	if (bigIntValue <= maxSafeInteger) {
-		decimalValue = Number(bigIntValue);
-	} else {
-		decimalValue = bigIntValue;
-	}
-
-	return {
-		hex: truncatedHexValue,
-		decimal: decimalValue,
-	};
-}
-
 /**
  * @description Convert a hexadecimal string to a decimal number.
  * @param {string} hex - A hexacimal string.
