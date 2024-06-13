@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Sketch<span class="signature">(width, height, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Sketch<span class="signature">(width, height, options<span class="signature-attributes">opt</span>, seed<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="Sketch"><span class="type-signature"></span>new Sketch<span class="signature">(width, height, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Sketch"><span class="type-signature"></span>new Sketch<span class="signature">(width, height, options<span class="signature-attributes">opt</span>, seed<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -72,6 +72,8 @@
         <th>Attributes</th>
         
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -106,6 +108,10 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
             <td class="description last"></td>
         </tr>
@@ -136,6 +142,10 @@
                 </td>
             
 
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"></td>
@@ -169,6 +179,10 @@
                 </td>
             
 
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last">
@@ -322,6 +336,45 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>seed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    randomHex(6)
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -359,7 +412,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line8">line 8</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -474,7 +527,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line76">line 76</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line83">line 83</a>
     </li></ul></dd>
     
 
@@ -562,7 +615,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line85">line 85</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line95">line 95</a>
     </li></ul></dd>
     
 
@@ -650,7 +703,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line69">line 69</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line76">line 76</a>
     </li></ul></dd>
     
 
@@ -745,7 +798,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line39">line 39</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -791,13 +844,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addLineToSVG">addLineToSVG</a></li><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#deduplicateObjectArray">deduplicateObjectArray</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="PRNG.html">PRNG</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addLineToSVG">addLineToSVG</a></li><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#deduplicateObjectArray">deduplicateObjectArray</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sat Jun 08 2024 13:23:22 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 13 2024 01:10:41 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

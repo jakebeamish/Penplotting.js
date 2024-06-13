@@ -29,91 +29,102 @@
             <pre class="prettyprint source linenums"><code>import { createSVG } from "./createSVG.js";
 import { addLineToSVG } from "./addLineToSVG.js";
 import { deduplicateObjectArray } from "./deduplicateObjectArray.js";
+import { cryptoRandomHex } from "./utils.js";
 
 /**
  * @class
  */
 export class Sketch {
-    /**
-     * 
-     * @param {number} width 
-     * @param {number} height 
-     * @param {object} [options] 
-     * @param {string} [options.title = "Untitled"]
-     * @param {string} [options.units = '']
-     * @param {string} [options.backgroundColor = 'transparent']
-     */
-    constructor(width, height, {
-       units = 'mm',
-       backgroundColor = 'transparent',
-       title = "Untitled"
-    }={}) {
-        this.title = title;
-        this.width = width;
-        this.height = height;
-        this.lines = [];
-        this.units = units;
-        this.backgroundColor = backgroundColor
-        this.svg = createSVG(this.width, this.height, {
-            units: this.units,
-            backgroundColor: this.backgroundColor
-        });
-        this.filename = `${this.title}_${this.width}x${this.height}${this.units}.svg`
-    }
+	/**
+	 *
+	 * @param {number} width
+	 * @param {number} height
+	 * @param {object} [options]
+	 * @param {string} [options.title = "Untitled"]
+	 * @param {string} [options.units = '']
+	 * @param {string} [options.backgroundColor = 'transparent']
+	 * @param {number} [seed = randomHex(6)]
+	 */
+	constructor(
+		width,
+		height,
+		{
+			units = "mm",
+			backgroundColor = "transparent",
+			title = "Untitled",
+			seed = cryptoRandomHex(6),
+		} = {},
+	) {
+		this.title = title;
+		this.width = width;
+		this.height = height;
+		this.lines = [];
+		this.units = units;
+		this.backgroundColor = backgroundColor;
+		this.svg = createSVG(this.width, this.height, {
+			units: this.units,
+			backgroundColor: this.backgroundColor,
+		});
+		this.seed = seed;
+		this.filename = `${this.title}_${this.seed.hex}_${this.width}x${this.height}${this.units}.svg`;
+	}
 
-    /**
-     * Creates an SVG element and appends it to the document body
-     */
-    draw() {
-        this.deduplicateLines();
-        this.addLinesToSVG();
+	/**
+	 * Creates an SVG element and appends it to the document body
+	 */
+	draw() {
+		this.deduplicateLines();
+		this.addLinesToSVG();
 
-        document.title = this.title;
-        this.appendSVG();
+		document.title = `${this.title} ${this.seed.hex}`;
+		this.appendSVG();
+	}
 
-    }
+	downloadSVG() {
+		const serializer = new XMLSerializer();
+		const source = serializer.serializeToString(this.svg);
 
-    downloadSVG(filename) {
-        const serializer = new XMLSerializer();
-        const source = serializer.serializeToString(this.svg);
-    
-        const svgBlob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
-        const url = URL.createObjectURL(svgBlob);
-    
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-    
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      }
+		const svgBlob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+		const url = URL.createObjectURL(svgBlob);
 
-    /**
-     * Removes duplicated Lines in this Sketch's lines array.
-     * @todo Compare startpoints with endpoints too
-     */
-    deduplicateLines() {
-        this.lines = deduplicateObjectArray(this.lines);
-    }
+		const a = document.createElement("a");
+		a.href = url;
+		a.download = this.filename;
+		document.body.appendChild(a);
+		a.click();
 
-    /**
-     * Adds the Lines in this Sketch's lines array to it's svg element.
-     */
-    addLinesToSVG() {
-        for (let line of this.lines) {
-            addLineToSVG(this.svg, line.a.x, line.a.y, line.b.x, line.b.y, { stroke: 'black', strokeWidth: 0.1 });
-        }
-    }
+		document.body.removeChild(a);
+		URL.revokeObjectURL(url);
+	}
 
-    /**
-     * Appends this sketch's svg element to the document body.
-     */
-    appendSVG() {
-        document.body.appendChild(this.svg);
-        }
-}</code></pre>
+	/**
+	 * Removes duplicated Lines in this Sketch's lines array.
+	 * @todo Compare startpoints with endpoints too
+	 */
+	deduplicateLines() {
+		this.lines = deduplicateObjectArray(this.lines);
+	}
+
+	/**
+	 * Adds the Lines in this Sketch's lines array to it's svg element.
+	 */
+	addLinesToSVG() {
+		for (const line of this.lines) {
+			addLineToSVG(this.svg, line.a.x, line.a.y, line.b.x, line.b.y, {
+				stroke: "black",
+				strokeWidth: 0.1,
+			});
+		}
+	}
+
+	/**
+	 * Appends this sketch's svg element to the document body.
+	 */
+	appendSVG() {
+		document.body.appendChild(this.svg);
+	}
+}
+</code></pre>
         </article>
     </section>
 
@@ -123,13 +134,13 @@ export class Sketch {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addLineToSVG">addLineToSVG</a></li><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#deduplicateObjectArray">deduplicateObjectArray</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="PRNG.html">PRNG</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addLineToSVG">addLineToSVG</a></li><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#deduplicateObjectArray">deduplicateObjectArray</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sat Jun 08 2024 13:23:22 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 13 2024 01:10:41 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
