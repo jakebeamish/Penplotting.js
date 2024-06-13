@@ -13,12 +13,12 @@ This is a dependency-free JavaScript framework for making SVG files for penplott
 The way I'm using this framework currently is something like this:
 
 ```js
-let sketch = new Sketch();
-let line = new Line(
-	new Vector(100, 0),
-	new Vector(0, 100)
-);
+import { Sketch, Vector, Line } from "../../index.js"
 
+const sketch = new Sketch();
+const a = new Vector(10, 10);
+const b = new Vector(90, 90);
+const l = new Line(a, b);
 sketch.lines.push(line);
 sketch.draw();
 ```
@@ -31,6 +31,11 @@ sketch.draw();
 ## Roadmap
 
 TODO:
+- Random Hex function
+- Tutorials using JSDoc
+- Examples using JSdoc
+- Line line intersection
+- Nearest neighbours
 - More PRNG implementations
 - Units conversion
 - Support for SVG paths
