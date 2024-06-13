@@ -92,6 +92,11 @@ export function cryptoRandomHex(length) {
 	};
 }
 
+/**
+ * @description Convert a hexadecimal string to a decimal number.
+ * @param {string} hex - A hexacimal string.
+ * @returns {number} - The decimal equivalent of the hex string.
+ */
 export function hexToDec(hex) {
 	return parseInt(hex, 16);
 }
