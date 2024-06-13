@@ -49,7 +49,22 @@ export class Sketch {
 		this.addLinesToSVG();
 
 		document.title = `${this.title} ${this.seed.hex}`;
+
+		let pageTitle = document.createElement("h1");
+		pageTitle.setAttribute("class", "gui")
+		pageTitle.append(`${this.title} ${this.seed.hex}`);
+		document.body.appendChild(pageTitle);
+
+		let downloadButton = document.createElement("a");
+		downloadButton.setAttribute("class", "gui")
+		downloadButton.append("Download");
+		document.body.appendChild(downloadButton)
 		this.appendSVG();
+
+		downloadButton.addEventListener('click', () => this.downloadSVG())
+
+
+
 	}
 
 	downloadSVG() {
