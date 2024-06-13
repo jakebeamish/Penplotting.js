@@ -3,8 +3,7 @@ This is a dependency-free JavaScript framework for making SVG files for penplott
 ## Features
 
 - A Sketch class to contain everything needed to create and render the SVG
-- 2D Vector class for geometry
-- Line class for drawing lines
+- 2D Vector and Line classes for geometry
 - A seedable PRNG with helper functions:
     - Random integer in range
     - Random float in range
@@ -16,21 +15,32 @@ This is a dependency-free JavaScript framework for making SVG files for penplott
 
 The way I'm using this framework currently is something like this:
 
-```js
-import { Sketch, Vector, Line } from "../../index.js"
-
-const sketch = new Sketch();
-const a = new Vector(10, 10);
-const b = new Vector(90, 90);
-const l = new Line(a, b);
-sketch.lines.push(line);
-sketch.draw();
-```
-
 1. Create a new Sketch (with optional parameters for dimensions, units and background colour)
 2. Create and manipulate Vectors and Lines
 3. Add Lines to the Sketch by pushing Lines to the Sketch's `lines` array
 4. Call the Sketch's instance method `draw()`
+
+```js
+import { Sketch, Vector, Line, LCG } from "../../index.js"
+
+// Setup the sketch
+const sketch = new Sketch(500, 500, {
+    units: "mm",
+    title: "My amazing sketch"
+});
+
+// Create Lines from Vectors
+const a = new Vector(10, 10);
+const b = new Vector(90, 90);
+const l = new Line(a, b);
+
+// Add the Lines to the Sketch object's lines array
+sketch.lines.push(line);
+
+// Call draw() on the Sketch
+sketch.draw();
+```
+
 
 ## Roadmap
 
