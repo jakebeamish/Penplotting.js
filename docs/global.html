@@ -1254,6 +1254,167 @@ fract(-42.23)</code></pre>
     
 
     
+    <h4 class="name" id="hexToDec"><span class="type-signature"></span>hexToDec<span class="signature">(hex)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Convert a hexadecimal string to a decimal number.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>hex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A hexacimal string.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils.js.html">utils.js</a>, <a href="utils.js.html#line100">line 100</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>The decimal equivalent of the hex string.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="lerp"><span class="type-signature"></span>lerp<span class="signature">(a, b, amount)</span><span class="type-signature"></span></h4>
     
 
@@ -1786,6 +1947,170 @@ fract(-42.23)</code></pre>
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="unseededRandomHex"><span class="type-signature"></span>unseededRandomHex<span class="signature">(n)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+    <p class="summary"><p>Create a random hexadecimal string of a specified length.</p></p>
+    
+
+
+
+<div class="description">
+    <p>Uses Math.random() to make a hexadecimal string for
+setting the seed of a <a href="Sketch.html">Sketch</a> to be used in a seedable <a href="PRNG.html">PRNG</a> such as <a href="LCG.html">LCG</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Number of digits</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line88">line 88</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Hexadecimal string of length n</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -1801,13 +2126,13 @@ fract(-42.23)</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="PRNG.html">PRNG</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addLineToSVG">addLineToSVG</a></li><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#deduplicateObjectArray">deduplicateObjectArray</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="PRNG.html">PRNG</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addLineToSVG">addLineToSVG</a></li><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#deduplicateObjectArray">deduplicateObjectArray</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#hexToDec">hexToDec</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#unseededRandomHex">unseededRandomHex</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 13 2024 01:18:15 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 13 2024 15:28:05 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

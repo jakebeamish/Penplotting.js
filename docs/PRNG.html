@@ -28,10 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature">(abstract) </span></span>PRNG</h2>
-        
-            <div class="class-description"><p>Class representing a Psuedo Random Number Generator.
-Note that this class should not be instantiated directly</p></div>
+        <h2><span class="attribs"><span class="type-signature">(abstract) </span></span>PRNG<span class="signature">(seed<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,6 +38,22 @@ Note that this class should not be instantiated directly</p></div>
     
         
 
+    
+
+    
+    <h4 class="name" id="PRNG"><span class="type-signature">(abstract) </span>new PRNG<span class="signature">(seed<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary"><p>Class representing a Psuedo Random Number Generator.</p></p>
+    
+
+
+
+<div class="description">
+    <p>This class shouldn't be instantiated directly.
+It is extended by <a href="LCG.html">LCG</a>.</p>
+</div>
 
 
 
@@ -49,6 +62,74 @@ Note that this class should not be instantiated directly</p></div>
 
 
 
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>seed</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    Date.now()
+                
+                </td>
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -84,7 +165,7 @@ Note that this class should not be instantiated directly</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line6">line 6</a>
+        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
@@ -148,7 +229,7 @@ Note that this class should not be instantiated directly</p></div>
 
 
 <div class="description">
-    <p>Selects a random element from an array</p>
+    <p>Select a random element from an array.</p>
 </div>
 
 
@@ -200,7 +281,7 @@ Note that this class should not be instantiated directly</p></div>
 
             
 
-            <td class="description last"><p>The array from which to select an element</p></td>
+            <td class="description last"><p>The array from which to select an element.</p></td>
         </tr>
 
     
@@ -241,7 +322,7 @@ Note that this class should not be instantiated directly</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line47">line 47</a>
+        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -271,7 +352,7 @@ Note that this class should not be instantiated directly</p></div>
         
 <div class="param-desc">
     <ul>
-<li>A randomly selected element from the given array</li>
+<li>A randomly selected element from the given array.</li>
 </ul>
 </div>
 
@@ -309,7 +390,7 @@ Note that this class should not be instantiated directly</p></div>
 
 
 <div class="description">
-    <p>Generates a random float (in the range (0, 1]?)</p>
+    <p>Generate a random float (in the range (0, 1]?)</p>
 </div>
 
 
@@ -353,7 +434,7 @@ Note that this class should not be instantiated directly</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line27">line 27</a>
+        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -419,7 +500,7 @@ Note that this class should not be instantiated directly</p></div>
 
 
 <div class="description">
-    <p>Generates a random integer from a specified range of values</p>
+    <p>Generate a random integer from a specified range of values.</p>
 </div>
 
 
@@ -471,7 +552,7 @@ Note that this class should not be instantiated directly</p></div>
 
             
 
-            <td class="description last"><p>The minimum integer value</p></td>
+            <td class="description last"><p>The minimum integer value.</p></td>
         </tr>
 
     
@@ -494,7 +575,7 @@ Note that this class should not be instantiated directly</p></div>
 
             
 
-            <td class="description last"><p>The maximum integer value</p></td>
+            <td class="description last"><p>The maximum integer value.</p></td>
         </tr>
 
     
@@ -535,7 +616,7 @@ Note that this class should not be instantiated directly</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line37">line 37</a>
+        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -565,7 +646,7 @@ Note that this class should not be instantiated directly</p></div>
         
 <div class="param-desc">
     <ul>
-<li>A random integer in the given range</li>
+<li>A random integer in the given range.</li>
 </ul>
 </div>
 
@@ -605,13 +686,13 @@ Note that this class should not be instantiated directly</p></div>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="PRNG.html">PRNG</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addLineToSVG">addLineToSVG</a></li><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#deduplicateObjectArray">deduplicateObjectArray</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="PRNG.html">PRNG</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addLineToSVG">addLineToSVG</a></li><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#deduplicateObjectArray">deduplicateObjectArray</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#hexToDec">hexToDec</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#unseededRandomHex">unseededRandomHex</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 13 2024 01:18:15 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 13 2024 15:28:05 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
