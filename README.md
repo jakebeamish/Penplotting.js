@@ -5,7 +5,11 @@ This is a dependency-free JavaScript framework for making SVG files for penplott
 - A Sketch class to contain everything needed to create and render the SVG
 - 2D Vector class for geometry
 - Line class for drawing lines
-- A seedable PRNG
+- A seedable PRNG with helper functions:
+    - Random integer in range
+    - Random float in range
+    - Random element in array
+    - Random hexadecimal string
 - Maths functions such as fract, wrap, lerp, map
 
 ## Usage
@@ -31,7 +35,6 @@ sketch.draw();
 ## Roadmap
 
 TODO:
-- Random Hex function
 - Tutorials using JSDoc
 - Examples using JSdoc
 - Line line intersection
