@@ -4,7 +4,7 @@
  * @description This class shouldn't be instantiated directly.
  * It is extended by {@link LCG}.
  */
-class PRNG {
+export class PRNG {
     /**
      * 
      * @param {number} [seed=Date.now()] 
