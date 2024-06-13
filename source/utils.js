@@ -91,3 +91,7 @@ export function cryptoRandomHex(length) {
 		decimal: decimalValue,
 	};
 }
+
+export function hexToDec(hex) {
+	return parseInt(hex, 16);
+}
