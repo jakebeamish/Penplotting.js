@@ -1,7 +1,7 @@
 import { createSVG } from "./createSVG.js";
 import { addLineToSVG } from "./addLineToSVG.js";
 import { deduplicateObjectArray } from "./deduplicateObjectArray.js";
-import { cryptoRandomHex } from "./utils.js";
+import { unseededRandomHex } from "./Random.js";
 
 /**
  * @class
@@ -15,7 +15,7 @@ export class Sketch {
 	 * @param {string} [options.title = "Untitled"]
 	 * @param {string} [options.units = '']
 	 * @param {string} [options.backgroundColor = 'transparent']
-	 * @param {number} [seed = randomHex(6)]
+	 * @param {number} [seed = unseededRandomHexRandomHex(8)]
 	 */
 	constructor(
 		width,
@@ -24,7 +24,7 @@ export class Sketch {
 			units = "mm",
 			backgroundColor = "transparent",
 			title = "Untitled",
-			seed = cryptoRandomHex(6),
+			seed = unseededRandomHex(8),
 		} = {},
 	) {
 		this.title = title;
