@@ -1,10 +1,12 @@
 /**
- * Class representing a Psuedo Random Number Generator.
+ * @summary Class representing a Psuedo Random Number Generator.
  * @abstract
+ * @description This class shouldn't be instantiated directly.
+ * It is extended by {@link LCG}.
  */
 class PRNG {
     /**
-     * @hideconstructor
+     * 
      * @param {number} [seed=Date.now()] 
      */
     constructor(seed = Date.now()) {
@@ -73,5 +75,26 @@ export class LCG extends PRNG {
 
     maxValue() {
         return this.modulus;
+    }
+}
+
+/**
+ * @summary Create a random hexadecimal string of a specified length.
+ * @description Uses Math.random() to make a hexadecimal string for
+ * setting the seed of a {@link Sketch} to be used in a seedable {@link PRNG} such as {@link LCG}
+ * @param {number} n - Number of digits 
+ * @returns {string} - Hexadecimal string of length n
+ */
+export function unseededRandomHex(n) {
+    const hexArray = Array.from({
+        length: n
+    }, () => {
+        return Math.floor(Math.random() * 16).toString(16)
+    });
+    const hex = hexArray.join("");
+    const decimal = parseInt(hex, 16);
+
+    return {
+        hex, decimal
     }
 }
