@@ -1,8 +1,8 @@
 /**
  * Class representing a Psuedo Random Number Generator.
- * @class 
+ * @abstract
  */
-export class PRNG {
+class PRNG {
     /**
      * @hideconstructor
      * @param {number} [seed=Date.now()] 
