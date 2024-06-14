@@ -2,6 +2,8 @@ import { createSVG } from "./createSVG.js";
 import { addLineToSVG } from "./addLineToSVG.js";
 import { deduplicateObjectArray } from "./deduplicateObjectArray.js";
 import { unseededRandomHex } from "./Random.js";
+import { hexToDec } from "./utils.js";
+import { decToHex } from "./utils.js";
 
 /**
  * @class
@@ -37,34 +39,77 @@ export class Sketch {
 			units: this.units,
 			backgroundColor: this.backgroundColor,
 		});
-		this.seed = seed;
-		this.filename = `${this.title}_${this.seed.hex}_${this.width}x${this.height}${this.units}.svg`;
+
+		this.header;
+
+		// this.seed = seed;
+
+		if (typeof seed === "number") {
+			// console.log("seed is a "number")
+			this.seed = {
+				hex: decToHex(seed, 8),
+				decimal: seed
+			}
+			// console.log("num")
+		}
+
+		// this.seed = seed;
+		// this.filename = 
+	}
+
+	filename() {
+		return `${this.title}_${this.seed.hex}_${this.width}x${this.height}${this.units}.svg`;
 	}
 
 	/**
 	 * Creates an SVG element and appends it to the document body
 	 */
 	draw() {
+		this.generate();
 		this.deduplicateLines();
 		this.addLinesToSVG();
 
 		document.title = `${this.title} ${this.seed.hex}`;
 
-		let pageTitle = document.createElement("h1");
-		pageTitle.setAttribute("class", "gui")
-		pageTitle.append(`${this.title} ${this.seed.hex}`);
-		document.body.appendChild(pageTitle);
+		this.header = document.createElement("header");
+		document.body.append(this.header);
 
+		let pageTitle = document.createElement("h1");
+		pageTitle.append(`${this.title} ${this.seed.hex}`);
+		this.header.appendChild(pageTitle);
+
+		let nav = document.createElement("nav");
+		this.header.appendChild(nav);
+
+		let ul = document.createElement("ul");
+
+		nav.appendChild(ul);
+
+		let li1 = document.createElement("li");
+		ul.append(li1);
 		let downloadButton = document.createElement("a");
-		downloadButton.setAttribute("class", "gui")
-		downloadButton.append("Download");
-		document.body.appendChild(downloadButton)
+		downloadButton.append("💾 Download");
+		// downloadButton.setAttribute("href", "")
+		li1.appendChild(downloadButton)
 		this.appendSVG();
 
 		downloadButton.addEventListener('click', () => this.downloadSVG())
 
+		let li2 = document.createElement("li");
+		ul.appendChild(li2)
+		let randomButton = document.createElement("a");
+		randomButton.append("🎲 Randomise");
+		// randomButton.setAttribute("href)
+		li2.appendChild(randomButton)
 
+		randomButton.addEventListener('click', () => this.randomiseSeed())
 
+	}
+
+	clear() {
+		this.lines = [];
+		document.body.removeChild(this.header)
+		document.body.removeChild(this.svg);
 	}
 
 	downloadSVG() {
@@ -76,12 +121,27 @@ export class Sketch {
 
 		const a = document.createElement("a");
 		a.href = url;
-		a.download = this.filename;
+		a.download = this.filename();
 		document.body.appendChild(a);
 		a.click();
 
 		document.body.removeChild(a);
 		URL.revokeObjectURL(url);
+	}
+
+	randomiseSeed() {
+		console.log(this.seed)
+		this.seed = unseededRandomHex(8);
+		console.log(this.seed)
+
+		this.clear();
+
+		this.svg = createSVG(this.width, this.height, {
+			units: this.units,
+			backgroundColor: this.backgroundColor,
+		});
+
+		this.draw();
 	}
 
 	/**
