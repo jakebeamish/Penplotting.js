@@ -64,3 +64,7 @@ export function map(value, min1, max1, min2, max2, withinBounds = false) {
 export function hexToDec(hex) {
 	return parseInt(hex, 16);
 }
+
+export function decToHex(dec, length = 8) {
+	return dec.toString(16).padStart(length, "0");
+}
