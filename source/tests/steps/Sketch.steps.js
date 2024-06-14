@@ -1,5 +1,5 @@
 import { defineFeature, loadFeature } from "jest-cucumber";
-import { Sketch } from "../../Sketch";
+import { Sketch } from "../../index.js";
 
 const feature = loadFeature("./source/tests/features/Sketch.feature");
 
@@ -13,7 +13,7 @@ defineFeature(feature, (test) => {
 		let sketch;
 		given(
 			"I want to create a sketch object to contain an SVG element and stuff",
-			() => {},
+			() => { },
 		);
 
 		when("when I create a sketch object", () => {
@@ -28,7 +28,7 @@ defineFeature(feature, (test) => {
 	test("Add a sketch SVG to the document body", ({ given, when, then }) => {
 		let sketch = new Sketch(100, 100);
 
-		given("I want to see the sketch", () => {});
+		given("I want to see the sketch", () => { });
 
 		when("I append the SVG to the document", () => {
 			sketch.appendSVG();
@@ -78,7 +78,10 @@ defineFeature(feature, (test) => {
 		when,
 		then,
 	}) => {
-		let sketch = new Sketch(100, 100);
+		let sketch;
+
+		given("I want to generate and see the sketch simply", () => { });
+		sketch = new Sketch(100, 100);
 		sketch.lines.push({
 			a: {
 				x: 3,
@@ -89,12 +92,8 @@ defineFeature(feature, (test) => {
 				y: 6,
 			},
 		});
-
-		let domSvg;
-
-		given("I want to generate and see the sketch simply", () => {});
-
 		when("I call sketch.draw()", () => {
+			sketch.generate = function () { };
 			sketch.draw();
 		});
 
@@ -138,7 +137,7 @@ defineFeature(feature, (test) => {
 				},
 			});
 
-		given("I don't want to draw duplicated lines", () => {});
+		given("I don't want to draw duplicated lines", () => { });
 
 		when("I call Sketch.deduplicateLines()", () => {
 			sketch.deduplicateLines();

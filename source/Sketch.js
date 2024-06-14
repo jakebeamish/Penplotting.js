@@ -41,8 +41,9 @@ export class Sketch {
 		});
 
 		this.header;
+		this.generate = () => { };
 
-		// this.seed = seed;
+		this.seed = seed;
 
 		if (typeof seed === "number") {
 			// console.log("seed is a "number")
@@ -65,6 +66,7 @@ export class Sketch {
 	 * Creates an SVG element and appends it to the document body
 	 */
 	draw() {
+
 		this.generate();
 		this.deduplicateLines();
 		this.addLinesToSVG();
