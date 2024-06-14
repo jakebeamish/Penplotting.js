@@ -29,13 +29,17 @@ const sketch = new Sketch(500, 500, {
     title: "My amazing sketch"
 });
 
-// Create Lines from Vectors
-const a = new Vector(10, 10);
-const b = new Vector(90, 90);
-const l = new Line(a, b);
+// Define a generate() function
+// This is where the work is made
+sketch.generate = () => {
+    // Create Lines from Vectors
+    const a = new Vector(10, 10);
+    const b = new Vector(90, 90);
+    const l = new Line(a, b);
 
-// Add the Lines to the Sketch object's lines array
-sketch.lines.push(line);
+    // Add the Lines to the Sketch object's lines array
+    sketch.lines.push(line);
+}
 
 // Call draw() on the Sketch
 sketch.draw();
@@ -48,12 +52,11 @@ TODO:
 - Tutorials using JSDoc
 - Examples using JSdoc
 - Line line intersection
-- Nearest neighbours
 - More PRNG implementations
 - Units conversion
 - Support for SVG paths
 - SVG output validation
-- HTML GUI (reseed, change params, download)
+- HTML GUI for changing params
 - Keyboard shortcuts
 - 3D support
 - Noise functions
