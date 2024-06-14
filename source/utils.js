@@ -100,3 +100,7 @@ export function cryptoRandomHex(length) {
 export function hexToDec(hex) {
 	return parseInt(hex, 16);
 }
+
+export function decToHex(dec, length = 8) {
+	return dec.toString(16).padStart(length, "0");
+}
