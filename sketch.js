@@ -1,4 +1,4 @@
-import { Sketch, Line, Vector, LCG, cryptoRandomHex } from "./source/index.js";
+import { Sketch, Line, Vector, LCG } from "./source/index.js";
 
 let sketch = new Sketch(200, 282,
     {
