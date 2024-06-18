@@ -4,6 +4,7 @@ import { deduplicateObjectArray } from "./deduplicateObjectArray.js";
 import { unseededRandomHex } from "./Random.js";
 import { hexToDec } from "./utils.js";
 import { decToHex } from "./utils.js";
+import { wrap } from "./utils.js";
 
 /**
  * @class
@@ -46,16 +47,11 @@ export class Sketch {
 		this.seed = seed;
 
 		if (typeof seed === "number") {
-			// console.log("seed is a "number")
 			this.seed = {
 				hex: decToHex(seed, 8),
 				decimal: seed
 			}
-			// console.log("num")
 		}
-
-		// this.seed = seed;
-		// this.filename = 
 	}
 
 	filename() {
@@ -87,31 +83,79 @@ export class Sketch {
 
 		nav.appendChild(ul);
 
-		let li1 = document.createElement("li");
-		ul.append(li1);
+		let downloadListItem = document.createElement("li");
+		ul.append(downloadListItem);
 		let downloadButton = document.createElement("a");
 		downloadButton.append("💾 Download");
 		// downloadButton.setAttribute("href", "")
-		li1.appendChild(downloadButton)
-		this.appendSVG();
+		downloadListItem.appendChild(downloadButton)
 
 		downloadButton.addEventListener('click', () => this.downloadSVG())
 
-		let li2 = document.createElement("li");
-		ul.appendChild(li2)
+		let randomListItem = document.createElement("li");
+		ul.appendChild(randomListItem)
 		let randomButton = document.createElement("a");
 		randomButton.append("🎲 Randomise");
 		// randomButton.setAttribute("href)
-		li2.appendChild(randomButton)
+		randomListItem.appendChild(randomButton)
 
 		randomButton.addEventListener('click', () => this.randomiseSeed())
 
+		// let seedDecrementListItem = document.createElement("li");
+		// ul.appendChild(seedDecrementListItem)
+		// let seedDecrementButton = document.createElement("a");
+		// seedDecrementButton.append("-");
+		// // randomButton.setAttribute("href)
+		// seedDecrementListItem.appendChild(seedDecrementButton)
+
+		// seedDecrementButton.addEventListener('click', () => {
+		// 	const newSeed = wrap(this.seed.decimal - 1, 1, 0xFFFFFFFF + 1)
+		// 	this.seed = {
+		// 		decimal: newSeed,
+		// 		hex: decToHex(newSeed)
+		// 	}
+		// 	this.clear();
+		// 	this.draw();
+		// })
+
+		// let seedIncrementListItem = document.createElement("li");
+		// ul.appendChild(seedIncrementListItem)
+		// let seedIncrementButton = document.createElement("a");
+		// seedIncrementButton.append("+");
+		// // randomButton.setAttribute("href)
+		// seedIncrementListItem.appendChild(seedIncrementButton)
+
+		// seedIncrementButton.addEventListener('click', () => {
+		// 	const newSeed = wrap(this.seed.decimal + 1, 0, 0xFFFFFFFF)
+		// 	this.seed = {
+		// 		decimal: newSeed,
+		// 		hex: decToHex(newSeed)
+		// 	}
+		// 	this.clear();
+		// 	this.draw();
+		// })
+
+		this.appendSVG();
+
+		let sketchInfo = document.createElement("div")
+
+		let numOfLines = document.createElement("p");
+		numOfLines.append(`${this.lines.length} lines`)
+		sketchInfo.appendChild(numOfLines)
+		this.header.appendChild(sketchInfo)
+
+		this.appendSVG();
 	}
 
 	clear() {
 		this.lines = [];
 		document.body.removeChild(this.header)
 		document.body.removeChild(this.svg);
+
+		this.svg = createSVG(this.width, this.height, {
+			units: this.units,
+			backgroundColor: this.backgroundColor,
+		});
 	}
 
 	downloadSVG() {
@@ -132,17 +176,10 @@ export class Sketch {
 	}
 
 	randomiseSeed() {
-		console.log(this.seed)
+		// console.log(this.seed)
 		this.seed = unseededRandomHex(8);
-		console.log(this.seed)
-
+		// console.log(this.seed)
 		this.clear();
-
-		this.svg = createSVG(this.width, this.height, {
-			units: this.units,
-			backgroundColor: this.backgroundColor,
-		});
-
 		this.draw();
 	}
 
@@ -151,8 +188,25 @@ export class Sketch {
 	 * @todo Compare startpoints with endpoints too
 	 */
 	deduplicateLines() {
-		this.lines = deduplicateObjectArray(this.lines);
+		// this.lines = deduplicateObjectArray(this.lines);
+		const uniqueLines = [];
+
+		for (const line of this.lines) {
+			let isDuplicate = false;
+			for (const uniqueLine of uniqueLines) {
+				if (line.isDuplicate(uniqueLine)) {
+					isDuplicate = true;
+					break;
+				}
+			}
+			if (!isDuplicate) {
+				uniqueLines.push(line);
+			}
+		}
+
+		this.lines = uniqueLines;
 	}
+
 
 	/**
 	 * Adds the Lines in this Sketch's lines array to it's svg element.
