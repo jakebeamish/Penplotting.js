@@ -13,7 +13,7 @@ const lcg = new LCG(sketch.seed.decimal);
 // lcg.increment = 1;
 
 
-sketch.generate = function () {
+sketch.generate = () => {
 
 
     let { width, height } = sketch;

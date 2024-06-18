@@ -16,8 +16,8 @@ This is a dependency-free JavaScript framework for making SVG files for penplott
 The way I'm using this framework currently is something like this:
 
 1. Create a new Sketch (with optional parameters for dimensions, units and background colour)
-2. Create and manipulate Vectors and Lines
-3. Add Lines to the Sketch by pushing Lines to the Sketch's `lines` array
+2. Create and manipulate Vectors and Lines in the sketch.generate() function
+3. Add Lines to be included as SVG elements in the Sketch by pushing Lines to the Sketch's `lines` array
 4. Call the Sketch's instance method `draw()`
 
 ```js
