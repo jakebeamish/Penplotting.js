@@ -8,7 +8,13 @@ let sketch = new Sketch(200, 282,
     }
 );
 
+const lcg = new LCG(sketch.seed.decimal);
+// lcg.multiplier = 30000000;
+// lcg.increment = 1;
+
+
 sketch.generate = function () {
+
 
     let { width, height } = sketch;
     const centre = new Vector(width / 2, height / 2)
@@ -17,10 +23,10 @@ sketch.generate = function () {
 
     let points = [];
 
-    while (points.length < 6000) {
+    while (points.length < 4000) {
 
-        let theta = Math.random() * Math.PI * 2;
-        let r = Math.random() * (width - (margin * 2)) * 0.5;
+        let theta = lcg.randomFloat() * Math.PI * 2;
+        let r = lcg.randomFloat() * (width - (margin * 2)) * 0.5;
         let point = new Vector(
             Math.cos(theta) * r,
             Math.sin(theta) * r
@@ -41,8 +47,9 @@ sketch.generate = function () {
 
     for (let point of points) {
 
-        let k = point.distance(centre) / (width / 2) - Math.random() * 0.2;
-        let nearestNeighbours = point.nearestNeighbour(points, 5 - k * 2);
+        // let k = point.distance(centre) / (width / 2);
+        let k = 4;
+        let nearestNeighbours = point.nearestNeighbour(points, k);
         for (let neighbour of nearestNeighbours) {
             sketch.lines.push(new Line(
                 point, neighbour
