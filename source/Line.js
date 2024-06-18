@@ -22,4 +22,9 @@ export class Line {
 	length() {
 		return this.a.distance(this.b);
 	}
+
+	isDuplicate(line) {
+		return (this.a.equals(line.a) && this.b.equals(line.b)) ||
+			(this.a.equals(line.b) && this.b.equals(line.a));
+	}
 }

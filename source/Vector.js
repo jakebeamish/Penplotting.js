@@ -34,6 +34,10 @@ export class Vector {
         return this;
     }
 
+    equals(vector) {
+        return this.x === vector.x && this.y === vector.y;
+    }
+
     /**
      * Subtract a vector from this vector
      * @param {Vector} vector
