@@ -61,6 +61,8 @@ TODO:
 - 3D support
 - Noise functions
 - Batch create and download
+- Voronoi diagrams
+- Grid class
 
 ## Contributing
 
