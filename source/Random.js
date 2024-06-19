@@ -49,6 +49,10 @@ export class PRNG {
         const index = Math.floor(this.randomFloat() * array.length);
         return array[index];
     }
+
+    randomChance(chance) {
+        return this.randomFloat() < chance;
+    }
 }
 
 /**
