@@ -4,19 +4,15 @@ This is a dependency-free JavaScript framework for making SVG files for penplott
 
 - A Sketch class to contain everything needed to create and render the SVG
 - 2D Vector and Line classes for geometry
-- A seedable PRNG with helper functions:
-    - Random integer in range
-    - Random float in range
-    - Random element in array
-    - Random hexadecimal string
+- A seedable PRNG with useful methods
 - Maths functions such as fract, wrap, lerp, map
 
 ## Usage
 
 The way I'm using this framework currently is something like this:
 
-1. Create a new Sketch (with optional parameters for dimensions, units and background colour)
-2. Create and manipulate Vectors and Lines in the sketch.generate() function
+1. Create a new Sketch (with optional parameters for dimensions, units, background colour, title, seed)
+2. Create and manipulate Vectors and Lines by defining a sketch.generate() function
 3. Add Lines to be included as SVG elements in the Sketch by pushing Lines to the Sketch's `lines` array
 4. Call the Sketch's instance method `draw()`
 
@@ -37,7 +33,7 @@ sketch.generate = () => {
     const b = new Vector(90, 90);
     const l = new Line(a, b);
 
-    // Add the Lines to the Sketch object's lines array
+    // Add Lines to the Sketch object's lines array
     sketch.lines.push(line);
 }
 
@@ -49,6 +45,7 @@ sketch.draw();
 ## Roadmap
 
 TODO:
+- Test plans
 - Tutorials using JSDoc
 - Examples using JSdoc
 - Line line intersection
@@ -69,5 +66,3 @@ TODO:
 Currently, I am using `jest` and `jest-cucumber` for testing. Some scenarios are described in feature files, but the majority of tests are not.
 
 I'm trying to make sure that everything in the library is well documented using `JSDoc`.
-
-I am also trying out Biome.js for formatting.
