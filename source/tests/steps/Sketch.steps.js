@@ -1,5 +1,7 @@
 import { defineFeature, loadFeature } from "jest-cucumber";
 import { Sketch } from "../../index.js";
+import { Line } from "../../index.js";
+import { Vector } from "../../index.js";
 
 const feature = loadFeature("./source/tests/features/Sketch.feature");
 
@@ -55,6 +57,8 @@ defineFeature(feature, (test) => {
 				y: 1,
 			},
 		};
+
+
 
 		given("the sketch may have a line in it's lines array", () => {
 			sketch = new Sketch();
@@ -116,26 +120,19 @@ defineFeature(feature, (test) => {
 	}) => {
 		let sketch = new Sketch();
 
-		sketch.lines.push({
-			a: {
-				x: 3,
-				y: 4,
-			},
-			b: {
-				x: 5,
-				y: 6,
-			},
-		}),
-			sketch.lines.push({
-				a: {
-					x: 3,
-					y: 4,
-				},
-				b: {
-					x: 5,
-					y: 6,
-				},
-			});
+		let a = new Line(
+			new Vector(3, 4),
+			new Vector(5, 6)
+		);
+
+		let b = new Line(
+			new Vector(5, 6),
+			new Vector(3, 4)
+
+		);
+
+		sketch.lines.push(a);
+		sketch.lines.push(b);
 
 		given("I don't want to draw duplicated lines", () => { });
 
