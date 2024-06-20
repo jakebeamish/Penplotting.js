@@ -90,7 +90,7 @@ export class Sketch {
 		let downloadListItem = document.createElement("li");
 		ul.append(downloadListItem);
 		let downloadButton = document.createElement("a");
-		downloadButton.append("💾 Download");
+		downloadButton.append("⬇️");
 		downloadListItem.appendChild(downloadButton)
 
 		downloadButton.addEventListener('click', () => this.downloadSVG())
@@ -98,7 +98,7 @@ export class Sketch {
 		let randomListItem = document.createElement("li");
 		ul.appendChild(randomListItem)
 		let randomButton = document.createElement("a");
-		randomButton.append("🎲 Randomise");
+		randomButton.append("🔄");
 		randomListItem.appendChild(randomButton)
 
 		randomButton.addEventListener('click', () => this.randomiseSeed())

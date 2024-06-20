@@ -19,22 +19,20 @@ header div,
 header div p {
     display: inline;
     font-family: 'Courier New', Courier, monospace;
-    font-size: small;
-    font-weight: 200;
+    margin-left: 0.2rem;
+    font-size: medium;
 }
 
 header nav ul li {
     margin-right: 0.2rem;
-    padding: 0.2rem;
+    padding: 0.2rem 0.2rem 0rem 0.2rem;
     cursor: pointer;
-    border-radius: 5px 5px;
+    border-radius: 3px 3px;
     border: 1px solid white;
+    font-weight: 600;
 }
 
 header nav ul li:hover {
-    /* border: 1 1 white; */
-
-
     color: black;
     background-color: white;
 }
