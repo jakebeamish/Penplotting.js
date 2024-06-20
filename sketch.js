@@ -1,17 +1,11 @@
-import { Sketch, Line, Vector, LCG } from "./source/index.js";
+import { Sketch, Line, Vector, LCG, Mulberry32 } from "./source/index.js";
 
-let sketch = new Sketch(210, 297,
-    {
-        // units: "mm",
-        // seed: 1,
-        backgroundColor: "gray",
-    }
+let sketch = new Sketch(210, 297, {
+    backgroundColor: "white",
+}
 );
 
-const lcg = new LCG(sketch.seed.decimal);
-// lcg.multiplier = 30000000;
-// lcg.increment = 1;
-
+const prng = new Mulberry32(sketch.seed.decimal);
 
 sketch.generate = () => {
 
@@ -22,8 +16,8 @@ sketch.generate = () => {
     let margin = width * 0.2;
 
     let points = [];
-    let rows = 50;
-    let columns = 50;
+    let rows = 10;
+    let columns = 10;
 
     for (let j = 0; j <= rows; j++) {
         for (let i = 0; i <= columns; i++) {
@@ -32,8 +26,8 @@ sketch.generate = () => {
                 margin + j * ((height - margin * 2) / rows)
             )
             vector.add(new Vector(
-                (lcg.randomFloat() * 2 - 1),
-                (lcg.randomFloat() * 2 - 1)
+                (prng.randomFloat() * 2 - 1),
+                (prng.randomFloat() * 2 - 1)
             ))
             points.push(vector);
         }
@@ -41,8 +35,8 @@ sketch.generate = () => {
 
     for (let i = 0; i < 10; i++) {
         points.push(new Vector(
-            lcg.randomInteger(margin, width - margin),
-            lcg.randomInteger(margin, height - margin)
+            prng.randomInteger(margin, width - margin),
+            prng.randomInteger(margin, height - margin)
         ))
     }
 

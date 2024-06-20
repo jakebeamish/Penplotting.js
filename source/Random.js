@@ -82,6 +82,25 @@ export class LCG extends PRNG {
     }
 }
 
+export class Mulberry32 extends PRNG {
+    constructor(seed) {
+        super(seed);
+        this.state = this.seed;
+    }
+
+    maxValue() {
+        return 2 ** 32;
+    }
+
+    next() {
+        let t = this.state += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, 1 | t);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        this.state = t ^ t >>> 14;
+        return this.state >>> 0;
+    }
+}
+
 /**
  * @summary Create a random hexadecimal string of a specified length.
  * @description Uses Math.random() to make a hexadecimal string for
