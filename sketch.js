@@ -26,14 +26,14 @@ sketch.generate = () => {
                 margin + j * ((height - margin * 2) / rows)
             )
             vector.add(new Vector(
-                (prng.randomFloat() * 2 - 1),
-                (prng.randomFloat() * 2 - 1)
+                (prng.randomFloat() * 2 - 1) * 2,
+                (prng.randomFloat() * 2 - 1) * 2
             ))
             points.push(vector);
         }
     }
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1000; i++) {
         points.push(new Vector(
             prng.randomInteger(margin, width - margin),
             prng.randomInteger(margin, height - margin)
@@ -41,7 +41,7 @@ sketch.generate = () => {
     }
 
     for (let point of points) {
-        let k = 4;
+        let k = 3;
         let nearestNeighbours = point.nearestNeighbour(points, k);
         for (let neighbour of nearestNeighbours) {
             sketch.lines.push(new Line(
