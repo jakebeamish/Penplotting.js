@@ -62,10 +62,14 @@ export class Sketch {
 	 * Creates an SVG element and appends it to the document body
 	 */
 	draw() {
-
+		let startTime = Date.now();
 		this.generate();
+
 		this.deduplicateLines();
 		this.addLinesToSVG();
+
+		const timeTaken = +(Math.round(((Date.now() - startTime) / 1000) + "e+2") + "e-2");
+
 
 		document.title = `${this.title} ${this.seed.hex}`;
 
@@ -87,7 +91,6 @@ export class Sketch {
 		ul.append(downloadListItem);
 		let downloadButton = document.createElement("a");
 		downloadButton.append("💾 Download");
-		// downloadButton.setAttribute("href", "")
 		downloadListItem.appendChild(downloadButton)
 
 		downloadButton.addEventListener('click', () => this.downloadSVG())
@@ -96,51 +99,14 @@ export class Sketch {
 		ul.appendChild(randomListItem)
 		let randomButton = document.createElement("a");
 		randomButton.append("🎲 Randomise");
-		// randomButton.setAttribute("href)
 		randomListItem.appendChild(randomButton)
 
 		randomButton.addEventListener('click', () => this.randomiseSeed())
 
-		// let seedDecrementListItem = document.createElement("li");
-		// ul.appendChild(seedDecrementListItem)
-		// let seedDecrementButton = document.createElement("a");
-		// seedDecrementButton.append("-");
-		// // randomButton.setAttribute("href)
-		// seedDecrementListItem.appendChild(seedDecrementButton)
-
-		// seedDecrementButton.addEventListener('click', () => {
-		// 	const newSeed = wrap(this.seed.decimal - 1, 1, 0xFFFFFFFF + 1)
-		// 	this.seed = {
-		// 		decimal: newSeed,
-		// 		hex: decToHex(newSeed)
-		// 	}
-		// 	this.clear();
-		// 	this.draw();
-		// })
-
-		// let seedIncrementListItem = document.createElement("li");
-		// ul.appendChild(seedIncrementListItem)
-		// let seedIncrementButton = document.createElement("a");
-		// seedIncrementButton.append("+");
-		// // randomButton.setAttribute("href)
-		// seedIncrementListItem.appendChild(seedIncrementButton)
-
-		// seedIncrementButton.addEventListener('click', () => {
-		// 	const newSeed = wrap(this.seed.decimal + 1, 0, 0xFFFFFFFF)
-		// 	this.seed = {
-		// 		decimal: newSeed,
-		// 		hex: decToHex(newSeed)
-		// 	}
-		// 	this.clear();
-		// 	this.draw();
-		// })
-
-		this.appendSVG();
-
 		let sketchInfo = document.createElement("div")
 
 		let numOfLines = document.createElement("p");
-		numOfLines.append(`${this.lines.length} lines`)
+		numOfLines.append(`Generated ${this.lines.length} lines in ~${timeTaken}s`)
 		sketchInfo.appendChild(numOfLines)
 		this.header.appendChild(sketchInfo)
 

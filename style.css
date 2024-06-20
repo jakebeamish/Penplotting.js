@@ -19,7 +19,7 @@ header div,
 header div p {
     display: inline;
     font-family: 'Courier New', Courier, monospace;
-    font-size: medium;
+    font-size: small;
     font-weight: 200;
 }
 
