@@ -50,6 +50,8 @@ TODO:
 - Examples using JSdoc
 - Line line intersection
 - More PRNG implementations
+    - [ ] XORShift
+    - [ ] Another one
 - Units conversion
 - Support for SVG paths
 - SVG output validation
@@ -60,6 +62,12 @@ TODO:
 - Batch create and download
 - Voronoi diagrams
 - Grid class
+- Download the code (the sketch.generate() function or the whole Sketch object)
+- Quadtree
+- Paper sizes
+- Add strokeweight to sketch config
+
+
 
 ## Contributing
 
