@@ -1,15 +1,25 @@
 import { Sketch, Line, Vector, LCG, Mulberry32, XORShift32 } from "./source/index.js";
 
-let sketch = new Sketch(210, 297, {
+const PAPER = {
+    A4: {
+        width: 210,
+        height: 297
+    },
+    A5: {
+        width: 148,
+        height: 210
+    }
+}
+
+let sketch = new Sketch({
     backgroundColor: "white",
+    size: PAPER.A5
 }
 );
 
 const prng = new XORShift32(sketch.seed.decimal);
 
 sketch.generate = () => {
-
-
     let { width, height } = sketch;
     const centre = new Vector(width / 2, height / 2)
 
@@ -49,7 +59,6 @@ sketch.generate = () => {
             ))
         }
     }
-
 }
 
 sketch.draw();

@@ -17,22 +17,31 @@ export class Sketch {
 	 * @param {object} [options]
 	 * @param {string} [options.title = "Untitled"]
 	 * @param {string} [options.units = '']
+
 	 * @param {string} [options.backgroundColor = 'transparent']
 	 * @param {number} [seed = unseededRandomHexRandomHex(8)]
 	 */
 	constructor(
-		width,
-		height,
 		{
 			units = "mm",
 			backgroundColor = "transparent",
 			title = "Untitled",
 			seed = unseededRandomHex(8),
+			size = undefined,
+			width = 100,
+			height = 100
 		} = {},
 	) {
 		this.title = title;
 		this.width = width;
 		this.height = height;
+		this.size = size;
+
+		if (this.size !== undefined) {
+			this.width = this.size.width;
+			this.height = this.size.height;
+		}
+
 		this.lines = [];
 		this.units = units;
 		this.backgroundColor = backgroundColor;
@@ -52,6 +61,7 @@ export class Sketch {
 				decimal: seed
 			}
 		}
+
 	}
 
 	filename() {
