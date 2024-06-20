@@ -1,11 +1,11 @@
-import { Sketch, Line, Vector, LCG, Mulberry32 } from "./source/index.js";
+import { Sketch, Line, Vector, LCG, Mulberry32, XORShift32 } from "./source/index.js";
 
 let sketch = new Sketch(210, 297, {
     backgroundColor: "white",
 }
 );
 
-const prng = new Mulberry32(sketch.seed.decimal);
+const prng = new XORShift32(sketch.seed.decimal);
 
 sketch.generate = () => {
 

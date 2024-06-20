@@ -101,6 +101,26 @@ export class Mulberry32 extends PRNG {
     }
 }
 
+export class XORShift32 extends PRNG {
+    constructor(seed) {
+        super(seed);
+        this.state = this.seed;
+    }
+
+    maxValue() {
+        return 2 ** 32;
+    }
+
+    next() {
+        let a = this.state;
+        a ^= a << 13;
+        a ^= a >>> 17;
+        a ^= a << 5;
+        this.state = a >>> 0; // Ensure it stays a 32-bit unsigned integer
+        return this.state;
+    }
+}
+
 /**
  * @summary Create a random hexadecimal string of a specified length.
  * @description Uses Math.random() to make a hexadecimal string for
