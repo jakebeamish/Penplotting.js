@@ -1,9 +1,9 @@
 import { Sketch, Line, Vector, LCG } from "./source/index.js";
 
-let sketch = new Sketch(200, 282,
+let sketch = new Sketch(210, 297,
     {
         // units: "mm",
-        seed: 1,
+        // seed: 1,
         backgroundColor: "gray",
     }
 );
@@ -19,35 +19,34 @@ sketch.generate = () => {
     let { width, height } = sketch;
     const centre = new Vector(width / 2, height / 2)
 
-    let margin = width * 0.1;
+    let margin = width * 0.2;
 
     let points = [];
+    let rows = 50;
+    let columns = 50;
 
-    while (points.length < 4000) {
-
-        let theta = lcg.randomFloat() * Math.PI * 2;
-        let r = lcg.randomFloat() * (width - (margin * 2)) * 0.5;
-        let point = new Vector(
-            Math.cos(theta) * r,
-            Math.sin(theta) * r
-        )
-
-        point.add(centre)
-
-        let valid = true;
-        for (let other of points) {
-            if (point.distance(other) < 1.1) {
-                valid = false;
-            }
-        }
-        if (valid) {
-            points.push(point);
+    for (let j = 0; j <= rows; j++) {
+        for (let i = 0; i <= columns; i++) {
+            const vector = new Vector(
+                margin + i * ((width - margin * 2) / columns),
+                margin + j * ((height - margin * 2) / rows)
+            )
+            vector.add(new Vector(
+                (lcg.randomFloat() * 2 - 1),
+                (lcg.randomFloat() * 2 - 1)
+            ))
+            points.push(vector);
         }
     }
 
-    for (let point of points) {
+    for (let i = 0; i < 10; i++) {
+        points.push(new Vector(
+            lcg.randomInteger(margin, width - margin),
+            lcg.randomInteger(margin, height - margin)
+        ))
+    }
 
-        // let k = point.distance(centre) / (width / 2);
+    for (let point of points) {
         let k = 4;
         let nearestNeighbours = point.nearestNeighbour(points, k);
         for (let neighbour of nearestNeighbours) {
