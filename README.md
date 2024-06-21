@@ -6,6 +6,7 @@ This is a dependency-free JavaScript framework for making SVG files for penplott
 - 2D Vector and Line classes for geometry
 - Seedable PRNGs with useful methods (Mulberry32, XORShift32, LCG)
 - Maths functions such as fract, wrap, lerp, map
+- Paper sizes
 
 ## Usage
 
@@ -22,8 +23,9 @@ import { Sketch, Paper, Vector, Line, LCG } from "../../index.js"
 // Setup the sketch
 const sketch = new Sketch({
     units: "mm",
-    title: "My amazing sketch"
-    size: Paper.A5
+    title: "My amazing sketch",
+    size: Paper.A5,
+    strokeWeight: 0.05
 });
 
 // Define a generate() function
@@ -62,7 +64,6 @@ TODO:
 - Grid class
 - Download the code (the sketch.generate() function or the whole Sketch object)
 - Quadtree
-- Add strokeweight to sketch config
 
 ## Contributing
 
