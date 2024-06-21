@@ -65,6 +65,7 @@ TODO:
 - Download the code (the sketch.generate() function or the whole Sketch object)
 - Quadtree
 - randomWeighted
+- other ways of adding lines to the sketch, something like: a sketch.add function that checks the type of what's being added and then adds that line (or point or path)
 
 ## Contributing
 
