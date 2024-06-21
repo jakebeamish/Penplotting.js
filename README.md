@@ -17,12 +17,13 @@ The way I'm using this framework currently is something like this:
 4. Call the Sketch's instance method `draw()`
 
 ```js
-import { Sketch, Vector, Line, LCG } from "../../index.js"
+import { Sketch, Paper, Vector, Line, LCG } from "../../index.js"
 
 // Setup the sketch
-const sketch = new Sketch(500, 500, {
+const sketch = new Sketch({
     units: "mm",
     title: "My amazing sketch"
+    size: Paper.A5
 });
 
 // Define a generate() function
@@ -61,10 +62,7 @@ TODO:
 - Grid class
 - Download the code (the sketch.generate() function or the whole Sketch object)
 - Quadtree
-- Paper sizes
 - Add strokeweight to sketch config
-
-
 
 ## Contributing
 

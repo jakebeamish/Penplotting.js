@@ -1,16 +1,17 @@
-import { Sketch, Line, Vector, LCG } from "../../source/index.js";
+import { Sketch, Paper, Line, Vector, LCG } from "../../source/index.js";
 
-const sketch = new Sketch(200, 200, {
+const sketch = new Sketch({
     title: "10PRINT",
-    backgroundColor: "snow"
+    backgroundColor: "snow",
+    size: Paper.A5
 });
 
 sketch.generate = () => {
 
     const columns = 100;
-    const rows = 100;
-    const cellWidth = sketch.width / columns;
-    const cellHeight = sketch.height / rows;
+    const rows = 141;
+    const cellWidth = sketch.size.width / columns;
+    const cellHeight = sketch.size.height / rows;
     const lcg = new LCG(Number(sketch.seed.decimal));
 
     const grid = Array.from({

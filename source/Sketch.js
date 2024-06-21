@@ -27,25 +27,19 @@ export class Sketch {
 			backgroundColor = "transparent",
 			title = "Untitled",
 			seed = unseededRandomHex(8),
-			size = undefined,
-			width = 100,
-			height = 100
+			size = {
+				width: 100,
+				height: 100
+			},
 		} = {},
 	) {
 		this.title = title;
-		this.width = width;
-		this.height = height;
 		this.size = size;
-
-		if (this.size !== undefined) {
-			this.width = this.size.width;
-			this.height = this.size.height;
-		}
 
 		this.lines = [];
 		this.units = units;
 		this.backgroundColor = backgroundColor;
-		this.svg = createSVG(this.width, this.height, {
+		this.svg = createSVG(this.size.width, this.size.height, {
 			units: this.units,
 			backgroundColor: this.backgroundColor,
 		});
@@ -65,7 +59,7 @@ export class Sketch {
 	}
 
 	filename() {
-		return `${this.title}_${this.seed.hex}_${this.width}x${this.height}${this.units}.svg`;
+		return `${this.title}_${this.seed.hex}_${this.size.width}x${this.size.height}${this.units}.svg`;
 	}
 
 	/**
@@ -128,7 +122,7 @@ export class Sketch {
 		document.body.removeChild(this.header)
 		document.body.removeChild(this.svg);
 
-		this.svg = createSVG(this.width, this.height, {
+		this.svg = createSVG(this.size.width, this.size.height, {
 			units: this.units,
 			backgroundColor: this.backgroundColor,
 		});
@@ -152,9 +146,7 @@ export class Sketch {
 	}
 
 	randomiseSeed() {
-		// console.log(this.seed)
 		this.seed = unseededRandomHex(8);
-		// console.log(this.seed)
 		this.clear();
 		this.draw();
 	}
@@ -164,7 +156,6 @@ export class Sketch {
 	 * @todo Compare startpoints with endpoints too
 	 */
 	deduplicateLines() {
-		// this.lines = deduplicateObjectArray(this.lines);
 		const uniqueLines = [];
 
 		for (const line of this.lines) {
@@ -182,7 +173,6 @@ export class Sketch {
 
 		this.lines = uniqueLines;
 	}
-
 
 	/**
 	 * Adds the Lines in this Sketch's lines array to it's svg element.

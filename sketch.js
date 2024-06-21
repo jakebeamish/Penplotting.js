@@ -1,26 +1,15 @@
-import { Sketch, Line, Vector, LCG, Mulberry32, XORShift32 } from "./source/index.js";
-
-const PAPER = {
-    A4: {
-        width: 210,
-        height: 297
-    },
-    A5: {
-        width: 148,
-        height: 210
-    }
-}
+import { Sketch, PAPER, Line, Vector, LCG, Mulberry32, XORShift32 } from "./source/index.js";
 
 let sketch = new Sketch({
     backgroundColor: "white",
-    size: PAPER.A5
+    size: PAPER.A5.landscape()
 }
 );
 
 const prng = new XORShift32(sketch.seed.decimal);
 
 sketch.generate = () => {
-    let { width, height } = sketch;
+    let { width, height } = sketch.size;
     const centre = new Vector(width / 2, height / 2)
 
     let margin = width * 0.2;
@@ -43,7 +32,7 @@ sketch.generate = () => {
         }
     }
 
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 100; i++) {
         points.push(new Vector(
             prng.randomInteger(margin, width - margin),
             prng.randomInteger(margin, height - margin)
@@ -56,7 +45,7 @@ sketch.generate = () => {
         for (let neighbour of nearestNeighbours) {
             sketch.lines.push(new Line(
                 point, neighbour
-            ))
+            ));
         }
     }
 }
