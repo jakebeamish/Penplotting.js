@@ -64,6 +64,7 @@ TODO:
 - Grid class
 - Download the code (the sketch.generate() function or the whole Sketch object)
 - Quadtree
+- randomWeighted
 
 ## Contributing
 
