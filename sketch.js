@@ -1,8 +1,9 @@
 import { Sketch, PAPER, Line, Vector, LCG, Mulberry32, XORShift32 } from "./source/index.js";
 
 let sketch = new Sketch({
-    backgroundColor: "white",
-    size: PAPER.A5.landscape()
+    size: PAPER.A5.portrait(),
+    backgroundColor: "#888888",
+    strokeWeight: 0.05,
 }
 );
 

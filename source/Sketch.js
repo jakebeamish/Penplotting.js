@@ -31,14 +31,17 @@ export class Sketch {
 				width: 100,
 				height: 100
 			},
+			strokeWeight = 1,
 		} = {},
 	) {
 		this.title = title;
 		this.size = size;
-
-		this.lines = [];
+		this.strokeWeight = strokeWeight;
 		this.units = units;
 		this.backgroundColor = backgroundColor;
+
+		this.lines = [];
+
 		this.svg = createSVG(this.size.width, this.size.height, {
 			units: this.units,
 			backgroundColor: this.backgroundColor,
@@ -181,7 +184,7 @@ export class Sketch {
 		for (const line of this.lines) {
 			addLineToSVG(this.svg, line.a.x, line.a.y, line.b.x, line.b.y, {
 				stroke: "black",
-				strokeWidth: 0.1,
+				strokeWidth: this.strokeWeight,
 			});
 		}
 	}
