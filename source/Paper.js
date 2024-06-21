@@ -11,6 +11,14 @@ export class Paper {
             return this;
         }
     }
+
+    portrait() {
+        if (this.width > this.height) {
+            return { width: this.height, height: this.width };
+        } else {
+            return this;
+        }
+    }
 }
 
 export const PAPER = {
