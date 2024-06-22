@@ -2,12 +2,12 @@ import { Sketch, PAPER, Vector, Line, XORShift32 } from "../../source/index.js";
 
 const sketch = new Sketch({
     size: PAPER.A5,
-    backgroundColor: "#888888",
-    strokeWeight: 0.05
+    backgroundColor: "#FFFFFF",
+    strokeWeight: 0.1
 })
 
 const { width, height } = sketch.size;
-const margin = width * 0.1
+const margin = width * 0.2
 const prng = new XORShift32(sketch.seed.decimal)
 
 sketch.generate = () => {
@@ -17,10 +17,21 @@ sketch.generate = () => {
         new Vector(-1, 0),
         new Vector(0, 1),
         new Vector(0, -1),
-
-        new Vector(1, 1),
-        new Vector(-1, -1)
     ]
+
+    let r = prng.randomFloat();
+
+    if (r < 0.3) {
+        possibleMoves.push(
+            new Vector(1, -1),
+            new Vector(-1, 1)
+        )
+    } else if (r < 0.6) {
+        possibleMoves.push(
+            new Vector(1, 1),
+            new Vector(-1, -1)
+        )
+    }
 
     createPath();
 
@@ -28,22 +39,21 @@ sketch.generate = () => {
         const start = new Vector(width / 2, height / 2);
         let current = start;
 
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < 100; i++) {
 
             let move = prng.randomElement(possibleMoves).clone();
-            move.multiply(prng.randomElement([3, 11, 48]));
+            move.multiply(prng.randomElement([2, 5, 50]));
             let next = Vector.add(current, move);
 
             if (next.x < margin || next.x > width - margin ||
                 next.y < margin || next.y > height - margin
             ) {
-                if (sketch.lines.length < 100) {
+                if (sketch.lines.length < 500) {
                     createPath();
                 } else {
 
                 }
                 return;
-
             }
 
 
