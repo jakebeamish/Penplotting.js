@@ -16,9 +16,8 @@ export class Sketch {
 	 * @param {number} height
 	 * @param {object} [options]
 	 * @param {string} [options.title = "Untitled"]
-	 * @param {string} [options.units = '']
-
-	 * @param {string} [options.backgroundColor = 'transparent']
+	 * @param {string} [options.units = ""]
+	 * @param {string} [options.backgroundColor = "transparent"]
 	 * @param {number} [seed = unseededRandomHexRandomHex(8)]
 	 */
 	constructor(
@@ -58,7 +57,6 @@ export class Sketch {
 				decimal: seed
 			}
 		}
-
 	}
 
 	filename() {
@@ -76,7 +74,6 @@ export class Sketch {
 		this.addLinesToSVG();
 
 		const timeTaken = +(Math.round(((Date.now() - startTime) / 1000) + "e+2") + "e-2");
-
 
 		document.title = `${this.title} ${this.seed.hex}`;
 
@@ -113,9 +110,14 @@ export class Sketch {
 		let sketchInfo = document.createElement("div")
 
 		let numOfLines = document.createElement("p");
-		numOfLines.append(`Generated ${this.lines.length} lines in ~${timeTaken}s`)
-		sketchInfo.appendChild(numOfLines)
-		this.header.appendChild(sketchInfo)
+
+		if (timeTaken < 0.05) {
+			numOfLines.append(`Generated ${this.lines.length} lines in <0.05s`)
+		} else {
+			numOfLines.append(`Generated ${this.lines.length} lines in ~${timeTaken}s`);
+		}
+		sketchInfo.appendChild(numOfLines);
+		this.header.appendChild(sketchInfo);
 
 		this.appendSVG();
 	}
@@ -156,7 +158,6 @@ export class Sketch {
 
 	/**
 	 * Removes duplicated Lines in this Sketch's lines array.
-	 * @todo Compare startpoints with endpoints too
 	 */
 	deduplicateLines() {
 		const uniqueLines = [];
