@@ -1,7 +1,7 @@
 import { Sketch, PAPER, Vector, Line, XORShift32 } from "../../source/index.js";
 
 const sketch = new Sketch({
-    size: PAPER.A5,
+    size: PAPER.A4,
     backgroundColor: "#FFFFFF",
     strokeWeight: 0.1
 })

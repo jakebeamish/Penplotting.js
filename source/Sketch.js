@@ -59,12 +59,16 @@ export class Sketch {
 		}
 	}
 
+	/**
+	 * 
+	 * @returns {string} - The file name to be used to name the Sketch's SVG document, as a string
+	 */
 	filename() {
 		return `${this.title}_${this.seed.hex}_${this.size.width}x${this.size.height}${this.units}.svg`;
 	}
 
 	/**
-	 * Creates an SVG element and appends it to the document body
+	 * Creates an SVG element and HTML UI and appends them to the document body.
 	 */
 	draw() {
 		let startTime = Date.now();
@@ -75,53 +79,13 @@ export class Sketch {
 
 		const timeTaken = +(Math.round(((Date.now() - startTime) / 1000) + "e+2") + "e-2");
 
-		document.title = `${this.title} ${this.seed.hex}`;
-
-		this.header = document.createElement("header");
-		document.body.append(this.header);
-
-		let pageTitle = document.createElement("h1");
-		pageTitle.append(`${this.title} ${this.seed.hex}`);
-		this.header.appendChild(pageTitle);
-
-		let nav = document.createElement("nav");
-		this.header.appendChild(nav);
-
-		let ul = document.createElement("ul");
-
-		nav.appendChild(ul);
-
-		let downloadListItem = document.createElement("li");
-		ul.append(downloadListItem);
-		let downloadButton = document.createElement("a");
-		downloadButton.append("⬇️");
-		downloadListItem.appendChild(downloadButton)
-
-		downloadButton.addEventListener('click', () => this.downloadSVG())
-
-		let randomListItem = document.createElement("li");
-		ul.appendChild(randomListItem)
-		let randomButton = document.createElement("a");
-		randomButton.append("🔄");
-		randomListItem.appendChild(randomButton)
-
-		randomButton.addEventListener('click', () => this.randomiseSeed())
-
-		let sketchInfo = document.createElement("div")
-
-		let numOfLines = document.createElement("p");
-
-		if (timeTaken < 0.05) {
-			numOfLines.append(`Generated ${this.lines.length} lines in <0.05s`)
-		} else {
-			numOfLines.append(`Generated ${this.lines.length} lines in ~${timeTaken}s`);
-		}
-		sketchInfo.appendChild(numOfLines);
-		this.header.appendChild(sketchInfo);
-
+		this.createUI(timeTaken);
 		this.appendSVG();
 	}
 
+	/**
+	 * Empty out any existing HTML UI and SVG document elements on the page, in order to regenerate a Sketch.
+	 */
 	clear() {
 		this.lines = [];
 		document.body.removeChild(this.header)
@@ -133,6 +97,9 @@ export class Sketch {
 		});
 	}
 
+	/**
+	 * Download the {@link Sketch} as an SVG file
+	 */
 	downloadSVG() {
 		const serializer = new XMLSerializer();
 		const source = serializer.serializeToString(this.svg);
@@ -195,5 +162,57 @@ export class Sketch {
 	 */
 	appendSVG() {
 		document.body.appendChild(this.svg);
+	}
+
+	createUI(timeTaken) {
+
+		// Add the document title
+		document.title = `${this.title} ${this.seed.hex}`;
+
+		// Create a HTML header element
+		this.header = document.createElement("header");
+		document.body.append(this.header);
+
+		// Add a h1 title to the header
+		let pageTitle = document.createElement("h1");
+		pageTitle.append(`${this.title} ${this.seed.hex}`);
+		this.header.appendChild(pageTitle);
+
+		// Add a nav element to the header
+		let nav = document.createElement("nav");
+		this.header.appendChild(nav);
+
+		// Add a ul element to the nav
+		let ul = document.createElement("ul");
+		nav.appendChild(ul);
+
+		// Add a download SVG button
+		let downloadListItem = document.createElement("li");
+		ul.append(downloadListItem);
+		let downloadButton = document.createElement("a");
+		downloadButton.append("⬇️");
+		downloadListItem.appendChild(downloadButton)
+		downloadButton.addEventListener('click', () => this.downloadSVG())
+
+		// Add a randomise sketch button
+		let randomListItem = document.createElement("li");
+		ul.appendChild(randomListItem)
+		let randomButton = document.createElement("a");
+		randomButton.append("🔄");
+		randomListItem.appendChild(randomButton)
+		randomButton.addEventListener('click', () => this.randomiseSeed())
+
+		// Add a p element in a div to the header
+		let sketchInfo = document.createElement("div")
+		let numOfLines = document.createElement("p");
+
+		// The p element tells the user how many lines have been generated and how fast
+		if (timeTaken < 0.05) {
+			numOfLines.append(`Generated ${this.lines.length} lines in <0.05s`)
+		} else {
+			numOfLines.append(`Generated ${this.lines.length} lines in ~${timeTaken}s`);
+		}
+		sketchInfo.appendChild(numOfLines);
+		this.header.appendChild(sketchInfo);
 	}
 }
