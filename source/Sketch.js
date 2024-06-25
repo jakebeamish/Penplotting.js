@@ -1,6 +1,5 @@
 import { createSVG } from "./createSVG.js";
 import { addLineToSVG } from "./addLineToSVG.js";
-import { deduplicateObjectArray } from "./deduplicateObjectArray.js";
 import { unseededRandomHex } from "./Random.js";
 import { hexToDec } from "./utils.js";
 import { decToHex } from "./utils.js";
