@@ -16,10 +16,10 @@ export class Sketch {
 	 * @param {number} [options.size.width=100] - The width of the Sketch.
 	 * @param {number} [options.size.height=100] - The height of the Sketch.
 	 * @param {string} [options.title = "Untitled"] - The title of the Sketch.
-	 * @param {string} [options.units = ""] - The units of measurement to be used (i.e. "mm" or "in")
+	 * @param {string} [options.units = "mm"] - The units of measurement to be used (i.e. "mm" or "in")
 	 * @param {string} [options.backgroundColor = "transparent"] - The background colour of the sketch, as a hex value or HTML color name.
 	 * @param {number} [options.seed] - The seed to be used for the Sketch. Defaults to an 8 digit hexadecimal integer
-	 * @param {number} [options.strokeWeight = 1]
+	 * @param {number} [options.strokeWeight = 1] - The line width of the Sketch. Defaults to 1 unit (1mm)
 	 */
 	constructor(
 		{
