@@ -55,7 +55,6 @@ TODO:
 - Support for SVG paths
 - SVG output validation
 - HTML GUI for changing params
-- Keyboard shortcuts
 - 3D support
 - Noise functions
 - Batch create and download
