@@ -7,17 +7,19 @@ import { wrap } from "./utils.js";
 
 /**
  * @class
+ * Sketch is an object that is able to create, display and download SVG documents.
  */
 export class Sketch {
 	/**
-	 *
-	 * @param {number} width
-	 * @param {number} height
-	 * @param {object} [options]
-	 * @param {string} [options.title = "Untitled"]
-	 * @param {string} [options.units = ""]
-	 * @param {string} [options.backgroundColor = "transparent"]
-	 * @param {number} [seed = unseededRandomHexRandomHex(8)]
+	 * @param {object} [options] - An object containing configuration for Sketch.
+	 * @param {object} [options.size] - An object with width and height properties to be used as dimensions of the Sketch.
+	 * @param {number} [options.size.width=100] - The width of the Sketch.
+	 * @param {number} [options.size.height=100] - The height of the Sketch.
+	 * @param {string} [options.title = "Untitled"] - The title of the Sketch.
+	 * @param {string} [options.units = ""] - The units of measurement to be used (i.e. "mm" or "in")
+	 * @param {string} [options.backgroundColor = "transparent"] - The background colour of the sketch, as a hex value or HTML color name.
+	 * @param {number} [options.seed] - The seed to be used for the Sketch. Defaults to an 8 digit hexadecimal integer
+	 * @param {number} [options.strokeWeight = 1]
 	 */
 	constructor(
 		{
