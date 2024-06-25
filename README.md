@@ -64,7 +64,6 @@ TODO:
 - Download the code (the sketch.generate() function or the whole Sketch object)
 - Quadtree
 - randomWeighted
-- other ways of adding lines to the sketch, something like: a sketch.add function that checks the type of what's being added and then adds that line (or point or path)
 - Is this vector on this line (or, does this line contain this vector?) -> Is this line a subset of a larger line (if so, don't draw it)
 - Do these lines overlap? If so, remove them and add a new composite line
 
