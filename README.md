@@ -62,7 +62,6 @@ TODO:
 - Voronoi diagrams
 - Grid class
 - Download the code (the sketch.generate() function or the whole Sketch object)
-- Quadtree
 - randomWeighted
 - Is this vector on this line (or, does this line contain this vector?) -> Is this line a subset of a larger line (if so, don't draw it)
 - Do these lines overlap? If so, remove them and add a new composite line
