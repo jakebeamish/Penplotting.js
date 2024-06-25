@@ -30,6 +30,14 @@ export class PRNG {
     }
 
     /**
+     * Generate a random float in the range (-1, 1]
+     * @returns {number} A number between -1 and 1
+     */
+    randomBipolarFloat() {
+        return this.randomFloat() * 2 - 1
+    }
+
+    /**
      * Generate a random integer from a specified range of values.
      * @param {number} min - The minimum integer value.
      * @param {number} max - The maximum integer value.
