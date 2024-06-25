@@ -1,4 +1,7 @@
-
+/**
+ * Generate pseudo-random numbers from `x` and `y` co-ordinates
+ * @returns {number} - A floating point number between 0 and 1
+ */
 export function sinFract(x, y, a, b, m) {
 	return fract(Math.sin(x * a + y * b) * m);
 }
@@ -18,6 +21,9 @@ export function fract(x) {
 	return x - Math.floor(x);
 }
 
+/**
+ * Constrain an input number to within a specified range, and wrapping it around to min when it exceeds max (and vice versa)
+ */
 export function wrap(input, min, max) {
 	const range = max - min;
 	return min + ((input - min + range) % range);
@@ -65,6 +71,12 @@ export function hexToDec(hex) {
 	return parseInt(hex, 16);
 }
 
+/**
+ * @description Convert a decimal number into a hexadecimal string.
+ * @param {number} dec - A decimal number.
+ * @param {number} [length=8] - The number of digits the string should be padded to.
+ * @returns {string} - The hexadecimal string equivalent of the decimal number.
+ */
 export function decToHex(dec, length = 8) {
 	return dec.toString(16).padStart(length, "0");
 }
