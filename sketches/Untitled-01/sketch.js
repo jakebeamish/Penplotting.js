@@ -39,16 +39,16 @@ sketch.generate = () => {
         const start = new Vector(width / 2, height / 2);
         let current = start;
 
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 1000; i++) {
 
             let move = prng.randomElement(possibleMoves).clone();
-            move.multiply(prng.randomElement([2, 5, 50]));
+            move.multiply(prng.randomElement([0.5, 1, 2, 3, 10]));
             let next = Vector.add(current, move);
 
             if (next.x < margin || next.x > width - margin ||
                 next.y < margin || next.y > height - margin
             ) {
-                if (sketch.lines.length < 500) {
+                if (sketch.lines.length < 10000) {
                     createPath();
                 } else {
 
