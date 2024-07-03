@@ -1,4 +1,4 @@
-import { Mulberry32, Random } from "../../Random"
+import { Mulberry32 } from "../../Random"
 
 describe("The randomBipolarFloat() function", () => {
 
