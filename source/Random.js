@@ -58,7 +58,7 @@ export class PRNG {
         return array[index];
     }
 
-    randomChance(chance) {
+    randomChance(chance = 0.5) {
         return this.randomFloat() < chance;
     }
 }
