@@ -1,9 +1,9 @@
-import { Sketch, PAPER, Line, Vector, LCG, Mulberry32, XORShift32 } from "./source/index.js";
+import { Sketch, PAPER, Line, Path, Vector, LCG, Mulberry32, XORShift32 } from "./source/index.js";
 
 let sketch = new Sketch({
     size: PAPER.A5.portrait(),
     backgroundColor: "#888888",
-    strokeWeight: 0.05,
+    strokeWeight: 0.1,
 }
 );
 
@@ -18,6 +18,23 @@ sketch.generate = () => {
     let points = [];
     let rows = 10;
     let columns = 10;
+
+    let pathPoints = [];
+
+    for (let i = 0; i < 100; i++) {
+        pathPoints.push(
+            new Vector(
+                margin + prng.randomFloat() * (width - margin* 2),
+                margin + prng.randomFloat() * (height - margin * 2)
+            )
+        )
+    }
+
+    let path = new Path(pathPoints, {
+        isClosed: true
+    });
+
+    sketch.add(path)
 
     for (let j = 0; j <= rows; j++) {
         for (let i = 0; i <= columns; i++) {
