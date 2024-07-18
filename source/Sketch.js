@@ -122,6 +122,7 @@ export class Sketch {
 	 */
 	clear() {
 		this.lines = [];
+		this.paths = [];
 		document.body.removeChild(this.header)
 		document.body.removeChild(this.svg);
 
