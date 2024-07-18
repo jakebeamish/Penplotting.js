@@ -14,7 +14,7 @@ The way I'm using this framework currently is something like this:
 
 1. Create a new Sketch (with optional parameters for dimensions, units, background colour, title, seed)
 2. Create and manipulate Vectors and Lines by defining a sketch.generate() function
-3. Add Lines to be included as SVG elements in the Sketch by pushing Lines to the Sketch's `lines` array
+3. Add Lines to be included as SVG elements in the Sketch by calling `sketch.add()`, and passing in a Line or array of Lines.
 4. Call the Sketch's instance method `draw()`
 
 ```js
@@ -37,7 +37,7 @@ sketch.generate = () => {
     const l = new Line(a, b);
 
     // Add Lines to the Sketch object's lines array
-    sketch.lines.push(line);
+    sketch.add(line);
 }
 
 // Call draw() on the Sketch

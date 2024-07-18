@@ -44,7 +44,7 @@ sketch.generate = () => {
         let k = 3;
         let nearestNeighbours = point.nearestNeighbour(points, k);
         for (let neighbour of nearestNeighbours) {
-            sketch.lines.push(new Line(
+            sketch.add(new Line(
                 point, neighbour
             ));
         }
