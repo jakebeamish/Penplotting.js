@@ -24,13 +24,15 @@ sketch.generate = () => {
     for (let i = 0; i < 100; i++) {
         pathPoints.push(
             new Vector(
-                prng.randomFloat() * width,
-                prng.randomFloat() * height
+                margin + prng.randomFloat() * (width - margin* 2),
+                margin + prng.randomFloat() * (height - margin * 2)
             )
         )
     }
 
-    let path = new Path(pathPoints);
+    let path = new Path(pathPoints, {
+        isClosed: true
+    });
 
     sketch.add(path)
 
