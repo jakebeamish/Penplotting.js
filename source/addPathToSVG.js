@@ -1,7 +1,7 @@
 export function addPathToSVG(svg, points, {
     stroke = "black",
     fill = "transparent",
-    strokeWidth = 0.2
+    strokeWidth = 0.1
 } = {}) {
 
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");

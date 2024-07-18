@@ -5,6 +5,8 @@ import { hexToDec } from "./utils.js";
 import { decToHex } from "./utils.js";
 import { wrap } from "./utils.js";
 import { Line } from "./Line.js";
+import { Path } from "./Path.js";
+import { addPathToSVG } from "./addPathToSVG.js";
 
 /**
  * @class
@@ -42,6 +44,7 @@ export class Sketch {
 		this.backgroundColor = backgroundColor;
 
 		this.lines = [];
+		this.paths = [];
 
 		this.svg = createSVG(this.size.width, this.size.height, {
 			units: this.units,
@@ -89,6 +92,8 @@ export class Sketch {
 	addSingleShape(shape) {
 		if (shape instanceof Line) {
 			this.lines.push(shape);
+		} else if (shape instanceof Path) {
+			this.paths.push(shape)
 		} else {
 			console.warn("Unsupported shape type:", shape);
 		}
@@ -103,6 +108,8 @@ export class Sketch {
 
 		this.deduplicateLines();
 		this.addLinesToSVG();
+
+		this.addPathsToSVG();
 
 		const timeTaken = +(Math.round(((Date.now() - startTime) / 1000) + "e+2") + "e-2");
 
@@ -181,6 +188,12 @@ export class Sketch {
 				stroke: "black",
 				strokeWidth: this.strokeWeight,
 			});
+		}
+	}
+
+	addPathsToSVG() {
+		for (const path of this.paths) {
+			addPathToSVG(this.svg, path.points)
 		}
 	}
 
