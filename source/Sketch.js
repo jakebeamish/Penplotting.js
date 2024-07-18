@@ -4,6 +4,7 @@ import { unseededRandomHex } from "./Random.js";
 import { hexToDec } from "./utils.js";
 import { decToHex } from "./utils.js";
 import { wrap } from "./utils.js";
+import { Line } from "./Line.js";
 
 /**
  * @class
@@ -66,6 +67,22 @@ export class Sketch {
 	 */
 	filename() {
 		return `${this.title}_${this.seed.hex}_${this.size.width}x${this.size.height}${this.units}.svg`;
+	}
+
+	add(shape) {
+		if (Array.isArray(shape)) {
+			shape.forEach(s => this.addSingleShape(s));
+		} else {
+			this.addSingleShape(shape);
+		}
+	}
+
+	addSingleShape(shape) {
+		if (shape instanceof Line) {
+			this.lines.push(shape);
+		} else {
+			console.warn("Unsupported shape type:", shape);
+		}
 	}
 
 	/**
