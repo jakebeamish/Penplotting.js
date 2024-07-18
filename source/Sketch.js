@@ -193,7 +193,7 @@ export class Sketch {
 
 	addPathsToSVG() {
 		for (const path of this.paths) {
-			addPathToSVG(this.svg, path.points)
+			addPathToSVG(this.svg, path)
 		}
 	}
 
