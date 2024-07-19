@@ -67,7 +67,7 @@ sketch.generate = () => {
 
         
         if (circle.radius > 4) {
-            circles.push(new Circle(point.x, point.y, circle.radius * 0.9))
+            // circles.push(new Circle(point.x, point.y, circle.radius * 0.9))
         }
     }
 
