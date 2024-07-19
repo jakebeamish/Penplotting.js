@@ -261,11 +261,13 @@ export class Sketch {
 		let sketchInfo = document.createElement("div")
 		let numOfLines = document.createElement("p");
 
+		let numOfShapes = this.lines.length + this.paths.length + this.circles.length;
+
 		// The p element tells the user how many lines have been generated and how fast
 		if (timeTaken < 0.05) {
-			numOfLines.append(`Generated ${this.lines.length} lines in <0.05s`)
+			numOfLines.append(`Generated ${numOfShapes} shapes in <0.05s`)
 		} else {
-			numOfLines.append(`Generated ${this.lines.length} lines in ~${timeTaken}s`);
+			numOfLines.append(`Generated ${numOfShapes} shapes in ~${timeTaken}s`);
 		}
 		sketchInfo.appendChild(numOfLines);
 		this.header.appendChild(sketchInfo);
