@@ -1,3 +1,10 @@
+/**
+ * 
+ * @param {SVGElement} svg 
+ * @param {Circle} circle 
+ * @param {Object} [options] 
+ * @returns {SVGElement}
+ */
 export function addCircleToSVG(svg, circle, {
     stroke = "black",
     fill = "transparent",
@@ -13,8 +20,6 @@ export function addCircleToSVG(svg, circle, {
     circleElement.setAttribute("fill", fill);
 	circleElement.setAttribute("stroke-width", `${strokeWidth}`);
 
-
     svg.appendChild(circleElement);
-
     return svg;
 }
