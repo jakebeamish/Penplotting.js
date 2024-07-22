@@ -38,6 +38,17 @@ export class Vector {
         return this.x === vector.x && this.y === vector.y;
     }
 
+    isOnLine(line) {
+        if ((line.b.x - line.a.x) * (this.y - line.a.y) !== (line.b.y - line.a.y) * (this.x - line.a.x)) {
+            return false;
+        }
+
+        return Math.min(line.a.x, line.b.x) <= this.x &&
+            this.x <= Math.max(line.a.x, line.b.x) &&
+            Math.min(line.a.y, line.b.y) <= this.y &&
+            this.y <= Math.max(line.a.y, line.b.y);
+    }
+
     /**
      * Subtract a vector from this vector
      * @param {Vector} vector
