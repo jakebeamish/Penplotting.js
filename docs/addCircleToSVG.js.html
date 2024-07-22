@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: addLineToSVG.js</title>
+    <title>JSDoc: Source: addCircleToSVG.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: addLineToSVG.js</h1>
+    <h1 class="page-title">Source: addCircleToSVG.js</h1>
 
     
 
@@ -27,35 +27,32 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Add a line to an SVG element
- * @param {SVGElement} svg
- * @param {number} x1
- * @param {number} y1
- * @param {number} x2
- * @param {number} y2
- * @param {Object} [options]
- * @param {string} [options.units = ""]
- * @param {string} [options.stroke = "black"]
- * @param {number} [options.strokeWidth = 0.1]
- * @returns {SVGElement}
+ * Add a {@link Circle} to an SVG Element.
+ * @param {SVGElement} svg - The target SVG Element.
+ * @param {Circle} circle - The circle to be appended.
+ * @param {Object} options - Styling options for the circle.
+ * @param {string} [options.stroke = "black"] - The stroke colour.
+ * @param {number} [options.strokeWidth = 0.1] - The stroke width.
+ * @returns {SVGElement} - A copy of the input SVG Element with the given circle appended.
  */
-export function addLineToSVG(svg, x1, y1, x2, y2, options) {
-	let units = options?.units || "";
-	let stroke = options?.stroke || "black";
-	let strokeWidth = options?.strokeWidth || 0.1;
+export function addCircleToSVG(svg, circle, {
+    stroke = "black",
+    fill = "transparent",
+    strokeWidth = 0.1
+} = {}) {
 
-	const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-	line.setAttribute("x1", `${x1}${units}`);
-	line.setAttribute("y1", `${y1}${units}`);
-	line.setAttribute("x2", `${x2}${units}`);
-	line.setAttribute("y2", `${y2}${units}`);
-	line.setAttribute("stroke", stroke);
-	line.setAttribute("stroke-width", `${strokeWidth}${units}`);
+    let circleElement = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-	svg.appendChild(line);
-	return svg;
-}
-</code></pre>
+    circleElement.setAttribute("cx", circle.x);
+    circleElement.setAttribute("cy", circle.y);
+    circleElement.setAttribute("r", circle.radius);
+    circleElement.setAttribute("stroke", stroke);
+    circleElement.setAttribute("fill", fill);
+	circleElement.setAttribute("stroke-width", `${strokeWidth}`);
+
+    svg.appendChild(circleElement);
+    return svg;
+}</code></pre>
         </article>
     </section>
 
