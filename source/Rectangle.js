@@ -18,6 +18,28 @@ export class Rectangle {
     }
 
     /**
+     * Create a rectangle from four corner [Vectors]{@link Vector}.
+     * @param {Vector} topLeft 
+     * @param {Vector} topRight 
+     * @param {Vector} bottomRight 
+     * @param {Vector} bottomLeft 
+     * @returns {Rectangle} - A new Rectangle object.
+     */
+    static fromCorners(
+        topLeft, topRight, bottomRight, bottomLeft
+    ) {
+        const centre = new Vector(
+            topRight.x - topLeft.x,
+            bottomLeft.y - topLeft.y
+        )
+
+        const width = topRight.x - centre.x;
+        const height = bottomRight.y - centre.y;
+
+        return new Rectangle(centre.x, centre.y, width, height);
+    }
+
+    /**
      * Check if this rectangle contains a {@link Vector}.
      * @param {Vector} point - The vector to check.
      * @returns {boolean}
