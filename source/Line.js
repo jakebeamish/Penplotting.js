@@ -32,4 +32,8 @@ export class Line {
 		return (this.a.equals(line.a) && this.b.equals(line.b)) ||
 			(this.a.equals(line.b) && this.b.equals(line.a));
 	}
+
+	isContainedBy(line) {
+		return this.a.isOnLine(line) && this.b.isOnLine(line);
+	}
 }
