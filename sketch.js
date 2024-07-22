@@ -3,7 +3,7 @@ import { Sketch, PAPER, Line, Circle, Path, Vector, LCG, Mulberry32, XORShift32,
 let sketch = new Sketch({
     size: PAPER.A4.portrait(),
     backgroundColor: "#888888",
-    strokeWeight: 0.1,
+    strokeWidth: 0.1,
 }
 );
 
