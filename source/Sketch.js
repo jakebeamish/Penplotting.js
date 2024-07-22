@@ -24,7 +24,7 @@ export class Sketch {
 	 * @param {string} [options.units = "mm"] - The units of measurement to be used (i.e. "mm" or "in")
 	 * @param {string} [options.backgroundColor = "transparent"] - The background colour of the sketch, as a hex value or HTML color name.
 	 * @param {number} [options.seed] - The seed to be used for the Sketch. Defaults to an 8 digit hexadecimal integer
-	 * @param {number} [options.strokeWeight = 1] - The line width of the Sketch. Defaults to 1 unit (1mm)
+	 * @param {number} [options.strokeWidth = 1] - The line width of the Sketch. Defaults to 1 unit (1mm)
 	 */
 	constructor(
 		{
@@ -36,12 +36,12 @@ export class Sketch {
 				width: 100,
 				height: 100
 			},
-			strokeWeight = 1,
+			strokeWidth = 1,
 		} = {},
 	) {
 		this.title = title;
 		this.size = size;
-		this.strokeWeight = strokeWeight;
+		this.strokeWidth = strokeWidth;
 		this.units = units;
 		this.backgroundColor = backgroundColor;
 
@@ -195,7 +195,7 @@ export class Sketch {
 		for (const line of this.lines) {
 			addLineToSVG(this.svg, line.a.x, line.a.y, line.b.x, line.b.y, {
 				stroke: "black",
-				strokeWidth: this.strokeWeight,
+				strokeWidth: this.strokeWidth,
 			});
 		}
 	}
