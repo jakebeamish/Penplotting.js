@@ -112,6 +112,7 @@ export class Sketch {
 		this.generate();
 
 		this.deduplicateLines();
+		this.removeOverlappingLines();
 		this.addLinesToSVG();
 
 		this.addPathsToSVG();
@@ -181,6 +182,26 @@ export class Sketch {
 				}
 			}
 			if (!isDuplicate) {
+				uniqueLines.push(line);
+			}
+		}
+
+		this.lines = uniqueLines;
+	}
+
+	removeOverlappingLines() {
+		const uniqueLines = [];
+
+		let sortedLines = this.lines.toSorted((j, k) => k.a.distance(k.b) - j.a.distance(j.b));
+		for (const line of sortedLines) {
+			let isOverlapped = false;
+			for (const uniqueLine of uniqueLines) {
+				if (line.isContainedBy(uniqueLine)) {
+					isOverlapped = true;
+					break;
+				}
+			}
+			if (!isOverlapped) {
 				uniqueLines.push(line);
 			}
 		}
