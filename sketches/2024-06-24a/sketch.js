@@ -3,7 +3,7 @@ import { Sketch, PAPER, Vector, Line, XORShift32 } from "../../source/index.js";
 const sketch = new Sketch({
     size: PAPER.A5,
     backgroundColor: "gainsboro",
-    strokeWeight: 0.1
+    strokeWidth: 0.1
 })
 
 const { width, height } = sketch.size;

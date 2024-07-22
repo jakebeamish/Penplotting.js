@@ -29,7 +29,7 @@ const sketch = new Sketch({
     units: "mm",
     title: "My amazing sketch",
     size: Paper.A5,
-    strokeWeight: 0.05
+    strokeWidth: 0.05
 });
 
 // Define a generate() function

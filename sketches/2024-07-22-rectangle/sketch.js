@@ -3,7 +3,7 @@ import { Sketch, PAPER, Vector, Rectangle } from "../../source/index.js";
 const sketch = new Sketch({
     size: PAPER.A5.portrait(),
     backgroundColor: "#FFFFFF",
-    strokeWeight: 0.1
+    strokeWidth: 0.1
 })
 
 const { width, height } = sketch.size;
