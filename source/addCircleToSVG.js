@@ -1,9 +1,11 @@
 /**
- * 
- * @param {SVGElement} svg 
- * @param {Circle} circle 
- * @param {Object} [options] 
- * @returns {SVGElement}
+ * Add a {@link Circle} to an SVG Element.
+ * @param {SVGElement} svg - The target SVG Element.
+ * @param {Circle} circle - The circle to be appended.
+ * @param {Object} options - Styling options for the circle.
+ * @param {string} [options.stroke = "black"] - The stroke colour.
+ * @param {number} [options.strokeWidth = 0.1] - The stroke width.
+ * @returns {SVGElement} - A copy of the input SVG Element with the given circle appended.
  */
 export function addCircleToSVG(svg, circle, {
     stroke = "black",
