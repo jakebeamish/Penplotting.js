@@ -53,6 +53,20 @@ export class Rectangle {
     }
 
     /**
+     * Check if this rectangle intersects another rectangle.
+     * @param {Rectangle} range - The target rectangle to check.
+     * @returns {boolean}
+     */
+    intersects(range) {
+        return !(
+            range.x - range.width > this.x + this.width ||
+            range.x + range.width < this.x - this.width ||
+            range.y - range.height > this.y + this.height ||
+            range.y + range.height < this.y - this.height
+        )
+    }
+
+    /**
      * Create an array of [Lines]{@link Line}
      * containing a line for each side of the rectangle.
      * @returns {Line[]} - An array of Lines that can be added
