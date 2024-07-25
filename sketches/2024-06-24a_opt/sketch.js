@@ -31,6 +31,7 @@ sketch.generate = () => {
 
         points.push(point);
         quadtree.insert(point);
+
     }
 
     for (let point of points) {
@@ -46,6 +47,9 @@ sketch.generate = () => {
             }
         }
     }
+
+    quadtree.show(sketch)
+
 }
 
 sketch.draw();
