@@ -8,6 +8,27 @@ export class Quadtree {
         this.divided = false;
     }
 
+    query(range, found = []) {
+        if (!this.boundary.intersects(range)) {
+            return found;
+        } else {
+            for (let p of this.points) {
+                if (range.contains(p)) {
+                    found.push(p);
+                }
+            }
+
+            if (this.divided) {
+                this.topLeft.query(range, found);
+                this.topRight.query(range, found);
+                this.bottomLeft.query(range, found);
+                this.bottomRight.query(range, found);
+            }
+        }
+
+        return found;
+    }
+
     insert(point) {
 
         if (!this.boundary.contains(point)) {
