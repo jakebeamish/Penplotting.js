@@ -5,7 +5,7 @@ export class Path {
      */
     constructor(points, {
         isClosed = false,
-    }) {
+    } = {}) {
         this.points = points;
         this.isClosed = isClosed;
     }
