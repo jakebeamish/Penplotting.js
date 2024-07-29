@@ -1,5 +1,5 @@
 import { defineFeature, loadFeature } from "jest-cucumber";
-import { Vector, createSVG } from "../../index.js";
+import { Path, Vector, createSVG } from "../../index.js";
 import { addPathToSVG } from "../../index.js";
 
 const feature = loadFeature("./source/tests/features/createSVGPath.feature")
@@ -8,6 +8,8 @@ defineFeature(feature, (test) => {
     test('Add a Path to an SVG file', ({ given, when, then }) => {
         let svg;
         let points;
+
+        let path;
         
         given('I have an SVG element and a list of points', () => {
             svg = createSVG();
@@ -17,10 +19,12 @@ defineFeature(feature, (test) => {
                 new Vector(50, 50)
             ];
 
+            path = new Path(points)
+
         });
 
         when('I create an SVG path from those points', () => {
-            addPathToSVG(svg, points);
+            addPathToSVG(svg, path);
         });
 
         then('the SVG element contains that path', () => {
