@@ -7,7 +7,7 @@ import { wrap } from "./utils.js";
 import { Line } from "./Line.js";
 import  { Circle } from "./Circle.js"
 import { Path } from "./Path.js";
-import { addPathToSVG } from "./addPathToSVG.js";
+// import { addPathToSVG } from "./addPathToSVG.js";
 
 /**
  * @class
@@ -222,7 +222,7 @@ export class Sketch {
 
 	addPathsToSVG() {
 		for (const path of this.paths) {
-			addPathToSVG(this.svg, path)
+			path.addToSVG(this.svg)
 		}
 	}
 

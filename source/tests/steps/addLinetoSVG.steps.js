@@ -1,6 +1,6 @@
 import { defineFeature, loadFeature } from "jest-cucumber";
 import { createSVG } from "../../createSVG.js";
-import { addLineToSVG } from "../../addLineToSVG.js";
+// import { addLineToSVG } from "../../addLineToSVG.js";
 import { Line } from "../../Line.js";
 
 const feature = loadFeature("./source/tests/features/addLinetoSVG.feature");
@@ -35,7 +35,9 @@ defineFeature(feature, (test) => {
 		when(
 			/^I add a line with startpoint of (\d+),(\d+) and endpoint (\d+),(\d+)$/,
 			(x1, y1, x2, y2) => {
-				addLineToSVG(svg, x1, y1, x2, y2);
+
+				new Line({x: x1, y: y1}, {x:x2, y:y2}).addToSVG(svg);
+				// addLineToSVG(svg, x1, y1, x2, y2);
 			},
 		);
 
@@ -57,9 +59,10 @@ defineFeature(feature, (test) => {
 		});
 
 		when("I add a line with a specified stroke colour", () => {
-			addLineToSVG(svg, 0, 0, 1, 1, {
-				stroke: "blue",
-			});
+
+			new Line({x: 0, y: 0}, {x: 1, y: 1}).addToSVG(svg, {
+				stroke: "blue"
+			})
 		});
 
 		then(

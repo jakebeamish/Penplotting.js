@@ -1,6 +1,6 @@
 import { defineFeature, loadFeature } from "jest-cucumber";
 import { Path, Vector, createSVG } from "../../index.js";
-import { addPathToSVG } from "../../index.js";
+// import { addPathToSVG } from "../../index.js";
 
 const feature = loadFeature("./source/tests/features/createSVGPath.feature")
 
@@ -24,7 +24,7 @@ defineFeature(feature, (test) => {
         });
 
         when('I create an SVG path from those points', () => {
-            addPathToSVG(svg, path);
+            path.addToSVG(svg);
         });
 
         then('the SVG element contains that path', () => {
