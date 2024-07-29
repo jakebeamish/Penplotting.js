@@ -1,19 +1,23 @@
 import { defineFeature, loadFeature } from "jest-cucumber";
 import { createSVG } from "../../createSVG.js";
 import { addLineToSVG } from "../../addLineToSVG.js";
+import { Line } from "../../Line.js";
 
 const feature = loadFeature("./source/tests/features/addLinetoSVG.feature");
 
 defineFeature(feature, (test) => {
 	test("Add a line to an SVG element", ({ given, when, then }) => {
 		let svg;
+		let line;
 
 		given("I have an empty SVG element", () => {
 			svg = createSVG();
 		});
 
 		when("I add a line to the SVG", () => {
-			addLineToSVG(svg, 0, 0, 1, 1);
+			line = new Line({x: 0, y: 0}, {x:1, y:1 });
+			line.addToSVG(svg)
+			// addLineToSVG(svg, 0, 0, 1, 1);
 		});
 
 		then("the SVG element should contain the new line", () => {

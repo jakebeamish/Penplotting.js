@@ -1,5 +1,5 @@
 import { createSVG } from "./createSVG.js";
-import { addLineToSVG } from "./addLineToSVG.js";
+// import { addLineToSVG } from "./addLineToSVG.js";
 import { unseededRandomHex } from "./Random.js";
 import { hexToDec } from "./utils.js";
 import { decToHex } from "./utils.js";
@@ -213,7 +213,7 @@ export class Sketch {
 	 */
 	addLinesToSVG() {
 		for (const line of this.lines) {
-			addLineToSVG(this.svg, line.a.x, line.a.y, line.b.x, line.b.y, {
+			line.addToSVG(this.svg, {
 				stroke: "black",
 				strokeWidth: this.strokeWidth,
 			});

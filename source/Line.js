@@ -36,4 +36,30 @@ export class Line {
 	isContainedBy(line) {
 		return this.a.isOnLine(line) && this.b.isOnLine(line);
 	}
+
+	/**
+	  * Add a line to an SVG element
+	  * @param {SVGElement} svg
+	  * @param {Object} [options]
+	  * @param {string} [options.units = ""]
+	  * @param {string} [options.stroke = "black"]
+	  * @param {number} [options.strokeWidth = 0.1]
+	  * @returns {SVGElement}
+	  */
+	addToSVG(svg, {
+		units = "",
+		stroke = "black",
+		strokeWidth = 0.1
+	} = {}) {
+		const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+		line.setAttribute("x1", `${this.x1}${units}`);
+		line.setAttribute("y1", `${this.y1}${units}`);
+		line.setAttribute("x2", `${this.x2}${units}`);
+		line.setAttribute("y2", `${this.y2}${units}`);
+		line.setAttribute("stroke", stroke);
+		line.setAttribute("stroke-width", `${strokeWidth}${units}`);
+
+		svg.appendChild(line);
+		return svg;
+	}
 }
