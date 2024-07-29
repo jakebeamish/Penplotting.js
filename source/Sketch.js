@@ -8,7 +8,6 @@ import { Line } from "./Line.js";
 import  { Circle } from "./Circle.js"
 import { Path } from "./Path.js";
 import { addPathToSVG } from "./addPathToSVG.js";
-import { addCircleToSVG } from "./addCircleToSVG.js";
 
 /**
  * @class
@@ -229,7 +228,7 @@ export class Sketch {
 
 	addCirclesToSVG() {
 		for (const circle of this.circles) {
-			addCircleToSVG(this.svg, circle);
+			circle.addToSVG(this.svg);
 		}
 	}
 
