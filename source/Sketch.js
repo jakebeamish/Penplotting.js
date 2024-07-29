@@ -1,5 +1,5 @@
 import { createSVG } from "./createSVG.js";
-import { addLineToSVG } from "./addLineToSVG.js";
+// import { addLineToSVG } from "./addLineToSVG.js";
 import { unseededRandomHex } from "./Random.js";
 import { hexToDec } from "./utils.js";
 import { decToHex } from "./utils.js";
@@ -7,8 +7,7 @@ import { wrap } from "./utils.js";
 import { Line } from "./Line.js";
 import  { Circle } from "./Circle.js"
 import { Path } from "./Path.js";
-import { addPathToSVG } from "./addPathToSVG.js";
-import { addCircleToSVG } from "./addCircleToSVG.js";
+// import { addPathToSVG } from "./addPathToSVG.js";
 
 /**
  * @class
@@ -214,7 +213,7 @@ export class Sketch {
 	 */
 	addLinesToSVG() {
 		for (const line of this.lines) {
-			addLineToSVG(this.svg, line.a.x, line.a.y, line.b.x, line.b.y, {
+			line.addToSVG(this.svg, {
 				stroke: "black",
 				strokeWidth: this.strokeWidth,
 			});
@@ -223,13 +222,13 @@ export class Sketch {
 
 	addPathsToSVG() {
 		for (const path of this.paths) {
-			addPathToSVG(this.svg, path)
+			path.addToSVG(this.svg)
 		}
 	}
 
 	addCirclesToSVG() {
 		for (const circle of this.circles) {
-			addCircleToSVG(this.svg, circle);
+			circle.addToSVG(this.svg);
 		}
 	}
 
