@@ -6,10 +6,10 @@ import { lerp } from "./utils.js";
 export class Vector {
     /**
      * Create a vector from coordinates
-     * @param {number} x
-     * @param {number} y
+     * @param {number} - x
+     * @param {number} - y
      */
-    constructor(x, y) {
+    constructor(x = 0, y = 0) {
         this.x = x;
         this.y = y;
     }
