@@ -47,6 +47,7 @@ export class Sketch {
 		this.lines = [];
 		this.paths = [];
 		this.circles = [];
+		this.seedHistory = [];
 
 		this.svg = createSVG(this.size.width, this.size.height, {
 			units: this.units,
@@ -122,6 +123,9 @@ export class Sketch {
 
 		this.createUI(timeTaken);
 		this.appendSVG();
+		if (!this.seedHistory.includes(this.seed.hex)) {
+			this.seedHistory.unshift(this.seed.hex);
+		}
 	}
 
 	/**
@@ -268,8 +272,43 @@ export class Sketch {
 		console.log(seedInput.value)
 		seedInput.addEventListener('change', () => this.setSeed(seedInput.value))
 		seedInput.addEventListener('focus', () => seedInput.select())
+
+		this.header.appendChild(seedInput);
+
+
+
+
+
+	
 		
-		this.header.appendChild(seedInput)
+		const historyForm = document.createElement("form");
+		const historyLabel = document.createElement("label");
+		historyLabel.setAttribute("for", "history");
+		historyLabel.append("History: ");
+
+		const historySelect = document.createElement("select");
+		historySelect.setAttribute("name", "history");
+		historySelect.setAttribute("id", "history");
+
+		let option = document.createElement("option");
+			option.setAttribute("value", "");
+			option.append("--------");
+			historySelect.appendChild(option);
+
+		this.seedHistory.forEach(seed => {
+			let option = document.createElement("option");
+			option.setAttribute("value", seed);
+			option.append(seed);
+			historySelect.appendChild(option);
+
+			option.addEventListener('click', (e) => {
+				// e.preventDefault();
+				this.setSeed(seed);
+			})
+		})
+		historyLabel.appendChild(historySelect)
+		historyForm.appendChild(historyLabel);
+		this.header.appendChild(historyForm);
 
 		// Add a nav element to the header
 		let nav = document.createElement("nav");
@@ -311,3 +350,4 @@ export class Sketch {
 		this.header.appendChild(sketchInfo);
 	}
 }
+
