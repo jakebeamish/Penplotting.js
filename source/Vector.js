@@ -62,7 +62,7 @@ export class Vector {
 
     /**
      * Multiply this vector by a scalar
-     * @param {*} scalar
+     * @param {number} scalar
      * @retruns {Vector}
      */
     multiply(scalar) {
