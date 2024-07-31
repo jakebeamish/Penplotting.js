@@ -1,7 +1,7 @@
 import { Sketch, PAPER, map, Vector, Line, XORShift32, Circle, Quadtree, Rectangle } from "../../source/index.js";
 
 const sketch = new Sketch({
-    size: PAPER.A6,
+    size: PAPER.A3,
     backgroundColor: "#DDDDDD",
     strokeWidth: 0.1,
 })
