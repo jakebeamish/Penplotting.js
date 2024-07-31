@@ -17,7 +17,7 @@ sketch.generate = () => {
 
     let attemptCounter = 0;
 
-    while (sketch.circles.length < 8000 && attemptCounter < 200000) {
+    while (sketch.circles.length < 1000 && attemptCounter < 200000) {
 
         attemptCounter++;
 
