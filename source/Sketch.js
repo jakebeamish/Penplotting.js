@@ -5,7 +5,7 @@ import { hexToDec } from "./utils.js";
 import { decToHex } from "./utils.js";
 import { wrap } from "./utils.js";
 import { Line } from "./Line.js";
-import  { Circle } from "./Circle.js"
+import { Circle } from "./Circle.js"
 import { Path } from "./Path.js";
 // import { addPathToSVG } from "./addPathToSVG.js";
 
@@ -166,6 +166,15 @@ export class Sketch {
 		this.draw();
 	}
 
+	setSeed(input) {
+		this.seed = {
+			hex: input,
+			decimal: hexToDec(input)
+		}
+		this.clear();
+		this.draw();
+	}
+
 	/**
 	 * Removes duplicated Lines in this Sketch's lines array.
 	 */
@@ -250,8 +259,17 @@ export class Sketch {
 
 		// Add a h1 title to the header
 		let pageTitle = document.createElement("h1");
-		pageTitle.append(`${this.title} ${this.seed.hex}`);
+		pageTitle.append(`${this.title}`);
 		this.header.appendChild(pageTitle);
+
+		let seedInput = document.createElement("input");
+		seedInput.setAttribute("value", `${this.seed.hex}`);
+		// seedInput.setAttribute("oninput", this.setSeed(123));
+		console.log(seedInput.value)
+		seedInput.addEventListener('change', () => this.setSeed(seedInput.value))
+		seedInput.addEventListener('focus', () => seedInput.select())
+		
+		this.header.appendChild(seedInput)
 
 		// Add a nav element to the header
 		let nav = document.createElement("nav");

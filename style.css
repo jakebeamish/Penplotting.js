@@ -12,6 +12,7 @@ header {
 }
 
 header h1,
+header input,
 header nav,
 header nav ul,
 header nav ul li,
@@ -21,6 +22,14 @@ header div p {
     font-family: 'Courier New', Courier, monospace;
     margin-left: 0.2rem;
     font-size: medium;
+}
+
+header input {
+    color: white;
+    background-color: black;
+    font-size: medium;
+    font-weight: bold;
+    border: none;
 }
 
 header nav ul li {
