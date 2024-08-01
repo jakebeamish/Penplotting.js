@@ -23,6 +23,13 @@ export class Vector {
         return new Vector(array[0], array[1]);
     }
 
+    static fromAngle(angle, magnitude = 1) {
+        return new Vector(
+            Math.cos(angle),
+            Math.sin(angle)
+        ).multiply(magnitude);
+    }
+
     /**
      * Add a vector to this vector
      * @param {Vector} vector
