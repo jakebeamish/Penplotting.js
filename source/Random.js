@@ -61,6 +61,35 @@ export class PRNG {
     randomChance(chance = 0.5) {
         return this.randomFloat() < chance;
     }
+
+    /**
+     * Select probabalistically from a set of weighted options.
+     * @param {Array} choices - An array of objects, each with an `option` and a `weight`.
+     * @param {function|number|string} choices[].option - The outcome of the choice.
+     * @param {number} choices[].weight - The weight of the choice. Higher weights (relative to other choices) are more likely to be selected.
+     * @returns {function|number|string}
+     */
+    randomWeighted(choices) {
+        const length = choices.length;
+   
+        let totalWeight = 0;
+        for (let choice of choices) {
+            totalWeight += choice.weight;
+        }
+
+        const randomNumberInRange = this.randomFloat() * totalWeight;
+        let cumulativeWeight = 0;
+        for (let choice of choices) {
+            cumulativeWeight += choice.weight;
+            if (randomNumberInRange < cumulativeWeight) {
+                if (typeof choice.option === 'function') {
+                    return choice.option();
+                }
+
+                return choice.option;
+            }
+        }
+    }
 }
 
 /**
