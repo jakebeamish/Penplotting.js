@@ -7,9 +7,12 @@ let sketch = new Sketch({
 }
 );
 
-const prng = new XORShift32(sketch.seed.decimal);
 
 sketch.generate = () => {
+
+    const prng = new XORShift32(sketch.seed.decimal);
+
+    // console.log(sketch.seed)
     let { width, height } = sketch.size;
     const centre = new Vector(width / 2, height / 2)
 
