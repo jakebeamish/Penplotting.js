@@ -46,7 +46,7 @@ describe("Vector", () => {
 		test("Normalized vector should have magnitude of 1", () => {
 			const v = new Vector(10, 53);
 			v.normalize();
-			expect(v.magnitude()).toBe(1);
+			expect(v.getMagnitude()).toBe(1);
 		});
 
 		test("Error should be thrown if a Vector of magnitude zero is normalized", () => {

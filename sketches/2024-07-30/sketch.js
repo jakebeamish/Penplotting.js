@@ -35,7 +35,7 @@ class Mover {
     move(direction) {
         const desired = direction.normalize().multiply(this.maxSpeed);
         const steering = Vector.subtract(desired, this.velocity);
-        if (steering.magnitude() > this.maxForce) {
+        if (steering.getMagnitude() > this.maxForce) {
             steering.normalize().multiply(this.maxForce);
         }
         this.applyForce(steering);
