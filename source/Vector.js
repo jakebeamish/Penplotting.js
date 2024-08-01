@@ -120,6 +120,15 @@ export class Vector {
     }
 
     /**
+     * Set the magnitude of this vector.
+     * @param {number} magnitude 
+     * @returns {Vector}
+     */
+    setMagnitude(magnitude) {
+        return this.normalize().multiply(magnitude);
+    }
+
+    /**
      * Calculate the distance to another vector from this vector
      * @param {Vector} vector
      * @returns {number}
