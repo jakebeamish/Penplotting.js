@@ -24,6 +24,19 @@ export class Vector {
     }
 
     /**
+     * Create a vector from an angle.
+     * @param {number} angle - The angle of the vector.
+     * @param {number} [magnitude=1] - The magnitude of the vector.
+     * @returns {Vector}
+     */
+    static fromAngle(angle, magnitude = 1) {
+        return new Vector(
+            Math.cos(angle),
+            Math.sin(angle)
+        ).multiply(magnitude);
+    }
+
+    /**
      * Add a vector to this vector
      * @param {Vector} vector
      * @returns {Vector}
