@@ -102,7 +102,7 @@ export class Vector {
     }
 
     /**
-     * Calculate the cross product of two 2D vectors
+     * Calculate the cross product of two 2D vectors.
      * @param {Vector} v1
      * @param {Vector} v2
      * @returns {number}
@@ -112,11 +112,20 @@ export class Vector {
     }
 
     /**
-     *
+     * Get the magnitude of this vector.
      * @returns {number} The magnitude (Euclidean distance) of this vector
      */
-    magnitude() {
+    getMagnitude() {
         return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
+
+    /**
+     * Set the magnitude of this vector.
+     * @param {number} magnitude 
+     * @returns {Vector}
+     */
+    setMagnitude(magnitude) {
+        return this.normalize().multiply(magnitude);
     }
 
     /**
@@ -126,7 +135,7 @@ export class Vector {
      */
     distance(vector) {
         const delta = Vector.subtract(this, vector);
-        return delta.magnitude();
+        return delta.getMagnitude();
     }
 
     /**
@@ -147,7 +156,7 @@ export class Vector {
      * @returns {Vector}
      */
     normalize() {
-        const mag = this.magnitude();
+        const mag = this.getMagnitude();
         if (mag === 0) {
             throw new Error("Cannot normalize a zero vector");
         }
@@ -209,6 +218,6 @@ export class Vector {
      */
     distance(vector) {
         let d = Vector.subtract(this, vector);
-        return d.magnitude();
+        return d.getMagnitude();
     }
 }
