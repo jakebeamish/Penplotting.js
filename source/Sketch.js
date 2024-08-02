@@ -126,6 +126,15 @@ export class Sketch {
 		if (!this.seedHistory.includes(this.seed.hex)) {
 			this.seedHistory.unshift(this.seed.hex);
 		}
+
+		addEventListener("keydown", (e) => {
+			switch (e.key) {
+				case "d":
+					this.downloadSVG();
+				case "r":
+					this.randomiseSeed()
+			}
+		})
 	}
 
 	/**
