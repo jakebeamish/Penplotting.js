@@ -2,9 +2,8 @@ import { Sketch, PAPER, Vector, Line, Circle, Rectangle, Path, Quadtree, XORShif
 
 const sketch = new Sketch({
     size: PAPER.A4,
-    backgroundColor: "white",
-    stroke: "red",
-    strokeWidth: 0.5
+    backgroundColor: "#FFFFFF",
+    strokeWidth: 0.1
 })
 
 sketch.generate = () => {
@@ -14,13 +13,13 @@ sketch.generate = () => {
     const centre = new Vector(width/2, height/2);
 
 
-    sketch.add([
-        new Circle(width/2, height/2, 10),
-        new Line(new Vector(0, height/2), new Vector(width, height/2)),
-        new Path([new Vector(0, 0), centre]),
-    ])
+    for (let i = 0; i < 3000; i++) {
+        let a = Vector.fromAngle(prng.randomFloat() * Math.PI * 2, 60).add(centre);
+        let b = Vector.fromAngle(prng.randomFloat() * Math.PI * 2, 60).add(centre);
 
-    sketch.add(new Rectangle(centre.x, centre.y, 10, 10).lines())
+        sketch.add(new Line(a, b));
+    }
+
 }
 
 
