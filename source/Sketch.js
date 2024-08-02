@@ -116,6 +116,9 @@ export class Sketch {
 
 		this.deduplicateLines();
 		this.removeOverlappingLines();
+		this.removeShortLines(0.5);
+
+
 		this.addLinesToSVG();
 
 		this.addPathsToSVG();
@@ -231,6 +234,18 @@ export class Sketch {
 		}
 
 		this.lines = uniqueLines;
+	}
+
+	removeShortLines(minimumLength) {
+		const validLines = [];
+
+		for (const line of this.lines) {
+			if (line.length() > minimumLength) {
+				validLines.push(line);
+			}
+		}
+
+		this.lines = validLines;
 	}
 
 	/**
