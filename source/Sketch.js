@@ -25,6 +25,7 @@ export class Sketch {
 	 * @param {number} [options.seed] - The seed to be used for the Sketch. Defaults to an 8 digit hexadecimal integer
 	 * @param {string} [options.stroke = "black"] - The foreground colour of the sketch, as a hex value or HTML color name.
 	 * @param {number} [options.strokeWidth = 1] - The line width of the Sketch. Defaults to 1 unit (1mm)
+	 * @param {number} [options.minimumLineLength = 0.1] - Lines shorter than this length are not drawn.
 	 */
 	constructor(
 		{
@@ -38,6 +39,7 @@ export class Sketch {
 			},
 			stroke = "black",
 			strokeWidth = 1,
+			minimumLineLength = 0.1,
 		} = {},
 	) {
 		this.title = title;
@@ -46,6 +48,7 @@ export class Sketch {
 		this.units = units;
 		this.stroke = stroke;
 		this.backgroundColor = backgroundColor;
+		this.minimumLineLength = minimumLineLength;
 
 		this.lines = [];
 		this.paths = [];
@@ -116,6 +119,9 @@ export class Sketch {
 
 		this.deduplicateLines();
 		this.removeOverlappingLines();
+		this.removeShortLines(this.minimumLineLength);
+
+
 		this.addLinesToSVG();
 
 		this.addPathsToSVG();
@@ -231,6 +237,18 @@ export class Sketch {
 		}
 
 		this.lines = uniqueLines;
+	}
+
+	removeShortLines(minimumLength) {
+		const validLines = [];
+
+		for (const line of this.lines) {
+			if (line.length() > minimumLength) {
+				validLines.push(line);
+			}
+		}
+
+		this.lines = validLines;
 	}
 
 	/**
