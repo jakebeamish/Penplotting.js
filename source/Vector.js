@@ -223,14 +223,4 @@ export class Vector {
         }
         return neighbours;
     }
-
-    /**
-     * Calculate the distance to another vector from this vector
-     * @param {Vector} vector 
-     * @returns {number}
-     */
-    distance(vector) {
-        let d = Vector.subtract(this, vector);
-        return d.getMagnitude();
-    }
 }
