@@ -23,6 +23,7 @@ export class Sketch {
 	 * @param {string} [options.units = "mm"] - The units of measurement to be used (i.e. "mm" or "in")
 	 * @param {string} [options.backgroundColor = "transparent"] - The background colour of the sketch, as a hex value or HTML color name.
 	 * @param {number} [options.seed] - The seed to be used for the Sketch. Defaults to an 8 digit hexadecimal integer
+	 * @param {string} [options.stroke = "black"] - The foreground colour of the sketch, as a hex value or HTML color name.
 	 * @param {number} [options.strokeWidth = 1] - The line width of the Sketch. Defaults to 1 unit (1mm)
 	 */
 	constructor(
@@ -35,6 +36,7 @@ export class Sketch {
 				width: 100,
 				height: 100
 			},
+			stroke = "black",
 			strokeWidth = 1,
 		} = {},
 	) {
@@ -42,6 +44,7 @@ export class Sketch {
 		this.size = size;
 		this.strokeWidth = strokeWidth;
 		this.units = units;
+		this.stroke = stroke;
 		this.backgroundColor = backgroundColor;
 
 		this.lines = [];
@@ -236,7 +239,7 @@ export class Sketch {
 	addLinesToSVG() {
 		for (const line of this.lines) {
 			line.addToSVG(this.svg, {
-				stroke: "black",
+				stroke: this.stroke,
 				strokeWidth: this.strokeWidth,
 			});
 		}
@@ -244,13 +247,19 @@ export class Sketch {
 
 	addPathsToSVG() {
 		for (const path of this.paths) {
-			path.addToSVG(this.svg)
+			path.addToSVG(this.svg, {
+				stroke: this.stroke,
+				strokeWidth: this.strokeWidth
+			})
 		}
 	}
 
 	addCirclesToSVG() {
 		for (const circle of this.circles) {
-			circle.addToSVG(this.svg);
+			circle.addToSVG(this.svg, {
+				stroke: this.stroke,
+				strokeWidth: this.strokeWidth
+			});
 		}
 	}
 
