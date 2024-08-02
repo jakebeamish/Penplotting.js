@@ -3,13 +3,9 @@ This is a dependency-free JavaScript framework for making SVG files for penplott
 ## Features
 
 - A Sketch class to contain everything needed to create and render the SVG
-- Geometry classes:
-  - 2D Vector
-  - Line
-  - Path
-  - Circle
-- Seedable PRNGs with useful methods (Mulberry32, XORShift32, LCG)
-- Helpful functions such as vector maths, nearestNeighbour, fract, wrap, lerp, map
+- Shapes and geometry classes: 2D Vector, Line, Path, Circle, Rectangle
+- Seedable PRNG implementations with useful methods
+- Quadtree
 - Paper sizes
 
 ## Usage
@@ -47,6 +43,12 @@ sketch.generate = () => {
 // Call draw() on the Sketch
 sketch.draw();
 ```
+
+### Keyboard shortcuts
+| Action | Key |
+|-|-|
+|Download an SVG file|`d`|
+|Regenerate with random seed|`r`|
 
 ## Roadmap
 
