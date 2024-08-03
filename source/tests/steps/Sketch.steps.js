@@ -78,7 +78,7 @@ defineFeature(feature, (test) => {
 		sketch = new Sketch(100, 100);
 
 		sketch.add(new Line(
-			{x: 3, y: 4}, {x:5, y:6}
+			new Vector(3, 4), new Vector(5, 6)
 		));
 		
 	

@@ -152,6 +152,17 @@ export class Vector {
     }
 
     /**
+     * Calculate the distance between two vectors.
+     * @param {Vector} v1
+     * @param {Vector} v2
+     * @returns {number}
+     */
+    static distance(v1, v2) {
+        const delta = Vector.subtract(v1, v2);
+        return delta.getMagnitude();
+    }
+
+    /**
      * Rotate this vector by a specified angle.
      * @param {number} angle - The angle to rotate the vector by, in radians.
      * @returns {Vector} This vector after rotation.
