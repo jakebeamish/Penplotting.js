@@ -37,4 +37,28 @@ describe("Sketch.add() can be used to add shapes to the sketch.", () => {
         expect(sketch.lines).toEqual(lines);
     })
 
+    test("Adds a single line and an inner array of lines to a sketch", () => {
+        const sketch = new Sketch();
+
+        const array = [
+            new Line(
+                new Vector(0, 0),
+                new Vector(5, 5)
+            ),
+            new Line(
+                new Vector(3, 1),
+                new Vector(4, 4)
+            )
+        ]
+
+        const line = new Line(
+            new Vector(10, 10),
+            new Vector(11, 17)
+        );
+
+        sketch.add([array, line]);
+
+        expect(sketch.lines.length).toBe(3);
+    })
+
 })
