@@ -52,6 +52,6 @@ sketch.draw();
 
 ## Contributing
 
-Currently, I am using `jest` and `jest-cucumber` for testing. Some scenarios are described in feature files, but the majority of tests are not.
+This is a personal project and is in part a learning exercise, but contributions are welcome. Currently, I am using `jest` and `jest-cucumber` for testing. Some scenarios are described in feature files, but the majority of tests are not.
 
 I'm trying to make sure that everything in the library is well documented using `JSDoc`.
