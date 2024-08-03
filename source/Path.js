@@ -1,7 +1,9 @@
+/** Class representing a path. */
 export class Path {
     /**
-     * 
-     * @param {Array<Vector>} points 
+     * @param {Array<Vector>} points - An array of [Vectors]{@link Vector} from which a Path is made.
+     * @param {Object} [options]
+     * @param {boolean} [options.isClosed = false] - A flag to optionally close the Path.
      */
     constructor(points, {
         isClosed = false,
