@@ -1,4 +1,5 @@
 import { Sketch } from "../../Sketch";
+import { Vector } from "../../Vector";
 import { Line } from "../../Line";
 
 describe("Instance methods of Sketch object", () => {
@@ -19,7 +20,7 @@ describe("Instance methods of Sketch object", () => {
     test("Clearing a Sketch results in an empty document body", () => {
         let sketch = new Sketch();
 
-        let line = new Line({x:1, y:1}, {x:2, y:3});
+        let line = new Line(new Vector(1, 1), new Vector(5, 5));
 
         sketch.add(line);
 
