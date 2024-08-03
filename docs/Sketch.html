@@ -442,6 +442,45 @@
 
         <tr>
             
+                <td class="name"><code>stroke</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "black"
+                
+                </td>
+            
+
+            <td class="description last"><p>The foreground colour of the sketch, as a hex value or HTML color name.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>strokeWidth</code></td>
             
 
@@ -475,6 +514,45 @@
             
 
             <td class="description last"><p>The line width of the Sketch. Defaults to 1 unit (1mm)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>minimumLineLength</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0.1
+                
+                </td>
+            
+
+            <td class="description last"><p>Lines shorter than this length are not drawn.</p></td>
         </tr>
 
     
@@ -593,7 +671,7 @@
 
 
 <div class="description">
-    <p>Adds a shape (line or other future shapes) to the sketch.</p>
+    <p>Adds shapes to the sketch.</p>
 </div>
 
 
@@ -638,7 +716,13 @@
 <span class="param-type"><a href="Line.html">Line</a></span>
 |
 
-<span class="param-type">Array.&lt;<a href="Line.html">Line</a>></span>
+<span class="param-type"><a href="Circle.html">Circle</a></span>
+|
+
+<span class="param-type">Path</span>
+|
+
+<span class="param-type">Array</span>
 
 
             
@@ -648,7 +732,7 @@
 
             
 
-            <td class="description last"><p>A Line object or array of Line objects</p></td>
+            <td class="description last"><p>An object or array of objects to be added to the sketch.</p></td>
         </tr>
 
     
@@ -689,7 +773,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line82">line 82</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line88">line 88</a>
     </li></ul></dd>
     
 
@@ -777,7 +861,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line227">line 227</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line263">line 263</a>
     </li></ul></dd>
     
 
@@ -915,7 +999,7 @@ Lines -&gt; this.lines</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line95">line 95</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line107">line 107</a>
     </li></ul></dd>
     
 
@@ -1003,7 +1087,7 @@ Lines -&gt; this.lines</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line251">line 251</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line293">line 293</a>
     </li></ul></dd>
     
 
@@ -1091,7 +1175,7 @@ Lines -&gt; this.lines</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line134">line 134</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line158">line 158</a>
     </li></ul></dd>
     
 
@@ -1179,7 +1263,7 @@ Lines -&gt; this.lines</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line185">line 185</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line209">line 209</a>
     </li></ul></dd>
     
 
@@ -1267,7 +1351,7 @@ Lines -&gt; this.lines</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line150">line 150</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line174">line 174</a>
     </li></ul></dd>
     
 
@@ -1355,7 +1439,7 @@ Lines -&gt; this.lines</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line110">line 110</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line122">line 122</a>
     </li></ul></dd>
     
 
@@ -1439,7 +1523,7 @@ Lines -&gt; this.lines</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line74">line 74</a>
+        <a href="Sketch.js.html">Sketch.js</a>, <a href="Sketch.js.html#line80">line 80</a>
     </li></ul></dd>
     
 
@@ -1515,7 +1599,7 @@ Lines -&gt; this.lines</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Aug 01 2024 15:21:54 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sat Aug 03 2024 14:16:27 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
