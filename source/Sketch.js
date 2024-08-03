@@ -82,12 +82,18 @@ export class Sketch {
 	}
 
 	/**
-	 * Adds a shape (line or other future shapes) to the sketch.
-	 * @param {Line|Array<Line>} shape - A Line object or array of Line objects
+	 * Adds shapes to the sketch.
+	 * @param {Line|Circle|Path|Array} shape - An object or array of objects to be added to the sketch.
 	 */
 	add(shape) {
 		if (Array.isArray(shape)) {
-			shape.forEach(s => this.addSingleShape(s));
+			shape.forEach((item) => {
+				if (Array.isArray(item)) {
+					this.add(item)
+				} else {
+				this.addSingleShape(item)
+				}
+		});
 		} else {
 			this.addSingleShape(shape);
 		}
@@ -386,4 +392,3 @@ export class Sketch {
 		this.header.appendChild(sketchInfo);
 	}
 }
-
