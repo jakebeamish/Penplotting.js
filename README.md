@@ -1,6 +1,6 @@
 This is a dependency-free framework for making SVG files for penplotters using JavaScript.
 
-> ![NOTE]
+> [!NOTE]
 > This framework is a work in progress, and is likely to change in future updates.
 
 ## Features
