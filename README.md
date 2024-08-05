@@ -1,21 +1,20 @@
 This is a dependency-free JavaScript framework for making SVG files for penplotters.
+It is built for my own use, and is in part an exercise in JavaScript development. 
 
 ## Features
 
 - A Sketch class to contain everything needed to create and render the SVG
 - Shapes and geometry classes: 2D Vector, Line, Path, Circle, Rectangle
 - Seedable PRNG implementations with useful methods
-- Quadtree
+- Quadtree for optimised nearest-neighbour search
 - Paper sizes
 
 ## Usage
 
-The way I'm using this framework currently is something like this:
-
-1. Create a new Sketch (with optional parameters for dimensions, units, background colour, title, seed)
-2. Create and manipulate Vectors and Lines by defining a sketch.generate() function
-3. Add Lines to be included as SVG elements in the Sketch by calling `sketch.add()`, and passing in a Line or array of Lines.
-4. Call the Sketch's instance method `draw()`
+1. Create a new Sketch (with optional parameters for dimensions, units, background colour, title, seed).
+2. Create and manipulate Vectors and Lines by defining a sketch.generate() function.
+3. Add Lines (or other shapes) to be included as SVG elements in the Sketch by calling `sketch.add(shapes)`.
+4. Call the Sketch's instance method `draw()`.
 
 ```js
 import { Sketch, PAPER, Vector, Line, LCG } from "../../index.js"
@@ -36,11 +35,11 @@ sketch.generate = () => {
     const b = new Vector(90, 90);
     const l = new Line(a, b);
 
-    // Add Lines to the Sketch object's lines array
+    // Add shapes to the Sketch
     sketch.add(line);
 }
 
-// Call draw() on the Sketch
+// Call draw() on the Sketch to render a HTML page containing the generated SVG document
 sketch.draw();
 ```
 
@@ -50,8 +49,15 @@ sketch.draw();
 |Download an SVG file|`d`|
 |Regenerate with random seed|`r`|
 
+### Plotting the SVG files
+
+The SVG file can be downloaded and then processed further.
+Personally, I use the wonderful vpype to optimise and tidy up,
+and then use the axidraw Inkscape plugin to control the plotter.
+
 ## Contributing
 
-This is a personal project and is in part a learning exercise, but contributions are welcome. Currently, I am using `jest` and `jest-cucumber` for testing. Some scenarios are described in feature files, but the majority of tests are not.
+Contributions are welcome. Currently, I am using `jest` and `jest-cucumber` for testing.
+Some scenarios are described in feature files, but the majority of tests are not.
 
-I'm trying to make sure that everything in the library is well documented using `JSDoc`.
+Documentation is generated using JSDoc.
