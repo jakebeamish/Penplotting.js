@@ -1,5 +1,7 @@
-This is a dependency-free JavaScript framework for making SVG files for penplotters.
-It is built for my own use, and is in part an exercise in JavaScript development. 
+This is a dependency-free framework for making SVG files for penplotters using JavaScript.
+
+> ![NOTE]
+> This framework is a work in progress, and is likely to change in future updates.
 
 ## Features
 
@@ -51,8 +53,8 @@ sketch.draw();
 
 ### Plotting the SVG files
 
-The SVG file can be downloaded and then processed further.
-Personally, I use the wonderful vpype to optimise and tidy up,
+The SVG file can be downloaded and optionally processed further.
+Personally, I use the wonderful vpype to optimise the file,
 and then use the axidraw Inkscape plugin to control the plotter.
 
 ## Contributing
