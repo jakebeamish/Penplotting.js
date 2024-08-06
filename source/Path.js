@@ -12,6 +12,10 @@ export class Path {
         this.isClosed = isClosed;
     }
 
+    /**
+     * Add this path to an SVG element. Called by {@link Sketch#addPathsToSVG} inside {@link Sketch#draw}.
+     * @returns {SVGElement}
+     */
     addToSVG(svg, {
         stroke = "black",
         fill = "transparent",
