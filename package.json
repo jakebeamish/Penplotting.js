@@ -5,7 +5,7 @@
   "main": "source/index.js",
   "scripts": {
     "test": "jest --coverage --verbose",
-    "generate-docs": "jsdoc -c jsdoc.json --verbose"
+    "docs": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
   "author": "Jake Beamish",
