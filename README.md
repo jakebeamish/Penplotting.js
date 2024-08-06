@@ -1,7 +1,7 @@
-This is a dependency-free framework for making SVG files for penplotters using JavaScript.
+This is a dependency-free JavaScript framework for making generative art in SVG format for penplotters.
 
 > [!NOTE]
-> This framework is a work in progress, and is likely to change in future updates.
+> This is a work in progress, and is likely to change in future updates.
 
 ## Features
 
@@ -14,9 +14,8 @@ This is a dependency-free framework for making SVG files for penplotters using J
 ## Usage
 
 1. Create a new Sketch (with optional parameters for dimensions, units, background colour, title, seed).
-2. Create and manipulate Vectors and Lines by defining a sketch.generate() function.
-3. Add Lines (or other shapes) to be included as SVG elements in the Sketch by calling `sketch.add(shapes)`.
-4. Call the Sketch's instance method `draw()`.
+2. Define a sketch.generate() function, in which Vectors, Lines and other shapes can be created, manipulated, and added to the SVG document using `sketch.add(shapes)`.
+3. Call the Sketch's instance method `draw()`.
 
 ```js
 import { Sketch, PAPER, Vector, Line, LCG } from "../../index.js"
@@ -59,7 +58,11 @@ and then use the axidraw Inkscape plugin to control the plotter.
 
 ## Contributing
 
-Contributions are welcome. Currently, I am using `jest` and `jest-cucumber` for testing.
+Contributions are welcome. Comments and Pull Requests on new and
+existing issues can be made at 
+https://github.com/jakebeamish/penplot-svg-tool/issues.
+
+Currently, `jest` and `jest-cucumber` are for testing.
 Some scenarios are described in feature files, but the majority of tests are not.
 
 Documentation is generated using JSDoc.
