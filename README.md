@@ -62,7 +62,7 @@ Contributions are welcome. Comments and Pull Requests on new and
 existing issues can be made at 
 https://github.com/jakebeamish/penplot-svg-tool/issues.
 
-Currently, `jest` and `jest-cucumber` are for testing.
+Currently, `jest` and `jest-cucumber` are used for testing.
 Some scenarios are described in feature files, but the majority of tests are not.
 
 Documentation is generated using JSDoc.
