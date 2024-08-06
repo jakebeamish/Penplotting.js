@@ -91,9 +91,9 @@ export class Sketch {
 				if (Array.isArray(item)) {
 					this.add(item)
 				} else {
-				this.addSingleShape(item)
+					this.addSingleShape(item)
 				}
-		});
+			});
 		} else {
 			this.addSingleShape(shape);
 		}
@@ -101,8 +101,7 @@ export class Sketch {
 
 	/**
 	 * Adds a single shape to the appropriate array.
-	 * Lines -> this.lines
-	 * @param {Line} shape 
+	 * @param {Line|Path|Circle} shape 
 	 */
 	addSingleShape(shape) {
 		if (shape instanceof Line) {
@@ -117,7 +116,8 @@ export class Sketch {
 	}
 
 	/**
-	 * Creates an SVG element and HTML UI and appends them to the document body.
+	 * Generates the SVG and UI and appends them to the document body.
+	 * Must be called after defining a Sketch.generate() function.
 	 */
 	draw() {
 		let startTime = Date.now();
@@ -169,7 +169,7 @@ export class Sketch {
 	}
 
 	/**
-	 * Download the {@link Sketch} as an SVG file
+	 * Download the {@link Sketch} as an SVG file.
 	 */
 	downloadSVG() {
 		const serializer = new XMLSerializer();
@@ -204,7 +204,7 @@ export class Sketch {
 	}
 
 	/**
-	 * Removes duplicated Lines in this Sketch's lines array.
+	 * Removes duplicated [Lines]{@link Line} from this Sketch's lines array.
 	 */
 	deduplicateLines() {
 		const uniqueLines = [];
@@ -225,6 +225,9 @@ export class Sketch {
 		this.lines = uniqueLines;
 	}
 
+	/**
+	 * Removes overlapping [Lines]{@link Line} from this Sketch's lines array.
+	 */
 	removeOverlappingLines() {
 		const uniqueLines = [];
 
@@ -245,6 +248,10 @@ export class Sketch {
 		this.lines = uniqueLines;
 	}
 
+	/**
+	 * Removes [Lines]{@link Line} in this Sketch's lines array that are shorter than a specified minimum length.
+	 * @param {number} minimumLength
+	 */
 	removeShortLines(minimumLength) {
 		const validLines = [];
 
@@ -258,7 +265,7 @@ export class Sketch {
 	}
 
 	/**
-	 * Adds the Lines in this Sketch's lines array to it's svg element.
+	 * Adds the [Lines]{@link Line} in this Sketch's lines array to it's SVG element.
 	 */
 	addLinesToSVG() {
 		for (const line of this.lines) {
@@ -269,6 +276,9 @@ export class Sketch {
 		}
 	}
 
+	/**
+	 * Adds the [Paths]{@link Path} in this Sketch's paths array to it's SVG element.
+	 */
 	addPathsToSVG() {
 		for (const path of this.paths) {
 			path.addToSVG(this.svg, {
@@ -277,7 +287,9 @@ export class Sketch {
 			})
 		}
 	}
-
+	/** 
+	* Adds the [Circles]{@link Circle} in this Sketch's circles array to it's SVG element.
+	*/
 	addCirclesToSVG() {
 		for (const circle of this.circles) {
 			circle.addToSVG(this.svg, {
@@ -288,12 +300,16 @@ export class Sketch {
 	}
 
 	/**
-	 * Appends this sketch's svg element to the document body.
+	 * Appends this sketch's SVG element to the document body.
 	 */
 	appendSVG() {
 		document.body.appendChild(this.svg);
 	}
 
+	/**
+	 * Creates HTML UI and adds it to the document body.
+	 * @param {number} timeTaken 
+	 */
 	createUI(timeTaken) {
 
 		// Add the document title
@@ -321,8 +337,8 @@ export class Sketch {
 
 
 
-	
-		
+
+
 		const historyForm = document.createElement("form");
 		const historyLabel = document.createElement("label");
 		historyLabel.setAttribute("for", "history");
@@ -333,9 +349,9 @@ export class Sketch {
 		historySelect.setAttribute("id", "history");
 
 		let option = document.createElement("option");
-			option.setAttribute("value", "");
-			option.append("--------");
-			historySelect.appendChild(option);
+		option.setAttribute("value", "");
+		option.append("--------");
+		historySelect.appendChild(option);
 
 		this.seedHistory.forEach(seed => {
 			let option = document.createElement("option");
