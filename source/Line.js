@@ -33,18 +33,24 @@ export class Line {
 			(this.a.equals(line.b) && this.b.equals(line.a));
 	}
 
+	/**
+	 * Check if this line lies directly on top of a longer line.
+	 * @param {Line} line - The target line to check against.
+	 * @returns {boolean} - True if this line's startpoint and endpoint are both
+	 * on the line being checked against, otherwise False.
+	 */
 	isContainedBy(line) {
 		return this.a.isOnLine(line) && this.b.isOnLine(line);
 	}
 
 	/**
 	  * Add a line to an SVG element
-	  * @param {SVGElement} svg
-	  * @param {Object} [options]
-	  * @param {string} [options.units = ""]
-	  * @param {string} [options.stroke = "black"]
-	  * @param {number} [options.strokeWidth = 0.1]
-	  * @returns {SVGElement}
+	  * @param {SVGElement} svg - The target SVG element.
+	  * @param {Object} [options] - A config object.
+	  * @param {string} [options.units = ""] - Units for the line (i.e. "mm" or "in").
+	  * @param {string} [options.stroke = "black"] - The line colour.
+	  * @param {number} [options.strokeWidth = 0.1] - The width of the line.
+	  * @returns {SVGElement} - The SVG element after appending this line.
 	  */
 	addToSVG(svg, {
 		units = "",
