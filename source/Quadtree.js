@@ -1,6 +1,12 @@
 import { Rectangle } from "./Rectangle.js";
-
+/** Class representing a quadtree. */
 export class Quadtree {
+    /**
+     * Create a quadtree.
+     * @param {Rectangle} boundary - The bounding box of the quadtree.
+     * @param {number} capacity - Defines the number of points that can be
+     *                            inserted into Quadtree without subdividing.
+     */
     constructor(boundary, capacity) {
         this.boundary = boundary;
         this.capacity = capacity;
@@ -8,6 +14,11 @@ export class Quadtree {
         this.divided = false;
     }
 
+    /**
+     * Check for points in a given range and return them in an array.
+     * @param {Rectangle} range - The bounding box of the query.
+     * @returns {Vector[]}
+     */
     query(range, found = []) {
         if (!this.boundary.intersects(range)) {
             return found;
@@ -29,6 +40,10 @@ export class Quadtree {
         return found;
     }
 
+    /**
+     * Add a point into this quadtree.
+     * @param {Vector} point 
+     */
     insert(point) {
 
         if (!this.boundary.contains(point)) {
@@ -86,6 +101,11 @@ export class Quadtree {
         this.bottomRight = new Quadtree(bottomRightBoundary, this.capacity);
     }
 
+    /**
+     * For each boundary of this quadtree and all it's children,
+     * create [Lines]{@link Line} from those rectangles and add them to a {@link Sketch}.
+     * @param {Sketch} sketch 
+     */
     show(sketch) {
 
         sketch.add(this.boundary.lines())
