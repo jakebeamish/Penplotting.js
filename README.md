@@ -53,13 +53,11 @@ sketch.draw();
 ### Plotting the SVG files
 
 The SVG file can be downloaded and optionally processed further.
-Personally, I use the wonderful vpype to optimise the file,
-and then use the axidraw Inkscape plugin to control the plotter.
+Personally, I use vpype to optimise the file, and then the axidraw Inkscape plugin to control the plotter.
 
 ## Contributing
 
-Contributions are welcome. Comments and Pull Requests on new and
-existing issues can be made at 
+Contributions are welcome. Issues, comments and Pull Requests can be made at 
 https://github.com/jakebeamish/penplot-svg-tool/issues.
 
 Currently, `jest` and `jest-cucumber` are used for testing.
