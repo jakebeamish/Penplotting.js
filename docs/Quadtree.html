@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Rectangle</title>
+    <title>JSDoc: Class: Quadtree</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Rectangle</h1>
+    <h1 class="page-title">Class: Quadtree</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Rectangle<span class="signature">(x, y, width, height)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Quadtree<span class="signature">(boundary, capacity)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>Class representing a rectangle.</p></div>
+            <div class="class-description"><p>Class representing a quadtree.</p></div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Rectangle"><span class="type-signature"></span>new Rectangle<span class="signature">(x, y, width, height)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Quadtree"><span class="type-signature"></span>new Quadtree<span class="signature">(boundary, capacity)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    <p>Create a rectangle using centre position, width, and height.</p>
+    <p>Create a quadtree.</p>
 </div>
 
 
@@ -89,13 +89,13 @@
 
         <tr>
             
-                <td class="name"><code>x</code></td>
+                <td class="name"><code>boundary</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type"><a href="Rectangle.html">Rectangle</a></span>
 
 
             
@@ -105,20 +105,20 @@
 
             
 
-            <td class="description last"><p>The x value of the centre.</p></td>
+            <td class="description last"><p>The bounding box of the quadtree.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>y</code></td>
+                <td class="name"><code>capacity</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">number</span>
 
 
             
@@ -128,53 +128,8 @@
 
             
 
-            <td class="description last"><p>The y value of the centre.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>width</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The width measured from the centre.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The height measured from the centre.</p></td>
+            <td class="description last"><p>Defines the number of points that can be
+inserted into Quadtree without subdividing.</p></td>
         </tr>
 
     
@@ -215,7 +170,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Rectangle.js.html">Rectangle.js</a>, <a href="Rectangle.js.html#line5">line 5</a>
+        <a href="Quadtree.js.html">Quadtree.js</a>, <a href="Quadtree.js.html#line3">line 3</a>
     </li></ul></dd>
     
 
@@ -256,7 +211,7 @@
         <h3 class="subsection-title">Classes</h3>
 
         <dl>
-            <dt><a href="Rectangle.html">Rectangle</a></dt>
+            <dt><a href="Quadtree.html">Quadtree</a></dt>
             <dd></dd>
         </dl>
     
@@ -278,7 +233,7 @@
     
 
     
-    <h4 class="name" id="contains"><span class="type-signature"></span>contains<span class="signature">(point)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="insert"><span class="type-signature"></span>insert<span class="signature">(point)</span><span class="type-signature"></span></h4>
     
 
     
@@ -286,7 +241,7 @@
 
 
 <div class="description">
-    <p>Check if this rectangle contains a <a href="Vector.html">Vector</a>.</p>
+    <p>Add a point into this quadtree.</p>
 </div>
 
 
@@ -338,7 +293,7 @@
 
             
 
-            <td class="description last"><p>The vector to check.</p></td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -379,7 +334,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Rectangle.js.html">Rectangle.js</a>, <a href="Rectangle.js.html#line47">line 47</a>
+        <a href="Quadtree.js.html">Quadtree.js</a>, <a href="Quadtree.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -404,24 +359,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -433,7 +370,7 @@
     
 
     
-    <h4 class="name" id="intersects"><span class="type-signature"></span>intersects<span class="signature">(range)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="query"><span class="type-signature"></span>query<span class="signature">(range)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="Vector.html">Vector</a>>}</span></h4>
     
 
     
@@ -441,7 +378,7 @@
 
 
 <div class="description">
-    <p>Check if this rectangle intersects another rectangle.</p>
+    <p>Check for points in a given range and return them in an array.</p>
 </div>
 
 
@@ -493,7 +430,7 @@
 
             
 
-            <td class="description last"><p>The target rectangle to check.</p></td>
+            <td class="description last"><p>The bounding box of the query.</p></td>
         </tr>
 
     
@@ -534,7 +471,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Rectangle.js.html">Rectangle.js</a>, <a href="Rectangle.js.html#line60">line 60</a>
+        <a href="Quadtree.js.html">Quadtree.js</a>, <a href="Quadtree.js.html#line22">line 22</a>
     </li></ul></dd>
     
 
@@ -570,7 +507,7 @@
     </dt>
     <dd>
         
-<span class="param-type">boolean</span>
+<span class="param-type">Array.&lt;<a href="Vector.html">Vector</a>></span>
 
 
     </dd>
@@ -588,7 +525,7 @@
     
 
     
-    <h4 class="name" id="lines"><span class="type-signature"></span>lines<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;<a href="Line.html">Line</a>>}</span></h4>
+    <h4 class="name" id="show"><span class="type-signature"></span>show<span class="signature">(sketch)</span><span class="type-signature"></span></h4>
     
 
     
@@ -596,121 +533,8 @@
 
 
 <div class="description">
-    <p>Create an array of <a href="Line.html">Lines</a>
-containing a line for each side of the rectangle.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Rectangle.js.html">Rectangle.js</a>, <a href="Rectangle.js.html#line75">line 75</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>An array of Lines that can be added
-to a <a href="Sketch.html">Sketch</a> using <a href="Sketch.html#add">Sketch#add</a>.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;<a href="Line.html">Line</a>></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".fromCorners"><span class="type-signature">(static) </span>fromCorners<span class="signature">(topLeft, topRight, bottomRight, bottomLeft)</span><span class="type-signature"> &rarr; {<a href="Rectangle.html">Rectangle</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Create a rectangle from four corner <a href="Vector.html">Vectors</a>.</p>
+    <p>For each boundary of this quadtree and all it's children,
+create <a href="Line.html">Lines</a> from those rectangles and add them to a <a href="Sketch.html">Sketch</a>.</p>
 </div>
 
 
@@ -746,82 +570,13 @@ to a <a href="Sketch.html">Sketch</a> using <a href="Sketch.html#add">Sketch#add
 
         <tr>
             
-                <td class="name"><code>topLeft</code></td>
+                <td class="name"><code>sketch</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="Vector.html">Vector</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>topRight</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Vector.html">Vector</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>bottomRight</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Vector.html">Vector</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>bottomLeft</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Vector.html">Vector</a></span>
+<span class="param-type"><a href="Sketch.html">Sketch</a></span>
 
 
             
@@ -872,7 +627,7 @@ to a <a href="Sketch.html">Sketch</a> using <a href="Sketch.html#add">Sketch#add
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Rectangle.js.html">Rectangle.js</a>, <a href="Rectangle.js.html#line28">line 28</a>
+        <a href="Quadtree.js.html">Quadtree.js</a>, <a href="Quadtree.js.html#line109">line 109</a>
     </li></ul></dd>
     
 
@@ -897,30 +652,6 @@ to a <a href="Sketch.html">Sketch</a> using <a href="Sketch.html#add">Sketch#add
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>A new Rectangle object.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Rectangle.html">Rectangle</a></span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
