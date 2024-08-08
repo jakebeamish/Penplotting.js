@@ -1,71 +1,40 @@
-import { Sketch, PAPER, Vector, Line, Circle, Rectangle, Path, Quadtree, XORShift32 } from "../../source/index.js";
+import { Sketch, PAPER, Vector, Line, Circle, Rectangle, Path, Quadtree, XORShift32, map } from "../../source/index.js";
 
 const sketch = new Sketch({
     title: "zigzag-test",
-    size: PAPER.A5.landscape(),
+    size: PAPER.A4.landscape(),
     backgroundColor: "#F0F0F0",
-    strokeWidth: 0.1
+    strokeWidth: 0.1,
+    units: "mm"
 })
 
 sketch.generate = () => {
     const { width, height } = sketch.size;
-    const margin = 0.5 * (width + height) * 0.13;
+    const margin = 0.5 * (width + height) * 0.15;
     const prng = new XORShift32(sketch.seed.decimal);
     const centre = new Vector(width / 2, height / 2);
 
-    let start = new Vector(margin, centre.y);
-    let end = new Vector(width - margin, centre.y);
-
-    // let points = [];
-    // let samples = 100000;
-
-    // for (let i = 0; i < samples; i++) {
-    //     let frequency = (i * i) * 0.0000005
-    //     points.push(
-    //         new Vector(
-    //             margin + (i/samples) * (width - margin * 2),
-    //             centre.y + Math.sin(frequency) * 50
-    //         )
-    //     )
-    // }
-
-    // sketch.add(new Path(points));
 
 
+    for (let i = 0; i < 40; i++) {
+
+        // let xStart = margin + prng.randomFloat() * 40;
+        // let xEnd = (width - margin) - prng.randomFloat() * 40;
+
+        let xStart = margin * 2;
+        let xEnd = width - margin * 2;
+        const y = margin + (i/40) * (height - margin * 2);
+        const startpoint = new Vector(xStart, y);
+        const endpoint = new Vector(xEnd, y);
+
+        sketch.add(new Line( new Vector(margin, y), new Vector(xStart, y)))
 
 
-    let points = [];
-    points.push(start);
-
-    for (let i = 0; i < 1000; i++) {
-        let x = ((width - margin * 2) / 1000);
-        let y = (((i % 2) * 2) - 1) * (height - margin * 2);
-
-        x *= (i+1)/500;
-
-        switch (i) {
-            case 0:
-                y *= 0;
-                break;
-            case 1:
-                y *= 0.5;
-                break;
-            case 999:
-                y *= 0.5;
-                break;
-        }
-        console.log(x)
-
-        let next = Vector.add(points[i], new Vector(x, y));
-        points.push(next)
+        const zigzag = makeZigzag(startpoint, endpoint, map(i, 0, 40, 1, 0.1), 3.3);
+        sketch.add(new Path(zigzag));
+        sketch.add(new Line(endpoint, new Vector(width-margin, y)));
     }
-
-    // points.push(end);
-
-
-
-
-    sketch.add(new Path(points));
+    
 
 
 
@@ -73,3 +42,25 @@ sketch.generate = () => {
 
 
 sketch.draw();
+
+
+function makeZigzag(startpoint, endpoint, density, amplitude) {
+    const length = Vector.distance(startpoint, endpoint);
+    const cycles = length / (density * 4);
+    const numOfPoints = (cycles * 2) - 2;
+
+    const angle = Vector.subtract(endpoint, startpoint).getAngle();
+
+
+    let points = [];
+
+    points.push(startpoint);
+    for (let i = 0; i < numOfPoints; i++) {
+        const point = Vector.lerp(startpoint, endpoint, (i + 1) / (numOfPoints + 1.5));        
+        let cycle = ((i % 2) * 2) - 1;
+        point.add(new Vector(0, cycle * amplitude * 0.5).rotate(angle));
+        points.push(point);
+    }
+    points.push(endpoint)
+    return points;
+}
