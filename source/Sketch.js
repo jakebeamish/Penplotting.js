@@ -306,6 +306,10 @@ export class Sketch {
 		document.body.appendChild(this.svg);
 	}
 
+	updateDocumentTitle() {
+		document.title = `${this.title} ${this.seed.hex}`;
+	}
+
 	/**
 	 * Creates HTML UI and adds it to the document body.
 	 * @param {number} timeTaken 
@@ -313,7 +317,9 @@ export class Sketch {
 	createUI(timeTaken) {
 
 		// Add the document title
-		document.title = `${this.title} ${this.seed.hex}`;
+
+
+		this.updateDocumentTitle();
 
 		// Create a HTML header element
 		this.header = document.createElement("header");
