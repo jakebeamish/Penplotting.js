@@ -310,69 +310,54 @@ export class Sketch {
 		document.title = `${this.title} ${this.seed.hex}`;
 	}
 
+	createElement(tag, parent, textContent = '', attributes = {}) {
+		const element = document.createElement(tag);
+		if (textContent) element.textContent = textContent;
+		Object.keys(attributes).forEach(key => element.setAttribute(key, attributes[key]));
+		parent.appendChild(element);
+		return element;
+	}
+
+	createSeedInput(parent) {
+		const seedInput = this.createElement('input', parent, '', { value: this.seed.hex });
+		seedInput.addEventListener('change', () => this.setSeed(seedInput.value))
+		seedInput.addEventListener('focus', () => seedInput.select())
+	}
+
+	createHistoryForm(parent) {
+		const historyForm = this.createElement('form', parent);
+		const historyLabel = this.createElement('label', historyForm, 'History: ', { for: 'history' });
+		const historySelect = this.createElement('select', historyLabel, '', {
+			name: 'history',
+			id: 'history'
+		})
+
+		this.createElement('option', historySelect, '--------', { value: '' });
+
+		this.seedHistory.forEach(seed => {
+			const option = this.createElement('option', historySelect, seed, { value: seed });
+			option.addEventListener('click', () => this.setSeed(seed));
+		});
+	}
+
 	/**
 	 * Creates HTML UI and adds it to the document body.
 	 * @param {number} timeTaken 
 	 */
 	createUI(timeTaken) {
-
-		// Add the document title
-
-
 		this.updateDocumentTitle();
 
-		// Create a HTML header element
-		this.header = document.createElement("header");
-		document.body.append(this.header);
+		// Create a HTML header element and append to body.
+		this.header = this.createElement('header', document.body);
 
-		// Add a h1 title to the header
-		let pageTitle = document.createElement("h1");
-		pageTitle.append(`${this.title}`);
-		this.header.appendChild(pageTitle);
+		// Create a h1 title and append to header.
+		this.createElement('h1', this.header, this.title);
 
-		let seedInput = document.createElement("input");
-		seedInput.setAttribute("value", `${this.seed.hex}`);
-		// seedInput.setAttribute("oninput", this.setSeed(123));
-		console.log(seedInput.value)
-		seedInput.addEventListener('change', () => this.setSeed(seedInput.value))
-		seedInput.addEventListener('focus', () => seedInput.select())
+		this.createSeedInput(this.header);
 
-		this.header.appendChild(seedInput);
+		this.createHistoryForm(this.header);
 
 
-
-
-
-
-
-		const historyForm = document.createElement("form");
-		const historyLabel = document.createElement("label");
-		historyLabel.setAttribute("for", "history");
-		historyLabel.append("History: ");
-
-		const historySelect = document.createElement("select");
-		historySelect.setAttribute("name", "history");
-		historySelect.setAttribute("id", "history");
-
-		let option = document.createElement("option");
-		option.setAttribute("value", "");
-		option.append("--------");
-		historySelect.appendChild(option);
-
-		this.seedHistory.forEach(seed => {
-			let option = document.createElement("option");
-			option.setAttribute("value", seed);
-			option.append(seed);
-			historySelect.appendChild(option);
-
-			option.addEventListener('click', (e) => {
-				// e.preventDefault();
-				this.setSeed(seed);
-			})
-		})
-		historyLabel.appendChild(historySelect)
-		historyForm.appendChild(historyLabel);
-		this.header.appendChild(historyForm);
 
 		// Add a nav element to the header
 		let nav = document.createElement("nav");
