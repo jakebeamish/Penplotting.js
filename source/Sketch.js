@@ -340,6 +340,20 @@ export class Sketch {
 		});
 	}
 
+	createNavigation(parent) {
+		const nav = this.createElement('nav', parent);
+		const ul = this.createElement('ul', nav);
+	
+		this.createNavItem(ul, '⬇️', () => this.downloadSVG());
+		this.createNavItem(ul, '🔄', () => this.randomiseSeed());
+	}
+	
+	createNavItem(parent, text, clickHandler) {
+		const listItem = this.createElement('li', parent);
+		const button = this.createElement('a', listItem, text);
+		button.addEventListener('click', clickHandler);
+	}
+
 	/**
 	 * Creates HTML UI and adds it to the document body.
 	 * @param {number} timeTaken 
@@ -357,31 +371,7 @@ export class Sketch {
 
 		this.createHistoryForm(this.header);
 
-
-
-		// Add a nav element to the header
-		let nav = document.createElement("nav");
-		this.header.appendChild(nav);
-
-		// Add a ul element to the nav
-		let ul = document.createElement("ul");
-		nav.appendChild(ul);
-
-		// Add a download SVG button
-		let downloadListItem = document.createElement("li");
-		ul.append(downloadListItem);
-		let downloadButton = document.createElement("a");
-		downloadButton.append("⬇️");
-		downloadListItem.appendChild(downloadButton)
-		downloadButton.addEventListener('click', () => this.downloadSVG())
-
-		// Add a randomise sketch button
-		let randomListItem = document.createElement("li");
-		ul.appendChild(randomListItem)
-		let randomButton = document.createElement("a");
-		randomButton.append("🔄");
-		randomListItem.appendChild(randomButton)
-		randomButton.addEventListener('click', () => this.randomiseSeed())
+		this.createNavigation(this.header);
 
 		// Add a p element in a div to the header
 		let sketchInfo = document.createElement("div")
