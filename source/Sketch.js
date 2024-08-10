@@ -354,6 +354,13 @@ export class Sketch {
 		button.addEventListener('click', clickHandler);
 	}
 
+	addSketchInfo(parent, timeTaken) {
+		const sketchInfo = this.createElement('div', parent);
+		const numOfShapes = this.lines.length + this.paths.length + this.circles.length;
+		const timeText = timeTaken < 0.05 ? '<0.05s' : `~${timeTaken}s`;
+		this.createElement('p', sketchInfo, `Generated ${numOfShapes} shapes in ${timeText}`);
+	}
+
 	/**
 	 * Creates HTML UI and adds it to the document body.
 	 * @param {number} timeTaken 
@@ -373,19 +380,6 @@ export class Sketch {
 
 		this.createNavigation(this.header);
 
-		// Add a p element in a div to the header
-		let sketchInfo = document.createElement("div")
-		let numOfLines = document.createElement("p");
-
-		let numOfShapes = this.lines.length + this.paths.length + this.circles.length;
-
-		// The p element tells the user how many lines have been generated and how fast
-		if (timeTaken < 0.05) {
-			numOfLines.append(`Generated ${numOfShapes} shapes in <0.05s`)
-		} else {
-			numOfLines.append(`Generated ${numOfShapes} shapes in ~${timeTaken}s`);
-		}
-		sketchInfo.appendChild(numOfLines);
-		this.header.appendChild(sketchInfo);
+		this.addSketchInfo(this.header, timeTaken);
 	}
 }
