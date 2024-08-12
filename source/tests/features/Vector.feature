@@ -29,3 +29,18 @@ Feature: Vector
   Given two vectors (1, 3) and (5, 4)
   When I add them together using Vector.add()
   Then a new vector (6, 7) should be returned
+
+  Scenario: Static subtraction of two vectors
+  Given two vectors (10, 10) and (5, 4)
+  When I subtract them using Vector.subtract()
+  Then a new vector (5, 6) should be returned
+
+  Scenario: Multiply this vector by a scalar
+  Given a vector (1, 3) and a scalar 5
+  When I multiply the vector by the scalar
+  Then the vector should now equal (5, 15)
+
+  Scenario: Rotate this vector by 90 degrees
+  Given a vector (1, 0) and an angle 1.5708 radians
+  When I rotate the vector by the angle
+  Then the vector should now equal approximately (0, 1)

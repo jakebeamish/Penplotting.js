@@ -26,22 +26,24 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @class
+            <pre class="prettyprint source linenums"><code>import { lerp } from "./utils.js";
+
+/**
+ * Class representing a Vector.
  */
 export class Vector {
     /**
-     * Create a vector from coordinates
-     * @param {number} x 
-     * @param {number} y 
+     * Create a vector from coordinates.
+     * @param {number} - x
+     * @param {number} - y
      */
-    constructor(x, y) {
+    constructor(x = 0, y = 0) {
         this.x = x;
         this.y = y;
     }
 
     /**
-     * Create a vector from an array
+     * Create a vector from an array.
      * @param {array} array [x, y]
      * @returns {Vector}
      */
@@ -50,87 +52,234 @@ export class Vector {
     }
 
     /**
-     * Add a vector to this vector
-     * @param {Vector} vector 
-     * @returns {Vector} 
+     * Create a vector from an angle.
+     * @param {number} angle - The angle of the vector in radians.
+     * @param {number} [magnitude=1] - The magnitude of the vector.
+     * @returns {Vector}
      */
-    add(vector) {
-        // return new Vector(
-            this.x += vector.x,
-            this.y += vector.y
-        // )
+    static fromAngle(angle, magnitude = 1) {
+        return new Vector(
+            Math.cos(angle),
+            Math.sin(angle)
+        ).multiply(magnitude);
     }
 
     /**
-     * Subtract a vector from this vector
+     * Add a vector to this vector.
+     * @param {Vector} vector
+     * @returns {Vector}
+     */
+    add(vector) {
+        this.x += vector.x;
+        this.y += vector.y;
+        return this;
+    }
+
+    /**
+     * Check if this vector is equivalent to another vector.
      * @param {Vector} vector 
+     * @returns {boolean}
+     */
+    equals(vector) {
+        return this.x === vector.x &amp;&amp; this.y === vector.y;
+    }
+
+    /**
+     * Check if this vector is a point on a {@link Line}.
+     * @param {Line} line 
+     * @returns {boolean}
+     */
+    isOnLine(line) {
+        if ((line.b.x - line.a.x) * (this.y - line.a.y) !== (line.b.y - line.a.y) * (this.x - line.a.x)) {
+            return false;
+        }
+
+        return Math.min(line.a.x, line.b.x) &lt;= this.x &amp;&amp;
+            this.x &lt;= Math.max(line.a.x, line.b.x) &amp;&amp;
+            Math.min(line.a.y, line.b.y) &lt;= this.y &amp;&amp;
+            this.y &lt;= Math.max(line.a.y, line.b.y);
+    }
+
+    /**
+     * Subtract a vector from this vector.
+     * @param {Vector} vector
      * @returns {Vector}
      */
     subtract(vector) {
-        // return new Vector(
-            this.x -= vector.x,
-            this.y -= vector.y
-        // )
+        this.x -= vector.x;
+        this.y -= vector.y;
+        return this;
     }
 
     /**
-     * 
-     * @param {*} v1 
-     * @param {*} v2 
-     * @returns 
+     * Multiply this vector by a scalar.
+     * @param {number} scalar
+     * @returns {Vector}
+     */
+    multiply(scalar) {
+        this.x *= scalar;
+        this.y *= scalar;
+        return this;
+    }
+
+    /**
+     * Add two vectors.
+     * @param {Vector} v1
+     * @param {Vector} v2
+     * @returns {Vector}
      */
     static add(v1, v2) {
-        return new Vector(
-            v1.x + v2.x,
-            v1.y + v2.y
-        )
+        return new Vector(v1.x + v2.x, v1.y + v2.y);
     }
 
     /**
-     * 
-     * @param {*} v1 
-     * @param {*} v2 
-     * @returns 
+     * Subtract two vectors.
+     * @param {Vector} v1
+     * @param {Vector} v2
+     * @returns {Vector}
      */
     static subtract(v1, v2) {
-        return new Vector(
-            v1.x - v2.x,
-            v1.y - v2.y
-        )
+        return new Vector(v1.x - v2.x, v1.y - v2.y);
     }
 
-    static lerp(v1, v2, amount) {
-        return new Vector(
-            v1.x + amount * (v2.x - v1.x),
-            v1.y + amount * (v2.y - v1.y)
-        )
-    }
-
-    static multiply(v, scalar) {
-        return new Vector(
-            v.x * scalar,
-            v.y * scalar
-        )
-    }
-    
     /**
-     * 
+     * Calculate the dot product of two vectors.
+     * @param {Vector} v1
+     * @param {Vector} v2
+     * @returns {number}
+     */
+    static dot(v1, v2) {
+        return v1.x * v2.x + v1.y * v2.y;
+    }
+
+    /**
+     * Calculate the cross product of two 2D vectors.
+     * @param {Vector} v1
+     * @param {Vector} v2
+     * @returns {number}
+     */
+    static cross(v1, v2) {
+        return v1.x * v2.y - v1.y * v2.x;
+    }
+
+    /**
+     * Get the magnitude of this vector.
      * @returns {number} The magnitude (Euclidean distance) of this vector
      */
-    magnitude() {
+    getMagnitude() {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     }
 
     /**
+     * Set the magnitude of this vector.
+     * @param {number} magnitude 
+     * @returns {Vector}
+     */
+    setMagnitude(magnitude) {
+        return this.normalize().multiply(magnitude);
+    }
+
+    /**
      * Calculate the distance to another vector from this vector
-     * @param {Vector} vector 
+     * @param {Vector} vector
      * @returns {number}
      */
     distance(vector) {
-        let length = Vector.subtract(this, vector);
-        return length.magnitude();
+        const delta = Vector.subtract(this, vector);
+        return delta.getMagnitude();
     }
-}</code></pre>
+
+    /**
+     * Calculate the distance between two vectors.
+     * @param {Vector} v1
+     * @param {Vector} v2
+     * @returns {number}
+     */
+    static distance(v1, v2) {
+        const delta = Vector.subtract(v1, v2);
+        return delta.getMagnitude();
+    }
+
+    /**
+     * Rotate this vector by a specified angle.
+     * @param {number} angle - The angle to rotate the vector by, in radians.
+     * @returns {Vector} This vector after rotation.
+     */
+    rotate(angle) {
+        const x = this.x * Math.cos(angle) - this.y * Math.sin(angle);
+        const y = this.x * Math.sin(angle) + this.y * Math.cos(angle);
+        this.x = x;
+        this.y = y;
+        return this;
+    }
+
+    /**
+     * Normalize this vector by setting it's magnitude to 1.
+     * @returns {Vector}
+     */
+    normalize() {
+        const mag = this.getMagnitude();
+        if (mag === 0) {
+            throw new Error("Cannot normalize a zero vector");
+        }
+        this.x /= mag;
+        this.y /= mag;
+        return this;
+    }
+
+    /**
+     * Make a copy of this vector.
+     * @returns {Vector}
+     */
+    clone() {
+        return new Vector(this.x, this.y);
+    }
+
+    /**
+     * Get the angle of this vector with respect to the positive x-axis.
+     * @returns {number} Angle in radians
+     */
+    getAngle() {
+        return Math.atan2(this.y, this.x);
+    }
+
+    /**
+     * Linear interpolation between vectors.
+     * @param {Vector} v1
+     * @param {Vector} v2
+     * @param {number} amount
+     * @returns {Vector}
+     */
+    static lerp(v1, v2, amount) {
+        return new Vector(lerp(v1.x, v2.x, amount), lerp(v1.y, v2.y, amount));
+    }
+
+    /**
+     * Finds the `n` nearest neighbours to this vector, from a given array of vectors.
+     * @param {Array&lt;Vector>} array - An array of Vectors to check.
+     * @param {number} n - The number of neighbours to find (must be > 0).
+     * @returns {Array&lt;Vector>}
+     */
+    nearestNeighbour(array, n) {
+        let neighbours = [];
+        for (let i = 0; i &lt; n; i++) {
+            let record = Infinity;
+            let nearest = null;
+            for (let other of array) {
+                if (other != this &amp;&amp; !neighbours.includes(other)) {
+                    let dist = this.distance(other)
+                    if (dist &lt; record) {
+                        nearest = other;
+                        record = dist;
+                    }
+                }
+            }
+            neighbours.push(nearest)
+        }
+        return neighbours;
+    }
+}
+</code></pre>
         </article>
     </section>
 
@@ -140,13 +289,13 @@ export class Vector {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Line.html">Line</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addLineToSVG">addLineToSVG</a></li><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#deduplicateObjectArray">deduplicateObjectArray</a></li><li><a href="global.html#intersectionLineLine">intersectionLineLine</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Circle.html">Circle</a></li><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="PRNG.html">PRNG</a></li><li><a href="Path.html">Path</a></li><li><a href="Quadtree.html">Quadtree</a></li><li><a href="Rectangle.html">Rectangle</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#decToHex">decToHex</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#hexToDec">hexToDec</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#sinFract">sinFract</a></li><li><a href="global.html#unseededRandomHex">unseededRandomHex</a></li><li><a href="global.html#wrap">wrap</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Sun Jun 02 2024 02:51:40 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Aug 07 2024 23:45:20 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

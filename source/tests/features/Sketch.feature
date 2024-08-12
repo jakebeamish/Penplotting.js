@@ -20,3 +20,7 @@ Feature: Sketch
   When I call sketch.draw()
   Then lines should be added and the SVG should be shown
   
+  Scenario: Simplify the Sketch by removing duplicate Lines
+  Given I don't want to draw duplicated lines
+  When I call Sketch.deduplicateLines()
+  Then the Sketch lines array should not contain duplicated lines
