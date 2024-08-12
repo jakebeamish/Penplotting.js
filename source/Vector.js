@@ -1,21 +1,21 @@
 import { lerp } from "./utils.js";
 
 /**
- * @class
+ * Class representing a Vector.
  */
 export class Vector {
     /**
-     * Create a vector from coordinates
-     * @param {number} x
-     * @param {number} y
+     * Create a vector from coordinates.
+     * @param {number} - x
+     * @param {number} - y
      */
-    constructor(x, y) {
+    constructor(x = 0, y = 0) {
         this.x = x;
         this.y = y;
     }
 
     /**
-     * Create a vector from an array
+     * Create a vector from an array.
      * @param {array} array [x, y]
      * @returns {Vector}
      */
@@ -24,7 +24,20 @@ export class Vector {
     }
 
     /**
-     * Add a vector to this vector
+     * Create a vector from an angle.
+     * @param {number} angle - The angle of the vector in radians.
+     * @param {number} [magnitude=1] - The magnitude of the vector.
+     * @returns {Vector}
+     */
+    static fromAngle(angle, magnitude = 1) {
+        return new Vector(
+            Math.cos(angle),
+            Math.sin(angle)
+        ).multiply(magnitude);
+    }
+
+    /**
+     * Add a vector to this vector.
      * @param {Vector} vector
      * @returns {Vector}
      */
@@ -34,12 +47,33 @@ export class Vector {
         return this;
     }
 
+    /**
+     * Check if this vector is equivalent to another vector.
+     * @param {Vector} vector 
+     * @returns {boolean}
+     */
     equals(vector) {
         return this.x === vector.x && this.y === vector.y;
     }
 
     /**
-     * Subtract a vector from this vector
+     * Check if this vector is a point on a {@link Line}.
+     * @param {Line} line 
+     * @returns {boolean}
+     */
+    isOnLine(line) {
+        if ((line.b.x - line.a.x) * (this.y - line.a.y) !== (line.b.y - line.a.y) * (this.x - line.a.x)) {
+            return false;
+        }
+
+        return Math.min(line.a.x, line.b.x) <= this.x &&
+            this.x <= Math.max(line.a.x, line.b.x) &&
+            Math.min(line.a.y, line.b.y) <= this.y &&
+            this.y <= Math.max(line.a.y, line.b.y);
+    }
+
+    /**
+     * Subtract a vector from this vector.
      * @param {Vector} vector
      * @returns {Vector}
      */
@@ -50,9 +84,9 @@ export class Vector {
     }
 
     /**
-     * Multiply this vector by a scalar
-     * @param {*} scalar
-     * @retruns {Vector}
+     * Multiply this vector by a scalar.
+     * @param {number} scalar
+     * @returns {Vector}
      */
     multiply(scalar) {
         this.x *= scalar;
@@ -61,7 +95,7 @@ export class Vector {
     }
 
     /**
-     * Add two vectors
+     * Add two vectors.
      * @param {Vector} v1
      * @param {Vector} v2
      * @returns {Vector}
@@ -71,7 +105,7 @@ export class Vector {
     }
 
     /**
-     * Subtract two vectors
+     * Subtract two vectors.
      * @param {Vector} v1
      * @param {Vector} v2
      * @returns {Vector}
@@ -81,7 +115,7 @@ export class Vector {
     }
 
     /**
-     * Calculate the dot product of two vectors
+     * Calculate the dot product of two vectors.
      * @param {Vector} v1
      * @param {Vector} v2
      * @returns {number}
@@ -91,7 +125,7 @@ export class Vector {
     }
 
     /**
-     * Calculate the cross product of two 2D vectors
+     * Calculate the cross product of two 2D vectors.
      * @param {Vector} v1
      * @param {Vector} v2
      * @returns {number}
@@ -101,11 +135,20 @@ export class Vector {
     }
 
     /**
-     *
+     * Get the magnitude of this vector.
      * @returns {number} The magnitude (Euclidean distance) of this vector
      */
-    magnitude() {
+    getMagnitude() {
         return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
+
+    /**
+     * Set the magnitude of this vector.
+     * @param {number} magnitude 
+     * @returns {Vector}
+     */
+    setMagnitude(magnitude) {
+        return this.normalize().multiply(magnitude);
     }
 
     /**
@@ -115,7 +158,18 @@ export class Vector {
      */
     distance(vector) {
         const delta = Vector.subtract(this, vector);
-        return delta.magnitude();
+        return delta.getMagnitude();
+    }
+
+    /**
+     * Calculate the distance between two vectors.
+     * @param {Vector} v1
+     * @param {Vector} v2
+     * @returns {number}
+     */
+    static distance(v1, v2) {
+        const delta = Vector.subtract(v1, v2);
+        return delta.getMagnitude();
     }
 
     /**
@@ -132,11 +186,11 @@ export class Vector {
     }
 
     /**
-     * Normalise this vector
+     * Normalize this vector by setting it's magnitude to 1.
      * @returns {Vector}
      */
     normalize() {
-        const mag = this.magnitude();
+        const mag = this.getMagnitude();
         if (mag === 0) {
             throw new Error("Cannot normalize a zero vector");
         }
@@ -146,7 +200,7 @@ export class Vector {
     }
 
     /**
-     * Get a copy of this vector
+     * Make a copy of this vector.
      * @returns {Vector}
      */
     clone() {
@@ -154,7 +208,7 @@ export class Vector {
     }
 
     /**
-     * Get the angle of this vector with respect to the positive x-axis
+     * Get the angle of this vector with respect to the positive x-axis.
      * @returns {number} Angle in radians
      */
     getAngle() {
@@ -162,7 +216,7 @@ export class Vector {
     }
 
     /**
-     * Linear interpolation between vectors
+     * Linear interpolation between vectors.
      * @param {Vector} v1
      * @param {Vector} v2
      * @param {number} amount
@@ -172,6 +226,12 @@ export class Vector {
         return new Vector(lerp(v1.x, v2.x, amount), lerp(v1.y, v2.y, amount));
     }
 
+    /**
+     * Finds the `n` nearest neighbours to this vector, from a given array of vectors.
+     * @param {Array<Vector>} array - An array of Vectors to check.
+     * @param {number} n - The number of neighbours to find (must be > 0).
+     * @returns {Array<Vector>}
+     */
     nearestNeighbour(array, n) {
         let neighbours = [];
         for (let i = 0; i < n; i++) {
@@ -189,15 +249,5 @@ export class Vector {
             neighbours.push(nearest)
         }
         return neighbours;
-    }
-
-    /**
-     * Calculate the distance to another vector from this vector
-     * @param {Vector} vector 
-     * @returns {number}
-     */
-    distance(vector) {
-        let d = Vector.subtract(this, vector);
-        return d.magnitude();
     }
 }

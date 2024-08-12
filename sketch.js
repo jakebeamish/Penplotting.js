@@ -3,13 +3,16 @@ import { Sketch, PAPER, Line, Circle, Path, Vector, LCG, Mulberry32, XORShift32,
 let sketch = new Sketch({
     size: PAPER.A4.portrait(),
     backgroundColor: "#888888",
-    strokeWeight: 0.1,
+    strokeWidth: 0.1,
 }
 );
 
-const prng = new XORShift32(sketch.seed.decimal);
 
 sketch.generate = () => {
+
+    const prng = new XORShift32(sketch.seed.decimal);
+
+    // console.log(sketch.seed)
     let { width, height } = sketch.size;
     const centre = new Vector(width / 2, height / 2)
 
@@ -17,7 +20,7 @@ sketch.generate = () => {
 
     let attemptCounter = 0;
 
-    while (sketch.circles.length < 8000 && attemptCounter < 200000) {
+    while (sketch.circles.length < 1000 && attemptCounter < 200000) {
 
         attemptCounter++;
 

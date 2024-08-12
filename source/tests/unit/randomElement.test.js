@@ -1,11 +1,11 @@
-import { LCG } from "../../Random";
+import { XORShift32 } from "../../Random";
 
 test("randomElement(array) should return an element from the array", () => {
-    const lcg = new LCG();
+    const prng = new XORShift32();
 
     const array = ["beer", "wine", "juice"];
 
-    const element = lcg.randomElement(array);
+    const element = prng.randomElement(array);
 
     expect(array).toContain(element);
 })

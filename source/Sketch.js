@@ -1,14 +1,13 @@
 import { createSVG } from "./createSVG.js";
-import { addLineToSVG } from "./addLineToSVG.js";
+// import { addLineToSVG } from "./addLineToSVG.js";
 import { unseededRandomHex } from "./Random.js";
 import { hexToDec } from "./utils.js";
 import { decToHex } from "./utils.js";
 import { wrap } from "./utils.js";
 import { Line } from "./Line.js";
-import  { Circle } from "./Circle.js"
+import { Circle } from "./Circle.js"
 import { Path } from "./Path.js";
-import { addPathToSVG } from "./addPathToSVG.js";
-import { addCircleToSVG } from "./addCircleToSVG.js";
+// import { addPathToSVG } from "./addPathToSVG.js";
 
 /**
  * @class
@@ -24,7 +23,9 @@ export class Sketch {
 	 * @param {string} [options.units = "mm"] - The units of measurement to be used (i.e. "mm" or "in")
 	 * @param {string} [options.backgroundColor = "transparent"] - The background colour of the sketch, as a hex value or HTML color name.
 	 * @param {number} [options.seed] - The seed to be used for the Sketch. Defaults to an 8 digit hexadecimal integer
-	 * @param {number} [options.strokeWeight = 1] - The line width of the Sketch. Defaults to 1 unit (1mm)
+	 * @param {string} [options.stroke = "black"] - The foreground colour of the sketch, as a hex value or HTML color name.
+	 * @param {number} [options.strokeWidth = 1] - The line width of the Sketch. Defaults to 1 unit (1mm)
+	 * @param {number} [options.minimumLineLength = 0.1] - Lines shorter than this length are not drawn.
 	 */
 	constructor(
 		{
@@ -36,18 +37,23 @@ export class Sketch {
 				width: 100,
 				height: 100
 			},
-			strokeWeight = 1,
+			stroke = "black",
+			strokeWidth = 1,
+			minimumLineLength = 0.1,
 		} = {},
 	) {
 		this.title = title;
 		this.size = size;
-		this.strokeWeight = strokeWeight;
+		this.strokeWidth = strokeWidth;
 		this.units = units;
+		this.stroke = stroke;
 		this.backgroundColor = backgroundColor;
+		this.minimumLineLength = minimumLineLength;
 
 		this.lines = [];
 		this.paths = [];
 		this.circles = [];
+		this.seedHistory = [];
 
 		this.svg = createSVG(this.size.width, this.size.height, {
 			units: this.units,
@@ -76,12 +82,18 @@ export class Sketch {
 	}
 
 	/**
-	 * Adds a shape (line or other future shapes) to the sketch.
-	 * @param {Line|Array<Line>} shape - A Line object or array of Line objects
+	 * Adds shapes to the sketch.
+	 * @param {Line|Circle|Path|Array} shape - An object or array of objects to be added to the sketch.
 	 */
 	add(shape) {
 		if (Array.isArray(shape)) {
-			shape.forEach(s => this.addSingleShape(s));
+			shape.forEach((item) => {
+				if (Array.isArray(item)) {
+					this.add(item)
+				} else {
+					this.addSingleShape(item)
+				}
+			});
 		} else {
 			this.addSingleShape(shape);
 		}
@@ -89,8 +101,7 @@ export class Sketch {
 
 	/**
 	 * Adds a single shape to the appropriate array.
-	 * Lines -> this.lines
-	 * @param {Line} shape 
+	 * @param {Line|Path|Circle} shape 
 	 */
 	addSingleShape(shape) {
 		if (shape instanceof Line) {
@@ -105,13 +116,18 @@ export class Sketch {
 	}
 
 	/**
-	 * Creates an SVG element and HTML UI and appends them to the document body.
+	 * Generates the SVG and UI and appends them to the document body.
+	 * Must be called after defining a Sketch.generate() function.
 	 */
 	draw() {
 		let startTime = Date.now();
 		this.generate();
 
 		this.deduplicateLines();
+		this.removeOverlappingLines();
+		this.removeShortLines(this.minimumLineLength);
+
+
 		this.addLinesToSVG();
 
 		this.addPathsToSVG();
@@ -122,6 +138,18 @@ export class Sketch {
 
 		this.createUI(timeTaken);
 		this.appendSVG();
+		if (!this.seedHistory.includes(this.seed.hex)) {
+			this.seedHistory.unshift(this.seed.hex);
+		}
+
+		addEventListener("keydown", (e) => {
+			switch (e.key) {
+				case "d":
+					this.downloadSVG();
+				case "r":
+					this.randomiseSeed()
+			}
+		})
 	}
 
 	/**
@@ -141,7 +169,7 @@ export class Sketch {
 	}
 
 	/**
-	 * Download the {@link Sketch} as an SVG file
+	 * Download the {@link Sketch} as an SVG file.
 	 */
 	downloadSVG() {
 		const serializer = new XMLSerializer();
@@ -166,8 +194,17 @@ export class Sketch {
 		this.draw();
 	}
 
+	setSeed(input) {
+		this.seed = {
+			hex: input,
+			decimal: hexToDec(input)
+		}
+		this.clear();
+		this.draw();
+	}
+
 	/**
-	 * Removes duplicated Lines in this Sketch's lines array.
+	 * Removes duplicated [Lines]{@link Line} from this Sketch's lines array.
 	 */
 	deduplicateLines() {
 		const uniqueLines = [];
@@ -189,87 +226,160 @@ export class Sketch {
 	}
 
 	/**
-	 * Adds the Lines in this Sketch's lines array to it's svg element.
+	 * Removes overlapping [Lines]{@link Line} from this Sketch's lines array.
+	 */
+	removeOverlappingLines() {
+		const uniqueLines = [];
+
+		let sortedLines = this.lines.toSorted((j, k) => k.a.distance(k.b) - j.a.distance(j.b));
+		for (const line of sortedLines) {
+			let isOverlapped = false;
+			for (const uniqueLine of uniqueLines) {
+				if (line.isContainedBy(uniqueLine)) {
+					isOverlapped = true;
+					break;
+				}
+			}
+			if (!isOverlapped) {
+				uniqueLines.push(line);
+			}
+		}
+
+		this.lines = uniqueLines;
+	}
+
+	/**
+	 * Removes [Lines]{@link Line} in this Sketch's lines array that are shorter than a specified minimum length.
+	 * @param {number} minimumLength
+	 */
+	removeShortLines(minimumLength) {
+		const validLines = [];
+
+		for (const line of this.lines) {
+			if (line.length() > minimumLength) {
+				validLines.push(line);
+			}
+		}
+
+		this.lines = validLines;
+	}
+
+	/**
+	 * Adds the [Lines]{@link Line} in this Sketch's lines array to it's SVG element.
 	 */
 	addLinesToSVG() {
 		for (const line of this.lines) {
-			addLineToSVG(this.svg, line.a.x, line.a.y, line.b.x, line.b.y, {
-				stroke: "black",
-				strokeWidth: this.strokeWeight,
+			line.addToSVG(this.svg, {
+				stroke: this.stroke,
+				strokeWidth: this.strokeWidth,
 			});
 		}
 	}
 
+	/**
+	 * Adds the [Paths]{@link Path} in this Sketch's paths array to it's SVG element.
+	 */
 	addPathsToSVG() {
 		for (const path of this.paths) {
-			addPathToSVG(this.svg, path)
+			path.addToSVG(this.svg, {
+				stroke: this.stroke,
+				strokeWidth: this.strokeWidth
+			})
 		}
 	}
-
+	/** 
+	* Adds the [Circles]{@link Circle} in this Sketch's circles array to it's SVG element.
+	*/
 	addCirclesToSVG() {
 		for (const circle of this.circles) {
-			addCircleToSVG(this.svg, circle);
+			circle.addToSVG(this.svg, {
+				stroke: this.stroke,
+				strokeWidth: this.strokeWidth
+			});
 		}
 	}
 
 	/**
-	 * Appends this sketch's svg element to the document body.
+	 * Appends this sketch's SVG element to the document body.
 	 */
 	appendSVG() {
 		document.body.appendChild(this.svg);
 	}
 
-	createUI(timeTaken) {
-
-		// Add the document title
+	updateDocumentTitle() {
 		document.title = `${this.title} ${this.seed.hex}`;
+	}
 
-		// Create a HTML header element
-		this.header = document.createElement("header");
-		document.body.append(this.header);
+	createElement(tag, parent, textContent = '', attributes = {}) {
+		const element = document.createElement(tag);
+		if (textContent) element.textContent = textContent;
+		Object.keys(attributes).forEach(key => element.setAttribute(key, attributes[key]));
+		parent.appendChild(element);
+		return element;
+	}
 
-		// Add a h1 title to the header
-		let pageTitle = document.createElement("h1");
-		pageTitle.append(`${this.title} ${this.seed.hex}`);
-		this.header.appendChild(pageTitle);
+	createSeedInput(parent) {
+		const seedInput = this.createElement('input', parent, '', { value: this.seed.hex });
+		seedInput.addEventListener('change', () => this.setSeed(seedInput.value))
+		seedInput.addEventListener('focus', () => seedInput.select())
+	}
 
-		// Add a nav element to the header
-		let nav = document.createElement("nav");
-		this.header.appendChild(nav);
+	createHistoryForm(parent) {
+		const historyForm = this.createElement('form', parent);
+		const historyLabel = this.createElement('label', historyForm, 'History: ', { for: 'history' });
+		const historySelect = this.createElement('select', historyLabel, '', {
+			name: 'history',
+			id: 'history'
+		})
 
-		// Add a ul element to the nav
-		let ul = document.createElement("ul");
-		nav.appendChild(ul);
+		this.createElement('option', historySelect, '--------', { value: '' });
 
-		// Add a download SVG button
-		let downloadListItem = document.createElement("li");
-		ul.append(downloadListItem);
-		let downloadButton = document.createElement("a");
-		downloadButton.append("⬇️");
-		downloadListItem.appendChild(downloadButton)
-		downloadButton.addEventListener('click', () => this.downloadSVG())
+		this.seedHistory.forEach(seed => {
+			const option = this.createElement('option', historySelect, seed, { value: seed });
+			option.addEventListener('click', () => this.setSeed(seed));
+		});
+	}
 
-		// Add a randomise sketch button
-		let randomListItem = document.createElement("li");
-		ul.appendChild(randomListItem)
-		let randomButton = document.createElement("a");
-		randomButton.append("🔄");
-		randomListItem.appendChild(randomButton)
-		randomButton.addEventListener('click', () => this.randomiseSeed())
+	createNavigation(parent) {
+		const nav = this.createElement('nav', parent);
+		const ul = this.createElement('ul', nav);
+	
+		this.createNavItem(ul, '⬇️', () => this.downloadSVG());
+		this.createNavItem(ul, '🔄', () => this.randomiseSeed());
+	}
+	
+	createNavItem(parent, text, clickHandler) {
+		const listItem = this.createElement('li', parent);
+		const button = this.createElement('a', listItem, text);
+		button.addEventListener('click', clickHandler);
+	}
 
-		// Add a p element in a div to the header
-		let sketchInfo = document.createElement("div")
-		let numOfLines = document.createElement("p");
+	addSketchInfo(parent, timeTaken) {
+		const sketchInfo = this.createElement('div', parent);
+		const numOfShapes = this.lines.length + this.paths.length + this.circles.length;
+		const timeText = timeTaken < 0.05 ? '<0.05s' : `~${timeTaken}s`;
+		this.createElement('p', sketchInfo, `Generated ${numOfShapes} shapes in ${timeText}`);
+	}
 
-		let numOfShapes = this.lines.length + this.paths.length + this.circles.length;
+	/**
+	 * Creates HTML UI and adds it to the document body.
+	 * @param {number} timeTaken 
+	 */
+	createUI(timeTaken) {
+		this.updateDocumentTitle();
 
-		// The p element tells the user how many lines have been generated and how fast
-		if (timeTaken < 0.05) {
-			numOfLines.append(`Generated ${numOfShapes} shapes in <0.05s`)
-		} else {
-			numOfLines.append(`Generated ${numOfShapes} shapes in ~${timeTaken}s`);
-		}
-		sketchInfo.appendChild(numOfLines);
-		this.header.appendChild(sketchInfo);
+		// Create a HTML header element and append to body.
+		this.header = this.createElement('header', document.body);
+
+		// Create a h1 title and append to header.
+		this.createElement('h1', this.header, this.title);
+
+		this.createSeedInput(this.header);
+
+		this.createHistoryForm(this.header);
+
+		this.createNavigation(this.header);
+
+		this.addSketchInfo(this.header, timeTaken);
 	}
 }

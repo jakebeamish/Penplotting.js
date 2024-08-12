@@ -43,22 +43,24 @@
 
 
     <section>
-        <article><p>This is a dependency-free JavaScript framework for making SVG files for penplotters.</p>
+        <article><p>This is a dependency-free JavaScript framework for making generative art in SVG format for penplotters.</p>
+<blockquote>
+<p>[!NOTE]
+This is a work in progress, and is likely to change in future updates.</p>
+</blockquote>
 <h2>Features</h2>
 <ul>
 <li>A Sketch class to contain everything needed to create and render the SVG</li>
-<li>2D Vector and Line classes for geometry</li>
-<li>Seedable PRNGs with useful methods (Mulberry32, XORShift32, LCG)</li>
-<li>Maths functions such as fract, wrap, lerp, map</li>
+<li>Shapes and geometry classes: 2D Vector, Line, Path, Circle, Rectangle</li>
+<li>Seedable PRNG implementations with useful methods</li>
+<li>Quadtree for optimised nearest-neighbour search</li>
 <li>Paper sizes</li>
 </ul>
 <h2>Usage</h2>
-<p>The way I'm using this framework currently is something like this:</p>
 <ol>
-<li>Create a new Sketch (with optional parameters for dimensions, units, background colour, title, seed)</li>
-<li>Create and manipulate Vectors and Lines by defining a sketch.generate() function</li>
-<li>Add Lines to be included as SVG elements in the Sketch by calling <code>sketch.add()</code>, and passing in a Line or array of Lines.</li>
-<li>Call the Sketch's instance method <code>draw()</code></li>
+<li>Create a new Sketch (with optional parameters for dimensions, units, background colour, title, seed).</li>
+<li>Define a sketch.generate() function, in which Vectors, Lines and other shapes can be created, manipulated, and added to the SVG document using <code>sketch.add(shapes)</code>.</li>
+<li>Call the Sketch's instance method <code>draw()</code>.</li>
 </ol>
 <pre class="prettyprint source lang-js"><code>import { Sketch, PAPER, Vector, Line, LCG } from &quot;../../index.js&quot;
 
@@ -67,7 +69,7 @@ const sketch = new Sketch({
     units: &quot;mm&quot;,
     title: &quot;My amazing sketch&quot;,
     size: Paper.A5,
-    strokeWeight: 0.05
+    strokeWidth: 0.05
 });
 
 // Define a generate() function
@@ -78,37 +80,41 @@ sketch.generate = () => {
     const b = new Vector(90, 90);
     const l = new Line(a, b);
 
-    // Add Lines to the Sketch object's lines array
+    // Add shapes to the Sketch
     sketch.add(line);
 }
 
-// Call draw() on the Sketch
+// Call draw() on the Sketch to render a HTML page containing the generated SVG document
 sketch.draw();
 </code></pre>
-<h2>Roadmap</h2>
-<p>TODO:</p>
-<ul>
-<li>Test plans</li>
-<li>Tutorials using JSDoc</li>
-<li>Examples using JSdoc</li>
-<li>Line line intersection</li>
-<li>Units conversion</li>
-<li>Support for SVG paths</li>
-<li>SVG output validation</li>
-<li>HTML GUI for changing params</li>
-<li>3D support</li>
-<li>Noise functions</li>
-<li>Batch create and download</li>
-<li>Voronoi diagrams</li>
-<li>Grid class</li>
-<li>Download the code (the sketch.generate() function or the whole Sketch object)</li>
-<li>randomWeighted</li>
-<li>Is this vector on this line (or, does this line contain this vector?) -&gt; Is this line a subset of a larger line (if so, don't draw it)</li>
-<li>Do these lines overlap? If so, remove them and add a new composite line</li>
-</ul>
+<h3>Keyboard shortcuts</h3>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Download an SVG file</td>
+<td><code>d</code></td>
+</tr>
+<tr>
+<td>Regenerate with random seed</td>
+<td><code>r</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Plotting the SVG files</h3>
+<p>The SVG file can be downloaded and optionally processed further.
+Personally, I use vpype to optimise the file, and then the axidraw Inkscape plugin to control the plotter.</p>
 <h2>Contributing</h2>
-<p>Currently, I am using <code>jest</code> and <code>jest-cucumber</code> for testing. Some scenarios are described in feature files, but the majority of tests are not.</p>
-<p>I'm trying to make sure that everything in the library is well documented using <code>JSDoc</code>.</p></article>
+<p>Contributions are welcome. Issues, comments and Pull Requests can be made at
+https://github.com/jakebeamish/penplot-svg-tool/issues.</p>
+<p>Currently, <code>jest</code> and <code>jest-cucumber</code> are used for testing.
+Some scenarios are described in feature files, but the majority of tests are not.</p>
+<p>Documentation is generated using JSDoc.</p></article>
     </section>
 
 
@@ -119,13 +125,13 @@ sketch.draw();
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="PRNG.html">PRNG</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addLineToSVG">addLineToSVG</a></li><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#decToHex">decToHex</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#hexToDec">hexToDec</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#sinFract">sinFract</a></li><li><a href="global.html#unseededRandomHex">unseededRandomHex</a></li><li><a href="global.html#wrap">wrap</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Circle.html">Circle</a></li><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="PRNG.html">PRNG</a></li><li><a href="Path.html">Path</a></li><li><a href="Quadtree.html">Quadtree</a></li><li><a href="Rectangle.html">Rectangle</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#decToHex">decToHex</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#hexToDec">hexToDec</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#sinFract">sinFract</a></li><li><a href="global.html#unseededRandomHex">unseededRandomHex</a></li><li><a href="global.html#wrap">wrap</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jul 18 2024 14:27:02 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Aug 07 2024 23:45:20 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

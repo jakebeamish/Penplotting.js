@@ -4,7 +4,7 @@ const sketch = new Sketch({
     size: PAPER.A4,
     title: "Path Test",
     backgroundColor: "#DDDDDD",
-    strokeWeight: 0.1,
+    strokeWidth: 0.1,
     seed: {
         decimal: 1,
         hex: "00000001"

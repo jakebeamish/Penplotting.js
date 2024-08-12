@@ -11,7 +11,11 @@ header {
     padding-bottom: 0.5rem;
 }
 
+
 header h1,
+header form,
+header form select,
+header input,
 header nav,
 header nav ul,
 header nav ul li,
@@ -23,13 +27,27 @@ header div p {
     font-size: medium;
 }
 
+header input {
+    color: white;
+    background-color: black;
+    font-size: medium;
+    font-weight: bold;
+    border: none;
+}
+
+header form select {
+    padding-right: 0px;
+    margin: 0px;
+    display: inline;
+}
+
 header nav ul li {
     margin-right: 0.2rem;
     padding: 0.2rem 0.2rem 0rem 0.2rem;
     cursor: pointer;
     border-radius: 3px 3px;
     border: 1px solid white;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 header nav ul li:hover {

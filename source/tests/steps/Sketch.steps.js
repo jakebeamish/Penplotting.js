@@ -47,18 +47,8 @@ defineFeature(feature, (test) => {
 		then,
 	}) => {
 		let sketch;
-		let line = {
-			a: {
-				x: 0,
-				y: 0,
-			},
-			b: {
-				x: 1,
-				y: 1,
-			},
-		};
 
-
+		let line = new Line({x: 0, y: 0}, {x:1, y:1})
 
 		given("the sketch may have a line in it's lines array", () => {
 			sketch = new Sketch();
@@ -86,16 +76,12 @@ defineFeature(feature, (test) => {
 
 		given("I want to generate and see the sketch simply", () => { });
 		sketch = new Sketch(100, 100);
-		sketch.lines.push({
-			a: {
-				x: 3,
-				y: 4,
-			},
-			b: {
-				x: 5,
-				y: 6,
-			},
-		});
+
+		sketch.add(new Line(
+			new Vector(3, 4), new Vector(5, 6)
+		));
+		
+	
 		when("I call sketch.draw()", () => {
 			sketch.generate = function () { };
 			sketch.draw();

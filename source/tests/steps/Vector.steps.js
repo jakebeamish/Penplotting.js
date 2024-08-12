@@ -39,7 +39,7 @@ defineFeature(feature, (test) => {
 		});
 
 		when("I calculate the magnitude", () => {
-			magnitude = vector.magnitude();
+			magnitude = vector.getMagnitude();
 		});
 
 		then(/^I should recieve a magnitude value of 5$/, () => {
