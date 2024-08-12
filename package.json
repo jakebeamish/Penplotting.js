@@ -4,7 +4,7 @@
   "description": "A framework for making SVG files for penplotters",
   "main": "source/index.js",
   "scripts": {
-    "test": "jest --coverage --verbose",
+    "test": "jest --coverage",
     "docs": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
