@@ -1,47 +1,58 @@
 /**
- * @summary Class representing a Psuedo Random Number Generator.
+ * @summary Abstract base class representing a Psuedo Random Number Generator.
  * @abstract
- * @description This class shouldn't be instantiated directly.
- * It is extended by {@link LCG}.
+ * @class
+ * Represents an abstract base class for psuedo-random number generators. This class shouldn't be instantiated directly.
+ * @description This class is intended to be extended by specific implementations such as {@link LCG}, {@link Mulberry32} or {@link XORShift32}.
  */
 export class PRNG {
     /**
-     * 
-     * @param {number} [seed=Date.now()] 
+     * Creates an instance of PRNG.
+     * @param {number} [seed=Date.now()] - The initial seed value for the PRNG.
      */
     constructor(seed = Date.now()) {
         this.seed = seed;
     }
 
+    /**
+     * Returns the maximum possible value that the PRNG can generate.
+     * @returns {number} - The maximum value of the PRNG.
+     * @throws {Error} - Must be implemented by subclasses.
+     */
     maxValue() {
         throw new Error("Method maxValue() must be implemented.")
     }
 
+    /**
+     * Generates the next psuedo-random number.
+     * @returns {number} - The next psuedo-random number.
+     * @throws {Error} - Must be implemented by subclasses.
+     */
     next() {
         throw new Error("Method next() must be implemented.")
     }
 
     /**
-     * Generate a random float (in the range (0, 1]?)
-     * @returns {number} A number between 0 and 1
+     * Generate a random float in the range [0, 1).
+     * @returns {number} - A number between 0 (inclusive) and 1 (exclusive).
      */
     randomFloat() {
         return this.next() / this.maxValue();
     }
 
     /**
-     * Generate a random float in the range (-1, 1]
-     * @returns {number} A number between -1 and 1
+     * Generate a random float in the range [-1, 1).
+     * @returns {number} - A number between -1 (inclusive) and 1 (exclusive).
      */
     randomBipolarFloat() {
-        return this.randomFloat() * 2 - 1
+        return this.randomFloat() * 2 - 1;
     }
 
     /**
      * Generate a random integer from a specified range of values.
-     * @param {number} min - The minimum integer value.
-     * @param {number} max - The maximum integer value.
-     * @returns {number} - A random integer in the given range.
+     * @param {number} min - The minimum integer value (inclusive).
+     * @param {number} max - The maximum integer value (exclusive).
+     * @returns {number} - A random integer between min (inclusive) and max (exclusive).
      */
     randomInteger(min, max) {
         const range = max - min;
@@ -51,7 +62,7 @@ export class PRNG {
     /**
      * Select a random element from an array.
      * @param {array} array - The array from which to select an element.
-     * @returns {*} - A randomly selected element from the given array.
+     * @returns {*} - A randomly selected element from the array.
      */
     randomElement(array) {
         const index = Math.floor(this.randomFloat() * array.length);
@@ -59,27 +70,24 @@ export class PRNG {
     }
 
     /**
-     * Return True or False according to a specified probability.
-     * @param {number} chance - The probability of returning True as a number between 0 and 1.
-     * @returns {boolean}
-     * - False when {@link chance} is 0.
-     * - True when {@link chance} is 1.
-     * - True 50% of the time when {@link chance} is 0.5.
+     * Returns a boolean based on a specified probability.
+     * @param {number} [chance=0.5] - The probability of returning true (between 0 and 1).
+     * @returns {boolean} - True if the random float is less than the chance, otherwise false.
      */
     randomChance(chance = 0.5) {
         return this.randomFloat() < chance;
     }
 
     /**
-     * Select probabalistically from a set of weighted options.
-     * @param {Array} choices - An array of objects, each with an `option` and a `weight`.
+     * Selects an option probabalistically from a set of weighted choices.
+     * @param {Array<Object>} choices - An array of objects with `option` and `weight` properties.
      * @param {function|number|string} choices[].option - The outcome of the choice.
-     * @param {number} choices[].weight - The weight of the choice. Higher weights (relative to the other choices) are more likely to be selected.
-     * @returns {function|number|string}
+     * @param {number} choices[].weight - The weight of the choice. Higher weights (relative to the other choices) increase the likelihood of selection.
+     * @returns {function|number|string} - The selected option.
      */
     randomWeighted(choices) {
         const length = choices.length;
-   
+
         let totalWeight = 0;
         for (let choice of choices) {
             totalWeight += choice.weight;
@@ -101,12 +109,12 @@ export class PRNG {
 }
 
 /**
- * Class representing a Linear Congruential Generator
+ * @summary Linear Congruential Generator (LCG) implemenation of PRNG.
  * @extends PRNG
  */
 export class LCG extends PRNG {
     /**
-     * Create an LCG.
+     * Creates an instance of LCG.
      * @param {number} seed - The seed number.
      */
     constructor(seed) {
@@ -117,26 +125,50 @@ export class LCG extends PRNG {
         this.state = this.seed;
     }
 
+    /**
+     * Generates the next psuedo-random number.
+     * @returns {number} - The next psuedo-random number.
+     */
     next() {
         this.state = (this.multiplier * this.state + this.increment) % this.modulus;
         return this.state;
     }
 
+    /**
+     * Returns the maximum possible value of the LCG.
+     * @returns {number} - The maximum value (2^32).
+     */
     maxValue() {
         return this.modulus;
     }
 }
 
+/**
+ * @summary Mulberry32 implementation of PRNG.
+ * @extends PRNG
+ */
 export class Mulberry32 extends PRNG {
+    /**
+     * Creates an instance of Mulberry32.
+     * @param {number} seed - The seed value for the Mulberry32 PRNG.
+     */
     constructor(seed) {
         super(seed);
         this.state = this.seed;
     }
 
+    /**
+     * Returns the maximum possible value of Mulberry32.
+     * @returns {number} - The maximum value (2^32).
+     */
     maxValue() {
         return 2 ** 32;
     }
 
+    /**
+     * Generates the next psuedo-random number.
+     * @returns {number} - The next psuedo-random number.
+     */
     next() {
         let t = this.state += 0x6D2B79F5;
         t = Math.imul(t ^ t >>> 15, 1 | t);
@@ -146,16 +178,28 @@ export class Mulberry32 extends PRNG {
     }
 }
 
+/**
+ * @summary XORShift32 implementation of PRNG.
+ * @extends PRNG
+ */
 export class XORShift32 extends PRNG {
     constructor(seed) {
         super(seed);
         this.state = this.seed;
     }
 
+    /**
+   * Returns the maximum possible value of XORShift32.
+   * @returns {number} - The maximum value (2^32).
+   */
     maxValue() {
         return 2 ** 32;
     }
 
+    /**
+     * Generates the next psuedo-random number.
+     * @returns {number} - The next psuedo-random number.
+     */
     next() {
         let a = this.state;
         a ^= a << 13;

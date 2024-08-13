@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: PRNG</title>
+    <title>JSDoc: Class: Mulberry32</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: PRNG</h1>
+    <h1 class="page-title">Class: Mulberry32</h1>
 
     
 
@@ -28,9 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature">(abstract) </span></span>PRNG<span class="signature">(seed<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description"><p>Represents an abstract base class for psuedo-random number generators. This class shouldn't be instantiated directly.</p></div>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Mulberry32<span class="signature">(seed)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,21 +39,19 @@
         
 
     
-    <h2>Constructor</h2>
+
+    
+    <h4 class="name" id="Mulberry32"><span class="type-signature"></span>new Mulberry32<span class="signature">(seed)</span><span class="type-signature"></span></h4>
     
 
     
-    <h4 class="name" id="PRNG"><span class="type-signature">(abstract) </span>new PRNG<span class="signature">(seed<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
-
-    
-    <p class="summary"><p>Abstract base class representing a Psuedo Random Number Generator.</p></p>
+    <p class="summary"><p>Mulberry32 implementation of PRNG.</p></p>
     
 
 
 
 <div class="description">
-    <p>This class is intended to be extended by specific implementations such as <a href="LCG.html">LCG</a>, <a href="Mulberry32.html">Mulberry32</a> or <a href="XORShift32.html">XORShift32</a>.</p>
+    <p>Creates an instance of Mulberry32.</p>
 </div>
 
 
@@ -79,11 +75,7 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -108,26 +100,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    Date.now()
-                
-                </td>
-            
 
-            <td class="description last"><p>The initial seed value for the PRNG.</p></td>
+            <td class="description last"><p>The seed value for the Mulberry32 PRNG.</p></td>
         </tr>
 
     
@@ -168,7 +144,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line8">line 8</a>
+        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line150">line 150</a>
     </li></ul></dd>
     
 
@@ -202,6 +178,17 @@
     </div>
 
     
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="PRNG.html">PRNG</a></li>
+    </ul>
+
+
+    
 
     
 
@@ -209,8 +196,8 @@
         <h3 class="subsection-title">Classes</h3>
 
         <dl>
-            <dt><a href="PRNG.html">PRNG</a></dt>
-            <dd><p>Abstract base class representing a Psuedo Random Number Generator.</p></dd>
+            <dt><a href="Mulberry32.html">Mulberry32</a></dt>
+            <dd><p>Mulberry32 implementation of PRNG.</p></dd>
         </dl>
     
 
@@ -239,7 +226,7 @@
 
 
 <div class="description">
-    <p>Returns the maximum possible value that the PRNG can generate.</p>
+    <p>Returns the maximum possible value of Mulberry32.</p>
 </div>
 
 
@@ -263,6 +250,11 @@
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="PRNG.html#maxValue">PRNG#maxValue</a>
+    </li></ul></dd>
+    
 
     
 
@@ -283,7 +275,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line22">line 22</a>
+        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line164">line 164</a>
     </li></ul></dd>
     
 
@@ -306,37 +298,6 @@
 
 
 
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        <ul>
-<li>Must be implemented by subclasses.</li>
-</ul>
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">Error</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
 
 
 <h5>Returns:</h5>
@@ -344,7 +305,7 @@
         
 <div class="param-desc">
     <ul>
-<li>The maximum value of the PRNG.</li>
+<li>The maximum value (2^32).</li>
 </ul>
 </div>
 
@@ -406,6 +367,11 @@
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="PRNG.html#next">PRNG#next</a>
+    </li></ul></dd>
+    
 
     
 
@@ -426,7 +392,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line31">line 31</a>
+        <a href="Random.js.html">Random.js</a>, <a href="Random.js.html#line172">line 172</a>
     </li></ul></dd>
     
 
@@ -449,37 +415,6 @@
 
 
 
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        <ul>
-<li>Must be implemented by subclasses.</li>
-</ul>
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">Error</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
 
 
 <h5>Returns:</h5>
@@ -548,6 +483,11 @@
 
     
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="PRNG.html#randomBipolarFloat">PRNG#randomBipolarFloat</a>
+    </li></ul></dd>
     
 
     
@@ -730,6 +670,11 @@
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="PRNG.html#randomChance">PRNG#randomChance</a>
+    </li></ul></dd>
+    
 
     
 
@@ -891,6 +836,11 @@
     
 
     
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="PRNG.html#randomElement">PRNG#randomElement</a>
+    </li></ul></dd>
+    
 
     
 
@@ -1002,6 +952,11 @@
 
     
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="PRNG.html#randomFloat">PRNG#randomFloat</a>
+    </li></ul></dd>
     
 
     
@@ -1186,6 +1141,11 @@
 
     
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="PRNG.html#randomInteger">PRNG#randomInteger</a>
+    </li></ul></dd>
     
 
     
@@ -1425,6 +1385,11 @@
 
     
 
+    
+    <dt class="tag-overrides">Overrides:</dt>
+    <dd class="tag-overrides"><ul class="dummy"><li>
+        <a href="PRNG.html#randomWeighted">PRNG#randomWeighted</a>
+    </li></ul></dd>
     
 
     

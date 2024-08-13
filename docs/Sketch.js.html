@@ -334,106 +334,81 @@ export class Sketch {
 		document.body.appendChild(this.svg);
 	}
 
+	updateDocumentTitle() {
+		document.title = `${this.title} ${this.seed.hex}`;
+	}
+
+	createElement(tag, parent, textContent = '', attributes = {}) {
+		const element = document.createElement(tag);
+		if (textContent) element.textContent = textContent;
+		Object.keys(attributes).forEach(key => element.setAttribute(key, attributes[key]));
+		parent.appendChild(element);
+		return element;
+	}
+
+	createSeedInput(parent) {
+		const seedInput = this.createElement('input', parent, '', { value: this.seed.hex });
+		seedInput.addEventListener('change', () => this.setSeed(seedInput.value))
+		seedInput.addEventListener('focus', () => seedInput.select())
+	}
+
+	createHistoryForm(parent) {
+		const historyForm = this.createElement('form', parent);
+		const historyLabel = this.createElement('label', historyForm, 'History: ', { for: 'history' });
+		const historySelect = this.createElement('select', historyLabel, '', {
+			name: 'history',
+			id: 'history'
+		})
+
+		this.createElement('option', historySelect, '--------', { value: '' });
+
+		this.seedHistory.forEach(seed => {
+			const option = this.createElement('option', historySelect, seed, { value: seed });
+			option.addEventListener('click', () => this.setSeed(seed));
+		});
+	}
+
+	createNavigation(parent) {
+		const nav = this.createElement('nav', parent);
+		const ul = this.createElement('ul', nav);
+	
+		this.createNavItem(ul, '⬇️', () => this.downloadSVG());
+		this.createNavItem(ul, '🔄', () => this.randomiseSeed());
+	}
+	
+	createNavItem(parent, text, clickHandler) {
+		const listItem = this.createElement('li', parent);
+		const button = this.createElement('a', listItem, text);
+		button.addEventListener('click', clickHandler);
+	}
+
+	addSketchInfo(parent, timeTaken) {
+		const sketchInfo = this.createElement('div', parent);
+		const numOfShapes = this.lines.length + this.paths.length + this.circles.length;
+		const timeText = timeTaken &lt; 0.05 ? '&lt;0.05s' : `~${timeTaken}s`;
+		this.createElement('p', sketchInfo, `Generated ${numOfShapes} shapes in ${timeText}`);
+	}
+
 	/**
 	 * Creates HTML UI and adds it to the document body.
 	 * @param {number} timeTaken 
 	 */
 	createUI(timeTaken) {
+		this.updateDocumentTitle();
 
-		// Add the document title
-		document.title = `${this.title} ${this.seed.hex}`;
+		// Create a HTML header element and append to body.
+		this.header = this.createElement('header', document.body);
 
-		// Create a HTML header element
-		this.header = document.createElement("header");
-		document.body.append(this.header);
+		// Create a h1 title and append to header.
+		this.createElement('h1', this.header, this.title);
 
-		// Add a h1 title to the header
-		let pageTitle = document.createElement("h1");
-		pageTitle.append(`${this.title}`);
-		this.header.appendChild(pageTitle);
+		this.createSeedInput(this.header);
 
-		let seedInput = document.createElement("input");
-		seedInput.setAttribute("value", `${this.seed.hex}`);
-		// seedInput.setAttribute("oninput", this.setSeed(123));
-		console.log(seedInput.value)
-		seedInput.addEventListener('change', () => this.setSeed(seedInput.value))
-		seedInput.addEventListener('focus', () => seedInput.select())
+		this.createHistoryForm(this.header);
 
-		this.header.appendChild(seedInput);
+		this.createNavigation(this.header);
 
-
-
-
-
-
-
-		const historyForm = document.createElement("form");
-		const historyLabel = document.createElement("label");
-		historyLabel.setAttribute("for", "history");
-		historyLabel.append("History: ");
-
-		const historySelect = document.createElement("select");
-		historySelect.setAttribute("name", "history");
-		historySelect.setAttribute("id", "history");
-
-		let option = document.createElement("option");
-		option.setAttribute("value", "");
-		option.append("--------");
-		historySelect.appendChild(option);
-
-		this.seedHistory.forEach(seed => {
-			let option = document.createElement("option");
-			option.setAttribute("value", seed);
-			option.append(seed);
-			historySelect.appendChild(option);
-
-			option.addEventListener('click', (e) => {
-				// e.preventDefault();
-				this.setSeed(seed);
-			})
-		})
-		historyLabel.appendChild(historySelect)
-		historyForm.appendChild(historyLabel);
-		this.header.appendChild(historyForm);
-
-		// Add a nav element to the header
-		let nav = document.createElement("nav");
-		this.header.appendChild(nav);
-
-		// Add a ul element to the nav
-		let ul = document.createElement("ul");
-		nav.appendChild(ul);
-
-		// Add a download SVG button
-		let downloadListItem = document.createElement("li");
-		ul.append(downloadListItem);
-		let downloadButton = document.createElement("a");
-		downloadButton.append("⬇️");
-		downloadListItem.appendChild(downloadButton)
-		downloadButton.addEventListener('click', () => this.downloadSVG())
-
-		// Add a randomise sketch button
-		let randomListItem = document.createElement("li");
-		ul.appendChild(randomListItem)
-		let randomButton = document.createElement("a");
-		randomButton.append("🔄");
-		randomListItem.appendChild(randomButton)
-		randomButton.addEventListener('click', () => this.randomiseSeed())
-
-		// Add a p element in a div to the header
-		let sketchInfo = document.createElement("div")
-		let numOfLines = document.createElement("p");
-
-		let numOfShapes = this.lines.length + this.paths.length + this.circles.length;
-
-		// The p element tells the user how many lines have been generated and how fast
-		if (timeTaken &lt; 0.05) {
-			numOfLines.append(`Generated ${numOfShapes} shapes in &lt;0.05s`)
-		} else {
-			numOfLines.append(`Generated ${numOfShapes} shapes in ~${timeTaken}s`);
-		}
-		sketchInfo.appendChild(numOfLines);
-		this.header.appendChild(sketchInfo);
+		this.addSketchInfo(this.header, timeTaken);
 	}
 }
 </code></pre>
@@ -446,13 +421,13 @@ export class Sketch {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Circle.html">Circle</a></li><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="PRNG.html">PRNG</a></li><li><a href="Path.html">Path</a></li><li><a href="Quadtree.html">Quadtree</a></li><li><a href="Rectangle.html">Rectangle</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#decToHex">decToHex</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#hexToDec">hexToDec</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#sinFract">sinFract</a></li><li><a href="global.html#unseededRandomHex">unseededRandomHex</a></li><li><a href="global.html#wrap">wrap</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Circle.html">Circle</a></li><li><a href="LCG.html">LCG</a></li><li><a href="Line.html">Line</a></li><li><a href="Mulberry32.html">Mulberry32</a></li><li><a href="PRNG.html">PRNG</a></li><li><a href="Path.html">Path</a></li><li><a href="Quadtree.html">Quadtree</a></li><li><a href="Rectangle.html">Rectangle</a></li><li><a href="Sketch.html">Sketch</a></li><li><a href="Vector.html">Vector</a></li><li><a href="XORShift32.html">XORShift32</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createSVG">createSVG</a></li><li><a href="global.html#decToHex">decToHex</a></li><li><a href="global.html#fract">fract</a></li><li><a href="global.html#hexToDec">hexToDec</a></li><li><a href="global.html#intersectionLineLine">intersectionLineLine</a></li><li><a href="global.html#lerp">lerp</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#sinFract">sinFract</a></li><li><a href="global.html#unseededRandomHex">unseededRandomHex</a></li><li><a href="global.html#wrap">wrap</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Aug 07 2024 23:45:20 GMT+0100 (British Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Aug 13 2024 15:34:25 GMT+0100 (British Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
