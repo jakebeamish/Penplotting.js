@@ -13,13 +13,9 @@ describe("the Path class", () => {
         });
 
         const svg = createSVG();
-
         path.addToSVG(svg);
-
         const s = new XMLSerializer();
         const string = s.serializeToString(svg);
-        console.log(string)
-
         expect(string).toMatch(" Z");
     })
 })
