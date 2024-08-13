@@ -10,7 +10,7 @@ defineFeature(feature, (test) => {
 		let vectorFromArray;
 		let vectorFromConstructor;
 		given(/^an array of numbers \[(\d+), (\d+)\]$/, (arg0, arg1) => {
-			array = [arg0, arg1];
+			array = [parseFloat(arg0), parseFloat(arg1)];
 		});
 
 		when("I create a Vector from that array", () => {
@@ -21,8 +21,8 @@ defineFeature(feature, (test) => {
 		then(
 			/^I should recieve a Vector with x = (\d+) and y = (\d+)$/,
 			(arg0, arg1) => {
-				expect(vectorFromArray.x).toBe(arg0);
-				expect(vectorFromArray.y).toBe(arg1);
+				expect(vectorFromArray.x).toBe(parseFloat(arg0));
+				expect(vectorFromArray.y).toBe(parseFloat(arg1));
 
 				expect(vectorFromArray).toEqual(vectorFromConstructor);
 			},

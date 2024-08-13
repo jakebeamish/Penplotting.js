@@ -10,6 +10,12 @@ export class Vector {
      * @param {number} - y
      */
     constructor(x = 0, y = 0) {
+
+        // Currently broken because jest-cucumber steps have strings as args.
+        // if (![x, y].every(component => component === 'number')) {
+        //     throw new TypeError("Vector components must be numbers.");
+        // }
+
         this.x = x;
         this.y = y;
     }
