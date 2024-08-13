@@ -9,6 +9,12 @@ module.exports = {
       '**/tests/**/*.[jt]s?(x)',
       '**/tests/features/**/*.feature',            // Feature files
       '**/tests/steps/**/*.steps.js',              // Step definitions
+    ],
+    reporters: [
+      'default',
+      ['./node_modules/jest-html-reporter', {
+        "pageTitle": "Test Report"
+      }]
     ]
   };
   
