@@ -12,9 +12,12 @@ describe("The Vector class", () => {
 
     describe("nearestNeighbour method", () => {
         test("should not return itself even if it is a member of the queried array", () => {
-            const a = new Vector(0, 0);
-            const result = a.nearestNeighbour([a], 1);
-            expect(result).not.toBe([a]);
+            const a = new Vector(0, 0); 
+            const b = new Vector(1, 0);
+            const c = new Vector(2, 0);
+            const result = a.nearestNeighbour([a, b, c], 1);
+            expect(result).not.toEqual([a]);
+            expect(result).toEqual([b]);
         });
     });
 });
