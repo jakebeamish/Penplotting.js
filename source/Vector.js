@@ -6,15 +6,14 @@ import { lerp } from "./utils.js";
 export class Vector {
     /**
      * Create a vector from coordinates.
-     * @param {number} - x
-     * @param {number} - y
+     * @param {number} x - x
+     * @param {number} y - y
      */
     constructor(x = 0, y = 0) {
 
-        // Currently broken because jest-cucumber steps have strings as args.
-        // if (![x, y].every(component => component === 'number')) {
-        //     throw new TypeError("Vector components must be numbers.");
-        // }
+        if (typeof x !== 'number' || typeof y !== 'number') {
+            throw new TypeError("Vector components must be numbers.");
+        }
 
         this.x = x;
         this.y = y;
