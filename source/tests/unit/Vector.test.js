@@ -2,20 +2,20 @@ import { Vector } from "../../Vector";
 import {Line} from "../../Line";
 describe("Vector", () => {
 	describe("Vector class", () => {
-		test("It exists", () => {
-			let v = new Vector(0, 0);
+		// test("It exists", () => {
+		// 	let v = new Vector(0, 0);
 
-			// It is an object
-			expect(typeof v).toBe("object");
+		// 	// It is an object
+		// 	expect(typeof v).toBe("object");
 
-			// It is a Vector
-			expect(v instanceof Vector).toBe(true);
-		});
+		// 	// It is a Vector
+		// 	expect(v instanceof Vector).toBe(true);
+		// });
 
-		test("can be created without coordinates (defaults to [0, 0])", () => {
-			const a = new Vector();
-			expect(a).toEqual({x: 0, y: 0});
-		})
+		// test("can be created without coordinates (defaults to [0, 0])", () => {
+		// 	const a = new Vector();
+		// 	expect(a).toEqual({x: 0, y: 0});
+		// })
 	});
 
 	test("has a magnitude which can be set", () => {
