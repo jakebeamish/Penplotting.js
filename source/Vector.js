@@ -197,7 +197,7 @@ export class Vector {
     normalize() {
         const mag = this.getMagnitude();
         if (mag === 0) {
-            throw new Error("Cannot normalize a zero vector");
+            throw new Error("Cannot normalize a zero vector.");
         }
         this.x /= mag;
         this.y /= mag;
