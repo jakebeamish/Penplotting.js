@@ -9,3 +9,4 @@ export { fract, lerp, map, sinFract, wrap, decToHex, hexToDec } from "./utils.js
 export { PAPER } from "./Paper.js";
 export { createSVG } from "./createSVG.js";
 export { Quadtree } from "./Quadtree.js";
+export { intersectionLineLine } from "./intersectionLineLine.js";

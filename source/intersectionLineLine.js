@@ -1,5 +1,5 @@
 /**
- * 
+ * Check if two lines intersect.
  * @param {Line} line1 
  * @param {Line} line2 
  * @returns {(boolean|Array)} - False if lines don't intersect, otherwise returns the intersection point [x,y]
