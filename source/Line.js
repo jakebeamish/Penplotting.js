@@ -1,3 +1,4 @@
+import { Vector } from "./Vector";
 /** Class representing a line. */
 export class Line {
 	/**
@@ -12,6 +13,18 @@ export class Line {
 		this.y1 = a.y;
 		this.x2 = b.x;
 		this.y2 = b.y;
+	}
+
+	/**
+	 * Create a Line from an array of numbers.
+	 * @param {Array<number>} array - [x1, y1, x2, y2].
+	 * @returns {Line}
+	 */
+	static fromArray(array) {
+		return new Line(
+			new Vector(array[0], array[1]),
+			new Vector(array[2], array[3])
+		);
 	}
 
 	/**
