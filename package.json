@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "Jake Beamish",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.24.6",
     "@babel/preset-env": "^7.24.6",
