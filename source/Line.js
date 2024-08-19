@@ -1,4 +1,4 @@
-import { Vector } from "./Vector";
+import { Vector } from "./Vector.js";
 /** Class representing a line. */
 export class Line {
 	/**
