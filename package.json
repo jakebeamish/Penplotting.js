@@ -7,10 +7,16 @@
     "test": "jest --coverage",
     "docs": "jsdoc -c jsdoc.json"
   },
+  "files": [
+  "source/**/*.js",
+  "!source/tests/**"
+  ],
   "keywords": [
     "svg",
     "penplot",
     "plotter",
+    "penplotter",
+    "penplotting",
     "art",
     "generativeart",
     "p5.js",
