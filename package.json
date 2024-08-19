@@ -8,7 +8,10 @@
     "docs": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
-  "author": "Jake Beamish",
+  "author": {
+    "name": "Jake Beamish",
+    "email": "jakebeamish@gmail.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.24.6",
