@@ -88,6 +88,28 @@ svg {
     filter: drop-shadow(0px 0px 3px white);
 }'
 
+# Define js content
+js_content='import { Sketch, Vector, Line, Rectangle, Circle, Path, PAPER, XORShift32, map } from "@jakebeamish/penplotting";
+
+let sketch = new Sketch({
+    size: PAPER.A4.portrait(),
+    backgroundColor: "#888888",
+    strokeWidth: 0.1,
+}
+);
+
+
+sketch.generate = () => {
+
+    const prng = new XORShift32(sketch.seed.decimal);
+    const { width, height } = sketch.size;
+    const centre = new Vector(width / 2, height / 2)
+    let margin = width * 0.15;
+
+}
+
+sketch.draw();'
+
 # Write HTML content to index.html
 echo "$html_content" > index.html
 echo "Generated index.html"
@@ -95,3 +117,6 @@ echo "Generated index.html"
 # Write CSS content to style.css
 echo "$css_content" > style.css
 echo "Generated style.css"
+
+echo "$js_content" > sketch.js
+echo "Generated sketch.js"
