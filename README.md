@@ -13,23 +13,34 @@ Penplotting.js is a dependency-free JavaScript framework for making generative a
 - Quadtree for optimised nearest-neighbour search
 - Paper sizes
 
+## Installation
+
+```sh
+npm i @jakebeamish/penplotting
+```
+
 ## Usage
 
-1. Create a new Sketch (with optional parameters for dimensions, units, background colour, title, seed).
-2. Define a sketch.generate() function, in which Vectors, Lines and other shapes can be created, manipulated, and added to the SVG document using `sketch.add(shapes)`.
-3. Call the Sketch's instance method `draw()`.
+To start a new sketch, run
+```sh
+npx new-plot
+```
+This will create new default `index.html`, `style.css` and `sketch.js` files.
+
+Inside `sketch.js`, adjust the options for initializing the sketch:
 
 ```js
-import { Sketch, PAPER, Vector, Line, LCG } from "../../index.js"
-
-// Setup the sketch
 const sketch = new Sketch({
     units: "mm",
     title: "My amazing sketch",
     size: Paper.A5,
     strokeWidth: 0.05
 });
+```
 
+Define a sketch.generate() function, in which Vectors, Lines and other shapes can be created, manipulated, and added to the SVG document using `sketch.add(shapes)`.
+
+```js
 // Define a generate() function
 // This is where the work is made
 sketch.generate = () => {
@@ -41,10 +52,10 @@ sketch.generate = () => {
     // Add shapes to the Sketch
     sketch.add(line);
 }
-
-// Call draw() on the Sketch to render a HTML page containing the generated SVG document
-sketch.draw();
 ```
+
+Calling `sketch.draw()` at the end of the file will generate an SVG element and UI inside `index.html`, which can be viewed from a browser,
+Using something like the Live Server Extension for VS Code.
 
 ### Keyboard shortcuts
 | Action | Key |
