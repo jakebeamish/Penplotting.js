@@ -1,6 +1,6 @@
 {
   "name": "@jakebeamish/penplotting",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A JavaScript framework for making SVG files for penplotters.",
   "main": "source/index.js",
   "bin": {
@@ -11,9 +11,9 @@
     "docs": "jsdoc -c jsdoc.json"
   },
   "files": [
-  "source/**/*.js",
-  "new-plot.sh",
-  "!source/tests/**"
+    "source/**/*.js",
+    "new-plot.sh",
+    "!source/tests/**"
   ],
   "keywords": [
     "svg",
