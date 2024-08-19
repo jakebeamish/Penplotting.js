@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "A JavaScript framework for making SVG files for penplotters.",
   "main": "source/index.js",
+  "bin": {
+    "new-plot": "./new-plot.sh"
+  },
   "scripts": {
     "test": "jest --coverage",
     "docs": "jsdoc -c jsdoc.json"
   },
   "files": [
   "source/**/*.js",
+  "new-plot.sh",
   "!source/tests/**"
   ],
   "keywords": [
