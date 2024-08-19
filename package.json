@@ -4,7 +4,7 @@
   "description": "A JavaScript framework for making SVG files for penplotters.",
   "main": "source/index.js",
   "bin": {
-    "new-plot": "./new-plot.sh"
+    "new-plot": "new-plot.sh"
   },
   "scripts": {
     "test": "jest --coverage",
