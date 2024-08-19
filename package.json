@@ -20,6 +20,14 @@
     "name": "Jake Beamish",
     "email": "jakebeamish@gmail.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jakebeamish/plotting.js.git"
+  },
+  "homepage": "https://github.com/jakebeamish/plotting.js",
+  "bugs": {
+    "url": "https://github.com/jakebeamish/plotting.js/issues"
+  },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.24.6",
