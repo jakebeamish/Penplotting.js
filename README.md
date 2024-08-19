@@ -1,6 +1,6 @@
-# Plotting.js
+# Penplotting.js
 
-plotting.js is a dependency-free JavaScript framework for making generative art in SVG format for penplotters.
+Penplotting.js is a dependency-free JavaScript framework for making generative art in SVG format for penplotters.
 
 > [!NOTE]
 > This is a work in progress, and is likely to change in future updates.

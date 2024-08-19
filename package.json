@@ -1,5 +1,5 @@
 {
-  "name": "@jakebeamish/plotting.js",
+  "name": "@jakebeamish/penplotting",
   "version": "0.0.0",
   "description": "A JavaScript framework for making SVG files for penplotters.",
   "main": "source/index.js",
