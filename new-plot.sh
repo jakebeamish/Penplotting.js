@@ -1,20 +1,24 @@
 #!/bin/bash
 
 # Define HTML content
-html_content='<!DOCTYPE html>
-<html lang="en">
+html_content='<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <script type="module" src="./sketch.js"></script>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penplotting.js</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "@jakebeamish/penplotting": "/node_modules/@jakebeamish/penplotting/source/index.js"
+      }
+    }
+    </script>
+  <script type="module" src="./sketch.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
 </body>
 
 </html>'
