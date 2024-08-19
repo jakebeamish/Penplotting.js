@@ -7,7 +7,15 @@
     "test": "jest --coverage",
     "docs": "jsdoc -c jsdoc.json"
   },
-  "keywords": [],
+  "keywords": [
+    "svg",
+    "penplot",
+    "plotter",
+    "art",
+    "generativeart",
+    "p5.js",
+    "processing"
+  ],
   "author": {
     "name": "Jake Beamish",
     "email": "jakebeamish@gmail.com"
