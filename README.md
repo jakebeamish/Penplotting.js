@@ -1,6 +1,6 @@
 # Penplotting.js
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jakebeamish/Penplotting.js/node.js.yml?style=flat)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/jakebeamish/Penplotting.js/node.js.yml?style=flat&label=tests)
 
 Penplotting.js is a dependency-free JavaScript framework for making generative art in SVG format for penplotters.
 
