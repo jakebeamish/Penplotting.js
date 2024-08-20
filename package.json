@@ -32,11 +32,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jakebeamish/plotting.js.git"
+    "url": "git://github.com/jakebeamish/Penplotting.js.git"
   },
-  "homepage": "https://github.com/jakebeamish/plotting.js",
+  "homepage": "https://github.com/jakebeamish/Penplotting.js",
   "bugs": {
-    "url": "https://github.com/jakebeamish/plotting.js/issues"
+    "url": "https://github.com/jakebeamish/Penplotting.js/issues"
   },
   "license": "MIT",
   "devDependencies": {
