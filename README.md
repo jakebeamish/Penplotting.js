@@ -57,7 +57,7 @@ sketch.generate = () => {
 ```
 
 Calling `sketch.draw()` at the end of the file will generate an SVG element and UI inside `index.html`, which can be viewed from a browser,
-Using something like the Live Server Extension for VS Code.
+using something like the Live Server Extension for VS Code.
 
 ### Keyboard shortcuts
 | Action | Key |
