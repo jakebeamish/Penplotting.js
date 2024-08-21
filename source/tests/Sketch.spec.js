@@ -73,4 +73,29 @@ describe("Sketch", () => {
             });
         });
     });
+
+    describe("addCirclesToSVG", () => {
+        let sketch, mockCircle1, mockCircle2;
+
+        beforeEach(() => {
+            sketch = new Sketch();
+            mockCircle1 = new Circle(0, 0, 10);
+            mockCircle2 = new Circle(5, 5, 5);
+            jest.spyOn(mockCircle1, 'addToSVG').mockImplementation(()=> {});
+            jest.spyOn(mockCircle2, 'addToSVG').mockImplementation(()=> {});
+            sketch.circles = [mockCircle1, mockCircle2];
+        });
+
+        it("should call addToSVG on each Path in the paths array.", () => {
+            sketch.addCirclesToSVG();
+            expect(mockCircle1.addToSVG).toHaveBeenCalledWith(sketch.svg, {
+                stroke: sketch.stroke,
+                strokeWidth: sketch.strokeWidth
+            });
+            expect(mockCircle2.addToSVG).toHaveBeenCalledWith(sketch.svg, {
+                stroke: sketch.stroke,
+                strokeWidth: sketch.strokeWidth
+            })
+        });
+    });
 });
