@@ -53,4 +53,24 @@ describe("Sketch", () => {
             expect(sketch.seed).not.toEqual(oldSeed);
         });
     });
+
+    describe("addPathsToSVG", () => {
+        let sketch, mockPath1, mockPath2;
+
+        beforeEach(() => {
+            sketch = new Sketch();
+            mockPath1 = new Path([new Vector(0, 0), new Vector(1, 1)]);
+            mockPath2 = new Path([new Vector(2, 2), new Vector(3, 3)]);
+            jest.spyOn(mockPath1, 'addToSVG').mockImplementation(()=> {});
+            sketch.paths = [mockPath1, mockPath2];
+        });
+
+        it("should call addToSVG on each Path in the paths array.", () => {
+            sketch.addPathsToSVG();
+            expect(mockPath1.addToSVG).toHaveBeenCalledWith(sketch.svg, {
+                stroke: sketch.stroke,
+                strokeWidth: sketch.strokeWidth
+            });
+        });
+    });
 });
