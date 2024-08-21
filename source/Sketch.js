@@ -71,6 +71,9 @@ export class Sketch {
 				decimal: seed
 			}
 		}
+
+		this.handleKeydown = this.handleKeydown.bind(this);
+		document.addEventListener("keydown", this.handleKeydown);
 	}
 
 	/**
@@ -141,15 +144,28 @@ export class Sketch {
 		if (!this.seedHistory.includes(this.seed.hex)) {
 			this.seedHistory.unshift(this.seed.hex);
 		}
+	}
 
-		addEventListener("keydown", (e) => {
-			switch (e.key) {
-				case "d":
-					this.downloadSVG();
-				case "r":
-					this.randomiseSeed()
-			}
-		})
+
+	handleKeydown(e) {
+
+		const focusedElement = document.activeElement;
+
+		// Check if the focused element is an input, textarea, or select
+		if (focusedElement.tagName === 'INPUT' || 
+			focusedElement.tagName === 'TEXTAREA' || 
+			focusedElement.tagName === 'SELECT' || 
+			focusedElement.isContentEditable) {
+			// If an input is focused, do nothing
+			return;
+		}
+
+		if (e.key === "d") {
+			this.downloadSVG();
+		} else if (e.key === "r") {
+			this.randomiseSeed();
+		}
+
 	}
 
 	/**
