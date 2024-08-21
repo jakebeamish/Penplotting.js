@@ -3,18 +3,18 @@ import { Line } from "../Line";
 
 describe("Vector", () => {
     describe("constructor", () => {
-        it("returns a new vector object if creation is successful.", () => {
+        it("should return a new vector object if creation is successful.", () => {
             const v = new Vector(1, 1);
             expect(typeof v).toBe("object");
             expect(v instanceof Vector).toBe(true);
         });
 
-        test("can be called without coordinates (defaults to {x: 0, y: 0}).", () => {
+        test("should return a new vector with default components (0, 0) if called without parameters.", () => {
             const vector = new Vector();
             expect(vector).toEqual({ x: 0, y: 0 });
         });
 
-        it("throws a TypeError if any component is not a number. Currently does not throw if component is undefined.", () => {
+        it("should throw a TypeError if any component is not a number. Currently does not throw if component is undefined.", () => {
             expect(() => new Vector(1, 'a')).toThrow(TypeError);
             expect(() => new Vector(1, null)).toThrow(TypeError);
             expect(() => new Vector(1, {})).toThrow(TypeError);
@@ -44,7 +44,7 @@ describe("Vector", () => {
         });
 
         describe("fromArray", () => {
-            it("returns a new vector with components {x: array[0], y: array[1]}.", () => {
+            it("should return a new vector with components {x: array[0], y: array[1]}.", () => {
                 const x = 3;
                 const y = 7;
                 const array = [x, y];
@@ -54,7 +54,7 @@ describe("Vector", () => {
         });
 
         describe("distance", () => {
-            it("returns the distance between two vectors.", () => {
+            it("should return the distance between two vectors.", () => {
                 const a = new Vector(0, 0);
                 const b = new Vector(5, 0);
                 expect(Vector.distance(a, b)).toBeCloseTo(5);
@@ -63,7 +63,7 @@ describe("Vector", () => {
     });
 
     describe("multiply", () => {
-        it("returns the vector after multiplying it by a scalar.", () => {
+        it("should return the vector after multiplying it by a scalar.", () => {
             const vector = new Vector(1, 1);
             const scalar = 10;
             vector.multiply(scalar);
@@ -127,7 +127,7 @@ describe("Vector", () => {
     });
 
     describe("dot product", () => {
-        it("returns 10 for the dot product of (2,2) and (1,4).", () => {
+        it("should return 10 for the dot product of (2,2) and (1,4).", () => {
             const a = new Vector(2, 2);
             const b = new Vector(1, 4);
             // (2 * 1) + (2 * 4) = 10
@@ -137,7 +137,7 @@ describe("Vector", () => {
     });
 
     describe("cross product", () => {
-        it("returns 6 for the cross product of (2,2) and (1,4).", () => {
+        it("should return 6 for the cross product of (2,2) and (1,4).", () => {
             const a = new Vector(2, 2);
             const b = new Vector(1, 4);
             // (2 * 4) - (2 * 1) = 6
@@ -147,14 +147,14 @@ describe("Vector", () => {
     })
 
     describe("fromAngle", () => {
-        it("returns a new vector object with given angle and a default magnitude of 1.", () => {
+        it("should return a new vector object with given angle and a default magnitude of 1.", () => {
             const vector = Vector.fromAngle(Math.PI);
             expect(vector instanceof Vector).toBeTruthy();
             expect(vector.getMagnitude()).toBe(1);
             expect(vector.getAngle()).toBe(Math.PI);
         });
 
-        it("returns a new vector object with given magnitude.", () => {
+        it("should return a new vector object with given magnitude.", () => {
             const vector = Vector.fromAngle(0, 5);
             expect(vector.getMagnitude()).toBe(5);
             expect(vector.getAngle()).toBe(0);
@@ -162,7 +162,7 @@ describe("Vector", () => {
     });
 
     describe("clone", () => {
-        it("returns a new vector object with the same x and y values.", () => {
+        it("should return a new vector object with the same x and y values.", () => {
             const a = new Vector(3, 5);
             const b = a.clone();
             expect(a).toEqual(b);
@@ -171,13 +171,13 @@ describe("Vector", () => {
     });
 
     describe("isOnLine", () => {
-        it("returns true if a vector is a point on a line.", () => {
+        it("should return true if a vector is a point on a line.", () => {
             const vector = new Vector(5, 0);
             const line = new Line(new Vector(0, 0), new Vector(10, 0));
             expect(vector.isOnLine(line)).toBeTruthy();
         });
         
-        it("returns false isf a vector is not a point on a line", () => {
+        it("should return false if a vector is not a point on a line.", () => {
             const vector = new Vector(5, 0);
             const line = new Line(new Vector(0, 1), new Vector(10, 1));
             expect(vector.isOnLine(line)).toBeFalsy();
@@ -185,14 +185,14 @@ describe("Vector", () => {
     });
 
     describe("getMagnitude", () => {
-        it("returns the magnitude of a vector.", () => {
+        it("should return the magnitude of a vector.", () => {
             const vector = new Vector(10, 0);
             expect(vector.getMagnitude()).toBeCloseTo(10);
         });
     });
 
     describe("setMagnitude", () => {
-        it("rescales the magnitude of a vector to a given amount.", () => {
+        it("should rescale the magnitude of a vector to a given amount.", () => {
             const vector = new Vector(1, 0);
             expect(vector.getMagnitude()).toBeCloseTo(1);
 
@@ -210,13 +210,13 @@ describe("Vector", () => {
     })
 
     describe("normalize", () => {
-        it("rescales the magnitude of a vector to 1.", () => {
+        it("should rescale the magnitude of a vector to 1.", () => {
             const vector = new Vector(5, 5);
             vector.normalize();
             expect(vector.getMagnitude()).toBeCloseTo(1);
         });
 
-        it("throws an Error if the vector magnitude is zero.", () => {
+        it("should throw an Error if the vector magnitude is zero.", () => {
             const v = new Vector(0, 0);
             expect(() => {
                 v.normalize();
@@ -225,7 +225,7 @@ describe("Vector", () => {
     });
 
     describe("lerp", () => {
-        it("returns a new vector object.", () => {
+        it("should return a new vector object.", () => {
             const a = new Vector(0, 0);
             const b = new Vector(1, 1);
             const amount = 0.5;
@@ -233,7 +233,7 @@ describe("Vector", () => {
             expect(result instanceof Vector).toBeTruthy();
         });
 
-        it("returns a new Vector with lerped components.", () => {
+        it("should return a new Vector with lerped components.", () => {
             const a = new Vector(0, 0);
             const b = new Vector(1, 1);
             const amount = 0.5;
@@ -243,7 +243,7 @@ describe("Vector", () => {
     });
 
     describe("nearestNeighbour", () => {
-        it("returns the nearest neighbour from a given array.", () => {
+        it("should return the nearest neighbour from a given array.", () => {
             const a = new Vector(0, 0);
             const b = new Vector(1, 0);
             const c = new Vector(2, 0);
