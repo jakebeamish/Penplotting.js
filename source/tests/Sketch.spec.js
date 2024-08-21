@@ -1,5 +1,5 @@
 import { Sketch } from "../Sketch";
-import { Line } from    "../Line";
+import { Line } from "../Line";
 import { Path } from "../Path";
 import { Circle } from "../Circle";
 import { Vector } from "../Vector";
@@ -29,12 +29,28 @@ describe("Sketch", () => {
             expect(sketch.circles[0]).toEqual(circle);
         });
 
-        it("should throw an error if an unsupported shape is added.", () => {
+        it("should throw a TypeError if an unsupported shape is added.", () => {
             const unsupportedShape = { foo: 15, bar: 20 };
             expect(() => sketch.addSingleShape(unsupportedShape)).toThrow(TypeError);
+        });
+    });
 
+    describe("setSeed", () => {
+        it("should set the Sketch seed.", () => {
+            const sketch = new Sketch();
+            sketch.draw();
+            sketch.setSeed('2');
+            expect(sketch.seed.decimal).toEqual(2);
+        });
+    });
 
-        })
-
-    })
-})
+    describe("randomizeSeed", () => {
+        it("should set the Sketch seed to a new and different psuedo-random 8-bit hex string.", () => {
+            const sketch = new Sketch();
+            sketch.draw();
+            const oldSeed = sketch.seed;
+            sketch.randomiseSeed();
+            expect(sketch.seed).not.toEqual(oldSeed);
+        });
+    });
+});
