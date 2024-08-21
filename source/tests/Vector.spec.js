@@ -60,6 +60,59 @@ describe("Vector", () => {
                 expect(Vector.distance(a, b)).toBeCloseTo(5);
             });
         });
+
+        describe("dot product", () => {
+            it("should return 10 for the dot product of (2,2) and (1,4).", () => {
+                const a = new Vector(2, 2);
+                const b = new Vector(1, 4);
+                // (2 * 1) + (2 * 4) = 10
+                const expected = 10;
+                expect(Vector.dot(a, b)).toBeCloseTo(expected);
+            });
+        });
+
+        describe("cross product", () => {
+            it("should return 6 for the cross product of (2,2) and (1,4).", () => {
+                const a = new Vector(2, 2);
+                const b = new Vector(1, 4);
+                // (2 * 4) - (2 * 1) = 6
+                const expected = 6;
+                expect(Vector.cross(a, b)).toBeCloseTo(6);
+            });
+        });
+
+        describe("fromAngle", () => {
+            it("should return a new vector object with given angle and a default magnitude of 1.", () => {
+                const vector = Vector.fromAngle(Math.PI);
+                expect(vector instanceof Vector).toBeTruthy();
+                expect(vector.getMagnitude()).toBe(1);
+                expect(vector.getAngle()).toBe(Math.PI);
+            });
+
+            it("should return a new vector object with given magnitude.", () => {
+                const vector = Vector.fromAngle(0, 5);
+                expect(vector.getMagnitude()).toBe(5);
+                expect(vector.getAngle()).toBe(0);
+            });
+        });
+
+        describe("lerp", () => {
+            it("should return a new vector object.", () => {
+                const a = new Vector(0, 0);
+                const b = new Vector(1, 1);
+                const amount = 0.5;
+                const result = Vector.lerp(a, b, amount);
+                expect(result instanceof Vector).toBeTruthy();
+            });
+
+            it("should return a new Vector with lerped components.", () => {
+                const a = new Vector(0, 0);
+                const b = new Vector(1, 1);
+                const amount = 0.5;
+                const result = Vector.lerp(a, b, amount);
+                expect(result).toEqual(new Vector(0.5, 0.5));
+            });
+        });
     });
 
     describe("multiply", () => {
@@ -126,41 +179,6 @@ describe("Vector", () => {
         });
     });
 
-    describe("dot product", () => {
-        it("should return 10 for the dot product of (2,2) and (1,4).", () => {
-            const a = new Vector(2, 2);
-            const b = new Vector(1, 4);
-            // (2 * 1) + (2 * 4) = 10
-            const expected = 10;
-            expect(Vector.dot(a, b)).toBeCloseTo(expected);
-        });
-    });
-
-    describe("cross product", () => {
-        it("should return 6 for the cross product of (2,2) and (1,4).", () => {
-            const a = new Vector(2, 2);
-            const b = new Vector(1, 4);
-            // (2 * 4) - (2 * 1) = 6
-            const expected = 6;
-            expect(Vector.cross(a, b)).toBeCloseTo(6);
-        })
-    })
-
-    describe("fromAngle", () => {
-        it("should return a new vector object with given angle and a default magnitude of 1.", () => {
-            const vector = Vector.fromAngle(Math.PI);
-            expect(vector instanceof Vector).toBeTruthy();
-            expect(vector.getMagnitude()).toBe(1);
-            expect(vector.getAngle()).toBe(Math.PI);
-        });
-
-        it("should return a new vector object with given magnitude.", () => {
-            const vector = Vector.fromAngle(0, 5);
-            expect(vector.getMagnitude()).toBe(5);
-            expect(vector.getAngle()).toBe(0);
-        });
-    });
-
     describe("clone", () => {
         it("should return a new vector object with the same x and y values.", () => {
             const a = new Vector(3, 5);
@@ -176,7 +194,7 @@ describe("Vector", () => {
             const line = new Line(new Vector(0, 0), new Vector(10, 0));
             expect(vector.isOnLine(line)).toBeTruthy();
         });
-        
+
         it("should return false if a vector is not a point on a line.", () => {
             const vector = new Vector(5, 0);
             const line = new Line(new Vector(0, 1), new Vector(10, 1));
@@ -222,24 +240,6 @@ describe("Vector", () => {
                 v.normalize();
             }).toThrowError("Cannot normalize a zero vector");
         });
-    });
-
-    describe("lerp", () => {
-        it("should return a new vector object.", () => {
-            const a = new Vector(0, 0);
-            const b = new Vector(1, 1);
-            const amount = 0.5;
-            const result = Vector.lerp(a, b, amount);
-            expect(result instanceof Vector).toBeTruthy();
-        });
-
-        it("should return a new Vector with lerped components.", () => {
-            const a = new Vector(0, 0);
-            const b = new Vector(1, 1);
-            const amount = 0.5;
-            const result = Vector.lerp(a, b, amount);
-            expect(result).toEqual(new Vector(0.5, 0.5));
-        })
     });
 
     describe("nearestNeighbour", () => {
