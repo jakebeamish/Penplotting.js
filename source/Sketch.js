@@ -114,7 +114,7 @@ export class Sketch {
 		} else if (shape instanceof Circle) {
 			this.circles.push(shape)
 		} else {
-			console.warn("Unsupported shape type:", shape);
+			throw new TypeError("Unsupported shape type:", shape);
 		}
 	}
 
