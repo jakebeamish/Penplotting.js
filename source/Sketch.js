@@ -1,4 +1,3 @@
-import { createSVG } from "./createSVG.js";
 // import { addLineToSVG } from "./addLineToSVG.js";
 import { unseededRandomHex } from "./Random.js";
 import { hexToDec } from "./utils.js";
@@ -8,6 +7,7 @@ import { Line } from "./Line.js";
 import { Circle } from "./Circle.js"
 import { Path } from "./Path.js";
 // import { addPathToSVG } from "./addPathToSVG.js";
+import { SVGBuilder } from "./SVGBuilder.js";
 
 /**
  * @class
@@ -55,10 +55,17 @@ export class Sketch {
 		this.circles = [];
 		this.seedHistory = [];
 
-		this.svg = createSVG(this.size.width, this.size.height, {
-			units: this.units,
-			backgroundColor: this.backgroundColor,
-		});
+		this.svgBuilder = new SVGBuilder();
+
+		this.svgBuilder.setWidth(`${this.size.width}${this.units}`)
+		.setHeight(`${this.size.height}${this.units}`)
+		.setViewBox(`0 0 ${this.size.width} ${this.size.height}`)
+		.setBackgroundColor(this.backgroundColor)
+
+		// this.svg = createSVG(this.size.width, this.size.height, {
+		// 	units: this.units,
+		// 	backgroundColor: this.backgroundColor,
+		// });
 
 		this.header;
 		this.generate = () => { };
@@ -137,6 +144,8 @@ export class Sketch {
 
 		this.addCirclesToSVG();
 
+		this.svg = this.svgBuilder.build();
+
 		const timeTaken = +(Math.round(((Date.now() - startTime) / 1000) + "e+2") + "e-2");
 
 		this.createUI(timeTaken);
@@ -178,10 +187,7 @@ export class Sketch {
 		document.body.removeChild(this.header)
 		document.body.removeChild(this.svg);
 
-		this.svg = createSVG(this.size.width, this.size.height, {
-			units: this.units,
-			backgroundColor: this.backgroundColor,
-		});
+		this.svgBuilder.clear();
 	}
 
 	/**
@@ -189,7 +195,7 @@ export class Sketch {
 	 */
 	downloadSVG() {
 		const serializer = new XMLSerializer();
-		const source = serializer.serializeToString(this.svg);
+		const source = serializer.serializeToString(this.svgBuilder.build());
 
 		const svgBlob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
 		const url = URL.createObjectURL(svgBlob);
@@ -285,10 +291,11 @@ export class Sketch {
 	 */
 	addLinesToSVG() {
 		for (const line of this.lines) {
-			line.addToSVG(this.svg, {
-				stroke: this.stroke,
-				strokeWidth: this.strokeWidth,
-			});
+			this.svgBuilder.addShape(line.toSVGElement());
+			// line.addToSVG(this.svg, {
+			// 	stroke: this.stroke,
+			// 	strokeWidth: this.strokeWidth,
+			// });
 		}
 	}
 
@@ -297,10 +304,11 @@ export class Sketch {
 	 */
 	addPathsToSVG() {
 		for (const path of this.paths) {
-			path.addToSVG(this.svg, {
-				stroke: this.stroke,
-				strokeWidth: this.strokeWidth
-			})
+			this.svgBuilder.addShape(path.toSVGElement())
+			// path.addToSVG(this.svg, {
+			// 	stroke: this.stroke,
+			// 	strokeWidth: this.strokeWidth
+			// })
 		}
 	}
 	/** 
@@ -308,11 +316,14 @@ export class Sketch {
 	*/
 	addCirclesToSVG() {
 		for (const circle of this.circles) {
-			circle.addToSVG(this.svg, {
-				stroke: this.stroke,
-				strokeWidth: this.strokeWidth
-			});
+
+			this.svgBuilder.addShape(circle.toSVGElement());
+			// circle.addToSVG(this.svg, {
+			// 	stroke: this.stroke,
+			// 	strokeWidth: this.strokeWidth
+			// });
 		}
+
 	}
 
 	/**

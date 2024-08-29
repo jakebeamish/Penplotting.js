@@ -18,6 +18,10 @@ export class SVGBuilder {
         return this;
     }
 
+    setBackgroundColor(color) {
+        this.svg.setAttribute("style", `background-color: ${color}`)
+    }
+
     addShape(shapeElement) {
         this.svg.appendChild(shapeElement);
         return this;

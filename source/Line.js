@@ -6,13 +6,18 @@ export class Line {
 	 * @param {Vector} a - The startpoint.
 	 * @param {Vector} b - The endpoint.
 	 */
-	constructor(a, b) {
+	constructor(a, b, {
+		stroke = "black",
+		strokeWidth = 0.1
+	}={}) {
 		this.a = a;
 		this.b = b;
 		this.x1 = a.x;
 		this.y1 = a.y;
 		this.x2 = b.x;
 		this.y2 = b.y;
+		this.stroke = stroke;
+		this.strokeWidth = strokeWidth;
 	}
 
 	/**
@@ -54,6 +59,23 @@ export class Line {
 	 */
 	isContainedBy(line) {
 		return this.a.isOnLine(line) && this.b.isOnLine(line);
+	}
+
+	/**
+	 * 
+	 * @returns {SVGElement}
+	 */
+	toSVGElement() {
+		let units = "";
+		let element = document.createElementNS("http://www.w3.org/2000/svg", "line")
+		element.setAttribute("x1", `${this.a.x}${units}`)
+		element.setAttribute("y1", `${this.a.y}${units}`)
+		element.setAttribute("x2", `${this.b.x}${units}`)
+		element.setAttribute("y2", `${this.b.y}${units}`)
+		element.setAttribute("stroke", this.stroke)
+		element.setAttribute("stroke-width", `${this.strokeWidth}${units}`);
+
+		return element;
 	}
 
 	/**
