@@ -3,6 +3,9 @@ export class Path {
     /**
      * @param {Array<Vector>} points - An array of [Vectors]{@link Vector} from which a Path is made.
      * @param {Object} [options]
+     * @param {string} [options.stroke = "black"]
+     * @param {number} [options.strokeWidth = 0.1]
+     * @param {string} [options.fill = "none"]
      * @param {boolean} [options.isClosed = false] - A flag to optionally close the Path.
      */
     constructor(points, {

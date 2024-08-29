@@ -13,4 +13,13 @@ describe("Line", () => {
 
         })
     })
+
+    describe("toSVGElement", () => {
+        it("should return an SVG element of type line.", () => {
+            const line = new Line.fromArray([0, 0, 1, 1]);
+            const result = line.toSVGElement();
+
+            expect(result instanceof SVGElement).toBeTruthy();
+        })
+    })
 })
