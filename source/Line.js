@@ -5,14 +5,21 @@ export class Line {
 	 * Create a line between two [Vectors]{@link Vector}.
 	 * @param {Vector} a - The startpoint.
 	 * @param {Vector} b - The endpoint.
+	 * @param {string} [options.stroke = "black"]
+	 * @param {number} [options.strokeWidth = 0.1]
 	 */
-	constructor(a, b) {
+	constructor(a, b, {
+		stroke = "black",
+		strokeWidth = 0.1
+	}={}) {
 		this.a = a;
 		this.b = b;
 		this.x1 = a.x;
 		this.y1 = a.y;
 		this.x2 = b.x;
 		this.y2 = b.y;
+		this.stroke = stroke;
+		this.strokeWidth = strokeWidth;
 	}
 
 	/**
@@ -56,29 +63,24 @@ export class Line {
 		return this.a.isOnLine(line) && this.b.isOnLine(line);
 	}
 
-	/**
-	  * Add a line to an SVG element
-	  * @param {SVGElement} svg - The target SVG element.
-	  * @param {Object} [options] - A config object.
-	  * @param {string} [options.units = ""] - Units for the line (i.e. "mm" or "in").
-	  * @param {string} [options.stroke = "black"] - The line colour.
-	  * @param {number} [options.strokeWidth = 0.1] - The width of the line.
-	  * @returns {SVGElement} - The SVG element after appending this line.
-	  */
-	addToSVG(svg, {
-		units = "",
-		stroke = "black",
-		strokeWidth = 0.1
-	} = {}) {
-		const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-		line.setAttribute("x1", `${this.x1}${units}`);
-		line.setAttribute("y1", `${this.y1}${units}`);
-		line.setAttribute("x2", `${this.x2}${units}`);
-		line.setAttribute("y2", `${this.y2}${units}`);
-		line.setAttribute("stroke", stroke);
-		line.setAttribute("stroke-width", `${strokeWidth}${units}`);
+	toArray() {
+		return [this.a.x, this.a.y, this.b.x, this.b.y];
+	}
 
-		svg.appendChild(line);
-		return svg;
+	/**
+	 * 
+	 * @returns {SVGElement}
+	 */
+	toSVGElement() {
+		let units = "";
+		let element = document.createElementNS("http://www.w3.org/2000/svg", "line")
+		element.setAttribute("x1", `${this.a.x}${units}`)
+		element.setAttribute("y1", `${this.a.y}${units}`)
+		element.setAttribute("x2", `${this.b.x}${units}`)
+		element.setAttribute("y2", `${this.b.y}${units}`)
+		element.setAttribute("stroke", this.stroke)
+		element.setAttribute("stroke-width", `${this.strokeWidth}${units}`);
+
+		return element;
 	}
 }

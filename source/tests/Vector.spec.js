@@ -124,6 +124,16 @@ describe("Vector", () => {
         });
     });
 
+    describe("toArray", () => {
+        it.each([
+            { array: [0, 1], vector: new Vector(0, 1)},
+            { array: [2, -3], vector: new Vector(2, -3)},
+            { array: [0, 0], vector: new Vector(0, 0)}
+        ])("should return $array when vector $vector .toArray is called.", ({ array, vector }) => {
+            expect(vector.toArray()).toEqual(array);
+        })
+    })
+
     describe("add", () => {
         it("should return the vector after the addition of another vector.", () => {
             const vector = new Vector(1, 1);

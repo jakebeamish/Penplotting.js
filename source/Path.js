@@ -3,25 +3,25 @@ export class Path {
     /**
      * @param {Array<Vector>} points - An array of [Vectors]{@link Vector} from which a Path is made.
      * @param {Object} [options]
+     * @param {string} [options.stroke = "black"]
+     * @param {number} [options.strokeWidth = 0.1]
+     * @param {string} [options.fill = "none"]
      * @param {boolean} [options.isClosed = false] - A flag to optionally close the Path.
      */
     constructor(points, {
         isClosed = false,
+        stroke = "black",
+        strokeWidth = 0.1,
+        fill = "none"
     } = {}) {
         this.points = points;
         this.isClosed = isClosed;
+        this.stroke = stroke;
+        this.strokeWidth = strokeWidth;
+        this.fill = fill;
     }
 
-    /**
-     * Add this path to an SVG element. Called by {@link Sketch#addPathsToSVG} inside {@link Sketch#draw}.
-     * @returns {SVGElement}
-     */
-    addToSVG(svg, {
-        stroke = "black",
-        fill = "transparent",
-        strokeWidth = 0.1,
-    } = {}) {
-    
+    toSVGElement() {
         const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
     
         let commandString = "";
@@ -36,11 +36,10 @@ export class Path {
         }
     
         pathElement.setAttribute("d", commandString)
-        pathElement.setAttribute("stroke", stroke);
-        pathElement.setAttribute("stroke-width", strokeWidth);
-        pathElement.setAttribute("fill", fill);
-    
-        svg.appendChild(pathElement);
-        return svg;
+        pathElement.setAttribute("stroke", this.stroke);
+        pathElement.setAttribute("stroke-width", this.strokeWidth);
+        pathElement.setAttribute("fill", this.fill);
+
+        return pathElement;
     }
 }
