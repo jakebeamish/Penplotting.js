@@ -1,12 +1,9 @@
-// import { addLineToSVG } from "./addLineToSVG.js";
 import { unseededRandomHex } from "./Random.js";
 import { hexToDec } from "./utils.js";
 import { decToHex } from "./utils.js";
-import { wrap } from "./utils.js";
 import { Line } from "./Line.js";
 import { Circle } from "./Circle.js"
 import { Path } from "./Path.js";
-// import { addPathToSVG } from "./addPathToSVG.js";
 import { SVGBuilder } from "./SVGBuilder.js";
 
 /**
