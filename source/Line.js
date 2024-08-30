@@ -63,6 +63,10 @@ export class Line {
 		return this.a.isOnLine(line) && this.b.isOnLine(line);
 	}
 
+	toArray() {
+		return [this.a.x, this.a.y, this.b.x, this.b.y];
+	}
+
 	/**
 	 * 
 	 * @returns {SVGElement}
