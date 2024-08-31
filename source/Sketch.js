@@ -181,8 +181,8 @@ export class Sketch {
 		this.lines = [];
 		this.paths = [];
 		this.circles = [];
-		document.body.removeChild(this.header)
-		document.body.removeChild(this.svg);
+
+		document.body.innerHTML = "";
 
 		this.svgBuilder.clear();
 	}
