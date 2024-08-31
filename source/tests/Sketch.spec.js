@@ -5,6 +5,19 @@ import { Circle } from "../Circle";
 import { Vector } from "../Vector";
 
 describe("Sketch", () => {
+    describe("constructor", () => {
+        it("Creates a seed object literal with hex and decimal properties if Sketch is instantiated with a seed property.", () => {
+
+            let sketch = new Sketch({
+                seed: 123
+            });
+    
+            expect(sketch.seed).toHaveProperty("hex");
+            expect(sketch.seed).toHaveProperty("decimal");
+    
+        })
+    
+    });
     describe("addSingleShape", () => {
         let sketch;
         beforeEach(() => {
@@ -93,6 +106,26 @@ describe("Sketch", () => {
         });
     });
 
+    describe("clear", () => {
+        it("Clears the document body.", () => {
+            let sketch = new Sketch();
+    
+            let line = new Line(new Vector(1, 1), new Vector(5, 5));
+    
+            sketch.add(line);
+    
+            sketch.draw();
+    
+            expect(sketch.lines).toHaveLength(1)
+    
+            sketch.clear();
+    
+            expect(sketch.lines).toHaveLength(0)
+            expect(document.body.innerHTML).toBe("");
+        });
+    
+    });
+
     describe("add", () => {
     
         test("Adds a line object to a sketch", () => {
@@ -107,7 +140,7 @@ describe("Sketch", () => {
     
             expect(sketch.lines).toContain(line);
             expect(sketch.lines.length).toBe(1);
-        })
+        });
     
         test("Adds an array of lines to a sketch", () => {
             const sketch = new Sketch();
