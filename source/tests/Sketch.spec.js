@@ -121,8 +121,63 @@ describe("Sketch", () => {
             expect(sketch.lines).toHaveLength(0)
             expect(document.body.innerHTML).toBe("");
         });
-    
     });
+
+
+    describe("removeShortLines", () => {
+      it("Returns an array of lines that are longer than the minimum length.", () => {
+        const sketch = new Sketch();
+
+        const lines = [
+          Line.fromArray([0, 0, 1, 1]),
+          Line.fromArray([0, 0, 0.01, 0])
+        ];
+
+        sketch.add(lines);
+        sketch.removeShortLines(0.1);
+        expect(sketch.lines.length).toBe(1);
+
+      });
+    });
+
+    describe("deduplicateLines", () => {
+      it("Checks the lines array and removes lines that are duplicated.", () => {
+        const sketch = new Sketch();
+        
+        sketch.add(
+          [
+          Line.fromArray([0, 0, 5, 5]),
+          Line.fromArray([0, 0, 1, 1]),
+          Line.fromArray([0, 0, 1, 1]),
+          Line.fromArray([0, 0, 1, 1]),
+          Line.fromArray([0, 0, 1, 2])
+          ]
+        );
+        sketch.deduplicateLines();
+        expect(sketch.lines.length).toBe(3);
+
+      });
+    });
+
+    describe("removeOverlappingLines", () => {
+      it("Checks the lines array and removes sub-lines.", () => {
+        const sketch = new Sketch();
+        sketch.add([
+          Line.fromArray([0, 0, 5, 5]),
+          // These lines are sub-lines of the above.
+          Line.fromArray([1, 1, 4, 4]),
+          Line.fromArray([2, 2, 3, 3]),
+          
+          // These lines are not sub-lines of the first line.
+          Line.fromArray([1, 5, 5, 1]),
+          Line.fromArray([3, 2, 2, 3])
+        ]);
+        sketch.removeOverlappingLines();
+
+        expect(sketch.lines.length).toBe(3);
+      });
+    });
+
 
     describe("add", () => {
     
