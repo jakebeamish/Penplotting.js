@@ -104,45 +104,6 @@ describe("Sketch", () => {
         });
     });
 
-    describe.skip("addPathsToSVG", () => {
-        let sketch, mockPath1, mockPath2;
-
-        beforeEach(() => {
-            sketch = new Sketch();
-            mockPath1 = new Path([new Vector(0, 0), new Vector(1, 1)]);
-            mockPath2 = new Path([new Vector(2, 2), new Vector(3, 3)]);
-            jest.spyOn(mockPath1, 'addToSVG').mockImplementation(()=> {});
-            sketch.paths = [mockPath1, mockPath2];
-        });
-
-        it.skip("should call addToSVG on each Path in the paths array.", () => {
-            sketch.addPathsToSVG();
-            expect(mockPath1.addToSVG).toHaveBeenCalledWith(sketch.svg, {
-                stroke: sketch.stroke,
-                strokeWidth: sketch.strokeWidth
-            });
-        });
-    });
-
-    describe.skip("addCirclesToSVG", () => {
-        let sketch, mockCircle1, mockCircle2;
-
-        beforeEach(() => {
-            sketch = new Sketch();
-            mockCircle1 = new Circle(0, 0, 10);
-            mockCircle2 = new Circle(5, 5, 5);
-            jest.spyOn(mockCircle1, 'toSVGElement').mockImplementation(()=> {});
-            jest.spyOn(mockCircle2, 'toSVGElement').mockImplementation(()=> {});
-            sketch.circles = [mockCircle1, mockCircle2];
-        });
-
-        it("Calls toSVGElement on each Circle in the circles array.", () => {
-            sketch.addCirclesToSVG();
-            expect(mockCircle1.toSVGElement).toHaveBeenCalledWith();
-            expect(mockCircle2.toSVGElement).toHaveBeenCalledWith();
-        });
-    });
-
     describe("clear", () => {
         it("Clears the document body.", () => {
             let sketch = new Sketch();
