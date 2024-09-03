@@ -14,10 +14,9 @@ describe("Sketch", () => {
     
             expect(sketch.seed).toHaveProperty("hex");
             expect(sketch.seed).toHaveProperty("decimal");
-    
-        })
-    
+        });
     });
+
     describe("addSingleShape", () => {
         let sketch;
         beforeEach(() => {
@@ -31,7 +30,11 @@ describe("Sketch", () => {
         });
 
         it("Adds Paths to the Sketch.paths array.", () => {
-            const path = new Path([new Vector(), new Vector(1, 1), new Vector(2, 2)]);
+            const path = new Path([
+              new Vector(),
+              new Vector(1, 1),
+              new Vector(2, 2)
+            ]);
             sketch.addSingleShape(path);
             expect(sketch.paths[0]).toEqual(path);
         });
@@ -44,12 +47,13 @@ describe("Sketch", () => {
 
         it("Throws a TypeError if an unsupported shape is added.", () => {
             const unsupportedShape = { foo: 15, bar: 20 };
-            expect(() => sketch.addSingleShape(unsupportedShape)).toThrow(TypeError);
+            expect(() => sketch.addSingleShape(unsupportedShape))
+            .toThrow(TypeError);
         });
     });
 
     describe("addPathsToSVG", () => {
-      it("adds a path to the SVG via the SVGBuilder.", () => {
+      it("Adds a path to the SVG via the SVGBuilder.", () => {
         const sketch = new Sketch();
         sketch.add(new Path([
           new Vector(0, 0),
@@ -58,17 +62,29 @@ describe("Sketch", () => {
         ]));
         sketch.draw();
         expect(sketch.svg.outerHTML).toMatch("path");
-      })
-    })
+      });
+    });
 
     describe("addCirclesToSVG", () => {
-      it("adds a circle to the SVG via the SVGBuilder.", () => {
+      it("Adds a circle to the SVG via the SVGBuilder.", () => {
         const sketch = new Sketch();
         sketch.add(new Circle(0, 0, 100));
         sketch.draw();
         expect(sketch.svg.outerHTML).toMatch("circle");
-      })
-    })
+      });
+    });
+
+    describe("addLinesToSVG", () => {
+      it("Adds a line to the SVG via the SVGBuilder.", () => {
+        const sketch = new Sketch();
+        sketch.add(new Line(
+          new Vector(0, 0), new Vector(4, 4)
+        ));
+        sketch.draw();
+        expect(sketch.svg.outerHTML).toMatch("line");
+      });
+    });
+  
     describe("setSeed", () => {
         it("Sets the Sketch seed.", () => {
             const sketch = new Sketch();
@@ -120,7 +136,7 @@ describe("Sketch", () => {
             sketch.circles = [mockCircle1, mockCircle2];
         });
 
-        it("should call toSVGElement on each Circle in the circles array.", () => {
+        it("Calls toSVGElement on each Circle in the circles array.", () => {
             sketch.addCirclesToSVG();
             expect(mockCircle1.toSVGElement).toHaveBeenCalledWith();
             expect(mockCircle2.toSVGElement).toHaveBeenCalledWith();
