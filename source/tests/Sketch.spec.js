@@ -48,6 +48,27 @@ describe("Sketch", () => {
         });
     });
 
+    describe("addPathsToSVG", () => {
+      it("adds a path to the SVG via the SVGBuilder.", () => {
+        const sketch = new Sketch();
+        sketch.add(new Path([
+          new Vector(0, 0),
+          new Vector(3, 0),
+          new Vector(2, 1)
+        ]));
+        sketch.draw();
+        expect(sketch.svg.outerHTML).toMatch("path");
+      })
+    })
+
+    describe("addCirclesToSVG", () => {
+      it("adds a circle to the SVG via the SVGBuilder.", () => {
+        const sketch = new Sketch();
+        sketch.add(new Circle(0, 0, 100));
+        sketch.draw();
+        expect(sketch.svg.outerHTML).toMatch("circle");
+      })
+    })
     describe("setSeed", () => {
         it("Sets the Sketch seed.", () => {
             const sketch = new Sketch();
