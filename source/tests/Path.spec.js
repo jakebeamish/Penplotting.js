@@ -10,8 +10,18 @@ describe("Path", () => {
             ], {
                 isClosed: false
             });
+            expect(path.toSVGElement().outerHTML).not.toMatch("Z");
+        });
 
-            expect(path.toSVGElement().toString()).not.toMatch("Z");
-        })
+        it("returns a valid closed path element with a command string that ends with a 'Z'.", () => {
+            const path = new Path([
+                new Vector(0, 0),
+                new Vector(1, 1)
+            ], {
+                isClosed: true
+            });
+
+            expect(path.toSVGElement().outerHTML).toMatch("Z");
+        });
     });
 });
