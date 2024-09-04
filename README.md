@@ -43,7 +43,6 @@ const sketch = new Sketch({
 Define a sketch.generate() function, in which Vectors, Lines and other shapes can be created, manipulated, and added to the SVG document using `sketch.add(shapes)`.
 
 ```js
-// Define a generate() function
 // This is where the work is made
 sketch.generate = () => {
     // Create Lines from Vectors
@@ -54,10 +53,12 @@ sketch.generate = () => {
     // Add shapes to the Sketch
     sketch.add(line);
 }
+
+sketch.draw();
 ```
 
-Calling `sketch.draw()` at the end of the file will generate an SVG element and UI inside `index.html`, which can be viewed from a browser,
-using something like the Live Server Extension for VS Code.
+Calling `sketch.draw()` at the end of the file will generate an SVG element and
+UI inside `index.html`, which can be opened in a browser.
 
 ### Keyboard shortcuts
 | Action | Key |
@@ -75,7 +76,5 @@ Personally, I use vpype to optimise the file, and then the axidraw Inkscape plug
 Contributions are welcome. Issues, comments and Pull Requests can be made at 
 https://github.com/jakebeamish/penplot-svg-tool/issues.
 
-Currently, `jest` and `jest-cucumber` are used for testing.
-Some scenarios are described in feature files, but the majority of tests are not.
+The project is tested using jest. Documentation is generated using JSDoc.
 
-Documentation is generated using JSDoc.
