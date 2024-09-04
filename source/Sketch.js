@@ -59,7 +59,7 @@ export class Sketch {
       .setBackgroundColor(this.backgroundColor);
 
     this.header;
-    this.generate = () => {};
+    this.generate = () => { };
 
     this.seed = seed;
 
@@ -86,6 +86,28 @@ export class Sketch {
   /**
    * Adds shapes to the sketch.
    * @param {Line|Circle|Path|Array} shape - An object or array of objects to be added to the sketch.
+   * @example
+   * import { Sketch, Line, Circle } from "@jakebeamish/penplotting";
+
+const sketch = new Sketch({
+    size: {
+        width: 100,
+        height: 100
+    },
+    backgroundColor: "#ffffff"
+});
+
+sketch.generate = () => {
+    const line = Line.fromArray([0, 0, 100, 100]);
+    const circlesArray = [
+        new Circle(10, 10, 10),
+        new Circle(40, 40, 15),
+        new Circle(80, 80, 20)
+    ];
+    sketch.add([line, circlesArray]);
+}
+
+sketch.draw();
    */
   add(shape) {
     if (Array.isArray(shape)) {
@@ -113,7 +135,7 @@ export class Sketch {
     } else if (shape instanceof Circle) {
       this.circles.push(shape);
     } else {
-      throw new TypeError("Unsupported shape type: ${shape}" );
+      throw new TypeError("Unsupported shape type: ${shape}");
     }
   }
 
