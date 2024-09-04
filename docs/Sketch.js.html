@@ -60,8 +60,7 @@ export class Sketch {
       .setViewBox(`0 0 ${this.size.width} ${this.size.height}`)
       .setBackgroundColor(this.backgroundColor);
 
-    this.header;
-    this.generate = () => {};
+    this.generate = () => { };
 
     this.seed = seed;
 
@@ -86,8 +85,26 @@ export class Sketch {
   }
 
   /**
-   * Adds shapes to the sketch.
+   * @summary Adds shapes to the sketch.
    * @param {Line|Circle|Path|Array} shape - An object or array of objects to be added to the sketch.
+   * @example
+   * import { Sketch, Line, Circle } from "@jakebeamish/penplotting";
+
+const sketch = new Sketch({
+    backgroundColor: "#ffffff"
+});
+
+sketch.generate = () => {
+    const line = Line.fromArray([0, 0, 100, 100]);
+    const circlesArray = [
+        new Circle(10, 10, 10),
+        new Circle(40, 40, 15),
+        new Circle(80, 80, 20)
+    ];
+    sketch.add([line, circlesArray]);
+}
+
+sketch.draw();
    */
   add(shape) {
     if (Array.isArray(shape)) {
@@ -104,7 +121,8 @@ export class Sketch {
   }
 
   /**
-   * Adds a single shape to the appropriate array.
+   * Adds a single shape to the appropriate array. Used by {@link Sketch#add}.
+   * @private
    * @param {Line|Path|Circle} shape
    */
   addSingleShape(shape) {
@@ -115,7 +133,7 @@ export class Sketch {
     } else if (shape instanceof Circle) {
       this.circles.push(shape);
     } else {
-      throw new TypeError("Unsupported shape type: ${shape}" );
+      throw new TypeError("Unsupported shape type: ${shape}");
     }
   }
 
@@ -391,18 +409,18 @@ export class Sketch {
     this.updateDocumentTitle();
 
     // Create a HTML header element and append to body.
-    this.header = this.createElement("header", document.body);
+    const header = this.createElement("header", document.body);
 
     // Create a h1 title and append to header.
-    this.createElement("h1", this.header, this.title);
+    this.createElement("h1", header, this.title);
 
-    this.createSeedInput(this.header);
+    this.createSeedInput(header);
 
-    this.createHistoryForm(this.header);
+    this.createHistoryForm(header);
 
-    this.createNavigation(this.header);
+    this.createNavigation(header);
 
-    this.addSketchInfo(this.header, timeTaken);
+    this.addSketchInfo(header, timeTaken);
   }
 }
 </code></pre></article></section></div></div></div><div class="search-container" id="PkfLWpAbet" style="display:none"><div class="wrapper" id="iCxFxjkHbP"><button class="icon-button search-close-button" id="VjLlGakifb" aria-label="close search"><svg><use xlink:href="#close-icon"></use></svg></button><div class="search-box-c"><svg><use xlink:href="#search-icon"></use></svg> <input type="text" id="vpcKVYIppa" class="search-input" placeholder="Search..." autofocus></div><div class="search-result-c" id="fWwVHRuDuN"><span class="search-result-c-text">Type anything to view search result</span></div></div></div><div class="mobile-menu-icon-container"><button class="icon-button" id="mobile-menu" data-isopen="false" aria-label="menu"><svg><use xlink:href="#menu-icon"></use></svg></button></div><div id="mobile-sidebar" class="mobile-sidebar-container"><div class="mobile-sidebar-wrapper"><a href="/" class="sidebar-title sidebar-title-anchor">Penplotting.js</a><div class="mobile-nav-links"><div class="navbar-item"><a id="" href="https://github.com/jakebeamish/Penplotting.js/" target="_blank">GitHub</a></div></div><div class="mobile-sidebar-items-c"><div class="sidebar-section-title with-arrow" data-isopen="false" id="sidebar-classes"><div>Classes</div><svg><use xlink:href="#down-icon"></use></svg></div><div class="sidebar-section-children-container"><div class="sidebar-section-children"><a href="Circle.html">Circle</a></div><div class="sidebar-section-children"><a href="LCG.html">LCG</a></div><div class="sidebar-section-children"><a href="Line.html">Line</a></div><div class="sidebar-section-children"><a href="Mulberry32.html">Mulberry32</a></div><div class="sidebar-section-children"><a href="PRNG.html">PRNG</a></div><div class="sidebar-section-children"><a href="Path.html">Path</a></div><div class="sidebar-section-children"><a href="Quadtree.html">Quadtree</a></div><div class="sidebar-section-children"><a href="Rectangle.html">Rectangle</a></div><div class="sidebar-section-children"><a href="Sketch.html">Sketch</a></div><div class="sidebar-section-children"><a href="Vector.html">Vector</a></div><div class="sidebar-section-children"><a href="XORShift32.html">XORShift32</a></div></div><div class="sidebar-section-title with-arrow" data-isopen="false" id="sidebar-global"><div>Global</div><svg><use xlink:href="#down-icon"></use></svg></div><div class="sidebar-section-children-container"><div class="sidebar-section-children"><a href="global.html#decToHex">decToHex</a></div><div class="sidebar-section-children"><a href="global.html#fract">fract</a></div><div class="sidebar-section-children"><a href="global.html#hexToDec">hexToDec</a></div><div class="sidebar-section-children"><a href="global.html#intersectionLineLine">intersectionLineLine</a></div><div class="sidebar-section-children"><a href="global.html#lerp">lerp</a></div><div class="sidebar-section-children"><a href="global.html#map">map</a></div><div class="sidebar-section-children"><a href="global.html#sinFract">sinFract</a></div><div class="sidebar-section-children"><a href="global.html#unseededRandomHex">unseededRandomHex</a></div><div class="sidebar-section-children"><a href="global.html#wrap">wrap</a></div></div></div><div class="mobile-navbar-actions"><div class="navbar-right-item"><button class="icon-button search-button" aria-label="open-search"><svg><use xlink:href="#search-icon"></use></svg></button></div><div class="navbar-right-item"><button class="icon-button theme-toggle" aria-label="toggle-theme"><svg><use class="theme-svg-use" xlink:href="#dark-theme-icon"></use></svg></button></div><div class="navbar-right-item"><button class="icon-button font-size" aria-label="change-font-size"><svg><use xlink:href="#font-size-icon"></use></svg></button></div></div></div></div><script type="text/javascript" src="scripts/core.min.js"></script><script src="scripts/search.min.js" defer="defer"></script><script src="scripts/third-party/fuse.js" defer="defer"></script><script type="text/javascript">var tocbotInstance=tocbot.init({tocSelector:"#eed4d2a0bfd64539bb9df78095dec881",contentSelector:".main-content",headingSelector:"h1, h2, h3",hasInnerContainers:!0,scrollContainer:".main-content",headingsOffset:130,onClick:bringLinkToView})</script></body></html>
