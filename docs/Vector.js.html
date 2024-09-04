@@ -30,6 +30,10 @@ export class Vector {
         return new Vector(array[0], array[1]);
     }
 
+    toArray() {
+        return [this.x, this.y];
+    }
+
     /**
      * Create a vector from an angle.
      * @param {number} angle - The angle of the vector in radians.

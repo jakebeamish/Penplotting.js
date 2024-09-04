@@ -76,7 +76,8 @@ export class Sketch {
 
   /**
    *
-   * @returns {string} - The file name to be used to name the Sketch's SVG document, as a string
+   * @returns {string} - The file name to be used for the Sketch's SVG file,
+   * as a string in the format `Title_ffffffff_210x297mm.svg`
    */
   filename() {
     return `${this.title}_${this.seed.hex}_${this.size.width}x${this.size.height}${this.units}.svg`;
