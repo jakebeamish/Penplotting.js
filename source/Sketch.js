@@ -112,7 +112,7 @@ export class Sketch {
     } else if (shape instanceof Circle) {
       this.circles.push(shape);
     } else {
-      throw new TypeError("Unsupported shape type:", shape);
+      throw new TypeError("Unsupported shape type: ${shape}" );
     }
   }
 

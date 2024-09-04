@@ -5,6 +5,7 @@ import { Circle } from "../Circle";
 import { Vector } from "../Vector";
 
 describe("Sketch", () => {
+
   describe("constructor", () => {
     it("Creates a seed object literal with hex and decimal properties if Sketch is instantiated with a seed property.", () => {
 
@@ -384,7 +385,7 @@ describe("Sketch", () => {
 
   describe("add", () => {
 
-    test("Adds a line object to a sketch", () => {
+    test("Adds a line object to a sketch.", () => {
       const sketch = new Sketch();
 
       const line = new Line(
@@ -401,7 +402,7 @@ describe("Sketch", () => {
     it.skip("Adds nothing to the sketch if given an empty array to add.", () => {
     });
 
-    test("Adds an array of lines to a sketch", () => {
+    test("Adds an array of lines to a sketch.", () => {
       const sketch = new Sketch();
 
       const lines = [
@@ -420,7 +421,7 @@ describe("Sketch", () => {
       expect(sketch.lines).toEqual(lines);
     })
 
-    test("Adds a single line and an inner array of lines to a sketch", () => {
+    test("Adds a single line and an inner array of lines to a sketch.", () => {
       const sketch = new Sketch();
 
       const array = [
