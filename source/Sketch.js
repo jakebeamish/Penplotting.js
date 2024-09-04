@@ -58,7 +58,6 @@ export class Sketch {
       .setViewBox(`0 0 ${this.size.width} ${this.size.height}`)
       .setBackgroundColor(this.backgroundColor);
 
-    this.header;
     this.generate = () => { };
 
     this.seed = seed;
@@ -84,16 +83,12 @@ export class Sketch {
   }
 
   /**
-   * Adds shapes to the sketch.
+   * @summary Adds shapes to the sketch.
    * @param {Line|Circle|Path|Array} shape - An object or array of objects to be added to the sketch.
    * @example
    * import { Sketch, Line, Circle } from "@jakebeamish/penplotting";
 
 const sketch = new Sketch({
-    size: {
-        width: 100,
-        height: 100
-    },
     backgroundColor: "#ffffff"
 });
 
@@ -124,7 +119,8 @@ sketch.draw();
   }
 
   /**
-   * Adds a single shape to the appropriate array.
+   * Adds a single shape to the appropriate array. Used by {@link Sketch#add}.
+   * @private
    * @param {Line|Path|Circle} shape
    */
   addSingleShape(shape) {
@@ -411,17 +407,17 @@ sketch.draw();
     this.updateDocumentTitle();
 
     // Create a HTML header element and append to body.
-    this.header = this.createElement("header", document.body);
+    const header = this.createElement("header", document.body);
 
     // Create a h1 title and append to header.
-    this.createElement("h1", this.header, this.title);
+    this.createElement("h1", header, this.title);
 
-    this.createSeedInput(this.header);
+    this.createSeedInput(header);
 
-    this.createHistoryForm(this.header);
+    this.createHistoryForm(header);
 
-    this.createNavigation(this.header);
+    this.createNavigation(header);
 
-    this.addSketchInfo(this.header, timeTaken);
+    this.addSketchInfo(header, timeTaken);
   }
 }
