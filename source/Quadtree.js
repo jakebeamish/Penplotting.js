@@ -1,5 +1,12 @@
 import { Rectangle } from "./Rectangle.js";
-/** Class representing a quadtree. */
+/**
+ * Class representing a quadtree.
+ * 
+ * This implementation is adapted from CodingTrain/QuadTree, which is released
+ * with an MIT License. For the full license text, see `/LICENCE.md#CodingTrain/QuadTree`.
+ *
+ * @see https://github.com/CodingTrain/QuadTree
+ */
 export class Quadtree {
     /**
      * Create a quadtree.

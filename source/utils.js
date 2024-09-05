@@ -1,5 +1,9 @@
 /**
- * Generate pseudo-random numbers from `x` and `y` co-ordinates
+ * Generates pseudo-random numbers from `x` and `y` co-ordinates. This
+ * technique is adapted from The Art of Code's YouTube video on value noise.
+ *
+ * @see https://www.youtube.com/watch?v=zXsWftRdsvU
+ * 
  * @returns {number} - A floating point number between 0 and 1
  */
 export function sinFract(x, y, a, b, m) {

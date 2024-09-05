@@ -109,13 +109,24 @@ export class PRNG {
 }
 
 /**
- * @summary Linear Congruential Generator (LCG) implemenation of PRNG.
+ * LCG (Linear Congruential Generator) Pseudorandom Number Generator Class
  * @extends PRNG
+ * 
+ * @summary Implements the LCG algorithm to generate pseudorandom numbers.
+ * @description
+ * This class provides the LCG method of generating psuedorandom
+ * numbers to the {@link PRNG} class.
+ * 
+ * @example
+ * const rng = new LCG(123456789);
+ * console.log(rng.next()); // Generates a pseudorandom number
+ * 
+ * @see https://en.wikipedia.org/wiki/Linear_congruential_generator
  */
 export class LCG extends PRNG {
     /**
      * Creates an instance of LCG.
-     * @param {number} seed - The seed number.
+     * @param {number} seed - The seed value for the LCG PRNG.
      */
     constructor(seed) {
         super(seed);
@@ -126,8 +137,8 @@ export class LCG extends PRNG {
     }
 
     /**
-     * Generates the next psuedo-random number.
-     * @returns {number} - The next psuedo-random number.
+     * Generates the next pseudorandom number.
+     * @returns {number} A pseudorandom number in the range [0-1).
      */
     next() {
         this.state = (this.multiplier * this.state + this.increment) % this.modulus;
@@ -136,7 +147,7 @@ export class LCG extends PRNG {
 
     /**
      * Returns the maximum possible value of the LCG.
-     * @returns {number} - The maximum value (2^32).
+     * @returns {number} The maximum value (2^32).
      */
     maxValue() {
         return this.modulus;
@@ -144,8 +155,22 @@ export class LCG extends PRNG {
 }
 
 /**
- * @summary Mulberry32 implementation of PRNG.
+ * Mulberry32 Pseudorandom Number Generator Class
  * @extends PRNG
+ * 
+ * @summary Implements the Mulberry32 algorithm to generate pseudorandom numbers.
+ * @description
+ * This class provides the Mulberry32 method of generating psuedorandom
+ * numbers to the {@link PRNG} class.
+ * 
+ * The Mulberry32 algorithm was written by Tommy Ettinger in 2017 and is released to the public domain, meaning it can be freely used, modified, and distributed without restrictions.
+ * 
+ * @example
+ * const rng = new Mulberry32(123456789);
+ * console.log(rng.next()); // Generates a pseudorandom number
+ * 
+ * @see https://gist.github.com/tommyettinger/46a874533244883189143505d203312c
+
  */
 export class Mulberry32 extends PRNG {
     /**
@@ -159,7 +184,7 @@ export class Mulberry32 extends PRNG {
 
     /**
      * Returns the maximum possible value of Mulberry32.
-     * @returns {number} - The maximum value (2^32).
+     * @returns {number} The maximum value (2^32).
      */
     maxValue() {
         return 2 ** 32;
@@ -167,7 +192,12 @@ export class Mulberry32 extends PRNG {
 
     /**
      * Generates the next psuedo-random number.
-     * @returns {number} - The next psuedo-random number.
+     * @returns {number} A number in the range [0-1).
+     * 
+     * @example
+     * // Returns a random number in the range [0-1)
+     * const rng = new Mulberry32();
+     * console.log(rng.next());
      */
     next() {
         let t = this.state += 0x6D2B79F5;
@@ -179,8 +209,24 @@ export class Mulberry32 extends PRNG {
 }
 
 /**
- * @summary XORShift32 implementation of PRNG.
+ * XORShift32 Pseudorandom Number Generator Class
  * @extends PRNG
+ * 
+ * @summary Implements the XORShift32 algorithm to generate pseudorandom numbers.
+ * @description
+ * This class provides the XORShift32 method of generating psuedorandom
+ * numbers to the {@link PRNG} class. It uses bitwise operations
+ * to generate a sequence of pseudorandom 32-bit unsigned integers.
+ * 
+ * The XORShift algorithm was written by Geogrge Marsaglia in 2003 and is released to the public domain, meaning it can be freely used, modified, and distributed without restrictions.
+ * 
+ * @example
+ * const rng = new XORShift32(123456789);
+ * console.log(rng.next()); // Generates a pseudorandom number
+ * 
+ * @see Marsaglia, G. (2003) "XORShift RNGs", Journal of Statistical Software
+ *      https://www.jstatsoft.org/article/view/v008i14
+
  */
 export class XORShift32 extends PRNG {
     constructor(seed) {
@@ -190,7 +236,7 @@ export class XORShift32 extends PRNG {
 
     /**
    * Returns the maximum possible value of XORShift32.
-   * @returns {number} - The maximum value (2^32).
+   * @returns {number} The maximum value (2^32).
    */
     maxValue() {
         return 2 ** 32;
@@ -198,7 +244,12 @@ export class XORShift32 extends PRNG {
 
     /**
      * Generates the next psuedo-random number.
-     * @returns {number} - The next psuedo-random number.
+     * @returns {number} A number in the range [0-1).
+     * 
+     * @example
+     * // Returns a random number in the range [0-1)
+     * const rng = new XORShift32();
+     * console.log(rng.next());
      */
     next() {
         let a = this.state;
