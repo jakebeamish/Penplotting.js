@@ -2,8 +2,8 @@ import { Rectangle } from "./Rectangle.js";
 /**
  * Class representing a quadtree.
  * 
- * This implementation is adapted from CodingTrain/QuadTree, which is released
- * with an MIT License. For the full license text, see `/LICENCE.md#CodingTrain/QuadTree`.
+ * This implementation is adapted from CodingTrain/QuadTree, which is 
+ * licensed under an MIT License.
  *
  * @see https://github.com/CodingTrain/QuadTree
  */
@@ -11,7 +11,7 @@ export class Quadtree {
     /**
      * Create a quadtree.
      * @param {Rectangle} boundary - The bounding box of the quadtree.
-     * @param {number} capacity - Defines the number of points that can be
+     * @param {number} capacity - The number of points that can be
      *                            inserted into Quadtree without subdividing.
      */
     constructor(boundary, capacity) {
