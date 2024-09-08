@@ -79,7 +79,7 @@ https://github.com/jakebeamish/penplot-svg-tool/issues.
 The project is tested using jest. Documentation is generated using JSDoc.
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE.md] file for
+This project is licensed under the MIT License. See the [LICENSE.md](https://github.com/jakebeamish/Penplotting.js/blob/main/LICENSE.md) file for
 details.
 
 ## Acknowledgements
