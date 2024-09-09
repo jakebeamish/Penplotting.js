@@ -48,6 +48,7 @@
     "jest-cucumber": "^4.4.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-html-reporter": "^3.10.2",
-    "jsdoc": "^4.0.3"
+    "jsdoc": "^4.0.3",
+    "prettier": "3.3.3"
   }
 }

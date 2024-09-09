@@ -62,77 +62,76 @@ describe("lerp", () => {
 });
 
 describe("map", () => {
-	test("If withinBounds = true, the output should be constrained by min2 and max2.", () => {
-		let val = 10;
-		let min1 = 0;
-		let max1 = 100;
-		let min2 = 5;
-		let max2 = 6;
+  test("If withinBounds = true, the output should be constrained by min2 and max2.", () => {
+    let val = 10;
+    let min1 = 0;
+    let max1 = 100;
+    let min2 = 5;
+    let max2 = 6;
 
-		let output = map(val, min1, max1, min2, max2, true);
+    let output = map(val, min1, max1, min2, max2, true);
 
-		expect(output).toBeLessThanOrEqual(max2);
-		expect(output).toBeGreaterThanOrEqual(min2);
-	});
+    expect(output).toBeLessThanOrEqual(max2);
+    expect(output).toBeGreaterThanOrEqual(min2);
+  });
 
-	test("If withinBounds = false, the output should not be constrained by min2 and max2.", () => {
-		let val = 11;
-		let min1 = 0;
-		let max1 = 10;
-		let min2 = 5;
-		let max2 = 6;
+  test("If withinBounds = false, the output should not be constrained by min2 and max2.", () => {
+    let val = 11;
+    let min1 = 0;
+    let max1 = 10;
+    let min2 = 5;
+    let max2 = 6;
 
-		let output = map(val, min1, max1, min2, max2);
+    let output = map(val, min1, max1, min2, max2);
 
-		expect(output).toBeGreaterThan(max2);
-	});
+    expect(output).toBeGreaterThan(max2);
+  });
 });
 
-
 describe("sinFract", () => {
-	test("Correctly computes the sinFract value for given inputs.", () => {
-		// Example inputs and expected outputs
-		const testCases = [
-			{
-				x: 1,
-				y: 2,
-				a: 0.5,
-				b: 0.3,
-				m: 10,
-				expected: fract(Math.sin(1 * 0.5 + 2 * 0.3) * 10),
-			},
-			{
-				x: 0,
-				y: 0,
-				a: 1,
-				b: 1,
-				m: 1,
-				expected: fract(Math.sin(0 * 1 + 0 * 1) * 1),
-			},
-			{
-				x: -1,
-				y: -2,
-				a: 0.2,
-				b: 0.4,
-				m: 5,
-				expected: fract(Math.sin(-1 * 0.2 + -2 * 0.4) * 5),
-			},
-			// Add more test cases as needed
-		];
+  test("Correctly computes the sinFract value for given inputs.", () => {
+    // Example inputs and expected outputs
+    const testCases = [
+      {
+        x: 1,
+        y: 2,
+        a: 0.5,
+        b: 0.3,
+        m: 10,
+        expected: fract(Math.sin(1 * 0.5 + 2 * 0.3) * 10),
+      },
+      {
+        x: 0,
+        y: 0,
+        a: 1,
+        b: 1,
+        m: 1,
+        expected: fract(Math.sin(0 * 1 + 0 * 1) * 1),
+      },
+      {
+        x: -1,
+        y: -2,
+        a: 0.2,
+        b: 0.4,
+        m: 5,
+        expected: fract(Math.sin(-1 * 0.2 + -2 * 0.4) * 5),
+      },
+      // Add more test cases as needed
+    ];
 
-		testCases.forEach(({ x, y, a, b, m, expected }) => {
-			expect(sinFract(x, y, a, b, m)).toBeCloseTo(expected);
-		});
-	});
+    testCases.forEach(({ x, y, a, b, m, expected }) => {
+      expect(sinFract(x, y, a, b, m)).toBeCloseTo(expected);
+    });
+  });
 });
 
 describe("wrap", () => {
-	test("Returns numbers between min and max.", () => {
-		const min = 0;
-		const max = 7;
-		let x = wrap(-1, min, max);
+  test("Returns numbers between min and max.", () => {
+    const min = 0;
+    const max = 7;
+    let x = wrap(-1, min, max);
 
-		expect(x).toBeGreaterThanOrEqual(min);
-		expect(x).toBeLessThan(max);
-	});
+    expect(x).toBeGreaterThanOrEqual(min);
+    expect(x).toBeLessThan(max);
+  });
 });

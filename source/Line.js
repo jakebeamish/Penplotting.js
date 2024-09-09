@@ -27,7 +27,7 @@ export class Line {
   static fromArray(array) {
     return new Line(
       new Vector(array[0], array[1]),
-      new Vector(array[2], array[3])
+      new Vector(array[2], array[3]),
     );
   }
 
@@ -107,11 +107,11 @@ export class Line {
    */
   intersects(target) {
     if (target instanceof Line) {
-		return Line.lineIntersection(this, target);
-	} else {
-		throw new TypeError("Target shape must be a Line.")
-	}
-  };
+      return Line.lineIntersection(this, target);
+    } else {
+      throw new TypeError("Target shape must be a Line.");
+    }
+  }
 
   toArray() {
     return [this.a.x, this.a.y, this.b.x, this.b.y];
@@ -125,7 +125,7 @@ export class Line {
     let units = "";
     let element = document.createElementNS(
       "http://www.w3.org/2000/svg",
-      "line"
+      "line",
     );
     element.setAttribute("x1", `${this.a.x}${units}`);
     element.setAttribute("y1", `${this.a.y}${units}`);

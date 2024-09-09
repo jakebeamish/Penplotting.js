@@ -5,6 +5,14 @@ export { Circle } from "./Circle.js";
 export { AABB } from "./AABB.js";
 export { Plot } from "./Plot.js";
 export { LCG, Mulberry32, XORShift32, unseededRandomHex } from "./Random.js";
-export { fract, lerp, map, sinFract, wrap, decToHex, hexToDec } from "./utils.js";
+export {
+  fract,
+  lerp,
+  map,
+  sinFract,
+  wrap,
+  decToHex,
+  hexToDec,
+} from "./utils.js";
 export { PAPER } from "./Paper.js";
 export { Quadtree } from "./Quadtree.js";

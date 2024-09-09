@@ -15,7 +15,7 @@ describe("PRNG", () => {
 
     it("Throws an error if maxValue() is called directly.", () => {
       expect(maxValue).toThrow(
-        new Error("Method maxValue() must be implemented.")
+        new Error("Method maxValue() must be implemented."),
       );
     });
 
@@ -81,13 +81,13 @@ describe("PRNG", () => {
     it("Returns true if the chance parameter is greater than a random float between 0 and 1.", () => {
       let prng = new Mulberry32();
       let actualValue = prng.randomChance(1);
- 
+
       expect(actualValue).toBeTruthy();
     });
 
     it("Always returns a boolean.", () => {
       let prng = new Mulberry32();
- 
+
       expect(typeof prng.randomChance(0.5)).toBe("boolean");
     });
 

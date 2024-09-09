@@ -58,7 +58,7 @@ export class Plot {
       .setViewBox(`0 0 ${this.size.width} ${this.size.height}`)
       .setBackgroundColor(this.backgroundColor);
 
-    this.generate = () => { };
+    this.generate = () => {};
 
     this.seed = seed;
 
@@ -131,7 +131,9 @@ plot.draw();
     } else if (shape instanceof Circle) {
       this.circles.push(shape);
     } else {
-      throw new TypeError("Unsupported shape type. Shape must be a Line, Path or Circle.");
+      throw new TypeError(
+        "Unsupported shape type. Shape must be a Line, Path or Circle.",
+      );
     }
   }
 
@@ -264,7 +266,7 @@ plot.draw();
     const uniqueLines = [];
 
     let sortedLines = this.lines.toSorted(
-      (j, k) => k.a.distance(k.b) - j.a.distance(j.b)
+      (j, k) => k.a.distance(k.b) - j.a.distance(j.b),
     );
     for (const line of sortedLines) {
       let isOverlapped = false;
@@ -339,7 +341,7 @@ plot.draw();
     const element = document.createElement(tag);
     if (textContent) element.textContent = textContent;
     Object.keys(attributes).forEach((key) =>
-      element.setAttribute(key, attributes[key])
+      element.setAttribute(key, attributes[key]),
     );
     parent.appendChild(element);
     return element;
@@ -395,7 +397,7 @@ plot.draw();
     this.createElement(
       "p",
       plotInfo,
-      `Generated ${numOfShapes} shapes in ${timeText}`
+      `Generated ${numOfShapes} shapes in ${timeText}`,
     );
   }
 

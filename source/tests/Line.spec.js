@@ -26,7 +26,7 @@ describe("Line", () => {
         const line = new Line(start, end);
 
         expect(line.length()).toBe(expected);
-      }
+      },
     );
   });
 
@@ -70,13 +70,15 @@ describe("Line", () => {
     it("Returns the result of Line.lineIntersection if target is a line.", () => {
       const line1 = Line.fromArray([0, 0, 5, 0]);
       const line2 = Line.fromArray([0, 1, 5, 1]);
-      expect(line1.intersects(line2)).toEqual(Line.lineIntersection(line1, line2));
+      expect(line1.intersects(line2)).toEqual(
+        Line.lineIntersection(line1, line2),
+      );
     });
     it("Throws a TypeError if the target object is not recognised.", () => {
       const line = Line.fromArray([0, 0, 5, 0]);
       const notALine = { name: "notALine" };
       expect(() => line.intersects(notALine)).toThrow(TypeError);
-    })
+    });
   });
 
   describe("isDuplicate", () => {
@@ -92,7 +94,7 @@ describe("Line", () => {
         let target = Line.fromArray(targetline);
 
         expect(line.isDuplicate(target)).toBe(expected);
-      }
+      },
     );
   });
 
