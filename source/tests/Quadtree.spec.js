@@ -1,5 +1,5 @@
 import { Quadtree } from "../Quadtree";
-import { Rectangle } from "../Rectangle";
+import { AABB } from "../AABB";
 import { Vector } from "../Vector";
 import { Sketch } from "../Sketch";
 
@@ -7,8 +7,8 @@ describe("Quadtree", () => {
     let quadtree, boundary, range, points;
 
     beforeEach(() => {
-        boundary = new Rectangle(0.5, 0.5, 0.5, 0.5);
-        range = new Rectangle(0.1, 0.1, 0.1, 0.1);
+        boundary = new AABB(0.5, 0.5, 0.5, 0.5);
+        range = new AABB(0.1, 0.1, 0.1, 0.1);
         quadtree = new Quadtree(boundary, 1);
         points = [];
 
@@ -30,7 +30,7 @@ describe("Quadtree", () => {
 
     describe("query", () => {
         it("should return an empty array if given query range is out of bounds.", () => {
-            const outOfBoundsRect = new Rectangle(10, 10, 1, 1);
+            const outOfBoundsRect = new AABB(10, 10, 1, 1);
             const result = quadtree.query(outOfBoundsRect);
             expect(result).toEqual([]);
         });

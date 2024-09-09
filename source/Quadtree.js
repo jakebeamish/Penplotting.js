@@ -1,4 +1,4 @@
-import { Rectangle } from "./Rectangle.js";
+import { AABB } from "./AABB.js";
 /**
  * Class representing a quadtree.
  * 
@@ -10,7 +10,7 @@ import { Rectangle } from "./Rectangle.js";
 export class Quadtree {
     /**
      * Create a quadtree.
-     * @param {Rectangle} boundary - The bounding box of the quadtree.
+     * @param {AABB} boundary - The bounding box of the quadtree.
      * @param {number} capacity - The number of points that can be
      *                            inserted into Quadtree without subdividing.
      */
@@ -23,7 +23,7 @@ export class Quadtree {
 
     /**
      * Check for points in a given range and return them in an array.
-     * @param {Rectangle} range - The bounding box of the query.
+     * @param {AABB} range - The bounding box of the query.
      * @returns {Vector[]}
      */
     query(range, found = []) {
@@ -74,7 +74,7 @@ export class Quadtree {
     }
 
     subdivide() {
-        let topLeftBoundary = new Rectangle(
+        let topLeftBoundary = new AABB(
             this.boundary.x - this.boundary.width / 2,
             this.boundary.y - this.boundary.height / 2,
             this.boundary.width / 2,
@@ -82,7 +82,7 @@ export class Quadtree {
         )
         this.topLeft = new Quadtree(topLeftBoundary, this.capacity);
 
-        let topRightBoundary = new Rectangle(
+        let topRightBoundary = new AABB(
             this.boundary.x + this.boundary.width / 2,
             this.boundary.y - this.boundary.height / 2,
             this.boundary.width / 2,
@@ -91,7 +91,7 @@ export class Quadtree {
 
         this.topRight = new Quadtree(topRightBoundary, this.capacity);
 
-        let bottomLeftBoundary = new Rectangle(
+        let bottomLeftBoundary = new AABB(
             this.boundary.x - this.boundary.width / 2,
             this.boundary.y + this.boundary.height / 2,
             this.boundary.width / 2,
@@ -99,7 +99,7 @@ export class Quadtree {
         )
         this.bottomLeft = new Quadtree(bottomLeftBoundary, this.capacity);
 
-        let bottomRightBoundary = new Rectangle(
+        let bottomRightBoundary = new AABB(
             this.boundary.x + this.boundary.width / 2,
             this.boundary.y + this.boundary.height / 2,
             this.boundary.width / 2,

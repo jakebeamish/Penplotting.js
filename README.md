@@ -10,7 +10,7 @@ Penplotting.js is a JavaScript framework for making generative art in SVG format
 ## Features
 
 - A Sketch class to contain everything needed to create and render the SVG
-- Shapes and geometry classes: 2D Vector, Line, Path, Circle, Rectangle
+- Shapes and geometry classes: 2D Vector, Line, Path, Circle, AABB
 - Seedable PRNG implementations with useful methods
 - Quadtree for optimised nearest-neighbour search
 - Paper sizes
@@ -48,7 +48,7 @@ sketch.generate = () => {
     // Create Lines from Vectors
     const a = new Vector(10, 10);
     const b = new Vector(90, 90);
-    const l = new Line(a, b);
+    const line = new Line(a, b);
 
     // Add shapes to the Sketch
     sketch.add(line);

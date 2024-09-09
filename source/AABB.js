@@ -1,10 +1,10 @@
 import { Vector } from "./Vector.js";
 import { Line } from "./Line.js";
 
-/** Class representing a rectangle. */
-export class Rectangle {
+/** Class representing an AABB. */
+export class AABB {
     /**
-     * Create a rectangle using centre position, width, and height.
+     * Create an AABB using centre position, width, and height.
      * @param {*} x - The x value of the centre.
      * @param {*} y - The y value of the centre.
      * @param {*} width - The width measured from the centre.
@@ -18,12 +18,12 @@ export class Rectangle {
     }
 
     /**
-     * Create a rectangle from four corner [Vectors]{@link Vector}.
+     * Create an AABB from four corner [Vectors]{@link Vector}.
      * @param {Vector} topLeft 
      * @param {Vector} topRight 
      * @param {Vector} bottomRight 
      * @param {Vector} bottomLeft 
-     * @returns {Rectangle} - A new Rectangle object.
+     * @returns {AABB} - A new AABB object.
      */
     static fromCorners(
         topLeft, topRight, bottomRight, bottomLeft
@@ -36,11 +36,11 @@ export class Rectangle {
         const width = topRight.x - centre.x;
         const height = bottomRight.y - centre.y;
 
-        return new Rectangle(centre.x, centre.y, width, height);
+        return new AABB(centre.x, centre.y, width, height);
     }
 
     /**
-     * Check if this rectangle contains a {@link Vector}.
+     * Check if this AABB contains a {@link Vector}.
      * @param {Vector} point - The vector to check.
      * @returns {boolean}
      */
@@ -53,8 +53,8 @@ export class Rectangle {
     }
 
     /**
-     * Check if this rectangle intersects another rectangle.
-     * @param {Rectangle} range - The target rectangle to check.
+     * Check if this aabb intersects another AABB.
+     * @param {AABB} range - The target AABB to check.
      * @returns {boolean}
      */
     intersects(range) {
@@ -68,7 +68,7 @@ export class Rectangle {
 
     /**
      * Create an array of [Lines]{@link Line}
-     * containing a line for each side of the rectangle.
+     * containing a line for each side of the AABB.
      * @returns {Line[]} - An array of Lines that can be added
      * to a {@link Sketch} using {@link Sketch#add}.
      */
