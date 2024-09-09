@@ -70,7 +70,7 @@ export class AABB {
      * Create an array of [Lines]{@link Line}
      * containing a line for each side of the AABB.
      * @returns {Line[]} - An array of Lines that can be added
-     * to a {@link Sketch} using {@link Sketch#add}.
+     * to a {@link Plot} using {@link Plot#add}.
      */
     lines() {
         const topLeft = new Vector(this.x - this.width, this.y - this.height);

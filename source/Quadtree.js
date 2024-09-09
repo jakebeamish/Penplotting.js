@@ -110,18 +110,18 @@ export class Quadtree {
 
     /**
      * For each boundary of this quadtree and all it's children,
-     * create [Lines]{@link Line} from those rectangles and add them to a {@link Sketch}.
-     * @param {Sketch} sketch 
+     * create [Lines]{@link Line} from those rectangles and add them to a {@link Plot}.
+     * @param {Plot} plot 
      */
-    show(sketch) {
+    show(plot) {
 
-        sketch.add(this.boundary.lines())
+        plot.add(this.boundary.lines())
 
         if (this.divided) {
-            this.topLeft.show(sketch);
-            this.topRight.show(sketch);
-            this.bottomLeft.show(sketch);
-            this.bottomRight.show(sketch);
+            this.topLeft.show(plot);
+            this.topRight.show(plot);
+            this.bottomLeft.show(plot);
+            this.bottomRight.show(plot);
         }
     }
 }

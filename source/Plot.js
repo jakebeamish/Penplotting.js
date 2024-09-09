@@ -8,20 +8,20 @@ import { SVGBuilder } from "./SVGBuilder.js";
 
 /**
  * @class
- * Sketch is an object that is able to create, display and download SVG documents.
+ * Plot is an object that is able to create, display and download SVG documents.
  */
-export class Sketch {
+export class Plot {
   /**
-   * @param {object} [options] - An object containing configuration for Sketch.
-   * @param {object} [options.size] - An object with width and height properties to be used as dimensions of the Sketch.
-   * @param {number} [options.size.width=100] - The width of the Sketch.
-   * @param {number} [options.size.height=100] - The height of the Sketch.
-   * @param {string} [options.title = "Untitled"] - The title of the Sketch.
+   * @param {object} [options] - An object containing configuration for Plot.
+   * @param {object} [options.size] - An object with width and height properties to be used as dimensions of the Plot.
+   * @param {number} [options.size.width=100] - The width of the Plot.
+   * @param {number} [options.size.height=100] - The height of the Plot.
+   * @param {string} [options.title = "Untitled"] - The title of the Plot.
    * @param {string} [options.units = "mm"] - The units of measurement to be used (i.e. "mm" or "in").
-   * @param {string} [options.backgroundColor = "transparent"] - The background colour of the sketch, as a hex value or HTML color name.
-   * @param {number} [options.seed] - The seed to be used for the Sketch. Defaults to an 8 digit hexadecimal integer.
-   * @param {string} [options.stroke = "black"] - The foreground colour of the sketch, as a hex value or HTML color name.
-   * @param {number} [options.strokeWidth = 1] - The line width of the Sketch. Defaults to 1 unit. (1mm)
+   * @param {string} [options.backgroundColor = "transparent"] - The background colour of the plot, as a hex value or HTML color name.
+   * @param {number} [options.seed] - The seed to be used for the Plot. Defaults to an 8 digit hexadecimal integer.
+   * @param {string} [options.stroke = "black"] - The foreground colour of the plot, as a hex value or HTML color name.
+   * @param {number} [options.strokeWidth = 1] - The line width of the Plot. Defaults to 1 unit. (1mm)
    * @param {number} [options.minimumLineLength = 0.1] - Lines shorter than this length are not drawn.
    */
   constructor({
@@ -75,7 +75,7 @@ export class Sketch {
 
   /**
    *
-   * @returns {string} - The file name to be used for the Sketch's SVG file,
+   * @returns {string} - The file name to be used for the Plot's SVG file,
    * as a string in the format `Title_ffffffff_210x297mm.svg`
    */
   filename() {
@@ -83,26 +83,26 @@ export class Sketch {
   }
 
   /**
-   * @summary Adds shapes to the sketch.
-   * @param {Line|Circle|Path|Array} shape - An object or array of objects to be added to the sketch.
+   * @summary Adds shapes to the plot.
+   * @param {Line|Circle|Path|Array} shape - An object or array of objects to be added to the plot.
    * @example
-   * import { Sketch, Line, Circle } from "@jakebeamish/penplotting";
+   * import { Plot, Line, Circle } from "@jakebeamish/penplotting";
 
-const sketch = new Sketch({
+const plot = new Plot({
     backgroundColor: "#ffffff"
 });
 
-sketch.generate = () => {
+plot.generate = () => {
     const line = Line.fromArray([0, 0, 100, 100]);
     const circlesArray = [
         new Circle(10, 10, 10),
         new Circle(40, 40, 15),
         new Circle(80, 80, 20)
     ];
-    sketch.add([line, circlesArray]);
+    plot.add([line, circlesArray]);
 }
 
-sketch.draw();
+plot.draw();
    */
   add(shape) {
     if (Array.isArray(shape)) {
@@ -119,7 +119,7 @@ sketch.draw();
   }
 
   /**
-   * Adds a single shape to the appropriate array. Used by {@link Sketch#add}.
+   * Adds a single shape to the appropriate array. Used by {@link Plot#add}.
    * @private
    * @param {Line|Path|Circle} shape
    */
@@ -137,7 +137,7 @@ sketch.draw();
 
   /**
    * Generates the SVG and UI and appends them to the document body.
-   * Must be called after defining a Sketch.generate() function.
+   * Must be called after defining a Plot.generate() function.
    */
   draw() {
     let startTime = Date.now();
@@ -188,7 +188,7 @@ sketch.draw();
   }
 
   /**
-   * Empty out any existing HTML UI and SVG document elements on the page, in order to regenerate a Sketch.
+   * Empty out any existing HTML UI and SVG document elements on the page, in order to regenerate a Plot.
    */
   clear() {
     this.lines = [];
@@ -201,7 +201,7 @@ sketch.draw();
   }
 
   /**
-   * Download the {@link Sketch} as an SVG file.
+   * Download the {@link Plot} as an SVG file.
    */
   downloadSVG() {
     const serializer = new XMLSerializer();
@@ -236,7 +236,7 @@ sketch.draw();
   }
 
   /**
-   * Removes duplicated [Lines]{@link Line} from this Sketch's lines array.
+   * Removes duplicated [Lines]{@link Line} from this Plot's lines array.
    */
   deduplicateLines() {
     const uniqueLines = [];
@@ -258,7 +258,7 @@ sketch.draw();
   }
 
   /**
-   * Removes overlapping [Lines]{@link Line} from this Sketch's lines array.
+   * Removes overlapping [Lines]{@link Line} from this Plot's lines array.
    */
   removeOverlappingLines() {
     const uniqueLines = [];
@@ -283,7 +283,7 @@ sketch.draw();
   }
 
   /**
-   * Removes [Lines]{@link Line} in this Sketch's lines array that are shorter than a specified minimum length.
+   * Removes [Lines]{@link Line} in this Plot's lines array that are shorter than a specified minimum length.
    * @param {number} minimumLength
    */
   removeShortLines(minimumLength) {
@@ -299,7 +299,7 @@ sketch.draw();
   }
 
   /**
-   * Adds the [Lines]{@link Line} in this Sketch's lines array to it's SVG element.
+   * Adds the [Lines]{@link Line} in this Plot's lines array to it's SVG element.
    */
   addLinesToSVG() {
     for (const line of this.lines) {
@@ -308,7 +308,7 @@ sketch.draw();
   }
 
   /**
-   * Adds the [Paths]{@link Path} in this Sketch's paths array to it's SVG element.
+   * Adds the [Paths]{@link Path} in this Plot's paths array to it's SVG element.
    */
   addPathsToSVG() {
     for (const path of this.paths) {
@@ -316,7 +316,7 @@ sketch.draw();
     }
   }
   /**
-   * Adds the [Circles]{@link Circle} in this Sketch's circles array to it's SVG element.
+   * Adds the [Circles]{@link Circle} in this Plot's circles array to it's SVG element.
    */
   addCirclesToSVG() {
     for (const circle of this.circles) {
@@ -325,7 +325,7 @@ sketch.draw();
   }
 
   /**
-   * Appends this sketch's SVG element to the document body.
+   * Appends this plot's SVG element to the document body.
    */
   appendSVG() {
     document.body.appendChild(this.svg);
@@ -387,14 +387,14 @@ sketch.draw();
     button.addEventListener("click", clickHandler);
   }
 
-  addSketchInfo(parent, timeTaken) {
-    const sketchInfo = this.createElement("div", parent);
+  addPlotInfo(parent, timeTaken) {
+    const plotInfo = this.createElement("div", parent);
     const numOfShapes =
       this.lines.length + this.paths.length + this.circles.length;
     const timeText = timeTaken < 0.05 ? "<0.05s" : `~${timeTaken}s`;
     this.createElement(
       "p",
-      sketchInfo,
+      plotInfo,
       `Generated ${numOfShapes} shapes in ${timeText}`
     );
   }
@@ -418,6 +418,6 @@ sketch.draw();
 
     this.createNavigation(header);
 
-    this.addSketchInfo(header, timeTaken);
+    this.addPlotInfo(header, timeTaken);
   }
 }

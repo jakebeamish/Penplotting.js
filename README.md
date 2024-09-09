@@ -9,7 +9,7 @@ Penplotting.js is a JavaScript framework for making generative art in SVG format
 
 ## Features
 
-- A Sketch class to contain everything needed to create and render the SVG
+- A Plot class to contain everything needed to create and render the SVG
 - Shapes and geometry classes: 2D Vector, Line, Path, Circle, AABB
 - Seedable PRNG implementations with useful methods
 - Quadtree for optimised nearest-neighbour search
@@ -23,41 +23,41 @@ npm i @jakebeamish/penplotting
 
 ## Usage
 
-To start a new sketch, run
+To start a new plot, run
 ```sh
 npx new-plot
 ```
-This will create new default `index.html`, `style.css` and `sketch.js` files.
+This will create new default `index.html`, `style.css` and `plot.js` files.
 
-Inside `sketch.js`, adjust the options for initializing the sketch:
+Inside `plot.js`, adjust the options for initializing the plot:
 
 ```js
-const sketch = new Sketch({
+const plot = new Plot({
     units: "mm",
-    title: "My amazing sketch",
+    title: "My amazing plot",
     size: Paper.A5,
     strokeWidth: 0.05
 });
 ```
 
-Define a sketch.generate() function, in which Vectors, Lines and other shapes can be created, manipulated, and added to the SVG document using `sketch.add(shapes)`.
+Define a plot.generate() function, in which Vectors, Lines and other shapes can be created, manipulated, and added to the SVG document using `plot.add(shapes)`.
 
 ```js
 // This is where the work is made
-sketch.generate = () => {
+plot.generate = () => {
     // Create Lines from Vectors
     const a = new Vector(10, 10);
     const b = new Vector(90, 90);
     const line = new Line(a, b);
 
-    // Add shapes to the Sketch
-    sketch.add(line);
+    // Add shapes to the Plot
+    plot.add(line);
 }
 
-sketch.draw();
+plot.draw();
 ```
 
-Calling `sketch.draw()` at the end of the file will generate an SVG element and
+Calling `plot.draw()` at the end of the file will generate an SVG element and
 UI inside `index.html`, which can be opened in a browser.
 
 ### Keyboard shortcuts

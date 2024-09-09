@@ -1,7 +1,7 @@
 import { Quadtree } from "../Quadtree";
 import { AABB } from "../AABB";
 import { Vector } from "../Vector";
-import { Sketch } from "../Sketch";
+import { Plot } from "../Plot";
 
 describe("Quadtree", () => {
     let quadtree, boundary, range, points;
@@ -44,10 +44,10 @@ describe("Quadtree", () => {
     });
 
     describe("show", () => {
-        it("Adds lines to a Sketch.", () => {
-            const sketch = new Sketch();
-            quadtree.show(sketch);
-            expect(sketch.lines.length).toBeGreaterThan(points.length * 4);
+        it("Adds lines to a Plot.", () => {
+            const plot = new Plot();
+            quadtree.show(plot);
+            expect(plot.lines.length).toBeGreaterThan(points.length * 4);
         });
     });
 });

@@ -1,138 +1,138 @@
-import { Sketch } from "../Sketch";
+import { Plot } from "../Plot";
 import { Line } from "../Line";
 import { Path } from "../Path";
 import { Circle } from "../Circle";
 import { Vector } from "../Vector";
 
-describe("Sketch", () => {
+describe("Plot", () => {
 
   describe("constructor", () => {
-    it("Creates a seed object literal with hex and decimal properties if Sketch is instantiated with a seed property.", () => {
+    it("Creates a seed object literal with hex and decimal properties if Plot is instantiated with a seed property.", () => {
 
-      let sketch = new Sketch({
+      let plot = new Plot({
         seed: 123
       });
 
-      expect(sketch.seed).toHaveProperty("hex");
-      expect(sketch.seed).toHaveProperty("decimal");
+      expect(plot.seed).toHaveProperty("hex");
+      expect(plot.seed).toHaveProperty("decimal");
     });
   });
 
   describe("addSingleShape", () => {
-    let sketch;
+    let plot;
     beforeEach(() => {
-      sketch = new Sketch();
+      plot = new Plot();
     });
 
-    it("Adds Lines to the Sketch.lines array.", () => {
+    it("Adds Lines to the Plot.lines array.", () => {
       const line = Line.fromArray(0, 0, 1, 1);
-      sketch.addSingleShape(line);
-      expect(sketch.lines[0]).toEqual(line);
+      plot.addSingleShape(line);
+      expect(plot.lines[0]).toEqual(line);
     });
 
-    it("Adds Paths to the Sketch.paths array.", () => {
+    it("Adds Paths to the Plot.paths array.", () => {
       const path = new Path([
         new Vector(),
         new Vector(1, 1),
         new Vector(2, 2)
       ]);
-      sketch.addSingleShape(path);
-      expect(sketch.paths[0]).toEqual(path);
+      plot.addSingleShape(path);
+      expect(plot.paths[0]).toEqual(path);
     });
 
-    it("Adds Circles to the Sketch.circles array.", () => {
+    it("Adds Circles to the Plot.circles array.", () => {
       const circle = new Circle(0, 0, 5);
-      sketch.addSingleShape(circle);
-      expect(sketch.circles[0]).toEqual(circle);
+      plot.addSingleShape(circle);
+      expect(plot.circles[0]).toEqual(circle);
     });
 
     it("Throws a TypeError if an unsupported shape is added.", () => {
       const unsupportedShape = { foo: 15, bar: 20 };
-      expect(() => sketch.addSingleShape(unsupportedShape))
+      expect(() => plot.addSingleShape(unsupportedShape))
         .toThrow(TypeError);
     });
   });
 
   describe("addPathsToSVG", () => {
     it("Adds a path to the SVG via the SVGBuilder.", () => {
-      const sketch = new Sketch();
-      sketch.add(new Path([
+      const plot = new Plot();
+      plot.add(new Path([
         new Vector(0, 0),
         new Vector(3, 0),
         new Vector(2, 1)
       ]));
-      sketch.draw();
-      expect(sketch.svg.outerHTML).toMatch("path");
+      plot.draw();
+      expect(plot.svg.outerHTML).toMatch("path");
     });
   });
 
   describe("addCirclesToSVG", () => {
     it("Adds a circle to the SVG via the SVGBuilder.", () => {
-      const sketch = new Sketch();
-      sketch.add(new Circle(0, 0, 100));
-      sketch.draw();
-      expect(sketch.svg.outerHTML).toMatch("circle");
+      const plot = new Plot();
+      plot.add(new Circle(0, 0, 100));
+      plot.draw();
+      expect(plot.svg.outerHTML).toMatch("circle");
     });
   });
 
   describe("addLinesToSVG", () => {
     it("Adds a line to the SVG via the SVGBuilder.", () => {
-      const sketch = new Sketch();
-      sketch.add(new Line(
+      const plot = new Plot();
+      plot.add(new Line(
         new Vector(0, 0), new Vector(4, 4)
       ));
-      sketch.draw();
-      expect(sketch.svg.outerHTML).toMatch("line");
+      plot.draw();
+      expect(plot.svg.outerHTML).toMatch("line");
     });
   });
 
   describe("draw", () => {
     it("Adds the seed to seedHistory if it is not already present.", () => {
-      let sketch = new Sketch();
-      sketch.setSeed('ffffff');
-      sketch.draw();
-      sketch.setSeed('abcdef');
-      sketch.draw();
-      sketch.setSeed('ffffff');
-      sketch.draw();
-      expect(sketch.seedHistory.length).toBe(2);
+      let plot = new Plot();
+      plot.setSeed('ffffff');
+      plot.draw();
+      plot.setSeed('abcdef');
+      plot.draw();
+      plot.setSeed('ffffff');
+      plot.draw();
+      expect(plot.seedHistory.length).toBe(2);
     })
   })
 
   describe("setSeed", () => {
-    it("Sets the Sketch seed.", () => {
-      const sketch = new Sketch();
-      sketch.draw();
-      sketch.setSeed('2');
-      expect(sketch.seed.decimal).toEqual(2);
+    it("Sets the Plot seed.", () => {
+      const plot = new Plot();
+      plot.draw();
+      plot.setSeed('2');
+      expect(plot.seed.decimal).toEqual(2);
     });
   });
 
   describe("randomizeSeed", () => {
-    it("Sets the Sketch seed to a new and different psuedo-random 8-bit hex string.", () => {
-      const sketch = new Sketch();
-      sketch.draw();
-      const oldSeed = sketch.seed;
-      sketch.randomiseSeed();
-      expect(sketch.seed).not.toEqual(oldSeed);
+    it("Sets the Plot seed to a new and different psuedo-random 8-bit hex string.", () => {
+      const plot = new Plot();
+      plot.draw();
+      const oldSeed = plot.seed;
+      plot.randomiseSeed();
+      expect(plot.seed).not.toEqual(oldSeed);
     });
   });
 
   describe("clear", () => {
     it("Clears the document body.", () => {
-      let sketch = new Sketch();
+      let plot = new Plot();
 
       let line = new Line(new Vector(1, 1), new Vector(5, 5));
 
-      sketch.add(line);
+      plot.add(line);
 
-      sketch.draw();
+      plot.draw();
 
-      expect(sketch.lines).toHaveLength(1)
+      expect(plot.lines).toHaveLength(1)
 
-      sketch.clear();
+      plot.clear();
 
-      expect(sketch.lines).toHaveLength(0)
+      expect(plot.lines).toHaveLength(0)
       expect(document.body.innerHTML).toBe("");
     });
   });
@@ -140,40 +140,40 @@ describe("Sketch", () => {
 
   describe("removeShortLines", () => {
     it("Returns an array of lines that are longer than the minimum length.", () => {
-      const sketch = new Sketch();
-      sketch.minimumLineLength = 100;
+      const plot = new Plot();
+      plot.minimumLineLength = 100;
       const lines = [
         Line.fromArray([0, 0, 1, 1]),
         Line.fromArray([0, 0, 0.01, 0]),
         Line.fromArray([0, 0, 100, 100])
       ];
 
-      sketch.add(lines);
-      sketch.draw();
-      expect(sketch.lines.length).toBe(1);
+      plot.add(lines);
+      plot.draw();
+      expect(plot.lines.length).toBe(1);
     });
 
     it.skip("Doesn't remove lines that are longer than the minimum length.", () => {
-      const sketch = new Sketch();
-      sketch.minimumLineLength = 10;
+      const plot = new Plot();
+      plot.minimumLineLength = 10;
       const lines = [
         Line.fromArray(0, 0, 100, 100),
         Line.fromArray(0, 0, 1000, 10),
       ]
-      sketch.add(lines);
-      sketch.removeShortLines(sketch.minimumLineLength);
-      // sketch.draw();
-      expect(sketch.lines.length).toBe(2);
+      plot.add(lines);
+      plot.removeShortLines(plot.minimumLineLength);
+      // plot.draw();
+      expect(plot.lines.length).toBe(2);
     });
   });
 
   describe("handleKeydown", () => {
-    let sketch;
+    let plot;
 
     beforeEach(() => {
-      sketch = new Sketch();
-      jest.spyOn(sketch, "randomiseSeed").mockImplementation(() => {});
-      jest.spyOn(sketch, "downloadSVG").mockImplementation(() => {});
+      plot = new Plot();
+      jest.spyOn(plot, "randomiseSeed").mockImplementation(() => {});
+      jest.spyOn(plot, "downloadSVG").mockImplementation(() => {});
     });
 
     afterEach(() => {
@@ -182,21 +182,21 @@ describe("Sketch", () => {
 
     it("Calls randomiseSeed when 'r' is pressed.", () => {
       const event = new KeyboardEvent('keydown', { key: 'r' });
-      sketch.handleKeydown(event);
-      expect(sketch.randomiseSeed).toHaveBeenCalled();
+      plot.handleKeydown(event);
+      expect(plot.randomiseSeed).toHaveBeenCalled();
     });
 
     it("Does not call randomiseSeed when 'r' is not pressed.", () => {
       const event = new KeyboardEvent('keydown', { key: 'p' });
-      sketch.handleKeydown(event);
-      expect(sketch.randomiseSeed).not.toHaveBeenCalled();
+      plot.handleKeydown(event);
+      expect(plot.randomiseSeed).not.toHaveBeenCalled();
     });
 
 
     it("Calls downloadSVG when 'd' is pressed.", () => {
       const event = new KeyboardEvent('keydown', { key: 'd' });
-      sketch.handleKeydown(event);
-      expect(sketch.downloadSVG).toHaveBeenCalled();
+      plot.handleKeydown(event);
+      expect(plot.downloadSVG).toHaveBeenCalled();
     });
 
     it("Does not handle keydown events if an element is focused.", () => {
@@ -205,38 +205,38 @@ describe("Sketch", () => {
       input.focus();
 
       const event = new KeyboardEvent('keydown', { key: 'd' });
-      sketch.handleKeydown(event);
-      expect(sketch.downloadSVG).not.toHaveBeenCalled();
-      expect(sketch.randomiseSeed).not.toHaveBeenCalled();
+      plot.handleKeydown(event);
+      expect(plot.downloadSVG).not.toHaveBeenCalled();
+      expect(plot.randomiseSeed).not.toHaveBeenCalled();
     });
 
     it("Does nothing if an unmapped key is pressed.", () => {
       const event = new KeyboardEvent('keydown', { key: "z" });
-      sketch.handleKeydown(event);
-      expect(sketch.randomiseSeed).not.toHaveBeenCalled();
-      expect(sketch.downloadSVG).not.toHaveBeenCalled();
+      plot.handleKeydown(event);
+      expect(plot.randomiseSeed).not.toHaveBeenCalled();
+      expect(plot.downloadSVG).not.toHaveBeenCalled();
     });
     it("Does nothing if an unmapped key is pressed.", () => {
       const event = new KeyboardEvent('keydown', { key: "f" });
-      sketch.handleKeydown(event);
-      expect(sketch.randomiseSeed).not.toHaveBeenCalled();
-      expect(sketch.downloadSVG).not.toHaveBeenCalled();
+      plot.handleKeydown(event);
+      expect(plot.randomiseSeed).not.toHaveBeenCalled();
+      expect(plot.downloadSVG).not.toHaveBeenCalled();
     });
   });
 
   describe("createUI", () => {
     it("Creates necessary HTML elements", () => {
-      const sketch = new Sketch();
-      sketch.createUI(0.05);
+      const plot = new Plot();
+      plot.createUI(0.05);
       expect(document.querySelector("header")).not.toBeNull();
     });
   });
 
   describe("deduplicateLines", () => {
     it("Checks the lines array and removes lines that are duplicated.", () => {
-      const sketch = new Sketch();
+      const plot = new Plot();
 
-      sketch.add(
+      plot.add(
         [
           Line.fromArray([0, 0, 5, 5]),
           Line.fromArray([0, 0, 1, 1]),
@@ -245,16 +245,16 @@ describe("Sketch", () => {
           Line.fromArray([0, 0, 1, 2])
         ]
       );
-      sketch.deduplicateLines();
-      expect(sketch.lines.length).toBe(3);
+      plot.deduplicateLines();
+      expect(plot.lines.length).toBe(3);
 
     });
   });
 
   describe("downloadSVG", () => {
     test("Downloads the SVG file. (Bad test)", () => {
-      // Instantiate the Sketch class
-      const sketch = new Sketch(100, 100, {
+      // Instantiate the Plot class
+      const plot = new Plot(100, 100, {
         seed: 1
       }
       );
@@ -273,7 +273,7 @@ describe("Sketch", () => {
       global.URL.revokeObjectURL = revokeObjectURLMock;
     
       // Call the downloadSVG method
-      sketch.downloadSVG("test.svg");
+      plot.downloadSVG("test.svg");
     
       // Check that the serializer and Blob were called correctly
       expect(createObjectURLMock).toHaveBeenCalledTimes(1);
@@ -288,7 +288,7 @@ describe("Sketch", () => {
       // Use URL.createObjectURL to generate the expected absolute URL
       const expectedHref = new URL("mock-url", document.location).href;
       expect(aElement.href).toBe(expectedHref);
-      // expect(aElement.download).toBe(sketch.filename());
+      // expect(aElement.download).toBe(plot.filename());
     
       // Clean up mocks
       appendChildMock.mockRestore();
@@ -301,8 +301,8 @@ describe("Sketch", () => {
 
   describe("removeOverlappingLines", () => {
     it("Checks the lines array and removes sub-lines.", () => {
-      const sketch = new Sketch();
-      sketch.add([
+      const plot = new Plot();
+      plot.add([
         Line.fromArray([0, 0, 5, 5]),
         // These lines are sub-lines of the above.
         Line.fromArray([1, 1, 4, 4]),
@@ -312,35 +312,35 @@ describe("Sketch", () => {
         Line.fromArray([1, 5, 5, 1]),
         Line.fromArray([3, 2, 2, 3])
       ]);
-      sketch.removeOverlappingLines();
+      plot.removeOverlappingLines();
 
-      expect(sketch.lines.length).toBe(3);
+      expect(plot.lines.length).toBe(3);
     });
   });
 
   describe("createHistoryForm", () => {
     it("Creates a form with options that call setSeed when clicked.", () => {
-      let sketch = new Sketch();
+      let plot = new Plot();
       let parent = document.createElement("div");
-      sketch.createHistoryForm(parent);
+      plot.createHistoryForm(parent);
 
-      sketch.randomiseSeed();
-      sketch.randomiseSeed();
+      plot.randomiseSeed();
+      plot.randomiseSeed();
 
-      sketch.setSeed = jest.fn();
+      plot.setSeed = jest.fn();
 
       const options = document.getElementById("history").querySelectorAll("option");
       options[1].dispatchEvent(new Event("click"));
-      expect(sketch.setSeed).toHaveBeenCalled();
+      expect(plot.setSeed).toHaveBeenCalled();
     });
   });
 
   describe("createNavigation", () => {
-    let sketch;
+    let plot;
     let parent;
   
     beforeEach(() => {
-      sketch = new Sketch();
+      plot = new Plot();
       parent = document.createElement("div");
       document.body.appendChild(parent);
     });
@@ -350,7 +350,7 @@ describe("Sketch", () => {
     });
   
     it("creates a nav element with a ul as its child", () => {
-      sketch.createNavigation(parent);
+      plot.createNavigation(parent);
   
       const nav = parent.querySelector("nav");
       const ul = nav.querySelector("ul");
@@ -362,7 +362,7 @@ describe("Sketch", () => {
     });
   
     it("creates two nav items with the correct labels", () => {
-      sketch.createNavigation(parent);
+      plot.createNavigation(parent);
   
       const ul = parent.querySelector("ul");
       const navItems = ul.querySelectorAll("li");
@@ -373,32 +373,32 @@ describe("Sketch", () => {
     });
 
     it("Creates a download nav item that calls downloadSVG when clicked.", () => {
-      sketch.createNavigation(parent);
-      sketch.downloadSVG = jest.fn();
-      sketch.draw();
+      plot.createNavigation(parent);
+      plot.downloadSVG = jest.fn();
+      plot.draw();
 
       let button = document.querySelector("nav ul li a");
       button.dispatchEvent(new Event("click"));
-      expect(sketch.downloadSVG).toHaveBeenCalled();
+      expect(plot.downloadSVG).toHaveBeenCalled();
     });
 
     it("Creates a randomiseSeed nav item that calls randomiseSeed when clicked.", () => {
-      sketch.createNavigation(parent);
-      sketch.randomiseSeed = jest.fn();
-      sketch.draw();
+      plot.createNavigation(parent);
+      plot.randomiseSeed = jest.fn();
+      plot.draw();
 
       let button = document.querySelector("nav ul li:nth-child(2) a");
       button.dispatchEvent(new Event("click"));
-      expect(sketch.randomiseSeed).toHaveBeenCalled();
+      expect(plot.randomiseSeed).toHaveBeenCalled();
     });
   });
   
 
   describe("createSeedInput", () => {
-    let sketch;
+    let plot;
     let parentElement;
     beforeEach(() => {
-      sketch = new Sketch();
+      plot = new Plot();
       parentElement = document.createElement("div");
     });
     afterEach(() => {
@@ -406,13 +406,13 @@ describe("Sketch", () => {
     });
 
     it("Creates an input element with the correct initial value.", () => {
-      sketch.createSeedInput(parentElement);
+      plot.createSeedInput(parentElement);
       const seedInput = parentElement.querySelector("input");
-      expect(seedInput.value).toBe(sketch.seed.hex);
+      expect(seedInput.value).toBe(plot.seed.hex);
     });
 
     it("Creates an input element that selects input text on focus.", () => {
-      sketch.createSeedInput(parentElement);
+      plot.createSeedInput(parentElement);
       const seedInput = parentElement.querySelector("input");
       seedInput.select = jest.fn();
 
@@ -420,38 +420,38 @@ describe("Sketch", () => {
       expect(seedInput.select).toHaveBeenCalled();
     });
 
-    it("Creates an input element that sets the Sketch seed to the selected option.", () => {
-      sketch.createSeedInput(parentElement);
+    it("Creates an input element that sets the Plot seed to the selected option.", () => {
+      plot.createSeedInput(parentElement);
       const seedInput = parentElement.querySelector("input");
-      sketch.setSeed = jest.fn();
+      plot.setSeed = jest.fn();
 
       seedInput.dispatchEvent(new Event("change"));
-      expect(sketch.setSeed).toHaveBeenCalled();
+      expect(plot.setSeed).toHaveBeenCalled();
     })
   });
 
 
   describe("add", () => {
 
-    test("Adds a line object to a sketch.", () => {
-      const sketch = new Sketch();
+    test("Adds a line object to a plot.", () => {
+      const plot = new Plot();
 
       const line = new Line(
         new Vector(0, 0),
         new Vector(5, 5)
       );
 
-      sketch.add(line);
+      plot.add(line);
 
-      expect(sketch.lines).toContain(line);
-      expect(sketch.lines.length).toBe(1);
+      expect(plot.lines).toContain(line);
+      expect(plot.lines.length).toBe(1);
     });
 
-    it.skip("Adds nothing to the sketch if given an empty array to add.", () => {
+    it.skip("Adds nothing to the plot if given an empty array to add.", () => {
     });
 
-    test("Adds an array of lines to a sketch.", () => {
-      const sketch = new Sketch();
+    test("Adds an array of lines to a plot.", () => {
+      const plot = new Plot();
 
       const lines = [
         new Line(
@@ -464,13 +464,13 @@ describe("Sketch", () => {
         )
       ]
 
-      sketch.add(lines);
+      plot.add(lines);
 
-      expect(sketch.lines).toEqual(lines);
+      expect(plot.lines).toEqual(lines);
     })
 
-    test("Adds a single line and an inner array of lines to a sketch.", () => {
-      const sketch = new Sketch();
+    test("Adds a single line and an inner array of lines to a plot.", () => {
+      const plot = new Plot();
 
       const array = [
         new Line(
@@ -487,8 +487,8 @@ describe("Sketch", () => {
         new Vector(10, 10),
         new Vector(11, 17)
       );
-      sketch.add([array, line]);
-      expect(sketch.lines.length).toBe(3);
+      plot.add([array, line]);
+      expect(plot.lines.length).toBe(3);
     });
   });
 });

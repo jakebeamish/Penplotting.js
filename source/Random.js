@@ -264,7 +264,7 @@ export class XORShift32 extends PRNG {
 /**
  * @summary Create a random hexadecimal string of a specified length.
  * @description Uses Math.random() to make a hexadecimal string for
- * setting the seed of a {@link Sketch} to be used in a seedable {@link PRNG} such as {@link LCG}
+ * setting the seed of a {@link Plot} to be used in a seedable {@link PRNG} such as {@link LCG}
  * @param {number} n - Number of digits 
  * @returns {string} - Hexadecimal string of length n
  */

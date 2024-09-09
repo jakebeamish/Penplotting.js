@@ -14,7 +14,7 @@ html_content='<html lang="en">
       }
     }
     </script>
-  <script type="module" src="./sketch.js"></script>
+  <script type="module" src="./plot.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -89,23 +89,23 @@ svg {
 }'
 
 # Define js content
-js_content='import { Sketch, Vector, Line, Rectangle, Circle, Path, PAPER, XORShift32, map } from "@jakebeamish/penplotting";
+js_content='import { Plot, Vector, Line, Rectangle, Circle, Path, PAPER, XORShift32, map } from "@jakebeamish/penplotting";
 
-let sketch = new Sketch({
+let plot = new Plot({
     size: PAPER.A4.portrait(),
     backgroundColor: "#888888",
     strokeWidth: 0.1,
 });
 
-sketch.generate = () => {
-    const prng = new XORShift32(sketch.seed.decimal);
-    const { width, height } = sketch.size;
+plot.generate = () => {
+    const prng = new XORShift32(plot.seed.decimal);
+    const { width, height } = plot.size;
     const centre = new Vector(width / 2, height / 2);
     const margin = width * 0.15;
 
 }
 
-sketch.draw();
+plot.draw();
 '
 
 # Write HTML content to index.html
@@ -116,5 +116,5 @@ echo "Generated index.html"
 echo "$css_content" > style.css
 echo "Generated style.css"
 
-echo "$js_content" > sketch.js
-echo "Generated sketch.js"
+echo "$js_content" > plot.js
+echo "Generated plot.js"
