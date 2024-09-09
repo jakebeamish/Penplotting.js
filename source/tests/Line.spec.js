@@ -21,7 +21,7 @@ describe("Line", () => {
       },
       { start: new Vector(0, 0), end: new Vector(0, 0), expected: 0 },
     ])(
-      "Returns a distance of $expected from [$start.x, $start.y] to [$end.x, $end.y]\.",
+      "Returns a distance of $expected from [$start.x, $start.y] to [$end.x, $end.y].",
       ({ start, end, expected }) => {
         const line = new Line(start, end);
 
@@ -46,6 +46,39 @@ describe("Line", () => {
     });
   });
 
+  describe("lineIntersection", () => {
+    it("Returns false if two parallel lines do not intersect.", () => {
+      const line1 = Line.fromArray([0, 0, 5, 0]);
+      const line2 = Line.fromArray([0, 1, 5, 1]);
+      expect(Line.lineIntersection(line1, line2)).toBeFalsy();
+    });
+
+    it("Returns false if two non-parallel lines do not intersect.", () => {
+      const line1 = Line.fromArray([0, 0, 5, 0]);
+      const line2 = Line.fromArray([0, 1, 5, 5]);
+      expect(Line.lineIntersection(line1, line2)).toBeFalsy();
+    });
+
+    it("Returns true if two lines do intersect.", () => {
+      const line1 = Line.fromArray([0, 0, 5, 0]);
+      const line2 = Line.fromArray([2, 2, 2, -2]);
+      expect(Line.lineIntersection(line1, line2)).toBeTruthy();
+    });
+  });
+
+  describe("intersects", () => {
+    it("Returns the result of Line.lineIntersection if target is a line.", () => {
+      const line1 = Line.fromArray([0, 0, 5, 0]);
+      const line2 = Line.fromArray([0, 1, 5, 1]);
+      expect(line1.intersects(line2)).toEqual(Line.lineIntersection(line1, line2));
+    });
+    it("Throws a TypeError if the target object is not recognised.", () => {
+      const line = Line.fromArray([0, 0, 5, 0]);
+      const notALine = { name: "notALine" };
+      expect(() => line.intersects(notALine)).toThrow(TypeError);
+    })
+  });
+
   describe("isDuplicate", () => {
     it.each([
       { currentline: [0, 0, 1, 1], targetline: [1, 1, 1, 1], expected: false },
@@ -64,7 +97,7 @@ describe("Line", () => {
   });
 
   describe("toArray", () => {
-    it("Returns a new Line from an array in the form [x1, y1, x2, y2]\.", () => {
+    it("Returns a new Line from an array in the form [x1, y1, x2, y2].", () => {
       const start = Vector.fromArray([0, 1]);
       const end = Vector.fromArray([2, 3]);
       const line = new Line(start, end);
