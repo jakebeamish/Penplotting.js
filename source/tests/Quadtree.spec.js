@@ -20,7 +20,7 @@ describe("Quadtree", () => {
     });
 
     describe("insert", () => {
-        it("should add points.", () => {
+        it("Adds points.", () => {
             const results = quadtree.query(boundary);
             expect(quadtree.divided).toBe(true);
             expect(results.length).toBe(points.length);
@@ -29,7 +29,7 @@ describe("Quadtree", () => {
 
 
     describe("query", () => {
-        it("should return an empty array if given query range is out of bounds.", () => {
+        it("Returns an empty array if given query range is out of bounds.", () => {
             const outOfBoundsRect = new AABB(10, 10, 1, 1);
             const result = quadtree.query(outOfBoundsRect);
             expect(result).toEqual([]);
@@ -44,7 +44,7 @@ describe("Quadtree", () => {
     });
 
     describe("show", () => {
-        it("should add lines to a Sketch.", () => {
+        it("Adds lines to a Sketch.", () => {
             const sketch = new Sketch();
             quadtree.show(sketch);
             expect(sketch.lines.length).toBeGreaterThan(points.length * 4);
