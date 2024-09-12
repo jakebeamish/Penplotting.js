@@ -89,11 +89,11 @@ svg {
 }'
 
 # Define js content
-js_content='import { Plot, Vector, Line, Rectangle, Circle, Path, PAPER, XORShift32, map } from "@jakebeamish/penplotting";
+js_content='import { Plot, Vector, Line, AABB, Circle, Path, PAPER, XORShift32, map } from "@jakebeamish/penplotting";
 
 let plot = new Plot({
     size: PAPER.A4.portrait(),
-    backgroundColor: "#888888",
+    backgroundColor: "white",
     strokeWidth: 0.1,
 });
 
