@@ -2,6 +2,7 @@ import { PRNG } from "../Random";
 import { Mulberry32 } from "../Random";
 import { XORShift32 } from "../Random";
 import { LCG } from "../Random";
+import { Vector } from "../Vector";
 
 describe("PRNG", () => {
   describe("constructor", () => {
@@ -76,6 +77,15 @@ describe("PRNG", () => {
       }
     });
   });
+
+  describe("randomUnitVector", () => {
+    it("Returns a Vector of length 1.", () => {
+      let prng = new Mulberry32();
+      let vector = prng.randomUnitVector();
+      expect(vector instanceof Vector).toBeTruthy();
+      expect(vector.getMagnitude()).toBe(1);
+    })
+  })
 
   describe("randomChance", () => {
     it("Returns true if the chance parameter is greater than a random float between 0 and 1.", () => {

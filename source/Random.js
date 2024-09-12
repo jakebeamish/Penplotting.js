@@ -1,3 +1,5 @@
+import { Vector } from "./Vector.js";
+
 /**
  * @summary Abstract base class representing a Psuedo Random Number Generator.
  * @abstract
@@ -46,6 +48,15 @@ export class PRNG {
    */
   randomBipolarFloat() {
     return this.randomFloat() * 2 - 1;
+  }
+
+  /**
+   * Generate a random unit vector.
+   * @returns {Vector} - A Vector with a mangitude of 1 and a random angle between 0 and TWO_PI.
+   */
+  randomUnitVector() {
+    const angle = this.randomFloat() * Math.PI * 2;
+    return Vector.fromAngle(angle);
   }
 
   /**
