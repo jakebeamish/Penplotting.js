@@ -66,7 +66,7 @@ describe("PRNG", () => {
   });
 
   describe("randomFloat", () => {
-    it("It always returns values between 0 and 1.", () => {
+    it("Returns values between 0 and 1.", () => {
       let lcg = new LCG();
 
       for (let i = 0; i < 100; i++) {
@@ -85,7 +85,7 @@ describe("PRNG", () => {
       expect(actualValue).toBeTruthy();
     });
 
-    it("Always returns a boolean.", () => {
+    it("Returns a boolean.", () => {
       let prng = new Mulberry32();
 
       expect(typeof prng.randomChance(0.5)).toBe("boolean");
@@ -141,7 +141,7 @@ describe("PRNG", () => {
       ];
     });
 
-    it("Always returns an option from the choices it is passed.", () => {
+    it("Returns an option from the choices it is passed.", () => {
       for (let i = 0; i < 10; i++) {
         const result = prng.randomWeighted(choices);
         expect(result).toMatch(/red|green|blue/);
