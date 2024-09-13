@@ -84,8 +84,8 @@ describe("PRNG", () => {
       let vector = prng.randomUnitVector();
       expect(vector instanceof Vector).toBeTruthy();
       expect(vector.getMagnitude()).toBe(1);
-    })
-  })
+    });
+  });
 
   describe("randomChance", () => {
     it("Returns true if the chance parameter is greater than a random float between 0 and 1.", () => {
