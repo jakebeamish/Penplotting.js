@@ -9,7 +9,6 @@ own discretion, feel free to contribute and raise issues.
 
 ## Features
 
-- A Plot class to contain everything needed to create and render the SVG
 - Shapes and geometry classes: 2D Vector, Line, Path, Circle, AABB
 - Seedable PRNG implementations with useful methods
 - Quadtree for optimised nearest-neighbour search
