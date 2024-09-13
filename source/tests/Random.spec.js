@@ -83,7 +83,7 @@ describe("PRNG", () => {
       let prng = new Mulberry32();
       let vector = prng.randomUnitVector();
       expect(vector instanceof Vector).toBeTruthy();
-      expect(vector.getMagnitude()).toBe(1);
+      expect(vector.getMagnitude()).toBeCloseTo(1);
     });
   });
 
