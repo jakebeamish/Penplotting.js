@@ -105,17 +105,8 @@ plot.generate = () => {
 plot.draw();
    */
   add(shape) {
-    if (Array.isArray(shape)) {
-      shape.forEach((item) => {
-        if (Array.isArray(item)) {
-          this.add(item);
-        } else {
-          this.addSingleShape(item);
-        }
-      });
-    } else {
-      this.addSingleShape(shape);
-    }
+    const shapes = Array.isArray(shape) ? shape.flat(Infinity) : [shape];
+    shapes.forEach((item) => this.addSingleShape(item));
   }
 
   /**
