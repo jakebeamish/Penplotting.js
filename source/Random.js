@@ -1,16 +1,18 @@
 import { Vector } from "./Vector.js";
 
 /**
- * @summary Abstract base class representing a Psuedo Random Number Generator.
+ * @class PRNG
+ * @classdesc Abstract base class representing a Pseudo Random
+ * Number Generator (PRNG). This class defines the interface for
+ * PRNGs. It should not be instantiated directly but extended by
+ * specific implementations such as {@link LCG}, {@link Mulberry32}, or {@link XORShift32}.
+ * 
  * @abstract
- * @class
- * Represents an abstract base class for psuedo-random number generators. This class shouldn't be instantiated directly.
- * @description This class is intended to be extended by specific implementations such as {@link LCG}, {@link Mulberry32} or {@link XORShift32}.
  */
 export class PRNG {
   /**
    * Creates an instance of PRNG.
-   * @param {number} [seed=Date.now()] - The initial seed value for the PRNG.
+   * @param {number} [seed=Date.now()] - The default seed value for the PRNG is the current timestamp.
    */
   constructor(seed = Date.now()) {
     this.seed = seed;
@@ -18,6 +20,8 @@ export class PRNG {
 
   /**
    * Returns the maximum possible value that the PRNG can generate.
+   * 
+   * @abstract
    * @returns {number} - The maximum value of the PRNG.
    * @throws {Error} - Must be implemented by subclasses.
    */
@@ -27,6 +31,8 @@ export class PRNG {
 
   /**
    * Generates the next psuedo-random number.
+   * 
+   * @abstract
    * @returns {number} - The next psuedo-random number.
    * @throws {Error} - Must be implemented by subclasses.
    */
@@ -286,7 +292,7 @@ export function unseededRandomHex(n) {
     },
     () => {
       return Math.floor(Math.random() * 16).toString(16);
-    },
+    }
   );
   const hex = hexArray.join("");
   const decimal = parseInt(hex, 16);
