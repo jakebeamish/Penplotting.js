@@ -27,6 +27,10 @@ export class Vector {
     return new Vector(array[0], array[1]);
   }
 
+  /**
+   * Create an array from the vector's components.
+   * @returns {array} [x, y]
+   */
   toArray() {
     return [this.x, this.y];
   }
