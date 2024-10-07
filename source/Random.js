@@ -1,13 +1,12 @@
 import { Vector } from "./Vector.js";
 
 /**
- * @class PRNG
+ * @abstract @class PRNG
  * @classdesc Abstract base class representing a Pseudo Random
  * Number Generator (PRNG). This class defines the interface for
  * PRNGs. It should not be instantiated directly but extended by
  * specific implementations such as {@link LCG}, {@link Mulberry32}, or {@link XORShift32}.
  * 
- * @abstract
  */
 export class PRNG {
   /**
@@ -229,23 +228,29 @@ export class Mulberry32 extends PRNG {
  * XORShift32 Pseudorandom Number Generator Class
  * @extends PRNG
  * 
- * @summary Implements the XORShift32 algorithm to generate pseudorandom numbers.
+ * @summary Implements the XORShift32 algorithm to generate pseudorandom
+ * numbers.
  * @description
  * This class provides the XORShift32 method of generating psuedorandom
  * numbers to the {@link PRNG} class. It uses bitwise operations
  * to generate a sequence of pseudorandom 32-bit unsigned integers.
  * 
- * The XORShift algorithm was written by Geogrge Marsaglia in 2003 and is released to the public domain, meaning it can be freely used, modified, and distributed without restrictions.
+ * The XORShift algorithm was written by George Marsaglia in 2003 and is
+ * released to the public domain, meaning it can be freely used, modified,
+ * and distributed without restrictions.
  * 
  * @example
  * const rng = new XORShift32(123456789);
  * console.log(rng.next()); // Generates a pseudorandom number
  * 
- * @see Marsaglia, G. (2003) "XORShift RNGs", Journal of Statistical Software
- *      https://www.jstatsoft.org/article/view/v008i14
-
+ * @see Marsaglia, G. (2003) "XORShift RNGs", Journal of Statistical
+ * Software https://www.jstatsoft.org/article/view/v008i14
  */
 export class XORShift32 extends PRNG {
+    /**
+   * Creates an instance of XORShift32.
+   * @param {number} seed - The seed value for the Mulberry32 PRNG.
+   */
   constructor(seed) {
     super(seed);
     this.state = this.seed;
