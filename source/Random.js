@@ -58,7 +58,7 @@ export class PRNG {
 
   /**
    * Generate a random unit vector.
-   * @returns {Vector} - A Vector with a mangitude of 1 and a random angle between 0 and TWO_PI.
+   * @returns {Vector} - A Vector with a magnitude of 1 and a random angle between 0 and TWO_PI.
    */
   randomUnitVector() {
     const angle = this.randomFloat() * Math.PI * 2;
