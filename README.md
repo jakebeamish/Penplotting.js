@@ -26,8 +26,8 @@ To start a new plot, run
 ```sh
 npx new-plot
 ```
-This will create new default `index.html`, `style.css` and `plot.js` files.
-
+This is a shell script that will create new default `index.html`,
+`style.css` and `plot.js` files in the current working directory.
 Inside `plot.js`, adjust the options for initializing the plot:
 
 ```js
@@ -39,7 +39,9 @@ const plot = new Plot({
 });
 ```
 
-Define a plot.generate() function, in which Vectors, Lines and other shapes can be created, manipulated, and added to the SVG document using `plot.add(shapes)`.
+The image is defined in a plot.generate() function in which Vector,
+Line and Circle objects can be created and manipulated, and added to
+the SVG document using `plot.add(shapes)`.
 
 ```js
 // This is where the work is made
@@ -56,14 +58,14 @@ plot.generate = () => {
 plot.draw();
 ```
 
-Calling `plot.draw()` at the end of the file will generate an SVG element and
-UI inside `index.html`, which can be opened in a browser.
+Calling `plot.draw()` at the end of the file will generate an SVG element
+and UI inside `index.html`, which can be opened in a browser.
 
 ### Keyboard shortcuts
-| Action | Key |
-|-|-|
-|Download an SVG file|`d`|
-|Regenerate with random seed|`r`|
+| Action                     | Key |
+|----------------------------|----|
+|Download an SVG file        | `d`   |
+|Regenerate with random seed | `r`   |
 
 ### Plotting the SVG files
 
