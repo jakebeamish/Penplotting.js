@@ -1,42 +1,31 @@
 import { Vector } from "./Vector.js";
 
 /**
- * @abstract @class PRNG
- * @classdesc Abstract base class representing a Pseudo Random
- * Number Generator (PRNG). This class defines the interface for
- * PRNGs. It should not be instantiated directly but extended by
- * specific implementations such as {@link LCG}, {@link Mulberry32}, or {@link XORShift32}.
- *
+ * A PRNGAlgorithm is a class that implements some technique for random number
+ * generation. It should have a seed and max value, as well as a next function.
+ * @typedef PRNGAlgorithm
+ * @prop {number} seed - The initial state of the PRNG.
+ * @prop {number} max - The maximum possible value of the PRNG.
+ * @prop {function(): number} next - The next psuedo-random number between 0 and 1.
+ */
+
+/**
+ * @class
  */
 export class PRNG {
 	/**
 	 * Creates an instance of PRNG.
-	 * @param {number} [seed=Date.now()] - The default seed value for the PRNG is the current timestamp.
+	 * @param {Object} [options={}] - The configuration options for the PRNG.
+	 * @param {number} [options.seed=Date.now()] - The default seed value for the PRNG is the current timestamp.
+	 * @param {PRNGAlgorithm} [options.algorithm=XORShift32] - The algorithm to use
+	 * for generating psuedo-random numbers.
 	 */
-	constructor(seed = Date.now()) {
+	constructor({
+		seed = Date.now(),
+		algorithm = XORShift32
+	}={}) {
 		this.seed = seed;
-	}
-
-	/**
-	 * Returns the maximum possible value that the PRNG can generate.
-	 *
-	 * @abstract
-	 * @returns {number} - The maximum value of the PRNG.
-	 * @throws {Error} - Must be implemented by subclasses.
-	 */
-	maxValue() {
-		throw new Error("Method maxValue() must be implemented.");
-	}
-
-	/**
-	 * Generates the next psuedo-random number.
-	 *
-	 * @abstract
-	 * @returns {number} - The next psuedo-random number.
-	 * @throws {Error} - Must be implemented by subclasses.
-	 */
-	next() {
-		throw new Error("Method next() must be implemented.");
+		this.algorithm = new algorithm(this.seed);
 	}
 
 	/**
@@ -44,7 +33,7 @@ export class PRNG {
 	 * @returns {number} - A number between 0 (inclusive) and 1 (exclusive).
 	 */
 	randomFloat() {
-		return this.next() / this.maxValue();
+		return this.algorithm.next() / this.algorithm.max;
 	}
 
 	/**
@@ -102,8 +91,6 @@ export class PRNG {
 	 * @returns {function|number|string} - The selected option.
 	 */
 	randomWeighted(choices) {
-		const length = choices.length;
-
 		let totalWeight = 0;
 		for (let choice of choices) {
 			totalWeight += choice.weight;
@@ -126,7 +113,7 @@ export class PRNG {
 
 /**
  * LCG (Linear Congruential Generator) Pseudorandom Number Generator Class
- * @extends PRNG
+ * @implements {PRNGAlgorithm}
  *
  * @summary Implements the LCG algorithm to generate pseudorandom numbers.
  * @description
@@ -139,17 +126,17 @@ export class PRNG {
  *
  * @see https://en.wikipedia.org/wiki/Linear_congruential_generator
  */
-export class LCG extends PRNG {
+export class LCG {
 	/**
 	 * Creates an instance of LCG.
 	 * @param {number} seed - The seed value for the LCG PRNG.
 	 */
 	constructor(seed) {
-		super(seed);
 		this.modulus = 2 ** 32;
 		this.multiplier = 1664525;
 		this.increment = 1013904223;
-		this.state = this.seed;
+		this.state = seed;
+		this.max = this.modulus;
 	}
 
 	/**
@@ -160,19 +147,11 @@ export class LCG extends PRNG {
 		this.state = (this.multiplier * this.state + this.increment) % this.modulus;
 		return this.state;
 	}
-
-	/**
-	 * Returns the maximum possible value of the LCG.
-	 * @returns {number} The maximum value (2^32).
-	 */
-	maxValue() {
-		return this.modulus;
-	}
 }
 
 /**
  * Mulberry32 Pseudorandom Number Generator Class
- * @extends PRNG
+ * @implements {PRNGAlgorithm}
  * 
  * @summary Implements the Mulberry32 algorithm to generate pseudorandom numbers.
  * @description
@@ -188,22 +167,14 @@ export class LCG extends PRNG {
  * @see https://gist.github.com/tommyettinger/46a874533244883189143505d203312c
 
  */
-export class Mulberry32 extends PRNG {
+export class Mulberry32 {
 	/**
 	 * Creates an instance of Mulberry32.
 	 * @param {number} seed - The seed value for the Mulberry32 PRNG.
 	 */
 	constructor(seed) {
-		super(seed);
-		this.state = this.seed;
-	}
-
-	/**
-	 * Returns the maximum possible value of Mulberry32.
-	 * @returns {number} The maximum value (2^32).
-	 */
-	maxValue() {
-		return 2 ** 32;
+		this.state = seed;
+		this.max = 2 ** 32;
 	}
 
 	/**
@@ -226,7 +197,7 @@ export class Mulberry32 extends PRNG {
 
 /**
  * XORShift32 Pseudorandom Number Generator Class
- * @extends PRNG
+ * @implements {PRNGAlgorithm}
  *
  * @summary Implements the XORShift32 algorithm to generate pseudorandom
  * numbers.
@@ -240,28 +211,20 @@ export class Mulberry32 extends PRNG {
  * and distributed without restrictions.
  *
  * @example
- * const rng = new XORShift32(123456789);
- * console.log(rng.next()); // Generates a pseudorandom number
+ * const prng = new XORShift32(123456789);
+ * console.log(prng.next()); // Generates a pseudorandom number
  *
  * @see Marsaglia, G. (2003) "XORShift RNGs", Journal of Statistical
  * Software https://www.jstatsoft.org/article/view/v008i14
  */
-export class XORShift32 extends PRNG {
+export class XORShift32 {
 	/**
 	 * Creates an instance of XORShift32.
-	 * @param {number} seed - The seed value for the Mulberry32 PRNG.
+	 * @param {number} seed - The seed value for the PRNG.
 	 */
 	constructor(seed) {
-		super(seed);
-		this.state = this.seed;
-	}
-
-	/**
-	 * Returns the maximum possible value of XORShift32.
-	 * @returns {number} The maximum value (2^32).
-	 */
-	maxValue() {
-		return 2 ** 32;
+		this.state = seed;
+		this.max = 2 ** 32;
 	}
 
 	/**
