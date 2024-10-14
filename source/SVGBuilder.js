@@ -20,6 +20,7 @@ export class SVGBuilder {
 
   setBackgroundColor(color) {
     this.svg.setAttribute("style", `background-color: ${color}`);
+    return this;
   }
 
   addShape(shapeElement) {
