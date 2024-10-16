@@ -4,7 +4,7 @@ export { Path } from "./Path.js";
 export { Circle } from "./Circle.js";
 export { AABB } from "./AABB.js";
 export { Plot } from "./Plot.js";
-export { LCG, Mulberry32, XORShift32, unseededRandomHex } from "./Random.js";
+export { PRNG, LCG, Mulberry32, XORShift32, unseededRandomHex } from "./Random.js";
 export {
 	fract,
 	lerp,
