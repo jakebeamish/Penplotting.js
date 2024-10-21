@@ -30,10 +30,13 @@ export class PRNG {
 
 	/**
 	 * Generate a random float in the range [0, 1).
-	 * @returns {number} - A number between 0 (inclusive) and 1 (exclusive).
+	 * @param {number} [max=1] - A single argument specifies a range of between 0 and that number.
+	 * @param {number} [min=0] - Two numeric arguments specifies a range.
+	 * @returns {number} - A floating-point number in a given range, 0 (inclusive) and 1 (exclusive) if called without arguments.
 	 */
-	randomFloat() {
-		return this.algorithm.next() / this.algorithm.max;
+	randomFloat(max = 1, min = 0) {
+		let range = max - min;
+		return range * (this.algorithm.next() / this.algorithm.max) + min;
 	}
 
 	/**
@@ -117,7 +120,7 @@ export class PRNG {
  *
  * @summary Implements the LCG algorithm to generate pseudorandom numbers.
  * @description
- * This class provides the LCG method of generating psuedorandom
+ * This class provides the LCG algorithm for generating psuedorandom
  * numbers to the {@link PRNG} class.
  *
  * @example
@@ -141,7 +144,7 @@ export class LCG {
 
 	/**
 	 * Generates the next pseudorandom number.
-	 * @returns {number} A pseudorandom number in the range [0-1).
+	 * @returns {number} A number in the range [0 to this.modulus - 1).
 	 */
 	next() {
 		this.state = (this.multiplier * this.state + this.increment) % this.modulus;

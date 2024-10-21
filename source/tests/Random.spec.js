@@ -72,7 +72,43 @@ describe("PRNG", () => {
 				expect(value).toBeLessThan(1);
 			}
 		});
+
+		it.each([
+			[1, 0],
+			[10, 0],
+			[-1, 0]
+		])("Given a single argument, returns a value between 0 and that argument (%i).", (max, min) => {
+			let prng = new PRNG();
+
+			if (max < min) {
+				let temp = max;
+				max = min;
+				min = temp;
+			}
+
+			let value = prng.randomFloat(max);
+			expect(value).toBeGreaterThanOrEqual(min);
+			expect(value).toBeLessThanOrEqual(max);
+		})
 	});
+
+	it.each([
+		[1, 4],
+		[0.001, 0.01],
+		[-1, -10]
+	])("Given two arguments (%i and %i), returns a value in that range.", (min, max) => {
+		let prng = new PRNG();
+
+		if (max < min) {
+			let temp = max;
+			max = min;
+			min = temp;
+		}
+
+		let value = prng.randomFloat(min, max);
+		expect(value).toBeGreaterThanOrEqual(min);
+		expect(value).toBeLessThanOrEqual(max);
+	})
 
 	describe("randomUnitVector", () => {
 		it("Returns a Vector of length 1.", () => {
