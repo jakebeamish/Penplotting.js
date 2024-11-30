@@ -89,7 +89,7 @@ svg {
 }'
 
 # Define js content
-js_content='import { Plot, Vector, Line, AABB, Circle, Path, PAPER, XORShift32, map } from "@jakebeamish/penplotting";
+js_content='import { Plot, Vector, Line, AABB, Circle, Path, PAPER, PRNG, map } from "@jakebeamish/penplotting";
 
 let plot = new Plot({
     size: PAPER.A4.portrait(),
@@ -98,7 +98,7 @@ let plot = new Plot({
 });
 
 plot.generate = () => {
-    const prng = new XORShift32(plot.seed.decimal);
+    const prng = new PRNG({seed: plot.seed.decimal});
     const { width, height } = plot.size;
     const centre = new Vector(width / 2, height / 2);
     const margin = width * 0.15;
