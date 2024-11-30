@@ -1,4 +1,5 @@
 import { AABB } from "./AABB.js";
+
 /**
  * Class representing a quadtree.
  *
@@ -76,7 +77,7 @@ export class Quadtree {
 			this.boundary.x - this.boundary.width / 2,
 			this.boundary.y - this.boundary.height / 2,
 			this.boundary.width / 2,
-			this.boundary.height / 2,
+			this.boundary.height / 2
 		);
 		this.topLeft = new Quadtree(topLeftBoundary, this.capacity);
 
@@ -84,7 +85,7 @@ export class Quadtree {
 			this.boundary.x + this.boundary.width / 2,
 			this.boundary.y - this.boundary.height / 2,
 			this.boundary.width / 2,
-			this.boundary.height / 2,
+			this.boundary.height / 2
 		);
 
 		this.topRight = new Quadtree(topRightBoundary, this.capacity);
@@ -93,7 +94,7 @@ export class Quadtree {
 			this.boundary.x - this.boundary.width / 2,
 			this.boundary.y + this.boundary.height / 2,
 			this.boundary.width / 2,
-			this.boundary.height / 2,
+			this.boundary.height / 2
 		);
 		this.bottomLeft = new Quadtree(bottomLeftBoundary, this.capacity);
 
@@ -101,7 +102,7 @@ export class Quadtree {
 			this.boundary.x + this.boundary.width / 2,
 			this.boundary.y + this.boundary.height / 2,
 			this.boundary.width / 2,
-			this.boundary.height / 2,
+			this.boundary.height / 2
 		);
 		this.bottomRight = new Quadtree(bottomRightBoundary, this.capacity);
 	}
