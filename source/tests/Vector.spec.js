@@ -249,6 +249,13 @@ describe("Vector", () => {
     });
   });
 
+	describe("getMagnitudeSquared", () => {
+		it("Returns the squared magnitude of a vector.", () => {
+			const vector = new Vector(2, 0);
+			expect(vector.getMagnitudeSquared()).toBeCloseTo(4);
+		});
+	});
+
   describe("setMagnitude", () => {
     it("Rescales the magnitude of a vector to a given amount.", () => {
       const vector = new Vector(1, 0);
@@ -267,6 +274,13 @@ describe("Vector", () => {
     });
   });
 
+	describe("distanceSquared", () => {
+		it("Returns the square of the distance between two vectors.", () => {
+			const v1 = new Vector(0, 0);
+			const v2 = new Vector(0, 10);
+			expect(v1.distanceSquared(v2)).toBeCloseTo(100);
+		})
+	})
   describe("normalize", () => {
     it("Rescales the magnitude of a vector to 1.", () => {
       const vector = new Vector(5, 5);

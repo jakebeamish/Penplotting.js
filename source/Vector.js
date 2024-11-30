@@ -156,6 +156,16 @@ export class Vector {
     return Math.sqrt(this.x * this.x + this.y * this.y);
   }
 
+  getMagnitudeSquared() {
+    return (this.x * this.x + this.y * this.y);
+  }
+
+  distanceSquared(vector) {
+    const delta = Vector.subtract(this, vector);
+    return delta.getMagnitudeSquared();
+
+  }
+
   /**
    * Set the magnitude of this vector.
    * @param {number} magnitude
