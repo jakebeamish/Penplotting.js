@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Documentation for Triangle class.
 - Tags in changelog link to github.
 
+### Fixed
+
+- Incorrect Triangle class JSDoc annotation caused class methods to be hidden.
+
 ## [4.2.0] - 2024-12-05
 
 ### Added

@@ -1,6 +1,10 @@
 import { Vector } from "./Vector.js";
 import { Line } from "./Line.js";
 
+
+/**
+ * Class representing a triangle.
+ */
 export class Triangle {
 	/**
 	 * Create a triangle.
