@@ -66,7 +66,7 @@ export class Line {
 	 * Check if two lines intersect.
 	 * @param {Line} line1
 	 * @param {Line} line2
-	 * @returns {(boolean|Array)} - False if lines don't intersect, otherwise returns the intersection point [x,y]
+	 * @returns {(boolean|Vector)} - False if lines don't intersect, otherwise returns the intersection point as a {@link Vector}.
 	 */
 	static lineIntersection(line1, line2) {
 		const x1 = line1.a.x;
@@ -93,7 +93,7 @@ export class Line {
 		if (ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1) {
 			const x = x1 + ua * (x2 - x1);
 			const y = y1 + ua * (y2 - y1);
-			return [x, y];
+			return new Vector(x, y);
 		} else {
 			return false;
 		}
