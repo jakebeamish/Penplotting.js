@@ -31,4 +31,24 @@ export class Triangle {
 			new Line(this.c, this.a),
 		];
 	}
+
+	getMidpoints() {
+		const lines = this.lines();
+		return [
+			Vector.lerp(lines[0].a, lines[0].b, 0.5),
+			Vector.lerp(lines[1].a, lines[1].b, 0.5),
+			Vector.lerp(lines[2].a, lines[2].b, 0.5)
+		]
+	}
+
+	getCentroid() {
+		const d = Vector.lerp(this.a, this.b, 0.5);
+		const e = Vector.lerp(this.b, this.c, 0.5);
+
+		const medianCD = new Line(this.c, d);
+		const medianAE = new Line(this.a, e);
+
+		const point = medianAE.intersects(medianCD);
+		return point;
+	}
 }
