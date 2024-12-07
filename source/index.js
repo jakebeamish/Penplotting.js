@@ -1,4 +1,5 @@
 export { Vector } from "./Vector.js";
+export { Point } from "./Point.js";
 export { Line } from "./Line.js";
 export { Path } from "./Path.js";
 export { Circle } from "./Circle.js";

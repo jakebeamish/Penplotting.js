@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Documentation for Triangle class.
 - Tags in changelog link to github.
 - Get centroid and midpoints methods for Triangle class.
+- Point class that can be drawn as a tiny circle or tiny line.
 
 ### Fixed
 

@@ -5,7 +5,7 @@ import { Line } from "./Line.js";
 import { Circle } from "./Circle.js";
 import { Path } from "./Path.js";
 import { SVGBuilder } from "./SVGBuilder.js";
-
+import { Point } from "./Point.js";
 /**
  * @class
  * Plot is an object that is able to create, display and download SVG documents.
@@ -48,6 +48,8 @@ export class Plot {
 		this.lines = [];
 		this.paths = [];
 		this.circles = [];
+		this.points = [];
+
 		this.seedHistory = [];
 
 		this.svgBuilder = new SVGBuilder();
@@ -121,9 +123,11 @@ plot.draw();
 			this.paths.push(shape);
 		} else if (shape instanceof Circle) {
 			this.circles.push(shape);
+		} else if (shape instanceof Point){
+			this.points.push(shape);
 		} else {
 			throw new TypeError(
-				"Unsupported shape type. Shape must be a Line, Path or Circle.",
+				"Unsupported shape type. Shape must be a Line, Path, Point or Circle.",
 			);
 		}
 	}
@@ -145,6 +149,8 @@ plot.draw();
 		this.addPathsToSVG();
 
 		this.addCirclesToSVG();
+
+		this.addPointsToSVG();
 
 		this.svg = this.svgBuilder.build();
 
@@ -314,6 +320,12 @@ plot.draw();
 	addCirclesToSVG() {
 		for (const circle of this.circles) {
 			this.svgBuilder.addShape(circle.toSVGElement());
+		}
+	}
+
+	addPointsToSVG() {
+		for (const point of this.points) {
+			this.svgBuilder.addShape(point.toSVGElement());
 		}
 	}
 
