@@ -157,13 +157,12 @@ export class Vector {
   }
 
   getMagnitudeSquared() {
-    return (this.x * this.x + this.y * this.y);
+    return this.x * this.x + this.y * this.y;
   }
 
   distanceSquared(vector) {
     const delta = Vector.subtract(this, vector);
     return delta.getMagnitudeSquared();
-
   }
 
   /**

@@ -1,39 +1,33 @@
 {
-    "source": {
-        "include": [
-            "source"
-        ]
-    },
-    "opts": {
-        "encoding": "utf8",
-        "readme": "./README.md",
-        "destination": "./docs",
-        "recurse": true,
-        "verbose": true,
-        "template": "./node_modules/clean-jsdoc-theme",
-        "theme_opts": {
-            "default_theme": "light",
-            "title": "Penplotting.js",
-            "homepageTitle": "Penplotting.js",
-            "menu": [
-                {
-                  "title": "GitHub",
-                  "link": "https://github.com/jakebeamish/Penplotting.js/",
-                  "target": "_blank"
-                }
-            ]
+  "source": {
+    "include": ["source"]
+  },
+  "opts": {
+    "encoding": "utf8",
+    "readme": "./README.md",
+    "destination": "./docs",
+    "recurse": true,
+    "verbose": true,
+    "template": "./node_modules/clean-jsdoc-theme",
+    "theme_opts": {
+      "default_theme": "light",
+      "title": "Penplotting.js",
+      "homepageTitle": "Penplotting.js",
+      "menu": [
+        {
+          "title": "GitHub",
+          "link": "https://github.com/jakebeamish/Penplotting.js/",
+          "target": "_blank"
         }
-    },
-    "plugins": [
-        "plugins/markdown"
-    ],
-    "markdown": {
-        "hardwrap": false,
-        "idInHeadings": true
-    },
-    "templates": {
-        "clean-jsdoc-theme": {
-
-        }
+      ]
     }
+  },
+  "plugins": ["plugins/markdown"],
+  "markdown": {
+    "hardwrap": false,
+    "idInHeadings": true
+  },
+  "templates": {
+    "clean-jsdoc-theme": {}
+  }
 }
