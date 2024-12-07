@@ -32,6 +32,11 @@ export class Triangle {
 		];
 	}
 
+	/**
+	 * Find the midpoints of a Triangle.
+	 * @returns {Vector[]} - An array of Vectors of midpoints
+	 * of the Triangle edges.
+	 */
 	getMidpoints() {
 		const lines = this.lines();
 		return [
@@ -41,6 +46,10 @@ export class Triangle {
 		]
 	}
 
+	/**
+	 * Find the centroid of a Triangle.
+	 * @returns {Vector} - The centroid of the Triangle.
+	 */
 	getCentroid() {
 		const d = Vector.lerp(this.a, this.b, 0.5);
 		const e = Vector.lerp(this.b, this.c, 0.5);
