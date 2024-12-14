@@ -20,7 +20,7 @@ export class Vector {
 
   /**
    * Create a vector from an array.
-   * @param {array} array [x, y]
+   * @param {number[]} array - Vector components as numbers in the format `[x, y]`.
    * @returns {Vector}
    */
   static fromArray(array) {
@@ -29,7 +29,7 @@ export class Vector {
 
   /**
    * Create an array from the vector's components.
-   * @returns {array} [x, y]
+   * @returns {Array} an array `[x, y]`.
    */
   toArray() {
     return [this.x, this.y];
