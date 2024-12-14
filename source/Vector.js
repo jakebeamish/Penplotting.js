@@ -20,7 +20,7 @@ export class Vector {
 
   /**
    * Create a vector from an array.
-   * @param {number[]} array - Vector components as numbers in the format `[x, y]`.
+   * @param {number[]} array - Vector components as numbers in an array `[x, y]`.
    * @returns {Vector}
    */
   static fromArray(array) {
@@ -150,16 +150,25 @@ export class Vector {
 
   /**
    * Get the magnitude of this vector.
-   * @returns {number} The magnitude (Euclidean distance) of this vector
+   * @returns {number} The magnitude (Euclidean distance) of this vector.
    */
   getMagnitude() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
   }
 
+	/**
+	 * Get the magnitude squared of this vector. This is faster than [getMagnitude]{@link Vector#getMagnitude} because it avoids using the square root.
+	 * @returns {number} The magnitude squared of this vector.
+	 */
   getMagnitudeSquared() {
     return this.x * this.x + this.y * this.y;
   }
 
+	/**
+	 * Get the distance squared to another vector from this one.
+	 * @param {Vector} vector - The target vector.
+	 * @returns {number} The distance squared to the input vector.
+	 */
   distanceSquared(vector) {
     const delta = Vector.subtract(this, vector);
     return delta.getMagnitudeSquared();

@@ -5,87 +5,87 @@ import { Line } from "./Line.js";
 
 /** Class representing an AABB. */
 export class AABB {
-	/**
-	 * Create an AABB using centre position, width, and height.
-	 * @param {*} x - The x value of the centre.
-	 * @param {*} y - The y value of the centre.
-	 * @param {*} width - The width measured from the centre.
-	 * @param {*} height - The height measured from the centre.
-	 */
-	constructor(x, y, width, height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-	}
+  /**
+   * Create an AABB using centre position, width, and height.
+   * @param {*} x - The x value of the centre.
+   * @param {*} y - The y value of the centre.
+   * @param {*} width - The width measured from the centre.
+   * @param {*} height - The height measured from the centre.
+   */
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
 
-	/**
-	 * Create an AABB from four corner [Vectors]{@link Vector}.
-	 * @param {Vector} topLeft
-	 * @param {Vector} topRight
-	 * @param {Vector} bottomRight
-	 * @param {Vector} bottomLeft
-	 * @returns {AABB} - A new AABB object.
-	 */
-	static fromCorners(topLeft, topRight, bottomRight, bottomLeft) {
-		const centre = new Vector(topRight.x - topLeft.x, bottomLeft.y - topLeft.y);
+  /**
+   * Create an AABB from four corner [Vectors]{@link Vector}.
+   * @param {Vector} topLeft
+   * @param {Vector} topRight
+   * @param {Vector} bottomRight
+   * @param {Vector} bottomLeft
+   * @returns {AABB} - A new AABB object.
+   */
+  static fromCorners(topLeft, topRight, bottomRight, bottomLeft) {
+    const centre = new Vector(topRight.x - topLeft.x, bottomLeft.y - topLeft.y);
 
-		const width = topRight.x - centre.x;
-		const height = bottomRight.y - centre.y;
+    const width = topRight.x - centre.x;
+    const height = bottomRight.y - centre.y;
 
-		return new AABB(centre.x, centre.y, width, height);
-	}
+    return new AABB(centre.x, centre.y, width, height);
+  }
 
-	/**
-	 * Check if this AABB contains a {@link Vector}.
-	 * @param {Vector} point - The vector to check.
-	 * @returns {boolean}
-	 */
-	contains(point) {
-		return (
-			point.x > this.x - this.width &amp;&amp;
-			point.x &lt; this.x + this.width &amp;&amp;
-			point.y > this.y - this.height &amp;&amp;
-			point.y &lt; this.y + this.height
-		);
-	}
+  /**
+   * Check if this AABB contains a {@link Vector}.
+   * @param {Vector} point - The vector to check.
+   * @returns {boolean}
+   */
+  contains(point) {
+    return (
+      point.x > this.x - this.width &amp;&amp;
+      point.x &lt; this.x + this.width &amp;&amp;
+      point.y > this.y - this.height &amp;&amp;
+      point.y &lt; this.y + this.height
+    );
+  }
 
-	/**
-	 * Check if this aabb intersects another AABB.
-	 * @param {AABB} range - The target AABB to check.
-	 * @returns {boolean}
-	 */
-	intersects(range) {
-		return !(
-			range.x - range.width > this.x + this.width ||
-			range.x + range.width &lt; this.x - this.width ||
-			range.y - range.height > this.y + this.height ||
-			range.y + range.height &lt; this.y - this.height
-		);
-	}
+  /**
+   * Check if this aabb intersects another AABB.
+   * @param {AABB} range - The target AABB to check.
+   * @returns {boolean}
+   */
+  intersects(range) {
+    return !(
+      range.x - range.width > this.x + this.width ||
+      range.x + range.width &lt; this.x - this.width ||
+      range.y - range.height > this.y + this.height ||
+      range.y + range.height &lt; this.y - this.height
+    );
+  }
 
-	/**
-	 * Create an array of [Lines]{@link Line}
-	 * containing a line for each side of the AABB.
-	 * @returns {Line[]} - An array of Lines that can be added
-	 * to a {@link Plot} using {@link Plot#add}.
-	 */
-	lines() {
-		const topLeft = new Vector(this.x - this.width, this.y - this.height);
-		const topRight = new Vector(this.x + this.width, this.y - this.height);
-		const bottomLeft = new Vector(this.x - this.width, this.y + this.height);
-		const bottomRight = new Vector(this.x + this.width, this.y + this.height);
+  /**
+   * Create an array of [Lines]{@link Line}
+   * containing a line for each side of the AABB.
+   * @returns {Line[]} - An array of Lines that can be added
+   * to a {@link Plot} using {@link Plot#add}.
+   */
+  lines() {
+    const topLeft = new Vector(this.x - this.width, this.y - this.height);
+    const topRight = new Vector(this.x + this.width, this.y - this.height);
+    const bottomLeft = new Vector(this.x - this.width, this.y + this.height);
+    const bottomRight = new Vector(this.x + this.width, this.y + this.height);
 
-		let lines = [];
+    let lines = [];
 
-		lines.push(
-			new Line(topLeft, topRight),
-			new Line(topRight, bottomRight),
-			new Line(bottomRight, bottomLeft),
-			new Line(bottomLeft, topLeft),
-		);
+    lines.push(
+      new Line(topLeft, topRight),
+      new Line(topRight, bottomRight),
+      new Line(bottomRight, bottomLeft),
+      new Line(bottomLeft, topLeft),
+    );
 
-		return lines;
-	}
+    return lines;
+  }
 }
 </code></pre></article></section></div></div></div><div class="search-container" id="PkfLWpAbet" style="display:none"><div class="wrapper" id="iCxFxjkHbP"><button class="icon-button search-close-button" id="VjLlGakifb" aria-label="close search"><svg><use xlink:href="#close-icon"></use></svg></button><div class="search-box-c"><svg><use xlink:href="#search-icon"></use></svg> <input type="text" id="vpcKVYIppa" class="search-input" placeholder="Search..." autofocus></div><div class="search-result-c" id="fWwVHRuDuN"><span class="search-result-c-text">Type anything to view search result</span></div></div></div><div class="mobile-menu-icon-container"><button class="icon-button" id="mobile-menu" data-isopen="false" aria-label="menu"><svg><use xlink:href="#menu-icon"></use></svg></button></div><div id="mobile-sidebar" class="mobile-sidebar-container"><div class="mobile-sidebar-wrapper"><a href="/" class="sidebar-title sidebar-title-anchor">Penplotting.js</a><div class="mobile-nav-links"><div class="navbar-item"><a id="" href="https://github.com/jakebeamish/Penplotting.js/" target="_blank">GitHub</a></div></div><div class="mobile-sidebar-items-c"><div class="sidebar-section-title with-arrow" data-isopen="false" id="sidebar-classes"><div>Classes</div><svg><use xlink:href="#down-icon"></use></svg></div><div class="sidebar-section-children-container"><div class="sidebar-section-children"><a href="AABB.html">AABB</a></div><div class="sidebar-section-children"><a href="Circle.html">Circle</a></div><div class="sidebar-section-children"><a href="LCG.html">LCG</a></div><div class="sidebar-section-children"><a href="Line.html">Line</a></div><div class="sidebar-section-children"><a href="Mulberry32.html">Mulberry32</a></div><div class="sidebar-section-children"><a href="PRNG.html">PRNG</a></div><div class="sidebar-section-children"><a href="Path.html">Path</a></div><div class="sidebar-section-children"><a href="Plot.html">Plot</a></div><div class="sidebar-section-children"><a href="Point.html">Point</a></div><div class="sidebar-section-children"><a href="Quadtree.html">Quadtree</a></div><div class="sidebar-section-children"><a href="Triangle.html">Triangle</a></div><div class="sidebar-section-children"><a href="Vector.html">Vector</a></div><div class="sidebar-section-children"><a href="XORShift32.html">XORShift32</a></div></div><div class="sidebar-section-title with-arrow" data-isopen="false" id="sidebar-global"><div>Global</div><svg><use xlink:href="#down-icon"></use></svg></div><div class="sidebar-section-children-container"><div class="sidebar-section-children"><a href="global.html#PRNGAlgorithm">PRNGAlgorithm</a></div><div class="sidebar-section-children"><a href="global.html#decToHex">decToHex</a></div><div class="sidebar-section-children"><a href="global.html#fract">fract</a></div><div class="sidebar-section-children"><a href="global.html#hexToDec">hexToDec</a></div><div class="sidebar-section-children"><a href="global.html#lerp">lerp</a></div><div class="sidebar-section-children"><a href="global.html#map">map</a></div><div class="sidebar-section-children"><a href="global.html#sinFract">sinFract</a></div><div class="sidebar-section-children"><a href="global.html#unseededRandomHex">unseededRandomHex</a></div><div class="sidebar-section-children"><a href="global.html#wrap">wrap</a></div></div></div><div class="mobile-navbar-actions"><div class="navbar-right-item"><button class="icon-button search-button" aria-label="open-search"><svg><use xlink:href="#search-icon"></use></svg></button></div><div class="navbar-right-item"><button class="icon-button theme-toggle" aria-label="toggle-theme"><svg><use class="theme-svg-use" xlink:href="#dark-theme-icon"></use></svg></button></div><div class="navbar-right-item"><button class="icon-button font-size" aria-label="change-font-size"><svg><use xlink:href="#font-size-icon"></use></svg></button></div></div></div></div><script type="text/javascript" src="scripts/core.min.js"></script><script src="scripts/search.min.js" defer="defer"></script><script src="scripts/third-party/fuse.js" defer="defer"></script><script type="text/javascript">var tocbotInstance=tocbot.init({tocSelector:"#eed4d2a0bfd64539bb9df78095dec881",contentSelector:".main-content",headingSelector:"h1, h2, h3",hasInnerContainers:!0,scrollContainer:".main-content",headingsOffset:130,onClick:bringLinkToView})</script></body></html>
