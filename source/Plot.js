@@ -392,15 +392,17 @@ plot.draw();
     button.addEventListener("click", clickHandler);
   }
 
+	getNumOfShapes() {
+		return this.lines.length + this.paths.length + this.circles.length + this.points.length;
+	}
+
   addPlotInfo(parent, timeTaken) {
     const plotInfo = this.createElement("div", parent);
-    const numOfShapes =
-      this.lines.length + this.paths.length + this.circles.length;
     const timeText = timeTaken < 0.05 ? "<0.05s" : `~${timeTaken}s`;
     this.createElement(
       "p",
       plotInfo,
-      `Generated ${numOfShapes} shapes in ${timeText}`,
+      `Generated ${this.getNumOfShapes()} shapes in ${timeText}`,
     );
   }
 
