@@ -6,37 +6,39 @@ import { lerp } from "./utils.js";
 export class Vector {
   /**
    * Create a vector from coordinates.
-   * @param {number} x - x
-   * @param {number} y - y
+   * @param {number} [x=0] - x
+   * @param {number} [y=0] - y
+	 * @param {number} [z=0] - z
    */
-  constructor(x = 0, y = 0) {
-    if (typeof x !== "number" || typeof y !== "number") {
+  constructor(x = 0, y = 0, z = 0) {
+    if (typeof x !== "number" || typeof y !== "number" || typeof z !== "number") {
       throw new TypeError("Vector components must be numbers.");
     }
 
     this.x = x;
     this.y = y;
+		this.z = z;
   }
 
   /**
    * Create a vector from an array.
-   * @param {number[]} array - Vector components as numbers in an array `[x, y]`.
+   * @param {number[]} array - Vector components as numbers in an array `[x, y, z]`.
    * @returns {Vector}
    */
   static fromArray(array) {
-    return new Vector(array[0], array[1]);
+    return new Vector(array[0], array[1], array[2] || 0);
   }
 
   /**
    * Create an array from the vector's components.
-   * @returns {Array} an array `[x, y]`.
+   * @returns {Array} an array `[x, y, z]`.
    */
   toArray() {
-    return [this.x, this.y];
+    return [this.x, this.y, this.z];
   }
 
   /**
-   * Create a vector from an angle.
+   * Create a 2D vector from an angle.
    * @param {number} angle - The angle of the vector in radians.
    * @param {number} [magnitude=1] - The magnitude of the vector.
    * @returns {Vector}
@@ -53,6 +55,7 @@ export class Vector {
   add(vector) {
     this.x += vector.x;
     this.y += vector.y;
+		this.z += vector.z;
     return this;
   }
 
@@ -62,7 +65,7 @@ export class Vector {
    * @returns {boolean}
    */
   equals(vector) {
-    return this.x === vector.x && this.y === vector.y;
+    return this.x === vector.x && this.y === vector.y && this.z === vector.z;
   }
 
   /**
@@ -94,6 +97,7 @@ export class Vector {
   subtract(vector) {
     this.x -= vector.x;
     this.y -= vector.y;
+		this.z -= vector.z;
     return this;
   }
 
@@ -105,6 +109,7 @@ export class Vector {
   multiply(scalar) {
     this.x *= scalar;
     this.y *= scalar;
+		this.z *= scalar;
     return this;
   }
 
@@ -115,7 +120,7 @@ export class Vector {
    * @returns {Vector}
    */
   static add(v1, v2) {
-    return new Vector(v1.x + v2.x, v1.y + v2.y);
+    return new Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
   }
 
   /**
@@ -125,7 +130,7 @@ export class Vector {
    * @returns {Vector}
    */
   static subtract(v1, v2) {
-    return new Vector(v1.x - v2.x, v1.y - v2.y);
+    return new Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
   }
 
   /**
@@ -135,7 +140,7 @@ export class Vector {
    * @returns {number}
    */
   static dot(v1, v2) {
-    return v1.x * v2.x + v1.y * v2.y;
+    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
   }
 
   /**
@@ -149,7 +154,7 @@ export class Vector {
   }
 
   /**
-   * Get the magnitude of this vector.
+   * Get the magnitude of this 2D vector.
    * @returns {number} The magnitude (Euclidean distance) of this vector.
    */
   getMagnitude() {
@@ -205,7 +210,7 @@ export class Vector {
   }
 
   /**
-   * Rotate this vector by a specified angle.
+   * Rotate this 2D vector by a specified angle.
    * @param {number} angle - The angle to rotate the vector by, in radians.
    * @returns {Vector} This vector after rotation.
    */
@@ -236,11 +241,11 @@ export class Vector {
    * @returns {Vector}
    */
   clone() {
-    return new Vector(this.x, this.y);
+    return new Vector(this.x, this.y, this.z);
   }
 
   /**
-   * Get the angle of this vector with respect to the positive x-axis.
+   * Get the 2D angle of this vector with respect to the positive x-axis.
    * @returns {number} Angle in radians
    */
   getAngle() {
@@ -255,7 +260,7 @@ export class Vector {
    * @returns {Vector}
    */
   static lerp(v1, v2, amount) {
-    return new Vector(lerp(v1.x, v2.x, amount), lerp(v1.y, v2.y, amount));
+    return new Vector(lerp(v1.x, v2.x, amount), lerp(v1.y, v2.y, amount), lerp(v1.z, v2.z, amount));
   }
 
   /**

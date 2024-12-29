@@ -6,6 +6,7 @@ export { Circle } from "./Circle.js";
 export { AABB } from "./AABB.js";
 export { Plot } from "./Plot.js";
 export { Triangle } from "./Triangle.js";
+export { Matrix } from "./Matrix.js";
 export {
   PRNG,
   LCG,

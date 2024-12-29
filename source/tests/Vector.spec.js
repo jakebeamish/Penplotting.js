@@ -11,7 +11,7 @@ describe("Vector", () => {
 
     test("Returns a new vector with default components (0, 0) if called without parameters.", () => {
       const vector = new Vector();
-      expect(vector).toEqual({ x: 0, y: 0 });
+      expect(vector).toEqual({ x: 0, y: 0, z: 0 });
     });
 
     it("Throws a TypeError if any component is not a number. Currently does not throw if component is undefined.", () => {
@@ -126,9 +126,10 @@ describe("Vector", () => {
 
   describe("toArray", () => {
     it.each([
-      { array: [0, 1], vector: new Vector(0, 1) },
-      { array: [2, -3], vector: new Vector(2, -3) },
-      { array: [0, 0], vector: new Vector(0, 0) },
+      { array: [0, 1, 3], vector: new Vector(0, 1, 3) },
+			{ array: [1, 5, 0], vector: new Vector(1, 5) },
+      { array: [2, -3, 0], vector: new Vector(2, -3) },
+      { array: [0, 0, 0], vector: new Vector(0, 0) },
     ])(
       "Returns $array when vector $vector .toArray is called.",
       ({ array, vector }) => {
