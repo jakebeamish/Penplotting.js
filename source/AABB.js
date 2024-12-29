@@ -49,7 +49,7 @@ export class AABB {
   }
 
   /**
-   * Check if this aabb intersects another AABB.
+   * Check if this AABB intersects another AABB.
    * @param {AABB} range - The target AABB to check.
    * @returns {boolean}
    */
@@ -63,8 +63,7 @@ export class AABB {
   }
 
   /**
-   * Create an array of [Lines]{@link Line}
-   * containing a line for each side of the AABB.
+   * Create an array of [Lines]{@link Line} containing one line for each side of the AABB.
    * @returns {Line[]} - An array of Lines that can be added
    * to a {@link Plot} using {@link Plot#add}.
    */
