@@ -2,7 +2,20 @@
  * Class representing a matrix.
  */
 export class Matrix {
+  /**
+   * @param {number} rows - Rows (must be positive integer).
+   * @param {number} cols - Columns (must be positive integer).
+   */
   constructor(rows, cols) {
+    if (
+      rows < 1 ||
+      cols < 1 ||
+      !Number.isInteger(rows) ||
+      !Number.isInteger(cols)
+    ) {
+      throw new Error("Rows and columns must be positive integers.");
+    }
+
     this.rows = rows;
     this.cols = cols;
     this.matrix = [];
