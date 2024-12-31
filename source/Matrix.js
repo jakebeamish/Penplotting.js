@@ -1,3 +1,4 @@
+import { Vector } from "./Vector.js";
 /**
  * Class representing a matrix.
  */
@@ -28,6 +29,11 @@ export class Matrix {
     }
   }
 
+  toVector() {
+		const result = this.matrix.flat();
+    return Vector.fromArray(result.slice(0, 3));
+  }
+
   static hasEqualDimensions(a, b) {
     return a.rows === b.rows && a.cols === b.cols;
   }
@@ -49,9 +55,8 @@ export class Matrix {
       }
     }
 
-		return result
-	}
-  
+    return result;
+  }
 
   // TODO Static add and scale functions. Use the static to implement
   // instance methods. Test against bad inputs (matching rows and columns)
