@@ -77,7 +77,7 @@ export class Matrix {
           this.matrix[i][j] += n.matrix[i][j];
         }
       }
-    } else if (n instanceof Number) {
+    } else if (typeof n === "number") {
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.cols; j++) {
           this.matrix[i][j] += n;
