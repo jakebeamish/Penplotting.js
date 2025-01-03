@@ -86,7 +86,7 @@ export class Plot {
 
   /**
    * @summary Adds shapes to the plot.
-   * @param {Line|Circle|Path|Array} shape - An object or array of objects to be added to the plot.
+   * @param {Line|Circle|Path|Point|Array} shape - An object or array of objects to be added to the plot.
    * @example
    * import { Plot, Line, Circle } from "@jakebeamish/penplotting";
 
@@ -114,7 +114,7 @@ plot.draw();
   /**
    * Adds a single shape to the appropriate array. Used by {@link Plot#add}.
    * @private
-   * @param {Line|Path|Circle} shape
+   * @param {Line|Path|Circle|Point} shape
    */
   addSingleShape(shape) {
     if (shape instanceof Line) {
