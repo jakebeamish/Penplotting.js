@@ -193,6 +193,7 @@ plot.draw();
     this.lines = [];
     this.paths = [];
     this.circles = [];
+		this.points = [];
 
     document.body.innerHTML = "";
 
