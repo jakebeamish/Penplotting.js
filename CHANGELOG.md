@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Point class that can be drawn as a tiny circle or tiny line.
 - Documentation for Triangle class.
 - Documentation for Vector methods getMagnitudeSquared and distanceSquared.
+- Matrix class for 3D rendering.
 
 ### Fixed
 
