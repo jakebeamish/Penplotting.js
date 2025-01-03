@@ -1,14 +1,14 @@
 import { Vector } from "./Vector.js";
 import { Line } from "./Line.js";
 
-/** Class representing an AABB. */
+/** Class representing an Axis-Aligned Bounding Box. */
 export class AABB {
   /**
    * Create an AABB using centre position, width, and height.
-   * @param {*} x - The x value of the centre.
-   * @param {*} y - The y value of the centre.
-   * @param {*} width - The width measured from the centre.
-   * @param {*} height - The height measured from the centre.
+   * @param {number} x - The x value of the centre.
+   * @param {number} y - The y value of the centre.
+   * @param {number} width - The width measured from the centre.
+   * @param {number} height - The height measured from the centre.
    */
   constructor(x, y, width, height) {
     this.x = x;
