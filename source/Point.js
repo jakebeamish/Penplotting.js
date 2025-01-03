@@ -1,11 +1,14 @@
 import { Vector } from "./Vector.js";
 import { Circle } from "./Circle.js";
 import { Line } from "./Line.js";
+
 /**
  * Class representing a Point.
  *
- * SVG does not have a built-in way of making points. Either a very short {@link Line}
- * or a very small {@link Circle} is passed to the {@link SVGBuilder} instead.
+ * A Point is a small plottable shape that is drawn as either a {@link Circle}
+ * by default, or a very short {@link Line}.
+ * 
+ * Points can be instantiated with a vector position.
  */
 export class Point {
   /**
@@ -15,7 +18,7 @@ export class Point {
    *
    * @param {Vector} position - The position of the Point as a {@link Vector}.
    * @param {Number} [length = 0.25] - The radius or length of the drawn Point.
-   * @param {string} [style = "circle"] - The style of the Point ("circle" or "line").
+   * @param {string} [style = "circle"] - Shape type ("circle" or "line").
    */
   constructor(position, length = 0.25, style = "circle") {
     this.position = position;
@@ -24,6 +27,9 @@ export class Point {
   }
 
   /**
+	 * Converts the Point to an SVGElement.
+	 *
+	 * This method is used by {@link Plot#add}.
    * @returns {SVGElement}
    */
   toSVGElement() {
