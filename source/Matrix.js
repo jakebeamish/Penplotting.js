@@ -30,8 +30,15 @@ export class Matrix {
   }
 
   toVector() {
-		const result = this.matrix.flat();
+    const result = this.matrix.flat();
     return Vector.fromArray(result.slice(0, 3));
+  }
+
+  static fromVector(v) {
+    const result = new Matrix(v.toArray().length, 1);
+    result.matrix = [[v.x], [v.y], [v.z]];
+
+    return result;
   }
 
   static hasEqualDimensions(a, b) {
@@ -111,5 +118,37 @@ export class Matrix {
     } else {
       throw new TypeError("Expected input of type Matrix or Number.");
     }
+  }
+
+  static multiply(a, b) {
+    if (!(a instanceof Matrix) || !(b instanceof Matrix)) {
+      throw new TypeError("Inputs must both be Matrixes.");
+    }
+    if (a.cols !== b.rows) {
+      throw new TypeError("Columns of a must equal rows of b.");
+    }
+
+    const result = new Matrix(a.cols, b.cols);
+
+    // for (let k = 0; k < result.rows; k++) {
+    //
+    // 	let sum = 0;
+    //
+    // 	for (let j = 0; j < a.cols; j++) {
+    // 		sum += a.matrix[0][j] * b.matrix[k][0]
+    // 	}
+    // 	result.matrix[k][0] = sum;
+    // }
+
+    for (let i = 0; i < a.rows; i++) {
+      for (let j = 0; j < b.cols; j++) {
+        let sum = 0;
+        for (let k = 0; k < a.cols; k++) {
+          sum += a.matrix[i][k] * b.matrix[k][j];
+        }
+        result.matrix[i][j] = sum;
+      }
+    }
+    return result;
   }
 }
