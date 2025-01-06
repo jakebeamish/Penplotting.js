@@ -14,16 +14,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Matrix class for 3D rendering.
-- Get centroid and midpoints methods for Triangle class.
 - Point class that can be drawn as a tiny circle or tiny line.
+- Get centroid and midpoints methods for Triangle class.
 - Documentation for Triangle class.
 - Documentation for Vector methods getMagnitudeSquared and distanceSquared.
 - Improvements to documentation for Vector, AABB, Point, Matrix.
-- Tags in changelog link to github.
+- Tags in changelog now link to GitHub.
 
 ### Fixed
 
 - Incorrect Triangle class JSDoc annotation caused class methods to be hidden.
+- Points are now cleared properly when the Plot is cleared.
 
 ## [4.2.0] - 2024-12-05
 
