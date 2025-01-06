@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.0]
+
 ### Changed
 
 - Line-line intersection returns a Vector object rather than an array of vector components.
@@ -33,5 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This CHANGELOG.md file for documenting what has changed in new releases.
 - Triangle class with lines method.
 
-[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v4.2.0...HEAD
+[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.0...HEAD
+[5.0.0]: https://github.com/jakebeamish/Penplotting.js/compare/v4.2.0...v5.0.0
 [4.2.0]: https://github.com/jakebeamish/Penplotting.js/compare/v4.1.0...v4.2.0
