@@ -128,5 +128,98 @@ describe("Matrix", () => {
     });
   });
 
-  describe("fromVector", () => {});
+  describe("fromVector", () => {
+    it("Returns a valid matrix from Vector components.", () => {
+      const v = new Vector(1, 2, 3);
+      const expected = [[1], [2], [3]];
+
+      expect(Matrix.fromVector(v).matrix).toEqual(expected);
+    });
+  });
+
+  describe("multiply", () => {
+    it("Throws an error if inputs are not matrices.", () => {
+      expect(() => {
+        Matrix.multiply(1, 5);
+      }).toThrow();
+      expect(() => {
+        Matrix.multiply("a", 5);
+      }).toThrow();
+    });
+
+    it("Throws an error if columns of the first input don't match rows of the second.", () => {
+			const m = new Matrix(1, 1);
+			const n = new Matrix(3, 1);
+			expect(() => {
+				Matrix.multiply(m, n)
+			}).toThrow();
+		});
+
+		it("Returns a new matrix if given two matrices of correct size.", () =>  {
+			const m = new Matrix(2, 3);
+			const n = new Matrix(3, 1);
+			m.matrix = [
+				[1, 0, 0],
+				[0, 1, 0]
+			];
+			n.matrix = [
+				[5],
+				[4],
+				[2]
+			];
+			expect(Matrix.multiply(m, n).matrix).toEqual([
+				[5],
+				[4],
+				[0]
+			]);
+		})
+  });
+
+  describe("scale", () => {
+    it("Throws an error if input is not a number or a Matrix.", () => {
+      expect(() => {
+        const m = new Matrix(2, 2);
+        m.scale("A");
+      }).toThrow();
+    });
+
+    it("Throws an error if input is a Matrix of a different size.", () => {
+      expect(() => {
+        const m = new Matrix(2, 2);
+        const n = new Matrix(3, 4);
+        m.scale(n);
+      }).toThrow();
+    });
+
+    it("Scales each element in the matrix individually when input is a number.", () => {
+      const m = new Matrix(2, 2);
+      m.matrix = [
+        [1, 1],
+        [1, 1],
+      ];
+      m.scale(9);
+      expect(m.matrix).toEqual([
+        [9, 9],
+        [9, 9],
+      ]);
+    });
+
+    it("Scales the matrix element-wise when input is another matrix.", () => {
+      const m = new Matrix(2, 2);
+      const n = new Matrix(2, 2);
+      m.matrix = [
+        [1, 2],
+        [3, 4],
+      ];
+      n.matrix = [
+        [5, 4],
+        [3, 2],
+      ];
+      m.scale(n);
+      expect(m.matrix).toEqual([
+        [5, 8],
+        [9, 8],
+      ]);
+    });
+  });
 });
