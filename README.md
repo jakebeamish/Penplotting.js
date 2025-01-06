@@ -9,7 +9,7 @@ own discretion, feel free to contribute and raise issues.
 
 ## Features
 
-- Shapes and geometry classes: 2D Vector, Line, Path, Circle, AABB
+- Shapes and geometry classes: Vector, Point, Line, Path, Circle, AABB, Matrix
 - Seedable PRNG implementations with useful methods
 - Quadtree for optimised nearest-neighbour search
 - Paper sizes
@@ -21,6 +21,8 @@ npm i @jakebeamish/penplotting
 ```
 
 ## Usage
+
+Read the [API Documentation](https://jakebeamish.github.io/Penplotting.js/).
 
 To start a new plot, run
 
