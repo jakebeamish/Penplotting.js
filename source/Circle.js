@@ -1,3 +1,5 @@
+import { Plot } from "./Plot.js";
+
 /** Class representing a circle. */
 export class Circle {
   /**
@@ -14,13 +16,14 @@ export class Circle {
     x,
     y,
     radius,
-    { stroke = "black", strokeWidth = 0.1, fill = "none" } = {},
+    { stroke, strokeWidth, fill = "none" } = {},
   ) {
     this.x = x;
     this.y = y;
     this.radius = radius;
-    this.stroke = stroke;
-    this.strokeWidth = strokeWidth;
+    const plot = Plot.getContext();
+    this.stroke = stroke !== undefined ? stroke : plot?.stroke || "black";
+    this.strokeWidth = strokeWidth !== undefined ? strokeWidth : plot?.strokeWidth || 0.1;
     this.fill = fill;
   }
 

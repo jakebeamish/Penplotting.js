@@ -1,4 +1,5 @@
 import { Vector } from "./Vector.js";
+import { Plot } from "./Plot.js";
 /** Class representing a line. */
 export class Line {
   /**
@@ -8,15 +9,18 @@ export class Line {
    * @param {string} [options.stroke = "black"]
    * @param {number} [options.strokeWidth = 0.1]
    */
-  constructor(a, b, { stroke = "black", strokeWidth = 0.1 } = {}) {
+  constructor(a, b, { stroke, strokeWidth } = {}) {
     this.a = a;
     this.b = b;
     this.x1 = a.x;
     this.y1 = a.y;
     this.x2 = b.x;
     this.y2 = b.y;
-    this.stroke = stroke;
-    this.strokeWidth = strokeWidth;
+
+    const plot = Plot.getContext();
+
+    this.stroke = stroke !== undefined ? stroke : plot?.stroke || "black";
+    this.strokeWidth = strokeWidth !== undefined ? strokeWidth : plot?.strokeWidth || 0.1;
   }
 
   /**

@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+<!-- ## [Unreleased] -->
+
+## [5.0.1]
+
+### Fixed
+
+- Bug where shapes were not properly using plot-wide defaults to set stroke and strokeWidth.
 
 ## [5.0.0]
 
@@ -35,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This CHANGELOG.md file for documenting what has changed in new releases.
 - Triangle class with lines method.
 
-[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.0...HEAD
+[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.1...HEAD
+[5.0.1]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.0...v5.0.1
 [5.0.0]: https://github.com/jakebeamish/Penplotting.js/compare/v4.2.0...v5.0.0
 [4.2.0]: https://github.com/jakebeamish/Penplotting.js/compare/v4.1.0...v4.2.0

@@ -1,3 +1,4 @@
+import { Plot } from "./Plot.js";
 /** Class representing a path. */
 export class Path {
   /**
@@ -10,18 +11,19 @@ export class Path {
    */
   constructor(
     points,
-    {
-      isClosed = false,
-      stroke = "black",
-      strokeWidth = 0.1,
-      fill = "none",
-    } = {},
+    { isClosed = false, stroke, strokeWidth, fill = "none" } = {},
   ) {
     this.points = points;
     this.isClosed = isClosed;
     this.stroke = stroke;
     this.strokeWidth = strokeWidth;
     this.fill = fill;
+
+    const plot = Plot.getContext();
+
+    this.stroke = stroke !== undefined ? stroke : plot?.stroke || "black";
+    this.strokeWidth =
+      strokeWidth !== undefined ? strokeWidth : plot?.strokeWidth || 0.1;
   }
 
   toSVGElement() {

@@ -6,6 +6,9 @@ import { Circle } from "./Circle.js";
 import { Path } from "./Path.js";
 import { SVGBuilder } from "./SVGBuilder.js";
 import { Point } from "./Point.js";
+
+let plotContext = null;
+
 /**
  * @class
  * Plot is an object that is able to create, display and download SVG documents.
@@ -44,7 +47,7 @@ export class Plot {
     this.stroke = stroke;
     this.backgroundColor = backgroundColor;
     this.minimumLineLength = minimumLineLength;
-
+    plotContext = this;
     this.lines = [];
     this.paths = [];
     this.circles = [];
@@ -73,6 +76,10 @@ export class Plot {
 
     this.handleKeydown = this.handleKeydown.bind(this);
     document.addEventListener("keydown", this.handleKeydown);
+  }
+
+  static getContext() {
+    return plotContext;
   }
 
   /**
