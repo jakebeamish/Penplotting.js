@@ -20,7 +20,7 @@ describe("Quadtree", () => {
   });
 
   describe("insert", () => {
-    it("Adds points.", () => {
+    it("Adds points into the quadtree structure correctly.", () => {
       const results = quadtree.query(boundary);
       expect(quadtree.divided).toBe(true);
       expect(results.length).toBe(points.length);
@@ -34,7 +34,7 @@ describe("Quadtree", () => {
       expect(result).toEqual([]);
     });
 
-    it("should return an array containing only points within the given range.", () => {
+    it("Returns an array containing only points within the given range.", () => {
       const results = quadtree.query(range);
       for (let result of results) {
         expect(range.contains(result)).toBeTruthy();
