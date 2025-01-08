@@ -6,7 +6,7 @@ export class Paper {
 
   landscape() {
     if (this.height > this.width) {
-      return { width: this.height, height: this.width };
+      return new Paper(this.height, this.width);
     } else {
       return this;
     }
@@ -14,7 +14,7 @@ export class Paper {
 
   portrait() {
     if (this.width > this.height) {
-      return { width: this.height, height: this.width };
+      return new Paper(this.height, this.width);
     } else {
       return this;
     }
