@@ -1,4 +1,5 @@
 import { Plot } from "./Plot.js";
+import { Vector } from "./Vector.js";
 /** Class representing a path. */
 export class Path {
   /**
@@ -11,8 +12,18 @@ export class Path {
    */
   constructor(
     points,
-    { isClosed = false, stroke, strokeWidth, fill = "none" } = {},
+    { isClosed = false, stroke, strokeWidth, fill = "none" } = {}
   ) {
+    if (!Array.isArray(points) || points.length < 2) {
+      throw new Error("Points must be an array of two or more Vectors.");
+    }
+
+    for (let point of points) {
+      if (!(point instanceof Vector)) {
+        throw new Error("Points must be an array of two or more Vectors.");
+      }
+    }
+
     this.points = points;
     this.isClosed = isClosed;
     this.stroke = stroke;
@@ -29,7 +40,7 @@ export class Path {
   toSVGElement() {
     const pathElement = document.createElementNS(
       "http://www.w3.org/2000/svg",
-      "path",
+      "path"
     );
 
     let commandString = "";
