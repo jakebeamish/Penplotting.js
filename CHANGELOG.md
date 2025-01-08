@@ -10,8 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Paper objects now create new Paper instances when portrait or landscape is called.
+- Improved testing for Paper class.
 
 ### Added
+
+- Documentation for Paper objects.
 
 ### Fixed
 
