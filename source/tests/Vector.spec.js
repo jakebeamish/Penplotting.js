@@ -77,7 +77,7 @@ describe("Vector", () => {
         const b = new Vector(1, 4);
         // (2 * 4) - (2 * 1) = 6
         const expected = 6;
-        expect(Vector.cross(a, b)).toBeCloseTo(6);
+        expect(Vector.cross(a, b)).toBeCloseTo(expected);
       });
     });
 
