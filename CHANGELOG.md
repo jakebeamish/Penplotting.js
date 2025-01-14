@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+### Added
+
+### Fixed
+
+- Refactored Line.toSVGElement method to not include unused line direction (angle) variable.
+- Minor refactorings to tests for readability.
+
 ## [5.0.2]
 
 ### Changed
