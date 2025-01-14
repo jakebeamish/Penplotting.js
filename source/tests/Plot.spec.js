@@ -57,7 +57,7 @@ describe("Plot", () => {
     it("Adds a path to the SVG via the SVGBuilder.", () => {
       const plot = new Plot();
       plot.add(
-        new Path([new Vector(0, 0), new Vector(3, 0), new Vector(2, 1)]),
+        new Path([new Vector(0, 0), new Vector(3, 0), new Vector(2, 1)])
       );
       plot.draw();
       expect(plot.svg.outerHTML).toMatch("path");
@@ -483,8 +483,8 @@ describe("Plot", () => {
 
         const s = new XMLSerializer();
         const string = s.serializeToString(plot.svg);
-        expect(string).toMatch(/stroke=\"blue\"/);
-      expect(string).toMatch(/stroke-width=\"5/)
+        expect(string).toMatch(/stroke="blue"/);
+        expect(string).toMatch(/stroke-width="5/);
       });
     });
 
@@ -503,59 +503,50 @@ describe("Plot", () => {
 
       const string = s.serializeToString(plot.svg);
 
-      expect(string).toMatch(/stroke=\"red\"/);
-      expect(string).toMatch(/stroke-width=\"2/);
+      expect(string).toMatch(/stroke="red"/);
+      expect(string).toMatch(/stroke-width="2/);
     });
-
-
   });
 
-
   describe("Adds shapes using stroke colour and width of user-defined config object.", () => {
-
     it("Adds a single Line with user-defined stroke and strokeWidth.", () => {
       const plot = new Plot();
-      const line = new Line(
-        new Vector(0, 0),
-        new Vector(1, 1),
-        {
-          stroke: "white",
-          strokeWidth: 3.2
-        }
-      )
+      const line = new Line(new Vector(0, 0), new Vector(1, 1), {
+        stroke: "white",
+        strokeWidth: 3.2,
+      });
       plot.add(line);
       plot.draw();
       const s = new XMLSerializer();
       const string = s.serializeToString(plot.svg);
-      expect(string).toMatch(/stroke=\"white/);
-      expect(string).toMatch(/stroke-width=\"3.2/);
+      expect(string).toMatch(/stroke="white/);
+      expect(string).toMatch(/stroke-width="3.2/);
     });
 
     it("Adds a Path with user-defined stroke and strokeWidth.", () => {
       const plot = new Plot();
-      
-      const path = new Path([
-        new Vector(0, 0),
-        new Vector(1, 1),
-        new Vector(2, 3)
-      ], {
-        stroke: "purple",
-        strokeWidth: 0.24
-      });
+
+      const path = new Path(
+        [new Vector(0, 0), new Vector(1, 1), new Vector(2, 3)],
+        {
+          stroke: "purple",
+          strokeWidth: 0.24,
+        }
+      );
 
       plot.add(path);
       plot.draw();
       const s = new XMLSerializer();
       const string = s.serializeToString(plot.svg);
-      expect(string).toMatch(/stroke=\"purple/);
-      expect(string).toMatch(/stroke-width=\"0.24/);
-    })
+      expect(string).toMatch(/stroke="purple/);
+      expect(string).toMatch(/stroke-width="0.24/);
+    });
 
     it("Adds a single Circle with user-defined stroke and strokeWidth.", () => {
       const plot = new Plot();
       const circle = new Circle(0, 0, 5, {
         stroke: "green",
-        strokeWidth: 7.65
+        strokeWidth: 7.65,
       });
 
       plot.add(circle);
@@ -564,9 +555,8 @@ describe("Plot", () => {
       const s = new XMLSerializer();
       const string = s.serializeToString(plot.svg);
 
-      expect(string).toMatch(/stroke=\"green"/);
-      expect(string).toMatch(/stroke-width=\"7.65/);
-    })
-
-  })
+      expect(string).toMatch(/stroke="green"/);
+      expect(string).toMatch(/stroke-width="7.65/);
+    });
+  });
 });
