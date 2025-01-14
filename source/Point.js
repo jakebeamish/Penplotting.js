@@ -39,9 +39,9 @@ export class Point {
         shape = new Circle(this.position.x, this.position.y, this.length);
         return shape.toSVGElement();
       case "line":
-        let length = new Vector(this.length, 0);
-        let direction = 0;
-        shape = new Line(this.position, Vector.add(this.position, length));
+        // let length =         // let direction = 0;
+        shape = new Line(this.position, Vector.add(this.position, new Vector(this.length, 0)
+));
         return shape.toSVGElement();
     }
   }
