@@ -91,7 +91,7 @@ describe("PRNG", () => {
         let value = prng.randomFloat(max);
         expect(value).toBeGreaterThanOrEqual(min);
         expect(value).toBeLessThanOrEqual(max);
-      },
+      }
     );
   });
 
@@ -113,8 +113,29 @@ describe("PRNG", () => {
       let value = prng.randomFloat(min, max);
       expect(value).toBeGreaterThanOrEqual(min);
       expect(value).toBeLessThanOrEqual(max);
-    },
+    }
   );
+
+  describe("randomGaussian", () => {
+    it("Returns only the mean if the standard deviation is 0.", () => {
+      let prng = new PRNG();
+
+      for (let i = 0; i < 100; i++) {
+        const result = prng.randomGaussian(1, 0);
+        expect(result).toEqual(1);
+      }
+    });
+
+		it("Returns values that fit a normal distribution.", () => {
+			const prng = new PRNG();
+
+			for (let i = 0; i < 100; i++) {
+				const result = prng.randomGaussian();
+				expect(result).toBeLessThan(9);
+				expect(result).toBeGreaterThan(-9);
+			}
+		})
+  });
 
   describe("randomUnitVector", () => {
     it("Returns a Vector of length 1.", () => {

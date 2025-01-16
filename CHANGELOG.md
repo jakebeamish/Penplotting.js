@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Random Gaussian method using Box-Muller transform.
+
 ### Fixed
 
 - Refactored Line.toSVGElement method to not include unused line direction (angle) variable.
