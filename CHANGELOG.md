@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+### Added
+### Fixed
+
+## [5.1.0]
 
 ### Added
 
@@ -67,7 +71,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This CHANGELOG.md file for documenting what has changed in new releases.
 - Triangle class with lines method.
 
-[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.2...HEAD
+[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v5.1.0...HEAD
+[5.1.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.1.0...v5.0.2
 [5.0.2]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.1...v5.0.2
 [5.0.1]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.0...v5.0.1
 [5.0.0]: https://github.com/jakebeamish/Penplotting.js/compare/v4.2.0...v5.0.0

@@ -46,6 +46,36 @@ export class PRNG {
     return this.randomFloat() * 2 - 1;
   }
 
+	/**
+	 * Generate a random float that fits a normal distribution.
+	 *
+	 * The most likely values are at the mean. The standard deviation describes
+	 * the spread of the distribution.
+	 *
+	 * With a mean of 0, and standard deviation of 1 (default values);
+	 * - 68% of results fall within +/- 1
+	 * - 95% of results fall within +/- 2
+	 * - 99% of results fall within +/- 3
+	 *
+	 * @param {number} [mean=0] - The mean of the distribution.
+	 * @param {number} [sd=1] - The standard deviation of the distribution.
+	 * @returns {number}
+	 */
+	randomGaussian(mean = 0, sd = 1) {
+	let u, v, radius;		
+	while (true) {
+		u = this.randomBipolarFloat();
+		v = this.randomBipolarFloat();
+		radius = u * u + v * v;
+		if (radius &lt; 1 &amp;&amp; radius >= 0) {
+			break;
+		}
+	}
+
+	const scale = Math.sqrt(-2 * Math.log(radius) / radius)
+	return mean + sd * u * scale;
+	}
+
   /**
    * Generate a random unit vector.
    * @returns {Vector} - A Vector with a magnitude of 1 and a random angle between 0 and TWO_PI.
