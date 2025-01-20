@@ -1,6 +1,6 @@
 {
   "name": "@jakebeamish/penplotting",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "description": "A JavaScript framework for making SVG files for penplotters.",
   "main": "source/index.js",
   "bin": {
