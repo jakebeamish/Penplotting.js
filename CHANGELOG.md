@@ -7,14 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
+## [5.2.0] - 2025-01-20
+
 ### Added
 
 - AABB and Triangle lines() methods accept optional object for stroke and strokeWidth.
 
 ### Fixed
 
-## [5.1.0]
+## [5.1.0] - 2025-01-16
 
 ### Added
 
@@ -25,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactored Line.toSVGElement method to not include unused line direction (angle) variable.
 - Minor refactorings to tests for readability.
 
-## [5.0.2]
+## [5.0.2] - 2025-01-13
 
 ### Changed
 
@@ -40,13 +41,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-## [5.0.1]
+## [5.0.1] - 2025-01-07
 
 ### Fixed
 
 - Bug where shapes were not properly using plot-wide defaults to set stroke and strokeWidth.
 
-## [5.0.0]
+## [5.0.0] - 2025-01-06
 
 ### Changed
 
@@ -74,7 +75,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This CHANGELOG.md file for documenting what has changed in new releases.
 - Triangle class with lines method.
 
-[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v5.1.0...HEAD
+[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v5.2.0...HEAD
+[5.2.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.2.0...v5.1.0
 [5.1.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.1.0...v5.0.2
 [5.0.2]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.1...v5.0.2
 [5.0.1]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.0...v5.0.1
