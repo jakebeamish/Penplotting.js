@@ -64,10 +64,12 @@ export class AABB {
 
   /**
    * Create an array of [Lines]{@link Line} containing one line for each side of the AABB.
+	 * @param {string} [options.stroke]
+	 * @param {number} [options.strokeWidth]
    * @returns {Line[]} - An array of Lines that can be added
    * to a {@link Plot} using {@link Plot#add}.
    */
-  lines() {
+  lines(options = {}) {
     const topLeft = new Vector(this.x - this.width, this.y - this.height);
     const topRight = new Vector(this.x + this.width, this.y - this.height);
     const bottomLeft = new Vector(this.x - this.width, this.y + this.height);
@@ -76,10 +78,10 @@ export class AABB {
     let lines = [];
 
     lines.push(
-      new Line(topLeft, topRight),
-      new Line(topRight, bottomRight),
-      new Line(bottomRight, bottomLeft),
-      new Line(bottomLeft, topLeft),
+      new Line(topLeft, topRight, options),
+      new Line(topRight, bottomRight, options),
+      new Line(bottomRight, bottomLeft, options),
+      new Line(bottomLeft, topLeft, options),
     );
 
     return lines;

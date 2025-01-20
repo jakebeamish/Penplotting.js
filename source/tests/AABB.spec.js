@@ -49,5 +49,19 @@ describe("The AABB class", () => {
         new Line(new Vector(-1, -1), new Vector(1, -1)),
       );
     });
+		it("Applies style options if given.", () => {
+			const aabb = new AABB(0, 0, 1, 1);
+			const lines = aabb.lines({
+				stroke: "red",
+				strokeWidth: 2
+			});
+
+			expect(lines).toContainEqual(
+				new Line(new Vector(-1, -1), new Vector(1, -1), {
+					stroke: "red",
+					strokeWidth: 2
+				})
+			)
+		})
   });
 });
