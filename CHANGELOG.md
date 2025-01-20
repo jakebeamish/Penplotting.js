@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 ### Added
 
-- AABB lines() method accepts optional object for stroke and strokeWidth.
+- AABB and Triangle lines() methods accept optional object for stroke and strokeWidth.
 
 ### Fixed
 
