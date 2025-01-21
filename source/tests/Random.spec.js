@@ -1,5 +1,6 @@
 import { PRNG } from "../Random";
 import { AABB } from "../AABB";
+import { Circle } from "../Circle";
 import { Mulberry32 } from "../Random";
 import { XORShift32 } from "../Random";
 import { LCG } from "../Random";
@@ -153,9 +154,24 @@ describe("PRNG", () => {
     it("Returns a Vector that is within a given AABB.", () => {
       const box = new AABB(0, 0, 5, 5);
       const prng = new PRNG();
-			for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 100; i++) {
         const result = prng.randomVectorInAABB(box);
         expect(box.contains(result)).toBeTruthy();
+      }
+    });
+  });
+
+  describe("randomVectorInCircle", () => {
+    it("Returns a Vector that is within a given Circle.", () => {
+      const circle = new Circle(0, 0, 1);
+      const prng = new PRNG();
+      for (let i = 0; i < 100; i++) {
+        const result = prng.randomVectorInCircle(circle);
+        const distance = Vector.distance(
+          result,
+          new Vector(circle.x, circle.y)
+        );
+        expect(distance).toBeLessThan(circle.radius);
       }
     });
   });

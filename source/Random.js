@@ -44,35 +44,35 @@ export class PRNG {
     return this.randomFloat() * 2 - 1;
   }
 
-	/**
-	 * Generate a random float that fits a normal distribution.
-	 *
-	 * The most likely values are at the mean. The standard deviation describes
-	 * the spread of the distribution.
-	 *
-	 * With a mean of 0, and standard deviation of 1 (default values);
-	 * - 68% of results fall within +/- 1
-	 * - 95% of results fall within +/- 2
-	 * - 99% of results fall within +/- 3
-	 *
-	 * @param {number} [mean=0] - The mean of the distribution.
-	 * @param {number} [sd=1] - The standard deviation of the distribution.
-	 * @returns {number}
-	 */
-	randomGaussian(mean = 0, sd = 1) {
-	let u, v, radius;		
-	while (true) {
-		u = this.randomBipolarFloat();
-		v = this.randomBipolarFloat();
-		radius = u * u + v * v;
-		if (radius < 1 && radius >= 0) {
-			break;
-		}
-	}
+  /**
+   * Generate a random float that fits a normal distribution.
+   *
+   * The most likely values are at the mean. The standard deviation describes
+   * the spread of the distribution.
+   *
+   * With a mean of 0, and standard deviation of 1 (default values);
+   * - 68% of results fall within +/- 1
+   * - 95% of results fall within +/- 2
+   * - 99% of results fall within +/- 3
+   *
+   * @param {number} [mean=0] - The mean of the distribution.
+   * @param {number} [sd=1] - The standard deviation of the distribution.
+   * @returns {number}
+   */
+  randomGaussian(mean = 0, sd = 1) {
+    let u, v, radius;
+    while (true) {
+      u = this.randomBipolarFloat();
+      v = this.randomBipolarFloat();
+      radius = u * u + v * v;
+      if (radius < 1 && radius >= 0) {
+        break;
+      }
+    }
 
-	const scale = Math.sqrt(-2 * Math.log(radius) / radius)
-	return mean + sd * u * scale;
-	}
+    const scale = Math.sqrt((-2 * Math.log(radius)) / radius);
+    return mean + sd * u * scale;
+  }
 
   /**
    * Generate a random unit vector.
@@ -83,17 +83,26 @@ export class PRNG {
     return Vector.fromAngle(angle);
   }
 
-	/**
-	 * Generate a random vector within an AABB.
-	 * @param {AABB} box
-	 * @returns {Vector}
-	 */
-	randomVectorInAABB(box) {
-		return new Vector(
-			this.randomFloat(box.x - box.width, box.x + box.width),
-			this.randomFloat(box.y - box.height, box.y + box.height)
-		);
-	}
+  /**
+   * Generate a random vector within an AABB.
+   * @param {AABB} box
+   * @returns {Vector}
+   */
+  randomVectorInAABB(box) {
+    return new Vector(
+      this.randomFloat(box.x - box.width, box.x + box.width),
+      this.randomFloat(box.y - box.height, box.y + box.height)
+    );
+  }
+
+  randomVectorInCircle(circle) {
+    let angle = this.randomFloat() * Math.PI * 2;
+    let magnitude = Math.sqrt(this.randomFloat()) * circle.radius;
+    return Vector.add(
+      Vector.fromAngle(angle).multiply(magnitude),
+      new Vector(circle.x, circle.y)
+    );
+  }
 
   /**
    * Generate a random integer from a specified range of values.
@@ -302,7 +311,7 @@ export function unseededRandomHex(n) {
     },
     () => {
       return Math.floor(Math.random() * 16).toString(16);
-    },
+    }
   );
   const hex = hexArray.join("");
   const decimal = parseInt(hex, 16);

@@ -7,11 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.3.0] - 2025-01-22
+
 ### Added
 
 - Vector distance squared static method.
 - Circle from Vector static constructor method.
 - Random Vector in AABB static method.
+- Random Vector in Circle static method.
 
 ### Changed
 
@@ -85,9 +88,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This CHANGELOG.md file for documenting what has changed in new releases.
 - Triangle class with lines method.
 
-[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v5.2.0...HEAD
-[5.2.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.2.0...v5.1.0
-[5.1.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.1.0...v5.0.2
+[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v5.3.0...HEAD
+[5.3.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.2.0...v5.3.0
+[5.2.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.1.0...v5.2.0
+[5.1.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.2...v5.1.0
 [5.0.2]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.1...v5.0.2
 [5.0.1]: https://github.com/jakebeamish/Penplotting.js/compare/v5.0.0...v5.0.1
 [5.0.0]: https://github.com/jakebeamish/Penplotting.js/compare/v4.2.0...v5.0.0
