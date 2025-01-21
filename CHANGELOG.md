@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Vector distance squared static method.
-- Circle from vector static constructor method.
+- Circle from Vector static constructor method.
+- Random Vector in AABB static method.
 
 ### Changed
 

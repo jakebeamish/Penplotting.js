@@ -1,4 +1,5 @@
 import { PRNG } from "../Random";
+import { AABB } from "../AABB";
 import { Mulberry32 } from "../Random";
 import { XORShift32 } from "../Random";
 import { LCG } from "../Random";
@@ -126,15 +127,15 @@ describe("PRNG", () => {
       }
     });
 
-		it("Returns values that fit a normal distribution.", () => {
-			const prng = new PRNG();
+    it("Returns values that fit a normal distribution.", () => {
+      const prng = new PRNG();
 
-			for (let i = 0; i < 100; i++) {
-				const result = prng.randomGaussian();
-				expect(result).toBeLessThan(9);
-				expect(result).toBeGreaterThan(-9);
-			}
-		})
+      for (let i = 0; i < 100; i++) {
+        const result = prng.randomGaussian();
+        expect(result).toBeLessThan(9);
+        expect(result).toBeGreaterThan(-9);
+      }
+    });
   });
 
   describe("randomUnitVector", () => {
@@ -145,6 +146,17 @@ describe("PRNG", () => {
       let vector = prng.randomUnitVector();
       expect(vector instanceof Vector).toBeTruthy();
       expect(vector.getMagnitude()).toBeCloseTo(1);
+    });
+  });
+
+  describe("randomVectorInAABB", () => {
+    it("Returns a Vector that is within a given AABB.", () => {
+      const box = new AABB(0, 0, 5, 5);
+      const prng = new PRNG();
+			for (let i = 0; i < 100; i++) {
+        const result = prng.randomVectorInAABB(box);
+        expect(box.contains(result)).toBeTruthy();
+      }
     });
   });
 

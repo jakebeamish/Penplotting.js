@@ -83,6 +83,18 @@ export class PRNG {
     return Vector.fromAngle(angle);
   }
 
+	/**
+	 * Generate a random vector within an AABB.
+	 * @param {AABB} box
+	 * @returns {Vector}
+	 */
+	randomVectorInAABB(box) {
+		return new Vector(
+			this.randomFloat(box.x - box.width, box.x + box.width),
+			this.randomFloat(box.y - box.height, box.y + box.height)
+		);
+	}
+
   /**
    * Generate a random integer from a specified range of values.
    * @param {number} min - The minimum integer value (inclusive).
