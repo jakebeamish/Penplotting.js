@@ -61,6 +61,14 @@ describe("Vector", () => {
       });
     });
 
+    describe("distanceSquared", () => {
+      it("Returns the distance squared between two vectors.", () => {
+        const a = new Vector(0, 0);
+        const b = new Vector(5, 0);
+        expect(Vector.distanceSquared(a, b)).toBeCloseTo(25);
+      });
+    });
+
     describe("dot product", () => {
       it("Returns 10 for the dot product of (2,2) and (1,4).", () => {
         const a = new Vector(2, 2);
@@ -127,14 +135,14 @@ describe("Vector", () => {
   describe("toArray", () => {
     it.each([
       { array: [0, 1, 3], vector: new Vector(0, 1, 3) },
-			{ array: [1, 5, 0], vector: new Vector(1, 5) },
+      { array: [1, 5, 0], vector: new Vector(1, 5) },
       { array: [2, -3, 0], vector: new Vector(2, -3) },
       { array: [0, 0, 0], vector: new Vector(0, 0) },
     ])(
       "Returns $array when vector $vector .toArray is called.",
       ({ array, vector }) => {
         expect(vector.toArray()).toEqual(array);
-      },
+      }
     );
   });
 
