@@ -29,6 +29,16 @@ export class Circle {
     this.fill = fill;
   }
 
+	/**
+	 * Create a circle from a Vector object and a radius.
+	 * @param {Vector} vector - The position of the centre of the circle.
+	 * @param {number} radius - The radius.
+	 * @returns {Circle}
+	 */
+	static fromVector(vector, radius) {
+		return new Circle(vector.x, vector.y, radius);
+	}
+
   /**
    *
    * @returns {SVGElement}

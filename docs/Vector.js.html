@@ -211,6 +211,17 @@ export class Vector {
     return delta.getMagnitude();
   }
 
+	/**
+	 * Calculate the distance squared between two vectors.
+	 * @param {Vector} v1
+	 * @param {Vector} v2
+	 * @returns {number}
+		*/
+	static distanceSquared(v1, v2) {
+		const delta = Vector.subtract(v1, v2);
+		return delta.getMagnitudeSquared();
+	}
+
   /**
    * Rotate this 2D vector by a specified angle.
    * @param {number} angle - The angle to rotate the vector by, in radians.
