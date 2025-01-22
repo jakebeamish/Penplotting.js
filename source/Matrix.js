@@ -1,9 +1,10 @@
 import { Vector } from "./Vector.js";
 /**
- * Class representing a matrix.
+ * Class representing a Matrix.
  */
 export class Matrix {
   /**
+   * Creates a new Matrix.
    * @param {number} rows - Rows (must be positive integer).
    * @param {number} cols - Columns (must be positive integer).
    */
@@ -29,11 +30,20 @@ export class Matrix {
     }
   }
 
+  /**
+   * Creates a new {@link Vector} from a Matrix.
+   * @returns {Vector}
+   */
   toVector() {
     const result = this.matrix.flat();
     return Vector.fromArray(result.slice(0, 3));
   }
 
+  /**
+   * Returns a new Matrix from a given {@link Vector}.
+   * @param {Vector} v - The input vector.
+   * @returns {Matrix} A matrix with data rows corresponding to the vector components.
+   */
   static fromVector(v) {
     const result = new Matrix(v.toArray().length, 1);
     result.matrix = [[v.x], [v.y], [v.z]];
@@ -41,10 +51,22 @@ export class Matrix {
     return result;
   }
 
+  /**
+   * Checks if two Matrixes have the same number of rows and columns.
+   * @param {Matrix} a
+   * @param {Matrix} b
+   * @returns {boolean} True if Matrixes are of the same dimensionality, otherwise false.
+   */
   static hasEqualDimensions(a, b) {
     return a.rows === b.rows && a.cols === b.cols;
   }
 
+  /**
+   * Adds two Matrixes and returns the result.
+   * @param {Matrix} a
+   * @param {Matrix} b
+   * @returns {Matrix} A Matrix with data resulting from element-wise addition.
+   */
   static add(a, b) {
     if (!(a instanceof Matrix) || !(b instanceof Matrix)) {
       throw new TypeError("Inputs must be of type Matrix.");
@@ -65,13 +87,10 @@ export class Matrix {
     return result;
   }
 
-  // TODO Static add and scale functions. Use the static to implement
-  // instance methods. Test against bad inputs (matching rows and columns)
-  // This could also be a static method that
-
   /**
-   * Element-wise addition
-   * @param {(Matrix|number)} n - n
+   * Adds values to a Matrix. Input can either be a single number, or another
+	 * instance of Matrix if it has the same dimensionality.
+   * @param {Matrix | number} n - The input to add to this matrix.
    */
   add(n) {
     if (n instanceof Matrix) {
@@ -96,7 +115,8 @@ export class Matrix {
   }
 
   /**
-   * Scalar multiplication
+   * Multiplies a Matrix by a scalar, either a single number or another Matrix.
+   * @param {Matrix | number} n - The scalar (must be a number or a Matrix).
    */
   scale(n) {
     if (n instanceof Matrix) {
@@ -120,6 +140,12 @@ export class Matrix {
     }
   }
 
+  /**
+   * Multiply two Matrixes and return the result.
+   * @param {Matrix} a
+   * @param {Matrix} b
+   * @returns {Matrix} The result of matrix multiplication.
+   */
   static multiply(a, b) {
     if (!(a instanceof Matrix) || !(b instanceof Matrix)) {
       throw new TypeError("Inputs must both be Matrixes.");
@@ -129,16 +155,6 @@ export class Matrix {
     }
 
     const result = new Matrix(a.cols, b.cols);
-
-    // for (let k = 0; k < result.rows; k++) {
-    //
-    // 	let sum = 0;
-    //
-    // 	for (let j = 0; j < a.cols; j++) {
-    // 		sum += a.matrix[0][j] * b.matrix[k][0]
-    // 	}
-    // 	result.matrix[k][0] = sum;
-    // }
 
     for (let i = 0; i < a.rows; i++) {
       for (let j = 0; j < b.cols; j++) {
