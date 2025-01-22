@@ -29,7 +29,7 @@ export class PRNG {
    * Generate a random float in the range [0, 1).
    * @param {number} [max=1] - A single argument specifies a range of between 0 and that number.
    * @param {number} [min=0] - Two numeric arguments specifies a range.
-   * @returns {number} - A floating-point number in a given range, 0 (inclusive) and 1 (exclusive) if called without arguments.
+   * @returns {number} A floating-point number in a given range, 0 (inclusive) and 1 (exclusive) if called without arguments.
    */
   randomFloat(max = 1, min = 0) {
     let range = max - min;
@@ -38,7 +38,7 @@ export class PRNG {
 
   /**
    * Generate a random float in the range [-1, 1).
-   * @returns {number} - A number between -1 (inclusive) and 1 (exclusive).
+   * @returns {number} A number between -1 (inclusive) and 1 (exclusive).
    */
   randomBipolarFloat() {
     return this.randomFloat() * 2 - 1;
@@ -76,7 +76,7 @@ export class PRNG {
 
   /**
    * Generate a random unit vector.
-   * @returns {Vector} - A Vector with a magnitude of 1 and a random angle between 0 and TWO_PI.
+   * @returns {Vector} A {@link Vector} with a magnitude of 1 and a random angle between `0` and `TWO_PI`.
    */
   randomUnitVector() {
     const angle = this.randomFloat() * Math.PI * 2;
@@ -84,9 +84,9 @@ export class PRNG {
   }
 
   /**
-   * Generate a random vector within an AABB.
-   * @param {AABB} box
-   * @returns {Vector}
+   * Generate a random vector within the bounds of a given AABB.
+   * @param {AABB} box - The box to generate the vector within.
+   * @returns {Vector} A {@link Vector} within the {@link AABB}.
    */
   randomVectorInAABB(box) {
     return new Vector(
@@ -95,6 +95,11 @@ export class PRNG {
     );
   }
 
+  /**
+   * Generate a random {@link Vector} within a given {@link Circle}.
+   * @param {Circle} circle - The circle to generate the {@link Vector} within.
+   * @returns {Vector} A {@link Vector} within the {@link Circle}.
+   */
   randomVectorInCircle(circle) {
     let angle = this.randomFloat() * Math.PI * 2;
     let magnitude = Math.sqrt(this.randomFloat()) * circle.radius;
@@ -108,7 +113,7 @@ export class PRNG {
    * Generate a random integer from a specified range of values.
    * @param {number} min - The minimum integer value (inclusive).
    * @param {number} max - The maximum integer value (exclusive).
-   * @returns {number} - A random integer between min (inclusive) and max (exclusive).
+   * @returns {number} A random integer between min (inclusive) and max (exclusive).
    */
   randomInteger(min, max) {
     const range = max - min;
@@ -118,7 +123,7 @@ export class PRNG {
   /**
    * Select a random element from an array.
    * @param {array} array - The array from which to select an element.
-   * @returns {*} - A randomly selected element from the array.
+   * @returns {*} A randomly selected element from the array.
    */
   randomElement(array) {
     const index = Math.floor(this.randomFloat() * array.length);
@@ -128,7 +133,7 @@ export class PRNG {
   /**
    * Returns a boolean based on a specified probability.
    * @param {number} [chance=0.5] - The probability of returning true (between 0 and 1).
-   * @returns {boolean} - True if the random float is less than the chance, otherwise false.
+   * @returns {boolean} True if the random float is less than the chance, otherwise false.
    */
   randomChance(chance = 0.5) {
     return this.randomFloat() < chance;
@@ -139,7 +144,7 @@ export class PRNG {
    * @param {Array<Object>} choices - An array of objects with `option` and `weight` properties.
    * @param {function|number|string} choices[].option - The outcome of the choice.
    * @param {number} choices[].weight - The weight of the choice. Higher weights (relative to the other choices) increase the likelihood of selection.
-   * @returns {function|number|string} - The selected option.
+   * @returns {function|number|string} The selected option.
    */
   randomWeighted(choices) {
     let totalWeight = 0;
@@ -302,7 +307,7 @@ export class XORShift32 {
  * @description Uses Math.random() to make a hexadecimal string for
  * setting the seed of a {@link Plot} to be used in a seedable {@link PRNG} such as {@link LCG}
  * @param {number} n - Number of digits
- * @returns {string} - Hexadecimal string of length n
+ * @returns {string} Hexadecimal string of length n
  */
 export function unseededRandomHex(n) {
   const hexArray = Array.from(
