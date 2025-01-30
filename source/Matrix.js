@@ -89,8 +89,9 @@ export class Matrix {
 
   /**
    * Adds values to a Matrix. Input can either be a single number, or another
-	 * instance of Matrix if it has the same dimensionality.
+   * instance of Matrix if it has the same dimensionality.
    * @param {Matrix | number} n - The input to add to this matrix.
+   * @returns {Matrix} The current Matrix instance for chaining.
    */
   add(n) {
     if (n instanceof Matrix) {
@@ -112,6 +113,7 @@ export class Matrix {
     } else {
       throw new TypeError("Expected input of type Matrix or Number.");
     }
+    return this;
   }
 
   /**
