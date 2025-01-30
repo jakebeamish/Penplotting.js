@@ -145,7 +145,7 @@ and UI inside `index.html`, which can be viewed in a browser.
 
 The above code results in the following output:
 
-![demo screenshot](https://github.com/jakebeamish/Penplotting.js/assets/demo_screenshot.png)
+![demo screenshot](https://github.com/jakebeamish/Penplotting.js/blob/mainassets/demo_screenshot.png)
 
 ### Keyboard shortcuts
 
