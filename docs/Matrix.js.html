@@ -91,8 +91,9 @@ export class Matrix {
 
   /**
    * Adds values to a Matrix. Input can either be a single number, or another
-	 * instance of Matrix if it has the same dimensionality.
+   * instance of Matrix if it has the same dimensionality.
    * @param {Matrix | number} n - The input to add to this matrix.
+   * @returns {Matrix} The current Matrix instance for chaining.
    */
   add(n) {
     if (n instanceof Matrix) {
@@ -114,11 +115,13 @@ export class Matrix {
     } else {
       throw new TypeError("Expected input of type Matrix or Number.");
     }
+    return this;
   }
 
   /**
    * Multiplies a Matrix by a scalar, either a single number or another Matrix.
    * @param {Matrix | number} n - The scalar (must be a number or a Matrix).
+   * @returns {Matrix} This Matrix instance for chaining.
    */
   scale(n) {
     if (n instanceof Matrix) {
@@ -140,10 +143,12 @@ export class Matrix {
     } else {
       throw new TypeError("Expected input of type Matrix or Number.");
     }
+
+    return this;
   }
 
   /**
-   * Multiply two matrices and return the result.
+   * Multiply two Matrixes and return the result.
    * @param {Matrix} a
    * @param {Matrix} b
    * @returns {Matrix} The result of matrix multiplication.

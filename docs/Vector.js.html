@@ -160,7 +160,7 @@ export class Vector {
    * @returns {number} The magnitude (Euclidean distance) of this vector.
    */
   getMagnitude() {
-    return Math.sqrt(this.x * this.x + this.y * this.y);
+    return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
   }
 
 	/**
