@@ -9,11 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Vector getMagnitude and static distance methods support z-axis for 3D vectors.
+- Matrix instance methods add and scale return this for chaining.
 - Documentation for Matrix and SVGBuilder.
+- Edits and improvements to PRNG documentation.
+- More tests for Plot add method.
 
 ### Changed
-
-- Edits and improvements to PRNG documentation.
 
 ## [5.3.0] - 2025-01-22
 
