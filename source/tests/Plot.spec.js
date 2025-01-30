@@ -159,16 +159,15 @@ describe("Plot", () => {
       expect(plot.lines.length).toBe(1);
     });
 
-    it.skip("Doesn't remove lines that are longer than the minimum length.", () => {
+    it("Doesn't remove lines that are longer than the minimum length.", () => {
       const plot = new Plot();
       plot.minimumLineLength = 10;
       const lines = [
-        Line.fromArray(0, 0, 100, 100),
-        Line.fromArray(0, 0, 1000, 10),
+        Line.fromArray([0, 0, 100, 100]),
+        Line.fromArray([0, 0, 1000, 10]),
       ];
       plot.add(lines);
-      plot.removeShortLines(plot.minimumLineLength);
-      // plot.draw();
+      plot.draw();
       expect(plot.lines.length).toBe(2);
     });
   });
