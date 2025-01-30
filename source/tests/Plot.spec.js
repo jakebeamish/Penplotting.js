@@ -442,7 +442,14 @@ describe("Plot", () => {
       expect(plot.lines.length).toBe(1);
     });
 
-    it.skip("Adds nothing to the plot if given an empty array to add.", () => {});
+    it("Adds nothing to the plot if given an empty array to add.", () => {
+      const plot = new Plot();
+      plot.add([]);
+      expect(plot.lines.length).toBe(0);
+      expect(plot.circles.length).toBe(0);
+      expect(plot.paths.length).toBe(0);
+      expect(plot.points.length).toBe(0);
+    });
 
     test("Adds an array of lines to a plot.", () => {
       const plot = new Plot();
