@@ -119,6 +119,7 @@ export class Matrix {
   /**
    * Multiplies a Matrix by a scalar, either a single number or another Matrix.
    * @param {Matrix | number} n - The scalar (must be a number or a Matrix).
+   * @returns {Matrix} This Matrix instance for chaining.
    */
   scale(n) {
     if (n instanceof Matrix) {
@@ -140,6 +141,8 @@ export class Matrix {
     } else {
       throw new TypeError("Expected input of type Matrix or Number.");
     }
+
+    return this;
   }
 
   /**
