@@ -211,6 +211,51 @@ describe("PRNG", () => {
     });
   });
 
+  describe("randomSample", () => {
+    it("Returns a random sample without replacement.", () => {
+      const prng = new PRNG();
+      const array = [1, 2, 3];
+      const sampleSize = 2;
+      const result = prng.randomSample(array, sampleSize);
+
+      const validSamples = [
+        [1, 2],
+        [1, 3],
+        [2, 1],
+        [2, 3],
+        [3, 1],
+        [3, 2],
+      ];
+
+      expect(result).toHaveLength(sampleSize);
+      expect(
+        validSamples.some(
+          (sample) => JSON.stringify(sample) === JSON.stringify(result)
+        )
+      ).toBeTruthy();
+    });
+
+    it("Throws an error if sample size is larger than array length.", () => {
+      const prng = new PRNG();
+      const array = [];
+      const size = 1;
+      expect(() => {
+        prng.randomSample(array, size);
+      }).toThrow();
+    });
+
+    it("Throws an error if sample size is not a positive integer.", () => {
+      const prng = new PRNG();
+      expect(() => {
+        prng.randomSample([], "a");
+      }).toThrow();
+
+      expect(() => {
+        prng.randomSample([], -1);
+      }).toThrow();
+    });
+  });
+
   describe("randomBipolarFloat", () => {
     it("Returns a number between -1 and 1.", () => {
       let prng = new PRNG();

@@ -131,6 +131,32 @@ export class PRNG {
   }
 
   /**
+   * Returns a sample without replacement from a given array and sample size.
+   * @param {array} array - The array from which to sample elements.
+   * @param {number} size - The number of samples to generate (must be a positive integer).
+   * @returns {array} An array of randomly selected elements from an array.
+   */
+  randomSample(array, size) {
+    if (size < 1 || !Number.isInteger(size)) {
+      throw new TypeError("Sample size should be a positive integer.");
+    }
+
+    if (array.length < size) {
+      throw new Error("Sample size must not be greater than array length.");
+    }
+
+    let availableElements = [...array];
+    let result = [];
+    for (let i = 0; i < size; i++) {
+      const index = Math.floor(this.randomFloat() * availableElements.length);
+      result.push(availableElements[index]);
+      availableElements.splice(index, 1);
+    }
+
+    return result;
+  }
+
+  /**
    * Returns a boolean based on a specified probability.
    * @param {number} [chance=0.5] - The probability of returning true (between 0 and 1).
    * @returns {boolean} True if the random float is less than the chance, otherwise false.
