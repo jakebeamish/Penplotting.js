@@ -7,6 +7,16 @@ import { LCG } from "../Random";
 import { Vector } from "../Vector";
 
 describe("PRNG", () => {
+  /**
+   * @type {PRNG}
+   * This is a default instance of the PRNG class.
+   */
+  let prng;
+
+  beforeEach(() => {
+    prng = new PRNG();
+  });
+
   describe("constructor", () => {
     it("can be created using a variety of algorithms", () => {
       const random = new PRNG({
@@ -45,11 +55,14 @@ describe("PRNG", () => {
   });
 
   describe("randomInteger", () => {
-    const random = new PRNG({
-      seed: 12345,
-      algorithm: LCG,
+    /**
+     * @type {number}
+     * This is a random integer between 0 and 10.
+     */
+    let x;
+    beforeEach(() => {
+      x = prng.randomInteger(0, 10);
     });
-    let x = random.randomInteger(0, 10);
     it("Always returns an integer.", () => {
       expect(typeof x).toBe("number");
       expect(x).toBe(parseInt(x));
@@ -63,11 +76,6 @@ describe("PRNG", () => {
 
   describe("randomFloat", () => {
     it("Returns values between 0 and 1.", () => {
-      let prng = new PRNG({
-        seed: 432101,
-        algorithm: XORShift32,
-      });
-
       for (let i = 0; i < 100; i++) {
         let value = prng.randomFloat();
         expect(value).toBeGreaterThanOrEqual(0);
@@ -82,8 +90,6 @@ describe("PRNG", () => {
     ])(
       "Given a single argument, returns a value between 0 and that argument (%i).",
       (max, min) => {
-        let prng = new PRNG();
-
         if (max < min) {
           let temp = max;
           max = min;
@@ -104,8 +110,6 @@ describe("PRNG", () => {
   ])(
     "Given two arguments (%i and %i), returns a value in that range.",
     (min, max) => {
-      let prng = new PRNG();
-
       if (max < min) {
         let temp = max;
         max = min;
@@ -120,8 +124,6 @@ describe("PRNG", () => {
 
   describe("randomGaussian", () => {
     it("Returns only the mean if the standard deviation is 0.", () => {
-      let prng = new PRNG();
-
       for (let i = 0; i < 100; i++) {
         const result = prng.randomGaussian(1, 0);
         expect(result).toEqual(1);
@@ -129,8 +131,6 @@ describe("PRNG", () => {
     });
 
     it("Returns values that fit a normal distribution.", () => {
-      const prng = new PRNG();
-
       for (let i = 0; i < 100; i++) {
         const result = prng.randomGaussian();
         expect(result).toBeLessThan(9);
@@ -141,9 +141,6 @@ describe("PRNG", () => {
 
   describe("randomUnitVector", () => {
     it("Returns a Vector of length 1.", () => {
-      let prng = new PRNG({
-        algorithm: Mulberry32,
-      });
       let vector = prng.randomUnitVector();
       expect(vector instanceof Vector).toBeTruthy();
       expect(vector.getMagnitude()).toBeCloseTo(1);
@@ -153,7 +150,6 @@ describe("PRNG", () => {
   describe("randomVectorInAABB", () => {
     it("Returns a Vector that is within a given AABB.", () => {
       const box = new AABB(0, 0, 5, 5);
-      const prng = new PRNG();
       for (let i = 0; i < 100; i++) {
         const result = prng.randomVectorInAABB(box);
         expect(box.contains(result)).toBeTruthy();
@@ -164,7 +160,6 @@ describe("PRNG", () => {
   describe("randomVectorInCircle", () => {
     it("Returns a Vector that is within a given Circle.", () => {
       const circle = new Circle(0, 0, 1);
-      const prng = new PRNG();
       for (let i = 0; i < 100; i++) {
         const result = prng.randomVectorInCircle(circle);
         const distance = Vector.distance(
@@ -178,18 +173,11 @@ describe("PRNG", () => {
 
   describe("randomChance", () => {
     it("Returns true if the chance parameter is greater than a random float between 0 and 1.", () => {
-      let prng = new PRNG({
-        seed: 1000,
-        algorithm: LCG,
-      });
       let actualValue = prng.randomChance(1);
-
       expect(actualValue).toBeTruthy();
     });
 
     it("Returns a boolean.", () => {
-      let prng = new PRNG();
-
       expect(typeof prng.randomChance(0.5)).toBe("boolean");
     });
 
@@ -203,7 +191,6 @@ describe("PRNG", () => {
 
   describe("randomElement", () => {
     it("Returns an element from the array it is passed.", () => {
-      const prng = new PRNG();
       const array = ["beer", "wine", "juice"];
       const element = prng.randomElement(array);
 
@@ -213,7 +200,6 @@ describe("PRNG", () => {
 
   describe("randomSample", () => {
     it("Returns a random sample without replacement.", () => {
-      const prng = new PRNG();
       const array = [1, 2, 3];
       const sampleSize = 2;
       const result = prng.randomSample(array, sampleSize);
@@ -236,7 +222,6 @@ describe("PRNG", () => {
     });
 
     it("Throws an error if sample size is larger than array length.", () => {
-      const prng = new PRNG();
       const array = [];
       const size = 1;
       expect(() => {
@@ -245,7 +230,6 @@ describe("PRNG", () => {
     });
 
     it("Throws an error if sample size is not a positive integer.", () => {
-      const prng = new PRNG();
       expect(() => {
         prng.randomSample([], "a");
       }).toThrow();
@@ -258,7 +242,6 @@ describe("PRNG", () => {
 
   describe("randomBipolarFloat", () => {
     it("Returns a number between -1 and 1.", () => {
-      let prng = new PRNG();
       let randomValue = prng.randomBipolarFloat();
 
       expect(randomValue).toBeGreaterThanOrEqual(-1);
@@ -267,9 +250,8 @@ describe("PRNG", () => {
   });
 
   describe("randomWeighted", () => {
-    let prng, choices;
+    let choices;
     beforeEach(() => {
-      prng = new PRNG();
       choices = [
         {
           option: "red",
