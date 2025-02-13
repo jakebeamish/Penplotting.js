@@ -17,13 +17,27 @@ describe("PRNG", () => {
     prng = new PRNG();
   });
 
-  describe("constructor", () => {
-    it("can be created using a variety of algorithms", () => {
-      const random = new PRNG({
-        algorithm: LCG,
-      });
+  describe("PRNG algorithms", () => {
+    const algorithms = [Mulberry32, XORShift32, LCG];
+    algorithms.forEach((algorithm) => {
+      describe(`using the ${algorithm.name} algorithm`, () => {
+        let prng;
 
-      expect(random.algorithm instanceof LCG).toBeTruthy();
+        beforeEach(() => {
+          prng = new PRNG({ algorithm });
+        });
+
+        it("Can be created using the algorithm.", () => {
+          expect(prng.algorithm).toBeInstanceOf(algorithm);
+        });
+
+        it(`Returns random values in the range [0-1) when it is sent
+          .randomFloat().`, () => {
+          const result = prng.randomFloat();
+          expect(result).toBeGreaterThanOrEqual(0);
+          expect(result).toBeLessThan(1);
+        });
+      });
     });
   });
 
