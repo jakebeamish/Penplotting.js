@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - PRNG method randomSample() for sampling without replacement.
+- Added tests to cover all PRNGAlgorithm implementations.
+
+### Changed
+
+- Simplified tests for Triangle and PRNG by extracting setups to beforeEach.
 
 ## [5.4.0] - 2025-01-30
 
@@ -103,7 +108,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This CHANGELOG.md file for documenting what has changed in new releases.
 - Triangle class with lines method.
 
-[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v5.4.0...HEAD
+[Unreleased]: https://github.com/jakebeamish/Penplotting.js/compare/v5.5.0...HEAD
+[5.5.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.4.0...v5.5.0
 [5.4.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.3.0...v5.4.0
 [5.3.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.2.0...v5.3.0
 [5.2.0]: https://github.com/jakebeamish/Penplotting.js/compare/v5.1.0...v5.2.0
